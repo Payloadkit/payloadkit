@@ -24,7 +24,7 @@
     "build:docs": "bun run --filter=docs build",
     "changeset": "changeset",
     "version-packages": "changeset version",
-    "release": "bun run build && changeset publish",
+    "release": "bun run build && changeset publish"
   },
   "devDependencies": {
     "@changesets/cli": "^2.29.7",
