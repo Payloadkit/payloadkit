@@ -1,0 +1,61 @@
+{
+  "name": "payloadkit",
+  "version": "0.0.1",
+  "description": "CLI for PayloadKit - Build websites faster with PayloadCMS",
+  "bin": {
+    "payloadkit": "./bin/index.js"
+  },
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
+    }
+  },
+  "scripts": {
+    "build": "tsup && chmod +x bin/index.js",
+    "dev": "tsup --watch",
+    "clean": "rm -rf dist bin",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@payloadkit/core": "workspace:*",
+    "chalk": "^5.6.2",
+    "commander": "^14.0.1",
+    "execa": "^9.6.0",
+    "fast-glob": "^3.3.3",
+    "fs-extra": "^11.3.1",
+    "node-fetch": "^3.3.2",
+    "ora": "^8.2.0",
+    "prompts": "^2.4.2"
+  },
+  "devDependencies": {
+    "@types/fs-extra": "^11.0.4",
+    "@types/prompts": "^2.4.9",
+    "tsup": "^8.5.0",
+    "typescript": "^5.9.2",
+    "vitest": "^3.2.4"
+  },
+  "files": [
+    "dist",
+    "bin"
+  ],
+  "engines": {
+    "node": ">=18.20.2"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "keywords": [
+    "payloadcms",
+    "cli",
+    "blocks",
+    "templates",
+    "components",
+    "shadcn"
+  ]
+}

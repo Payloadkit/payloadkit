@@ -1,0 +1,23 @@
+{
+  "name": "hero-block",
+  "description": "A flexible hero section with title, subtitle, description and CTA buttons",
+  "category": "hero",
+  "tags": ["hero", "banner", "landing", "cta"],
+  "version": "0.0.1",
+  "files": [
+    "Component.tsx",
+    "config.ts",
+    "index.ts"
+  ],
+  "dependencies": [
+    "react"
+  ],
+  "peerDependencies": [
+    "payload"
+  ],
+  "registryDependencies": [],
+  "preview": {
+    "image": null,
+    "description": "A beautiful hero section perfect for landing pages"
+  }
+}
