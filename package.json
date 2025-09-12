@@ -9,6 +9,7 @@
   },
   "workspaces": [
     "packages/*",
+    "apps/*",
     "plugins/*",
     "templates/*"
   ],
@@ -19,11 +20,11 @@
     "lint": "bun run --filter='./packages/*' lint",
     "clean": "bun run --filter='./packages/*' clean",
     "typecheck": "bun run --filter='./packages/*' typecheck",
+    "dev:docs": "bun run --filter=docs dev",
+    "build:docs": "bun run --filter=docs build",
     "changeset": "changeset",
     "version-packages": "changeset version",
     "release": "bun run build && changeset publish",
-    "preview:docs": "bun run --filter=docs dev",
-    "build:docs": "bun run --filter=docs build"
   },
   "devDependencies": {
     "@changesets/cli": "^2.29.7",
