@@ -1,0 +1,23 @@
+{
+  "name": "media-block",
+  "description": "Simple media display block for images and videos with optional caption",
+  "category": "content",
+  "tags": ["media", "image", "video", "gallery", "content"],
+  "version": "0.0.1",
+  "files": [
+    "Component.tsx",
+    "config.ts",
+    "index.ts"
+  ],
+  "dependencies": [
+    "react"
+  ],
+  "peerDependencies": [
+    "payload"
+  ],
+  "registryDependencies": [],
+  "preview": {
+    "image": null,
+    "description": "Clean media display with responsive design"
+  }
+}

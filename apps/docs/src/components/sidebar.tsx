@@ -30,12 +30,40 @@ const sidebarNavItems = [
         href: "/docs/components",
       },
       {
+        title: "Banner",
+        href: "/docs/components/banner",
+      },
+      {
         title: "Call to Action",
         href: "/docs/components/call-to-action",
       },
       {
+        title: "Content",
+        href: "/docs/components/content",
+      },
+      {
+        title: "FAQ",
+        href: "/docs/components/faq",
+      },
+      {
+        title: "Feature",
+        href: "/docs/components/feature",
+      },
+      {
         title: "Hero Block",
         href: "/docs/components/hero-block",
+      },
+      {
+        title: "Icon Block",
+        href: "/docs/components/icon-block",
+      },
+      {
+        title: "Media Block",
+        href: "/docs/components/media-block",
+      },
+      {
+        title: "Text Block",
+        href: "/docs/components/text-block",
       },
     ],
   },

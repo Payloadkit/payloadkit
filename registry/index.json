@@ -1,6 +1,6 @@
 {
   "version": "0.0.1",
-  "lastUpdated": "2024-12-12T00:00:00Z",
+  "lastUpdated": "2025-01-12T00:00:00Z",
   "blocks": {
     "hero-block": {
       "name": "hero-block",
@@ -31,6 +31,111 @@
       "dependencies": ["react"],
       "peerDependencies": ["payload", "@payloadcms/richtext-lexical"],
       "registryDependencies": ["RichText", "CMSLink"]
+    },
+    "banner": {
+      "name": "banner",
+      "description": "A prominent banner section with title, description, background options and call-to-action buttons",
+      "category": "marketing",
+      "tags": ["banner", "hero", "marketing", "cta", "background"],
+      "version": "0.0.1",
+      "files": [
+        "Component.tsx",
+        "config.ts",
+        "index.ts"
+      ],
+      "dependencies": ["react"],
+      "peerDependencies": ["payload"],
+      "registryDependencies": []
+    },
+    "media-block": {
+      "name": "media-block",
+      "description": "Simple media display block for images and videos with optional caption",
+      "category": "content",
+      "tags": ["media", "image", "video", "gallery", "content"],
+      "version": "0.0.1",
+      "files": [
+        "Component.tsx",
+        "config.ts",
+        "index.ts"
+      ],
+      "dependencies": ["react"],
+      "peerDependencies": ["payload"],
+      "registryDependencies": []
+    },
+    "feature": {
+      "name": "feature",
+      "description": "Feature showcase block with icons, titles, descriptions and customizable grid layout",
+      "category": "marketing",
+      "tags": ["features", "grid", "icons", "showcase", "benefits"],
+      "version": "0.0.1",
+      "files": [
+        "Component.tsx",
+        "config.ts",
+        "index.ts"
+      ],
+      "dependencies": ["react"],
+      "peerDependencies": ["payload"],
+      "registryDependencies": []
+    },
+    "content": {
+      "name": "content",
+      "description": "Rich content block with flexible column layouts and rich text editor",
+      "category": "content",
+      "tags": ["content", "text", "columns", "rich-text", "layout"],
+      "version": "0.0.1",
+      "files": [
+        "Component.tsx",
+        "config.ts",
+        "index.ts"
+      ],
+      "dependencies": ["react"],
+      "peerDependencies": ["payload", "@payloadcms/richtext-lexical"],
+      "registryDependencies": []
+    },
+    "faq": {
+      "name": "faq",
+      "description": "FAQ block with collapsible question and answer pairs, perfect for support pages",
+      "category": "content",
+      "tags": ["faq", "questions", "answers", "support", "accordion"],
+      "version": "0.0.1",
+      "files": [
+        "Component.tsx",
+        "config.ts",
+        "index.ts"
+      ],
+      "dependencies": ["react"],
+      "peerDependencies": ["payload", "@payloadcms/richtext-lexical"],
+      "registryDependencies": []
+    },
+    "text-block": {
+      "name": "text-block",
+      "description": "Simple text block with optional title and rich text content",
+      "category": "content",
+      "tags": ["text", "content", "simple", "basic"],
+      "version": "0.0.1",
+      "files": [
+        "Component.tsx",
+        "config.ts",
+        "index.ts"
+      ],
+      "dependencies": ["react"],
+      "peerDependencies": ["payload", "@payloadcms/richtext-lexical"],
+      "registryDependencies": []
+    },
+    "icon-block": {
+      "name": "icon-block",
+      "description": "Icon-based content block with customizable icon, title and description",
+      "category": "content",
+      "tags": ["icon", "visual", "highlight", "callout"],
+      "version": "0.0.1",
+      "files": [
+        "Component.tsx",
+        "config.ts",
+        "index.ts"
+      ],
+      "dependencies": ["react"],
+      "peerDependencies": ["payload"],
+      "registryDependencies": []
     }
   },
   "collections": {},

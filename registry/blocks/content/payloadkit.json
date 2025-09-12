@@ -1,0 +1,24 @@
+{
+  "name": "content",
+  "description": "Rich content block with flexible column layouts and rich text editor",
+  "category": "content",
+  "tags": ["content", "text", "columns", "rich-text", "layout"],
+  "version": "0.0.1",
+  "files": [
+    "Component.tsx",
+    "config.ts",
+    "index.ts"
+  ],
+  "dependencies": [
+    "react"
+  ],
+  "peerDependencies": [
+    "payload",
+    "@payloadcms/richtext-lexical"
+  ],
+  "registryDependencies": [],
+  "preview": {
+    "image": null,
+    "description": "Flexible content block with column support"
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "name": "faq",
+  "description": "FAQ block with collapsible question and answer pairs, perfect for support pages",
+  "category": "content",
+  "tags": ["faq", "questions", "answers", "support", "accordion"],
+  "version": "0.0.1",
+  "files": [
+    "Component.tsx",
+    "config.ts",
+    "index.ts"
+  ],
+  "dependencies": [
+    "react"
+  ],
+  "peerDependencies": [
+    "payload",
+    "@payloadcms/richtext-lexical"
+  ],
+  "registryDependencies": [],
+  "preview": {
+    "image": null,
+    "description": "Interactive FAQ accordion for customer support"
+  }
+}

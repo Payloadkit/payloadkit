@@ -1,0 +1,24 @@
+{
+  "name": "text-block",
+  "description": "Simple text block with optional title and rich text content",
+  "category": "content",
+  "tags": ["text", "content", "simple", "basic"],
+  "version": "0.0.1",
+  "files": [
+    "Component.tsx",
+    "config.ts",
+    "index.ts"
+  ],
+  "dependencies": [
+    "react"
+  ],
+  "peerDependencies": [
+    "payload",
+    "@payloadcms/richtext-lexical"
+  ],
+  "registryDependencies": [],
+  "preview": {
+    "image": null,
+    "description": "Basic text content block for articles and pages"
+  }
+}
