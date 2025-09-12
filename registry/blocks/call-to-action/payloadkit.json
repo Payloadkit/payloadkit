@@ -1,0 +1,31 @@
+{
+  "name": "call-to-action",
+  "description": "A versatile call-to-action block with rich text content and customizable buttons",
+  "category": "marketing", 
+  "tags": ["cta", "call-to-action", "buttons", "marketing", "conversion"],
+  "version": "0.0.1",
+  "files": [
+    "Component.tsx",
+    "config.ts", 
+    "index.ts"
+  ],
+  "dependencies": [
+    "react"
+  ],
+  "peerDependencies": [
+    "payload",
+    "@payloadcms/richtext-lexical"
+  ],
+  "registryDependencies": [
+    "RichText",
+    "CMSLink"
+  ],
+  "preview": {
+    "image": null,
+    "description": "Professional CTA section perfect for conversion-focused pages"
+  },
+  "usage": {
+    "collections": ["pages", "posts"],
+    "description": "Add engaging call-to-action sections with rich text and multiple button options"
+  }
+}

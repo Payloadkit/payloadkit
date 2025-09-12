@@ -1,0 +1,39 @@
+{
+  "version": "0.0.1",
+  "lastUpdated": "2024-12-12T00:00:00Z",
+  "blocks": {
+    "hero-block": {
+      "name": "hero-block",
+      "description": "A flexible hero section with title, subtitle, description and CTA buttons",
+      "category": "hero",
+      "tags": ["hero", "banner", "landing", "cta"],
+      "version": "0.0.1",
+      "files": [
+        "Component.tsx",
+        "config.ts",
+        "index.ts"
+      ],
+      "dependencies": ["react"],
+      "peerDependencies": ["payload"],
+      "registryDependencies": []
+    },
+    "call-to-action": {
+      "name": "call-to-action",
+      "description": "A versatile call-to-action block with rich text content and customizable buttons",
+      "category": "marketing", 
+      "tags": ["cta", "call-to-action", "buttons", "marketing", "conversion"],
+      "version": "0.0.1",
+      "files": [
+        "Component.tsx",
+        "config.ts", 
+        "index.ts"
+      ],
+      "dependencies": ["react"],
+      "peerDependencies": ["payload", "@payloadcms/richtext-lexical"],
+      "registryDependencies": ["RichText", "CMSLink"]
+    }
+  },
+  "collections": {},
+  "globals": {},
+  "components": {}
+}

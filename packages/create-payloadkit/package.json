@@ -1,0 +1,40 @@
+{
+  "name": "create-payloadkit",
+  "version": "0.0.1",
+  "description": "Create PayloadCMS projects with PayloadKit",
+  "type": "module",
+  "bin": {
+    "create-payloadkit": "./bin/index.js"
+  },
+  "files": [
+    "dist",
+    "bin"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "type-check": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@payloadkit/core": "workspace:*",
+    "commander": "^12.0.0",
+    "prompts": "^2.4.2",
+    "node-fetch": "^3.3.2",
+    "chalk": "^5.3.0",
+    "ora": "^8.0.1"
+  },
+  "devDependencies": {
+    "@types/prompts": "^2.4.9",
+    "@types/node": "^22.5.4",
+    "tsup": "^8.2.4",
+    "typescript": "^5.6.2"
+  },
+  "keywords": [
+    "payloadcms",
+    "payloadkit",
+    "template",
+    "generator",
+    "cli"
+  ],
+  "license": "MIT"
+}

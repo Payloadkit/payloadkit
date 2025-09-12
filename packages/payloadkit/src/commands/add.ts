@@ -77,22 +77,56 @@ export const addCommand = new Command()
 
       Logger.startSpinner(`Installing ${componentName}...`)
 
-      // For now, create a placeholder since we don't have real components yet
-      await FileOperations.writeFile(
-        path.join(componentPath, 'index.ts'), 
-        `// ${componentName} component\n// This is a placeholder - real component will be implemented\n\nexport default function ${componentName}() {\n  return null\n}\n`
-      )
-
-      if (targetComponent) {
-        // Create component info file
-        await FileOperations.writeJson(
-          path.join(componentPath, 'payloadkit.json'),
-          {
-            name: targetComponent.name,
-            description: targetComponent.description,
-            installedAt: new Date().toISOString(),
-            version: '0.0.1'
+      try {
+        // Check if the component exists in local registry
+        const componentExists = await Registry.blockExists(componentName)
+        
+        if (componentExists) {
+          // Copy real component files from registry
+          const sourcePath = Registry.getBlockSourcePath(componentName)
+          
+          // Copy all files from the component directory
+          const files = await FileOperations.findFiles('**/*', sourcePath)
+          Logger.updateSpinner(`Copying ${files.length} files...`)
+          
+          for (const file of files) {
+            const srcFile = path.join(sourcePath, file)
+            const destFile = path.join(componentPath, file)
+            
+            // Skip the payloadkit.json metadata file
+            if (file === 'payloadkit.json') continue
+            
+            await FileOperations.copyFile(srcFile, destFile, options.force)
           }
+
+          // Create installation metadata
+          if (targetComponent) {
+            await FileOperations.writeJson(
+              path.join(componentPath, '.payloadkit.json'),
+              {
+                name: targetComponent.name,
+                description: targetComponent.description,
+                installedAt: new Date().toISOString(),
+                version: targetComponent.version || '0.0.1',
+                source: 'registry'
+              }
+            )
+          }
+        } else {
+          // Fallback: create placeholder
+          await FileOperations.writeFile(
+            path.join(componentPath, 'index.ts'), 
+            `// ${componentName} component\n// This component is not yet available in the registry\n\nexport default function ${componentName}() {\n  return null\n}\n`
+          )
+          
+          Logger.warn(`Component files not found in registry, created placeholder`)
+        }
+      } catch (copyError) {
+        Logger.warn(`Failed to copy component files: ${copyError}`)
+        // Create fallback placeholder
+        await FileOperations.writeFile(
+          path.join(componentPath, 'index.ts'), 
+          `// ${componentName} component\n// Error copying files: ${copyError}\n\nexport default function ${componentName}() {\n  return null\n}\n`
         )
       }
 

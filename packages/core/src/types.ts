@@ -13,6 +13,7 @@ export interface PayloadKitBlock {
   description?: string
   category?: BlockCategory
   tags?: string[]
+  version?: string
   dependencies?: string[]
   registryDependencies?: string[]
 }
@@ -67,6 +68,7 @@ export interface PayloadKitRegistry {
 export interface PayloadKitComponent {
   name: string
   description?: string
+  version?: string
   files: string[]
   dependencies?: string[]
   registryDependencies?: string[]

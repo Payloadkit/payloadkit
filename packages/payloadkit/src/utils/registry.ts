@@ -1,7 +1,10 @@
 import fetch from 'node-fetch'
+import path from 'path'
+import { fileURLToPath } from 'url'
 import { REGISTRY_URL } from '@payloadkit/core'
 import type { PayloadKitRegistry, PayloadKitBlock, PayloadKitComponent } from '@payloadkit/core'
 import { Logger } from './logger'
+import { FileOperations } from './file-operations'
 
 /**
  * Registry client for fetching components
@@ -9,6 +12,21 @@ import { Logger } from './logger'
 export class Registry {
   private static cache: PayloadKitRegistry | null = null
   private static readonly CACHE_TTL = 5 * 60 * 1000 // 5 minutes
+
+  /**
+   * Get the local registry path
+   */
+  private static getLocalRegistryPath(): string {
+    // Get the path to the registry folder in the PayloadKit monorepo
+    // For built CLI, __dirname points to packages/payloadkit/dist/
+    // So we need to go up 3 levels: dist -> payloadkit -> packages -> root
+    if (typeof __dirname !== 'undefined') {
+      return path.resolve(__dirname, '../../../registry')
+    }
+    
+    // Fallback: try to find from current working directory
+    return path.resolve(process.cwd(), 'registry')
+  }
 
   /**
    * Fetch the registry data
@@ -19,10 +37,20 @@ export class Registry {
     }
 
     try {
-      Logger.startSpinner('Fetching registry...')
+      Logger.startSpinner('Loading registry...')
       
-      // For now, return a mock registry since we don't have a server yet
-      const mockRegistry: PayloadKitRegistry = {
+      // Try to load local registry first
+      const localRegistryPath = path.join(this.getLocalRegistryPath(), 'index.json')
+      const localRegistry = await FileOperations.readJson<PayloadKitRegistry>(localRegistryPath)
+      
+      if (localRegistry) {
+        this.cache = localRegistry
+        Logger.stopSpinner(true, 'Registry loaded from local')
+        return localRegistry
+      }
+
+      // Fallback to empty registry
+      const emptyRegistry: PayloadKitRegistry = {
         version: '0.0.1',
         blocks: {},
         collections: {},
@@ -30,13 +58,13 @@ export class Registry {
         components: {}
       }
 
-      this.cache = mockRegistry
-      Logger.stopSpinner(true, 'Registry loaded')
+      this.cache = emptyRegistry
+      Logger.stopSpinner(true, 'Empty registry loaded')
       
-      return mockRegistry
+      return emptyRegistry
     } catch (error) {
-      Logger.stopSpinner(false, 'Failed to fetch registry')
-      throw new Error(`Failed to fetch registry: ${error}`)
+      Logger.stopSpinner(false, 'Failed to load registry')
+      throw new Error(`Failed to load registry: ${error}`)
     }
   }
 
@@ -85,6 +113,30 @@ export class Registry {
       block.category?.toLowerCase().includes(lowerQuery) ||
       block.tags?.some(tag => tag.toLowerCase().includes(lowerQuery))
     )
+  }
+
+  /**
+   * Get the source path for a block
+   */
+  static getBlockSourcePath(blockName: string): string {
+    const registryPath = this.getLocalRegistryPath()
+    return path.join(registryPath, 'blocks', blockName)
+  }
+
+  /**
+   * Get the source path for a component
+   */
+  static getComponentSourcePath(componentName: string): string {
+    const registryPath = this.getLocalRegistryPath()
+    return path.join(registryPath, 'components', componentName)
+  }
+
+  /**
+   * Check if a block exists in the local registry
+   */
+  static async blockExists(blockName: string): Promise<boolean> {
+    const blockPath = this.getBlockSourcePath(blockName)
+    return await FileOperations.exists(blockPath)
   }
 
   /**

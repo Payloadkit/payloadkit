@@ -32,6 +32,9 @@ var import_core = require("@payloadkit/core");
 var import_commander = require("commander");
 var import_prompts = __toESM(require("prompts"));
 
+// src/utils/registry.ts
+var import_path2 = __toESM(require("path"));
+
 // src/utils/logger.ts
 var import_chalk = __toESM(require("chalk"));
 var import_ora = __toESM(require("ora"));
@@ -90,84 +93,6 @@ var Logger = class {
   }
 };
 var { info, success, warn, error, startSpinner, stopSpinner } = Logger;
-
-// src/utils/registry.ts
-var Registry = class {
-  static cache = null;
-  static CACHE_TTL = 5 * 60 * 1e3;
-  // 5 minutes
-  /**
-   * Fetch the registry data
-   */
-  static async getRegistry() {
-    if (this.cache) {
-      return this.cache;
-    }
-    try {
-      Logger.startSpinner("Fetching registry...");
-      const mockRegistry = {
-        version: "0.0.1",
-        blocks: {},
-        collections: {},
-        globals: {},
-        components: {}
-      };
-      this.cache = mockRegistry;
-      Logger.stopSpinner(true, "Registry loaded");
-      return mockRegistry;
-    } catch (error2) {
-      Logger.stopSpinner(false, "Failed to fetch registry");
-      throw new Error(`Failed to fetch registry: ${error2}`);
-    }
-  }
-  /**
-   * Get a specific block
-   */
-  static async getBlock(name) {
-    const registry = await this.getRegistry();
-    return registry.blocks[name] || null;
-  }
-  /**
-   * Get a specific component
-   */
-  static async getComponent(name) {
-    const registry = await this.getRegistry();
-    return registry.components[name] || null;
-  }
-  /**
-   * List all available blocks
-   */
-  static async listBlocks() {
-    const registry = await this.getRegistry();
-    return Object.values(registry.blocks);
-  }
-  /**
-   * List all available components
-   */
-  static async listComponents() {
-    const registry = await this.getRegistry();
-    return Object.values(registry.components);
-  }
-  /**
-   * Search blocks by category or name
-   */
-  static async searchBlocks(query) {
-    const blocks = await this.listBlocks();
-    const lowerQuery = query.toLowerCase();
-    return blocks.filter(
-      (block) => block.name.toLowerCase().includes(lowerQuery) || block.description?.toLowerCase().includes(lowerQuery) || block.category?.toLowerCase().includes(lowerQuery) || block.tags?.some((tag) => tag.toLowerCase().includes(lowerQuery))
-    );
-  }
-  /**
-   * Clear cache
-   */
-  static clearCache() {
-    this.cache = null;
-  }
-};
-
-// src/utils/project.ts
-var import_path2 = __toESM(require("path"));
 
 // src/utils/file-operations.ts
 var import_fs_extra = __toESM(require("fs-extra"));
@@ -310,13 +235,126 @@ var FileOperations = class {
   }
 };
 
+// src/utils/registry.ts
+var Registry = class {
+  static cache = null;
+  static CACHE_TTL = 5 * 60 * 1e3;
+  // 5 minutes
+  /**
+   * Get the local registry path
+   */
+  static getLocalRegistryPath() {
+    if (typeof __dirname !== "undefined") {
+      return import_path2.default.resolve(__dirname, "../../../registry");
+    }
+    return import_path2.default.resolve(process.cwd(), "registry");
+  }
+  /**
+   * Fetch the registry data
+   */
+  static async getRegistry() {
+    if (this.cache) {
+      return this.cache;
+    }
+    try {
+      Logger.startSpinner("Loading registry...");
+      const localRegistryPath = import_path2.default.join(this.getLocalRegistryPath(), "index.json");
+      const localRegistry = await FileOperations.readJson(localRegistryPath);
+      if (localRegistry) {
+        this.cache = localRegistry;
+        Logger.stopSpinner(true, "Registry loaded from local");
+        return localRegistry;
+      }
+      const emptyRegistry = {
+        version: "0.0.1",
+        blocks: {},
+        collections: {},
+        globals: {},
+        components: {}
+      };
+      this.cache = emptyRegistry;
+      Logger.stopSpinner(true, "Empty registry loaded");
+      return emptyRegistry;
+    } catch (error2) {
+      Logger.stopSpinner(false, "Failed to load registry");
+      throw new Error(`Failed to load registry: ${error2}`);
+    }
+  }
+  /**
+   * Get a specific block
+   */
+  static async getBlock(name) {
+    const registry = await this.getRegistry();
+    return registry.blocks[name] || null;
+  }
+  /**
+   * Get a specific component
+   */
+  static async getComponent(name) {
+    const registry = await this.getRegistry();
+    return registry.components[name] || null;
+  }
+  /**
+   * List all available blocks
+   */
+  static async listBlocks() {
+    const registry = await this.getRegistry();
+    return Object.values(registry.blocks);
+  }
+  /**
+   * List all available components
+   */
+  static async listComponents() {
+    const registry = await this.getRegistry();
+    return Object.values(registry.components);
+  }
+  /**
+   * Search blocks by category or name
+   */
+  static async searchBlocks(query) {
+    const blocks = await this.listBlocks();
+    const lowerQuery = query.toLowerCase();
+    return blocks.filter(
+      (block) => block.name.toLowerCase().includes(lowerQuery) || block.description?.toLowerCase().includes(lowerQuery) || block.category?.toLowerCase().includes(lowerQuery) || block.tags?.some((tag) => tag.toLowerCase().includes(lowerQuery))
+    );
+  }
+  /**
+   * Get the source path for a block
+   */
+  static getBlockSourcePath(blockName) {
+    const registryPath = this.getLocalRegistryPath();
+    return import_path2.default.join(registryPath, "blocks", blockName);
+  }
+  /**
+   * Get the source path for a component
+   */
+  static getComponentSourcePath(componentName) {
+    const registryPath = this.getLocalRegistryPath();
+    return import_path2.default.join(registryPath, "components", componentName);
+  }
+  /**
+   * Check if a block exists in the local registry
+   */
+  static async blockExists(blockName) {
+    const blockPath = this.getBlockSourcePath(blockName);
+    return await FileOperations.exists(blockPath);
+  }
+  /**
+   * Clear cache
+   */
+  static clearCache() {
+    this.cache = null;
+  }
+};
+
 // src/utils/project.ts
+var import_path3 = __toESM(require("path"));
 var Project = class {
   /**
    * Check if current directory is a PayloadCMS project
    */
   static async isPayloadProject(cwd = process.cwd()) {
-    const packageJsonPath = import_path2.default.join(cwd, "package.json");
+    const packageJsonPath = import_path3.default.join(cwd, "package.json");
     const packageJson = await FileOperations.readJson(packageJsonPath);
     if (!packageJson) {
       return false;
@@ -331,14 +369,14 @@ var Project = class {
    * Check if current directory has PayloadKit components
    */
   static async hasPayloadKitComponents(cwd = process.cwd()) {
-    const payloadKitConfigPath = import_path2.default.join(cwd, "payloadkit.json");
+    const payloadKitConfigPath = import_path3.default.join(cwd, "payloadkit.json");
     return FileOperations.exists(payloadKitConfigPath);
   }
   /**
    * Get project info
    */
   static async getProjectInfo(cwd = process.cwd()) {
-    const packageJsonPath = import_path2.default.join(cwd, "package.json");
+    const packageJsonPath = import_path3.default.join(cwd, "package.json");
     const packageJson = await FileOperations.readJson(packageJsonPath);
     const isPayloadProject = await this.isPayloadProject(cwd);
     const hasPayloadKit = await this.hasPayloadKitComponents(cwd);
@@ -353,7 +391,7 @@ var Project = class {
    * Initialize PayloadKit in a project
    */
   static async initializePayloadKit(cwd = process.cwd()) {
-    const configPath = import_path2.default.join(cwd, "payloadkit.json");
+    const configPath = import_path3.default.join(cwd, "payloadkit.json");
     if (await FileOperations.exists(configPath)) {
       Logger.warn("PayloadKit already initialized");
       return;
@@ -385,7 +423,7 @@ var Project = class {
    * Get PayloadKit configuration
    */
   static async getPayloadKitConfig(cwd = process.cwd()) {
-    const configPath = import_path2.default.join(cwd, "payloadkit.json");
+    const configPath = import_path3.default.join(cwd, "payloadkit.json");
     return FileOperations.readJson(configPath);
   }
   /**
@@ -394,7 +432,7 @@ var Project = class {
   static async resolveComponentPath(componentType, cwd = process.cwd()) {
     const config = await this.getPayloadKitConfig(cwd);
     if (config && config[componentType]?.path) {
-      return import_path2.default.join(cwd, config[componentType].path);
+      return import_path3.default.join(cwd, config[componentType].path);
     }
     const defaults = {
       blocks: "src/blocks",
@@ -402,20 +440,20 @@ var Project = class {
       collections: "src/collections",
       globals: "src/globals"
     };
-    return import_path2.default.join(cwd, defaults[componentType]);
+    return import_path3.default.join(cwd, defaults[componentType]);
   }
   /**
    * Check if component already exists
    */
   static async componentExists(name, type, cwd = process.cwd()) {
     const componentPath = await this.resolveComponentPath(type, cwd);
-    const fullPath = import_path2.default.join(componentPath, name);
+    const fullPath = import_path3.default.join(componentPath, name);
     return FileOperations.exists(fullPath);
   }
 };
 
 // src/commands/add.ts
-var import_path3 = __toESM(require("path"));
+var import_path4 = __toESM(require("path"));
 var addCommand = new import_commander.Command().name("add").description("Add a component to your project").argument("<name>", "Component name to add").option("-f, --force", "Overwrite existing components").option("-p, --path <path>", "Custom installation path").action(async (componentName, options) => {
   try {
     Logger.header(`Adding ${componentName}`);
@@ -455,28 +493,57 @@ var addCommand = new import_commander.Command().name("add").description("Add a c
         return;
       }
     }
-    const installPath = options.path ? import_path3.default.resolve(options.path) : await Project.resolveComponentPath(componentType);
-    const componentPath = import_path3.default.join(installPath, componentName);
+    const installPath = options.path ? import_path4.default.resolve(options.path) : await Project.resolveComponentPath(componentType);
+    const componentPath = import_path4.default.join(installPath, componentName);
     Logger.startSpinner(`Installing ${componentName}...`);
-    await FileOperations.writeFile(
-      import_path3.default.join(componentPath, "index.ts"),
-      `// ${componentName} component
-// This is a placeholder - real component will be implemented
+    try {
+      const componentExists = await Registry.blockExists(componentName);
+      if (componentExists) {
+        const sourcePath = Registry.getBlockSourcePath(componentName);
+        const files = await FileOperations.findFiles("**/*", sourcePath);
+        Logger.updateSpinner(`Copying ${files.length} files...`);
+        for (const file of files) {
+          const srcFile = import_path4.default.join(sourcePath, file);
+          const destFile = import_path4.default.join(componentPath, file);
+          if (file === "payloadkit.json") continue;
+          await FileOperations.copyFile(srcFile, destFile, options.force);
+        }
+        if (targetComponent) {
+          await FileOperations.writeJson(
+            import_path4.default.join(componentPath, ".payloadkit.json"),
+            {
+              name: targetComponent.name,
+              description: targetComponent.description,
+              installedAt: (/* @__PURE__ */ new Date()).toISOString(),
+              version: targetComponent.version || "0.0.1",
+              source: "registry"
+            }
+          );
+        }
+      } else {
+        await FileOperations.writeFile(
+          import_path4.default.join(componentPath, "index.ts"),
+          `// ${componentName} component
+// This component is not yet available in the registry
 
 export default function ${componentName}() {
   return null
 }
 `
-    );
-    if (targetComponent) {
-      await FileOperations.writeJson(
-        import_path3.default.join(componentPath, "payloadkit.json"),
-        {
-          name: targetComponent.name,
-          description: targetComponent.description,
-          installedAt: (/* @__PURE__ */ new Date()).toISOString(),
-          version: "0.0.1"
-        }
+        );
+        Logger.warn(`Component files not found in registry, created placeholder`);
+      }
+    } catch (copyError) {
+      Logger.warn(`Failed to copy component files: ${copyError}`);
+      await FileOperations.writeFile(
+        import_path4.default.join(componentPath, "index.ts"),
+        `// ${componentName} component
+// Error copying files: ${copyError}
+
+export default function ${componentName}() {
+  return null
+}
+`
       );
     }
     Logger.stopSpinner(true, `${componentName} installed successfully!`);
