@@ -1,4 +1,7 @@
 import React from 'react'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import { Badge } from '@/components/ui/badge'
+import { Button } from '@/components/ui/button'
 
 // Simple icon components (in a real app, you'd use a proper icon library)
 const icons = {
@@ -82,9 +85,9 @@ export const FeatureBlock: React.FC<FeatureBlockProps> = ({
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
           {eyebrow && (
-            <p className="text-sm font-medium text-gray-600 mb-2 uppercase tracking-wide">
+            <Badge variant="outline" className="mb-4 uppercase tracking-wide">
               {eyebrow}
-            </p>
+            </Badge>
           )}
           
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
@@ -92,40 +95,43 @@ export const FeatureBlock: React.FC<FeatureBlockProps> = ({
           </h2>
           
           {description && (
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
               {description}
             </p>
           )}
         </div>
 
-        <div className={`grid gap-8 ${gridClasses[layout]}`}>
+        <div className={`grid gap-6 ${gridClasses[layout]}`}>
           {features.map((feature, index) => (
-            <div key={index} className="text-center">
-              {feature.icon && (
-                <div className={`text-4xl mb-4 ${iconColorClasses[feature.iconColor as keyof typeof iconColorClasses] || 'text-blue-600'}`}>
-                  {icons[feature.icon]}
-                </div>
-              )}
-              
-              <h3 className="text-xl font-semibold mb-3">
-                {feature.title}
-              </h3>
-              
-              <p className="text-gray-600 mb-4">
-                {feature.description}
-              </p>
-              
-              {feature.link?.text && feature.link?.href && (
-                <a
-                  href={feature.link.href}
-                  target={feature.link.newTab ? '_blank' : undefined}
-                  rel={feature.link.newTab ? 'noopener noreferrer' : undefined}
-                  className="text-blue-600 hover:text-blue-800 font-medium"
-                >
-                  {feature.link.text} →
-                </a>
-              )}
-            </div>
+            <Card key={index} className="text-center hover:shadow-md transition-shadow">
+              <CardHeader>
+                {feature.icon && (
+                  <div className={`text-4xl mb-2 ${iconColorClasses[feature.iconColor as keyof typeof iconColorClasses] || 'text-blue-600'}`}>
+                    {icons[feature.icon]}
+                  </div>
+                )}
+                <CardTitle className="text-xl">
+                  {feature.title}
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <CardDescription className="text-base mb-4">
+                  {feature.description}
+                </CardDescription>
+                
+                {feature.link?.text && feature.link?.href && (
+                  <Button variant="link" asChild className="p-0 h-auto">
+                    <a
+                      href={feature.link.href}
+                      target={feature.link.newTab ? '_blank' : undefined}
+                      rel={feature.link.newTab ? 'noopener noreferrer' : undefined}
+                    >
+                      {feature.link.text} →
+                    </a>
+                  </Button>
+                )}
+              </CardContent>
+            </Card>
           ))}
         </div>
       </div>

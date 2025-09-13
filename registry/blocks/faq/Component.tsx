@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import React from 'react'
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion'
 
 interface FaqItem {
   question: string
@@ -24,16 +25,6 @@ export const FaqBlock: React.FC<FaqBlockProps> = ({
   htmlId,
   htmlClasses,
 }) => {
-  const [openItems, setOpenItems] = useState<number[]>([])
-
-  const toggleItem = (index: number) => {
-    setOpenItems(prev => 
-      prev.includes(index) 
-        ? prev.filter(i => i !== index)
-        : [...prev, index]
-    )
-  }
-
   const backgroundClasses = {
     transparent: 'bg-transparent',
     white: 'bg-white',
@@ -42,9 +33,9 @@ export const FaqBlock: React.FC<FaqBlockProps> = ({
   }
 
   const textClasses = {
-    default: 'text-gray-900',
+    default: 'text-foreground',
     white: 'text-white',
-    gray: 'text-gray-600',
+    gray: 'text-muted-foreground',
   }
 
   // Simple function to render rich text
@@ -52,7 +43,7 @@ export const FaqBlock: React.FC<FaqBlockProps> = ({
     if (typeof richText === 'string') {
       return <div dangerouslySetInnerHTML={{ __html: richText }} />
     }
-    return <div className="prose prose-sm max-w-none">{JSON.stringify(richText)}</div>
+    return <div className="prose prose-sm max-w-none dark:prose-invert">{JSON.stringify(richText)}</div>
   }
 
   return (
@@ -61,7 +52,7 @@ export const FaqBlock: React.FC<FaqBlockProps> = ({
       className={`
         py-16
         ${backgroundClasses[backgroundColor as keyof typeof backgroundClasses] || 'bg-transparent'}
-        ${textClasses[textColor as keyof typeof textClasses] || 'text-gray-900'}
+        ${textClasses[textColor as keyof typeof textClasses] || 'text-foreground'}
         ${htmlClasses || ''}
       `.trim()}
     >
@@ -73,39 +64,24 @@ export const FaqBlock: React.FC<FaqBlockProps> = ({
             </h2>
             
             {description && (
-              <p className="text-lg text-gray-600">
+              <p className="text-lg text-muted-foreground">
                 {description}
               </p>
             )}
           </div>
 
-          <div className="space-y-4">
+          <Accordion type="multiple" className="w-full">
             {faqs.map((faq, index) => (
-              <div key={index} className="border border-gray-200 rounded-lg">
-                <button
-                  onClick={() => toggleItem(index)}
-                  className="w-full text-left px-6 py-4 hover:bg-gray-50 transition-colors duration-200"
-                >
-                  <div className="flex justify-between items-center">
-                    <h3 className="text-lg font-semibold pr-4">
-                      {faq.question}
-                    </h3>
-                    <span className="text-xl text-gray-500">
-                      {openItems.includes(index) ? '−' : '+'}
-                    </span>
-                  </div>
-                </button>
-                
-                {openItems.includes(index) && (
-                  <div className="px-6 pb-4 border-t border-gray-100">
-                    <div className="pt-4">
-                      {renderRichText(faq.answer)}
-                    </div>
-                  </div>
-                )}
-              </div>
+              <AccordionItem key={index} value={`item-${index}`}>
+                <AccordionTrigger className="text-left text-lg font-semibold">
+                  {faq.question}
+                </AccordionTrigger>
+                <AccordionContent className="pt-4">
+                  {renderRichText(faq.answer)}
+                </AccordionContent>
+              </AccordionItem>
             ))}
-          </div>
+          </Accordion>
         </div>
       </div>
     </section>

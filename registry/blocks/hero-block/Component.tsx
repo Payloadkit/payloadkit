@@ -1,4 +1,6 @@
 import React from 'react'
+import { Button } from '@/components/ui/button'
+import { Badge } from '@/components/ui/badge'
 
 export interface HeroBlockProps {
   title?: string
@@ -27,9 +29,9 @@ export const HeroBlock: React.FC<HeroBlockProps> = ({
       
       <div className="relative container mx-auto px-4 py-24 text-center">
         {subtitle && (
-          <p className="text-lg font-medium text-blue-100 mb-4">
+          <Badge variant="secondary" className="text-lg font-medium mb-4 bg-white/10 text-white border-white/20">
             {subtitle}
-          </p>
+          </Badge>
         )}
         
         {title && (
@@ -47,17 +49,20 @@ export const HeroBlock: React.FC<HeroBlockProps> = ({
         {buttons.length > 0 && (
           <div className="flex flex-wrap justify-center gap-4">
             {buttons.map((button, index) => (
-              <a
+              <Button
                 key={index}
-                href={button.url}
-                className={`px-8 py-3 rounded-lg font-semibold transition-colors ${
-                  button.type === 'secondary'
-                    ? 'bg-white text-blue-600 hover:bg-gray-100'
-                    : 'bg-blue-600 text-white hover:bg-blue-700'
-                }`}
+                asChild
+                variant={button.type === 'secondary' ? 'secondary' : 'default'}
+                size="lg"
+                className={button.type === 'secondary' 
+                  ? 'bg-white text-blue-600 hover:bg-gray-100' 
+                  : 'bg-blue-600 text-white hover:bg-blue-700'
+                }
               >
-                {button.label}
-              </a>
+                <a href={button.url}>
+                  {button.label}
+                </a>
+              </Button>
             ))}
           </div>
         )}

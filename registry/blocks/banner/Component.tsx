@@ -1,4 +1,6 @@
 import React from 'react'
+import { Button } from '@/components/ui/button'
+import { Badge } from '@/components/ui/badge'
 
 interface BannerBlockProps {
   eyebrow?: string
@@ -38,9 +40,9 @@ export const BannerBlock: React.FC<BannerBlockProps> = ({
   }
 
   const alignmentClasses = {
-    left: 'text-left',
-    center: 'text-center',
-    right: 'text-right',
+    left: 'text-left justify-start',
+    center: 'text-center justify-center',
+    right: 'text-right justify-end',
   }
 
   const heightClasses = {
@@ -55,49 +57,50 @@ export const BannerBlock: React.FC<BannerBlockProps> = ({
       id={htmlId}
       className={`
         ${backgroundClasses[backgroundColor as keyof typeof backgroundClasses] || 'bg-transparent'}
-        ${alignmentClasses[textAlignment as keyof typeof alignmentClasses] || 'text-center'}
+        ${alignmentClasses[textAlignment as keyof typeof alignmentClasses] || 'text-center justify-center'}
         ${heightClasses[height as keyof typeof heightClasses] || 'py-16'}
         ${htmlClasses || ''}
       `.trim()}
     >
       <div className="container mx-auto px-4">
-        {eyebrow && (
-          <p className="text-sm font-medium text-gray-600 mb-2 uppercase tracking-wide">
-            {eyebrow}
-          </p>
-        )}
-        
-        <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
-          {title}
-        </h1>
-        
-        {description && (
-          <p className="text-lg md:text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
-            {description}
-          </p>
-        )}
-        
-        {actions && actions.length > 0 && (
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            {actions.map((action, index) => (
-              <a
-                key={index}
-                href={action.href}
-                target={action.newTab ? '_blank' : undefined}
-                rel={action.newTab ? 'noopener noreferrer' : undefined}
-                className={`
-                  inline-flex items-center justify-center px-6 py-3 text-base font-medium rounded-lg transition-colors duration-200
-                  ${action.appearance === 'outline'
-                    ? 'border-2 border-current text-current hover:bg-current hover:text-white'
-                    : 'bg-blue-600 text-white hover:bg-blue-700'
-                  }
-                `.trim()}
-              >
-                {action.text}
-              </a>
-            ))}
-          </div>
-        )}
+        <div className={`flex flex-col ${textAlignment === 'center' ? 'items-center' : textAlignment === 'right' ? 'items-end' : 'items-start'}`}>
+          {eyebrow && (
+            <Badge variant="outline" className="mb-4 uppercase tracking-wide">
+              {eyebrow}
+            </Badge>
+          )}
+          
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
+            {title}
+          </h1>
+          
+          {description && (
+            <p className="text-lg md:text-xl text-muted-foreground mb-8 max-w-2xl">
+              {description}
+            </p>
+          )}
+          
+          {actions && actions.length > 0 && (
+            <div className={`flex flex-col sm:flex-row gap-4 ${alignmentClasses[textAlignment as keyof typeof alignmentClasses]?.split(' ')[1] || 'justify-center'}`}>
+              {actions.map((action, index) => (
+                <Button
+                  key={index}
+                  asChild
+                  variant={action.appearance === 'outline' ? 'outline' : 'default'}
+                  size="lg"
+                >
+                  <a
+                    href={action.href}
+                    target={action.newTab ? '_blank' : undefined}
+                    rel={action.newTab ? 'noopener noreferrer' : undefined}
+                  >
+                    {action.text}
+                  </a>
+                </Button>
+              ))}
+            </div>
+          )}
+        </div>
       </div>
     </section>
   )
