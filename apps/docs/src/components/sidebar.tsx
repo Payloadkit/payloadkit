@@ -160,7 +160,7 @@ export function Sidebar() {
   const pathname = usePathname()
 
   return (
-    <div className="w-full">
+    <div className="w-full py-2 px-2">
       {sidebarNavItems.map((item, index) => (
         <div key={index} className="pb-4">
           <h4 className="mb-1 rounded-md px-2 py-1 text-sm font-semibold">
@@ -191,6 +191,7 @@ export function Sidebar() {
           )}
         </div>
       ))}
+      <div className="h-4" /> {/* Bottom spacing */}
     </div>
   )
 }
