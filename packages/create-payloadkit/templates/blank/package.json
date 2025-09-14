@@ -18,6 +18,8 @@
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
     "@payloadcms/db-postgres": "^3.55.1",
+    "@payloadcms/db-mongodb": "^3.55.1",
+    "@payloadcms/email-nodemailer": "^3.55.1",
     "@payloadcms/richtext-lexical": "^3.55.1",
     "@payloadcms/next": "^3.55.1",
     "class-variance-authority": "^0.7.0",

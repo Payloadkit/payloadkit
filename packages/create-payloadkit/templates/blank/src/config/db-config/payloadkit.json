@@ -1,0 +1,63 @@
+{
+  "name": "db-config",
+  "version": "0.1.0",
+  "description": "Smart database configuration for PayloadCMS with auto-detection for Vercel and VPS deployments",
+  "type": "config",
+  "category": "database",
+  "tags": ["postgres", "mongodb", "vercel", "vps", "dokploy"],
+  "files": [
+    "index.ts",
+    "postgres.ts",
+    "mongodb.ts"
+  ],
+  "dependencies": {
+    "@payloadcms/db-postgres": "^3.55.1"
+  },
+  "optionalDependencies": {
+    "@payloadcms/db-mongodb": "^3.55.1"
+  },
+  "exports": {
+    "main": "./index.ts",
+    "postgres": "./postgres.ts",
+    "mongodb": "./mongodb.ts"
+  },
+  "envVars": {
+    "required": [],
+    "optional": [
+      {
+        "name": "DATABASE_URI",
+        "description": "Primary database connection string (PostgreSQL)",
+        "example": "postgresql://user:password@localhost:5432/mydb"
+      },
+      {
+        "name": "DATABASE_BUILD_URI",
+        "description": "Build-time database connection string for VPS deployments",
+        "example": "postgresql://builduser:pass@buildhost:5432/builddb"
+      },
+      {
+        "name": "MONGODB_URI",
+        "description": "MongoDB connection string (when using MongoDB adapter)",
+        "example": "mongodb://localhost:27017/mydb"
+      },
+      {
+        "name": "MONGODB_BUILD_URI",
+        "description": "Build-time MongoDB connection string for VPS deployments",
+        "example": "mongodb://builduser:pass@buildhost:27017/builddb"
+      }
+    ]
+  },
+  "features": [
+    "Auto-detection of Vercel vs VPS deployment",
+    "Smart build-time vs runtime connection handling",
+    "PostgreSQL support (default)",
+    "MongoDB support (optional)",
+    "Zero-config for most scenarios",
+    "Compatible with Dokploy and other VPS platforms"
+  ],
+  "usage": {
+    "basic": "import { dbConfig } from '@/config/db-config'",
+    "postgres": "import { postgresDbConfig } from '@/config/db-config'",
+    "mongodb": "import { mongoDbConfig } from '@/config/db-config'",
+    "custom": "import { createDbConfig } from '@/config/db-config'\nconst db = createDbConfig('mongodb')"
+  }
+}

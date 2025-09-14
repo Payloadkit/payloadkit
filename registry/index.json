@@ -183,6 +183,89 @@
     }
   },
   "globals": {},
+  "config": {
+    "db-config": {
+      "name": "db-config",
+      "description": "Smart database configuration with auto-detection for Vercel and VPS deployments",
+      "category": "database",
+      "tags": ["postgres", "mongodb", "vercel", "vps", "dokploy", "database"],
+      "version": "0.1.0",
+      "files": [
+        "index.ts",
+        "postgres.ts",
+        "mongodb.ts",
+        "payloadkit.json"
+      ],
+      "dependencies": ["@payloadcms/db-postgres"],
+      "optionalDependencies": ["@payloadcms/db-mongodb"],
+      "registryDependencies": []
+    },
+    "collections-config": {
+      "name": "collections-config",
+      "description": "Modular collections configuration for PayloadCMS",
+      "category": "configuration",
+      "tags": ["collections", "config", "modular"],
+      "version": "0.1.0",
+      "files": [
+        "index.ts"
+      ],
+      "dependencies": [],
+      "peerDependencies": ["payload"],
+      "registryDependencies": ["Users", "Media", "Pages"]
+    },
+    "plugins-config": {
+      "name": "plugins-config",
+      "description": "Essential plugins configuration for PayloadCMS applications",
+      "category": "configuration",
+      "tags": ["plugins", "seo", "forms", "redirects"],
+      "version": "0.1.0",
+      "files": [
+        "index.ts"
+      ],
+      "dependencies": ["@payloadcms/plugin-seo", "@payloadcms/plugin-form-builder", "@payloadcms/plugin-redirects"],
+      "peerDependencies": ["payload"],
+      "registryDependencies": []
+    },
+    "globals-config": {
+      "name": "globals-config",
+      "description": "Basic globals configuration for site-wide settings",
+      "category": "configuration",
+      "tags": ["globals", "header", "footer", "config"],
+      "version": "0.1.0",
+      "files": [
+        "index.ts"
+      ],
+      "dependencies": [],
+      "peerDependencies": ["payload"],
+      "registryDependencies": ["Header", "Footer"]
+    },
+    "jobs-config": {
+      "name": "jobs-config",
+      "description": "Background jobs configuration with security access control",
+      "category": "configuration",
+      "tags": ["jobs", "cron", "tasks", "background"],
+      "version": "0.1.0",
+      "files": [
+        "index.ts"
+      ],
+      "dependencies": [],
+      "peerDependencies": ["payload"],
+      "registryDependencies": []
+    },
+    "email-config": {
+      "name": "email-config",
+      "description": "Smart email configuration for development and production",
+      "category": "configuration",
+      "tags": ["email", "smtp", "nodemailer", "transport"],
+      "version": "0.1.0",
+      "files": [
+        "index.ts"
+      ],
+      "dependencies": ["@payloadcms/email-nodemailer"],
+      "peerDependencies": ["payload"],
+      "registryDependencies": []
+    }
+  },
   "components": {
     "RichText": {
       "name": "RichText",
