@@ -1,109 +1,109 @@
-# 📋 Changelog PayloadKit
+# 📋 PayloadKit Changelog
 
-Toutes les modifications importantes de PayloadKit sont documentées dans cette section.
+All notable changes to PayloadKit are documented in this section.
 
-Le format est basé sur [Keep a Changelog](https://keepachangelog.com/fr/1.0.0/),
-et ce projet adhère au [Semantic Versioning](https://semver.org/lang/fr/).
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
+and this project adheres to [Semantic Versioning](https://semver.org/).
 
-## 🚀 Récent (Non publié)
+## 🚀 Recent (Unreleased)
 
-### ✨ Nouvelles fonctionnalités
+### ✨ New Features
 
-#### 📖 Site de Documentation
-- **Site complet** : Site de documentation Next.js avec navigation moderne
-- **Recherche fonctionnelle** : Recherche avec raccourci Ctrl+K et navigation clavier
-- **Accessibilité** : Conformité WCAG complète avec support des lecteurs d'écran
-- **Design responsive** : Interface adaptative mobile/desktop
+#### 📖 Documentation Site
+- **Complete Site**: Next.js documentation site with modern navigation
+- **Functional Search**: Search with Ctrl+K shortcut and keyboard navigation
+- **Accessibility**: Full WCAG compliance with screen reader support
+- **Responsive Design**: Mobile/desktop adaptive interface
 
-#### 🐳 Docker & Déploiement
-- **Environnement Docker** : Configuration complète avec PostgreSQL, Redis, et MailHog
-- **Déploiement VPS** : Dockerfile optimisé pour déploiement Dokploy en production
-- **DATABASE_BUILD_URI** : Support des connexions de base de données au build-time
+#### 🐳 Docker & Deployment
+- **Docker Environment**: Complete configuration with PostgreSQL, Redis, and MailHog
+- **VPS Deployment**: Optimized Dockerfile for Dokploy production deployment
+- **DATABASE_BUILD_URI**: Support for build-time database connections
 
-#### ⚙️ Configuration Modulaire
-- **Détection intelligente** : Détection automatique PostgreSQL/MongoDB
-- **Configuration modulaire** : Architecture PayloadCMS modulaire et réutilisable
-- **Support VPS** : Optimisations spécifiques pour déploiement VPS
+#### ⚙️ Modular Configuration
+- **Smart Detection**: Automatic PostgreSQL/MongoDB detection
+- **Modular Configuration**: Modular and reusable PayloadCMS architecture
+- **VPS Support**: Specific optimizations for VPS deployment
 
-#### 🎨 Composants Améliorés
-- **Intégration shadcn/ui** : Composants shadcn/ui dans les blocs PayloadKit
-- **Sécurité Auth** : Système d'authentification amélioré dans le template blank
-- **Documentation S3** : Guides de configuration du stockage cloud
+#### 🎨 Enhanced Components
+- **shadcn/ui Integration**: shadcn/ui components in PayloadKit blocks
+- **Auth Security**: Improved authentication system in blank template
+- **S3 Documentation**: Cloud storage configuration guides
 
-### 🔄 Modifications
+### 🔄 Changes
 
-- **Système de Templates** : Template blank inclut maintenant la configuration modulaire
-- **Base de données** : PostgreSQL par défaut avec MongoDB en option
-- **Système de build** : Optimisé pour environnements Docker de production
+- **Template System**: Blank template now includes modular configuration
+- **Database**: PostgreSQL by default with MongoDB optional
+- **Build System**: Optimized for production Docker environments
 
-### 🐛 Corrections
+### 🐛 Fixes
 
-- **Documentation** : Résolution des conflits React et problèmes d'accessibilité
-- **Chemins de fichiers** : Correction du chargement markdown dans la documentation Next.js
-- **Dialog de recherche** : Ajout du DialogTitle requis pour les lecteurs d'écran
+- **Documentation**: Resolved React conflicts and accessibility issues
+- **File Paths**: Fixed markdown loading in Next.js documentation
+- **Search Dialog**: Added required DialogTitle for screen readers
 
 ---
 
-## 🎯 Version 0.0.1 - 12 septembre 2024
+## 🎯 Version 0.0.1 - September 12, 2024
 
-### ✨ Fonctionnalités initiales
+### ✨ Initial Features
 
-#### 🏗️ Framework Principal
-- **Framework PayloadKit** : Framework initial avec système de registre
-- **Outils CLI** : Interfaces en ligne de commande payloadkit et create-payloadkit
-- **Registre de Composants** : Système de découverte de composants basé sur les fichiers locaux
-- **Système de Templates** : Template blank avec intégration PayloadCMS
+#### 🏗️ Core Framework
+- **PayloadKit Framework**: Initial framework with registry system
+- **CLI Tools**: payloadkit and create-payloadkit command-line interfaces
+- **Component Registry**: Local file-based component discovery system
+- **Template System**: Blank template with PayloadCMS integration
 
 #### 📦 Architecture
-- **Structure Monorepo** : Workspaces Bun avec architecture packages et apps
-- **TypeScript** : Sécurité de type complète sur tous les packages
-- **Composants Blocs** : Blocs PayloadCMS réutilisables avec composants React
-- **Système de Collections** : Collections PayloadCMS réutilisables (Users, Media, Pages)
-- **Architecture Plugin** : Système de plugins extensible suivant les patterns PayloadCMS
+- **Monorepo Structure**: Bun workspaces with packages and apps architecture
+- **TypeScript**: Complete type safety across all packages
+- **Block Components**: Reusable PayloadCMS blocks with React components
+- **Collections System**: Reusable PayloadCMS collections (Users, Media, Pages)
+- **Plugin Architecture**: Extensible plugin system following PayloadCMS patterns
 
 ### 📚 Packages
 
-#### `payloadkit` - CLI Principal
-- **Commandes** : `init`, `list`, `add` pour la gestion des composants
-- **Système de registre** : Chargement et découverte des composants
-- **Approche copy-paste** : Contrôle maximum sur les composants
-- **Détection de projet** : Détection automatique des projets PayloadCMS
+#### `payloadkit` - Main CLI
+- **Commands**: `init`, `list`, `add` for component management
+- **Registry System**: Component loading and discovery
+- **Copy-paste Approach**: Maximum control over components
+- **Project Detection**: Automatic PayloadCMS project detection
 
-#### `create-payloadkit` - Générateur de Projets
-- **Scaffolding** : Création de projets PayloadCMS depuis des templates
-- **Template blank** : Foundation minimale avec PayloadCMS + PostgreSQL
-- **Gestion des dépendances** : Installation automatique des packages
-- **Intégration Git** : Initialisation du dépôt et premier commit
+#### `create-payloadkit` - Project Generator
+- **Scaffolding**: PayloadCMS project creation from templates
+- **Blank Template**: Minimal foundation with PayloadCMS + PostgreSQL
+- **Dependency Management**: Automatic package installation
+- **Git Integration**: Repository initialization and first commit
 
-#### `@payloadkit/core` - Types et Utilitaires
-- **Types TypeScript** : Interfaces pour l'écosystème PayloadKit
-- **Système de registre** : Définitions de types pour registre et métadonnées
-- **Utilitaires partagés** : Fonctions communes et constantes
-- **Sécurité de type** : Couverture TypeScript complète
+#### `@payloadkit/core` - Types and Utilities
+- **TypeScript Types**: Interfaces for PayloadKit ecosystem
+- **Registry System**: Type definitions for registry and metadata
+- **Shared Utilities**: Common functions and constants
+- **Type Safety**: Complete TypeScript coverage
 
-### 🛠️ Dépendances Principales
+### 🛠️ Core Dependencies
 
-- **PayloadCMS** : ^3.0.0+ intégration
-- **Next.js** : ^15.4.4 pour documentation et templates
-- **Bun** : Gestionnaire de packages et système de build principal
-- **TypeScript** : Sécurité de type complète et expérience de développement
-- **TailwindCSS** : Framework CSS utility-first
-- **shadcn/ui** : Intégration de bibliothèque de composants modernes
+- **PayloadCMS**: ^3.0.0+ integration
+- **Next.js**: ^15.4.4 for documentation and templates
+- **Bun**: Main package manager and build system
+- **TypeScript**: Complete type safety and development experience
+- **TailwindCSS**: Utility-first CSS framework
+- **shadcn/ui**: Modern component library integration
 
 ---
 
-## 📋 Format du Changelog
+## 📋 Changelog Format
 
-Ce changelog suit le format [Keep a Changelog](https://keepachangelog.com/fr/1.0.0/) :
+This changelog follows the [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) format:
 
-- **✨ Added** : Nouvelles fonctionnalités
-- **🔄 Changed** : Modifications de fonctionnalités existantes
-- **🗑️ Deprecated** : Fonctionnalités bientôt supprimées
-- **🐛 Fixed** : Corrections de bugs
-- **🔒 Security** : Correctifs de sécurité
-- **❌ Removed** : Fonctionnalités supprimées
+- **✨ Added**: New features
+- **🔄 Changed**: Changes to existing features
+- **🗑️ Deprecated**: Features to be removed soon
+- **🐛 Fixed**: Bug fixes
+- **🔒 Security**: Security fixes
+- **❌ Removed**: Removed features
 
-Le versioning suit [Semantic Versioning](https://semver.org/lang/fr/) :
-- **MAJOR** : Changements incompatibles API
-- **MINOR** : Nouvelles fonctionnalités rétrocompatibles
-- **PATCH** : Corrections de bugs rétrocompatibles
+Versioning follows [Semantic Versioning](https://semver.org/):
+- **MAJOR**: Incompatible API changes
+- **MINOR**: Backward-compatible new features
+- **PATCH**: Backward-compatible bug fixes

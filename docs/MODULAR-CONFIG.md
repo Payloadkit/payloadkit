@@ -1,36 +1,36 @@
-# Configuration Modulaire PayloadKit
+# PayloadKit Modular Configuration
 
-## 🏗️ Vue d'ensemble
+## 🏗️ Overview
 
-PayloadKit utilise maintenant une **architecture de configuration modulaire** qui permet de diviser la configuration PayloadCMS en modules réutilisables et maintenables. Fini les fichiers `payload.config.ts` monolithiques !
+PayloadKit now uses a **modular configuration architecture** that allows dividing PayloadCMS configuration into reusable and maintainable modules. No more monolithic `payload.config.ts` files!
 
-## ✨ Avantages
+## ✨ Benefits
 
-- **🗄️ Database Smart** : PostgreSQL par défaut, MongoDB en option
-- **☁️ Deploy Intelligent** : Auto-détection Vercel vs VPS (Dokploy)
-- **📦 Modulaire** : Chaque aspect configuré séparément
-- **🔄 Réutilisable** : Configs partagées entre projets
-- **🚀 DATABASE_BUILD_URI** : Support VPS sans accès DB au build
+- **🗄️ Smart Database**: PostgreSQL by default, MongoDB optional
+- **☁️ Intelligent Deploy**: Auto-detection Vercel vs VPS (Dokploy)
+- **📦 Modular**: Each aspect configured separately
+- **🔄 Reusable**: Configs shared between projects
+- **🚀 DATABASE_BUILD_URI**: VPS support without DB access at build
 
 ## 📂 Structure
 
 ```
 src/config/
-├── index.ts              # Point d'entrée principal
-├── db-config/            # Configuration base de données
-│   ├── index.ts          # Auto-sélection PostgreSQL/MongoDB
-│   ├── postgres.ts       # Adaptateur PostgreSQL + smart connection
-│   └── mongodb.ts        # Adaptateur MongoDB (optionnel)
-├── collections-config.ts # Configuration des collections
-├── plugins-config.ts     # Configuration des plugins
-├── globals-config.ts     # Configuration des globals
-├── jobs-config.ts        # Configuration des jobs/tâches
-└── email-config.ts       # Configuration email dev/prod
+├── index.ts              # Main entry point
+├── db-config/            # Database configuration
+│   ├── index.ts          # Auto-selection PostgreSQL/MongoDB
+│   ├── postgres.ts       # PostgreSQL adapter + smart connection
+│   └── mongodb.ts        # MongoDB adapter (optional)
+├── collections-config.ts # Collections configuration
+├── plugins-config.ts     # Plugins configuration
+├── globals-config.ts     # Globals configuration
+├── jobs-config.ts        # Jobs/tasks configuration
+└── email-config.ts       # Email configuration dev/prod
 ```
 
-## 🚀 Utilisation Rapide
+## 🚀 Quick Start
 
-### Configuration de Base
+### Basic Configuration
 
 ```typescript
 // src/payload.config.ts
@@ -45,7 +45,7 @@ import {
 } from './config'
 
 export default buildConfig({
-  // Configuration modulaire
+  // Modular configuration
   db: dbConfig,
   collections: collectionsConfig,
   plugins: pluginsConfig,
@@ -53,25 +53,25 @@ export default buildConfig({
   jobs: jobsConfig,
   email: emailConfig,
 
-  // Configuration standard
+  // Standard configuration
   secret: process.env.PAYLOAD_SECRET,
   // ...
 })
 ```
 
-## 🗄️ Configuration Database
+## 🗄️ Database Configuration
 
-### PostgreSQL (Par Défaut)
+### PostgreSQL (Default)
 
 ```typescript
-// Utilisation automatique
+// Automatic usage
 import { dbConfig } from './config'
 
-// Ou explicite
+// Or explicit
 import { postgresDbConfig } from './config'
 ```
 
-### MongoDB (Optionnel)
+### MongoDB (Optional)
 
 ```typescript
 import { createDbConfig } from './config'
@@ -79,43 +79,43 @@ import { createDbConfig } from './config'
 const dbConfig = createDbConfig('mongodb')
 ```
 
-### Variables d'Environnement
+### Environment Variables
 
-| Variable | Description | Environnement |
-|----------|-------------|---------------|
-| `DATABASE_URI` | Connexion principale | Vercel + VPS runtime |
-| `DATABASE_BUILD_URI` | Connexion build-time | VPS uniquement |
-| `MONGODB_URI` | Connexion MongoDB | Si MongoDB utilisé |
+| Variable | Description | Environment |
+|----------|-------------|-------------|
+| `DATABASE_URI` | Main connection | Vercel + VPS runtime |
+| `DATABASE_BUILD_URI` | Build-time connection | VPS only |
+| `MONGODB_URI` | MongoDB connection | If MongoDB used |
 | `MONGODB_BUILD_URI` | MongoDB build-time | VPS + MongoDB |
 
-## ☁️ Déploiement Intelligent
+## ☁️ Intelligent Deployment
 
-### Vercel (Automatique)
+### Vercel (Automatic)
 ```bash
-# Variables nécessaires
+# Required variables
 DATABASE_URI=postgresql://user:pass@host:5432/db
 PAYLOAD_SECRET=your-secret
 ```
 
 ### VPS/Dokploy (DATABASE_BUILD_URI)
 ```bash
-# Build-time (base de données accessible au build)
+# Build-time (database accessible at build)
 DATABASE_BUILD_URI=postgresql://build-user:pass@build-host:5432/db
 
-# Runtime (base de données de production)
+# Runtime (production database)
 DATABASE_URI=postgresql://prod-user:pass@prod-host:5432/db
 PAYLOAD_SECRET=your-production-secret
 ```
 
 ### Local Development
 ```bash
-# Fallback automatique
+# Automatic fallback
 DATABASE_URI=postgresql://localhost:5432/payloadkit_dev
 ```
 
-## 📦 Extension de Configuration
+## 📦 Configuration Extension
 
-### Ajout de Collections Personnalisées
+### Adding Custom Collections
 
 ```typescript
 // src/config/collections-config.ts
@@ -129,7 +129,7 @@ export const collectionsConfig = createCollectionsConfig([
 ])
 ```
 
-### Ajout de Plugins Personnalisés
+### Adding Custom Plugins
 
 ```typescript
 // src/config/plugins-config.ts
@@ -143,17 +143,17 @@ export const pluginsConfig = createPluginsConfig([
 ])
 ```
 
-## 🔧 Configuration Email
+## 🔧 Email Configuration
 
-### Développement (Console)
+### Development (Console)
 ```typescript
-// Automatique en NODE_ENV=development
-// Les emails sont loggés dans la console
+// Automatic in NODE_ENV=development
+// Emails are logged to console
 ```
 
 ### Production (SMTP)
 ```bash
-# Variables d'environnement
+# Environment variables
 SMTP_HOST=smtp.gmail.com
 SMTP_PORT=587
 SMTP_USER=your-email@gmail.com
@@ -162,24 +162,24 @@ FROM_ADDRESS=noreply@yourdomain.com
 FROM_NAME="Your App Name"
 ```
 
-## ⚙️ Configuration Jobs
+## ⚙️ Jobs Configuration
 
-### Jobs avec Sécurité
+### Jobs with Security
 
 ```typescript
-// Accès automatique pour utilisateurs connectés
-// Accès par CRON_SECRET pour automatisation
+// Automatic access for logged users
+// Access via CRON_SECRET for automation
 
-// Variables d'environnement
+// Environment variables
 CRON_SECRET=your-cron-secret
 
-// Header pour Vercel Cron
+// Header for Vercel Cron
 Authorization: Bearer your-cron-secret
 ```
 
-## 🎯 Migration depuis Config Monolithique
+## 🎯 Migration from Monolithic Config
 
-### Avant (Monolithique)
+### Before (Monolithic)
 ```typescript
 export default buildConfig({
   db: postgresAdapter({
@@ -191,52 +191,52 @@ export default buildConfig({
 })
 ```
 
-### Après (Modulaire)
+### After (Modular)
 ```typescript
 export default buildConfig({
-  db: dbConfig,           // Smart database avec auto-détection
-  collections: collectionsConfig,  // Collections réutilisables
-  plugins: pluginsConfig, // Plugins essentiels
+  db: dbConfig,           // Smart database with auto-detection
+  collections: collectionsConfig,  // Reusable collections
+  plugins: pluginsConfig, // Essential plugins
   // ...
 })
 ```
 
-## 🔍 Dépannage
+## 🔍 Troubleshooting
 
-### Problème : "Cannot find module '@payloadcms/db-mongodb'"
+### Problem: "Cannot find module '@payloadcms/db-mongodb'"
 
-**Solution** : MongoDB est optionnel
+**Solution**: MongoDB is optional
 ```bash
-# Installer uniquement si nécessaire
+# Install only if needed
 bun add @payloadcms/db-mongodb
 ```
 
-### Problème : Build échoue sur VPS
+### Problem: Build fails on VPS
 
-**Solution** : Vérifier DATABASE_BUILD_URI
+**Solution**: Check DATABASE_BUILD_URI
 ```bash
-# Doit être accessible pendant le build
+# Must be accessible during build
 DATABASE_BUILD_URI=postgresql://builduser:pass@accessible-host:5432/builddb
 ```
 
-### Problème : Emails ne fonctionnent pas
+### Problem: Emails not working
 
-**Solution** : Vérifier configuration SMTP
+**Solution**: Check SMTP configuration
 ```bash
-# Toutes les variables obligatoires
+# All required variables
 SMTP_HOST=smtp.yourdomain.com
 SMTP_PORT=587
 SMTP_USER=user@domain.com
 SMTP_PASS=password
 ```
 
-## 📚 Ressources
+## 📚 Resources
 
-- [Configuration PayloadCMS](https://payloadcms.com/docs/configuration/overview)
+- [PayloadCMS Configuration](https://payloadcms.com/docs/configuration/overview)
 - [PostgreSQL Adapter](https://payloadcms.com/docs/database/postgres)
 - [MongoDB Adapter](https://payloadcms.com/docs/database/mongodb)
 - [Email Configuration](https://payloadcms.com/docs/email/overview)
 
 ---
 
-> 💡 **Conseil** : Commencez avec la configuration par défaut, puis personnalisez selon vos besoins !
+> 💡 **Tip**: Start with the default configuration, then customize according to your needs!

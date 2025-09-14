@@ -1,323 +1,323 @@
-# Guide de Démarrage PayloadKit
+# PayloadKit Getting Started Guide
 
-## 🚀 Installation Rapide
+## 🚀 Quick Installation
 
-### Option 1 : Nouveau Projet (Recommandé)
+### Option 1: New Project (Recommended)
 
 ```bash
-# Créer un nouveau projet PayloadKit
-npx create-payloadkit@latest mon-projet
+# Create a new PayloadKit project
+npx create-payloadkit@latest my-project
 
-cd mon-projet
+cd my-project
 
-# Développement local standard
+# Standard local development
 bun dev
 
-# OU développement avec Docker (environnement complet)
+# OR Docker development (complete environment)
 npm run docker:dev
 ```
 
-### Option 2 : Projet Existant
+### Option 2: Existing Project
 
 ```bash
-# Dans votre projet PayloadCMS existant
+# In your existing PayloadCMS project
 npx payloadkit init
 
-# Ajouter des composants
+# Add components
 npx payloadkit add hero-block call-to-action
-npx payloadkit add db-config  # Configuration intelligente
+npx payloadkit add db-config  # Smart configuration
 ```
 
-## 🎯 Choisir son Environnement
+## 🎯 Choose Your Environment
 
-### 🖥️ Développement Local Standard
+### 🖥️ Standard Local Development
 
-**Quand l'utiliser :** Développement simple, pas besoin de services externes
+**When to use:** Simple development, no need for external services
 
 ```bash
-# Configuration minimale
-echo "DATABASE_URI=postgresql://localhost:5432/mon_projet" > .env
-echo "PAYLOAD_SECRET=mon-secret-local" >> .env
+# Minimal configuration
+echo "DATABASE_URI=postgresql://localhost:5432/my_project" > .env
+echo "PAYLOAD_SECRET=my-local-secret" >> .env
 
-# Lancement
+# Launch
 bun dev
 ```
 
-### 🐳 Développement Docker (Recommandé)
+### 🐳 Docker Development (Recommended)
 
-**Quand l'utiliser :** Premier projet, tests d'emails, développement full-stack
+**When to use:** First project, email testing, full-stack development
 
 ```bash
-# Environnement complet en une commande
+# Complete environment in one command
 npm run docker:dev
 
-# Services inclus :
+# Included services:
 # - PayloadKit app (hot-reload)
-# - PostgreSQL 16 avec extensions
-# - Interface web à : http://localhost:3000
+# - PostgreSQL 16 with extensions
+# - Web interface at: http://localhost:3000
 ```
 
-### 🌐 Développement Docker Complet
+### 🌐 Full Docker Development
 
-**Quand l'utiliser :** Développement avancé, tests d'emails, gestion DB
+**When to use:** Advanced development, email testing, database management
 
 ```bash
-# Tous les services
+# All services
 npm run docker:dev:full
 
-# Services supplémentaires :
-# - Redis (cache) : localhost:6379
-# - MailHog (emails) : localhost:8025
-# - pgAdmin (DB) : localhost:5050
+# Additional services:
+# - Redis (cache): localhost:6379
+# - MailHog (emails): localhost:8025
+# - pgAdmin (DB): localhost:5050
 ```
 
-## 🗄️ Configuration Base de Données
+## 🗄️ Database Configuration
 
-### Auto-Détection Intelligente
+### Smart Auto-Detection
 
-PayloadKit détecte automatiquement votre environnement :
+PayloadKit automatically detects your environment:
 
 ```typescript
 // src/config/db-config/index.ts
-export const dbConfig = createDbConfig() // PostgreSQL par défaut
+export const dbConfig = createDbConfig() // PostgreSQL by default
 
-// Ou explicitement
+// Or explicitly
 export const dbConfig = createDbConfig('mongodb') // MongoDB
 ```
 
-### Variables d'Environnement
+### Environment Variables
 
 ```bash
-# PostgreSQL (par défaut)
+# PostgreSQL (default)
 DATABASE_URI=postgresql://user:pass@host:5432/db
 
-# MongoDB (optionnel)
-MONGODB_URI=mongodb://localhost:27017/mon_projet
+# MongoDB (optional)
+MONGODB_URI=mongodb://localhost:27017/my_project
 
-# VPS/Dokploy (build séparé du runtime)
+# VPS/Dokploy (build separate from runtime)
 DATABASE_BUILD_URI=postgresql://build:pass@accessible:5432/build
 DATABASE_URI=postgresql://prod:pass@private:5432/prod
 ```
 
-## 📦 Ajout de Composants
+## 📦 Adding Components
 
-### Interface de Base
+### Basic Interface
 
 ```bash
-# Composants essentiels
+# Essential components
 npx payloadkit add Users Media Pages
 
-# Composants React
+# React components
 npx payloadkit add RichText CMSLink
 ```
 
-### Blocks de Contenu
+### Content Blocks
 
 ```bash
 # Landing page
 npx payloadkit add hero-block call-to-action
 
-# Contenu
+# Content
 npx payloadkit add faq content feature
 
 # Marketing
 npx payloadkit add banner media-block
 ```
 
-### Configuration Avancée
+### Advanced Configuration
 
 ```bash
-# Base de données intelligente
+# Smart database
 npx payloadkit add db-config
 
-# Setup Docker
+# Docker setup
 npx payloadkit add dockerfile-dev docker-compose-dev
 
-# Configuration email
+# Email configuration
 npx payloadkit add email-config
 ```
 
-## 🚀 Déploiement
+## 🚀 Deployment
 
 ### Vercel (Zero Config)
 
 ```bash
-# Variables Vercel
+# Vercel variables
 DATABASE_URI=postgresql://user:pass@host:5432/db
 PAYLOAD_SECRET=your-secret
 
-# Déploiement
+# Deploy
 vercel deploy
 ```
 
 ### VPS/Dokploy (Smart Build)
 
 ```bash
-# Variables build-time
+# Build-time variables
 DATABASE_BUILD_URI=postgresql://build:pass@accessible:5432/build
 
-# Variables runtime
+# Runtime variables
 DATABASE_URI=postgresql://prod:pass@private:5432/prod
 PAYLOAD_SECRET=your-production-secret
 
-# Dokploy déploie automatiquement
+# Dokploy deploys automatically
 ```
 
-## 🛠️ Workflows de Développement
+## 🛠️ Development Workflows
 
-### Développement Quotidien
+### Daily Development
 
 ```bash
-# Option 1 : Standard
+# Option 1: Standard
 bun dev                    # http://localhost:3000
 
-# Option 2 : Docker (recommandé)
-npm run docker:dev         # Environnement complet
-npm run docker:logs        # Voir les logs
-npm run docker:db          # Accès direct PostgreSQL
+# Option 2: Docker (recommended)
+npm run docker:dev         # Complete environment
+npm run docker:logs        # View logs
+npm run docker:db          # Direct PostgreSQL access
 ```
 
-### Ajout de Fonctionnalités
+### Adding Features
 
 ```bash
-# 1. Ajouter des composants
+# 1. Add components
 npx payloadkit add new-component
 
-# 2. Personnaliser dans src/
-# 3. Tester en développement
+# 2. Customize in src/
+# 3. Test in development
 npm run docker:dev
 
-# 4. Déployer
-git push origin main  # Auto-deploy sur Vercel/Dokploy
+# 4. Deploy
+git push origin main  # Auto-deploy on Vercel/Dokploy
 ```
 
-### Debug et Tests
+### Debug and Testing
 
 ```bash
-# Logs de l'application
+# Application logs
 npm run docker:logs
 
-# Accès direct à la base
+# Direct database access
 npm run docker:db
 # > SELECT * FROM users;
 
-# Interface web MailHog (emails)
+# MailHog web interface (emails)
 open http://localhost:8025
 
-# Interface web pgAdmin (DB)
+# pgAdmin web interface (DB)
 open http://localhost:5050
 ```
 
-## 📧 Configuration Email
+## 📧 Email Configuration
 
-### Développement (MailHog)
+### Development (MailHog)
 
 ```bash
-# Avec Docker complet
+# With full Docker
 npm run docker:dev:full
 
-# Variables .env
+# .env variables
 SMTP_HOST=mailhog
 SMTP_PORT=1025
-# Pas d'auth nécessaire
+# No auth needed
 
-# Emails visibles sur http://localhost:8025
+# Emails visible at http://localhost:8025
 ```
 
 ### Production (SMTP)
 
 ```bash
-# Variables .env.production
+# .env.production variables
 SMTP_HOST=smtp.gmail.com
 SMTP_PORT=587
 SMTP_USER=your-email@gmail.com
 SMTP_PASS=your-app-password
 FROM_ADDRESS=noreply@yourdomain.com
-FROM_NAME="Mon App"
+FROM_NAME="My App"
 ```
 
-## 🎯 Cas d'Usage Courants
+## 🎯 Common Use Cases
 
-### 1. Premier Projet PayloadCMS
+### 1. First PayloadCMS Project
 
 ```bash
-# Setup complet en 3 minutes
-npx create-payloadkit@latest mon-premier-projet
-cd mon-premier-projet
+# Complete setup in 3 minutes
+npx create-payloadkit@latest my-first-project
+cd my-first-project
 npm run docker:dev
 
-# Ouvrir http://localhost:3000/admin
-# Créer votre premier admin user
+# Open http://localhost:3000/admin
+# Create your first admin user
 ```
 
-### 2. Migration PayloadCMS Existant
+### 2. Migrating Existing PayloadCMS
 
 ```bash
-# Dans votre projet existant
+# In your existing project
 npx payloadkit init
 
-# Migrer vers config modulaire
+# Migrate to modular config
 npx payloadkit add db-config collections-config
 
-# Remplacer payload.config.ts
-# (voir docs/MODULAR-CONFIG.md)
+# Replace payload.config.ts
+# (see docs/MODULAR-CONFIG.md)
 ```
 
-### 3. Site Business/Marketing
+### 3. Business/Marketing Site
 
 ```bash
-# Template avec composants marketing
-npx create-payloadkit@latest mon-business
-cd mon-business
+# Template with marketing components
+npx create-payloadkit@latest my-business
+cd my-business
 
-# Ajouter des blocks
+# Add blocks
 npx payloadkit add hero-block feature faq call-to-action
 
 npm run docker:dev
 ```
 
-### 4. Développement avec Équipe
+### 4. Team Development
 
 ```bash
-# Environnement reproductible
+# Reproducible environment
 git clone your-project
 cd your-project
 
-# Setup identique pour tous
+# Identical setup for everyone
 npm run docker:dev
 
-# Base de données + services identiques
-# Pas de "ça marche chez moi"
+# Same database + services
+# No "works on my machine"
 ```
 
-## 🔧 Personnalisation
+## 🔧 Customization
 
-### Modifier un Composant
+### Modify a Component
 
 ```bash
-# Ajouter le composant
+# Add the component
 npx payloadkit add hero-block
 
-# Personnaliser dans votre projet
+# Customize in your project
 # src/blocks/hero-block/Component.tsx
 # src/blocks/hero-block/config.ts
 ```
 
-### Créer un Nouveau Block
+### Create a New Block
 
 ```bash
-# Copier un block existant comme base
-cp -r src/blocks/hero-block src/blocks/mon-block
+# Copy an existing block as base
+cp -r src/blocks/hero-block src/blocks/my-block
 
-# Personnaliser
-# src/blocks/mon-block/Component.tsx
-# src/blocks/mon-block/config.ts
+# Customize
+# src/blocks/my-block/Component.tsx
+# src/blocks/my-block/config.ts
 
-# Ajouter à PayloadCMS
+# Add to PayloadCMS
 # src/config/collections-config.ts
 ```
 
-### Configuration Avancée
+### Advanced Configuration
 
 ```typescript
 // src/config/plugins-config.ts
@@ -333,37 +333,37 @@ export const pluginsConfig = createPluginsConfig([
 
 ## ❓ FAQ
 
-### Q: PayloadKit vs PayloadCMS ?
-**R:** PayloadKit enrichit PayloadCMS avec des composants, configurations et outils. PayloadCMS reste le cœur.
+### Q: PayloadKit vs PayloadCMS?
+**A:** PayloadKit enriches PayloadCMS with components, configurations and tools. PayloadCMS remains the core.
 
-### Q: Puis-je utiliser npm au lieu de bun ?
-**R:** Oui, remplacez `bun` par `npm` ou `yarn`. Docker fonctionne avec tous.
+### Q: Can I use npm instead of bun?
+**A:** Yes, replace `bun` with `npm` or `yarn`. Docker works with all.
 
-### Q: Comment changer la base de données ?
-**R:**
+### Q: How to change the database?
+**A:**
 ```typescript
 import { createDbConfig } from './config'
 export const dbConfig = createDbConfig('mongodb')
 ```
 
-### Q: Le Docker est-il obligatoire ?
-**R:** Non, c'est optionnel. `bun dev` fonctionne parfaitement pour le développement simple.
+### Q: Is Docker mandatory?
+**A:** No, it's optional. `bun dev` works perfectly for simple development.
 
-### Q: Comment déployer sur mon VPS ?
-**R:** Voir [docs/VPS-DEPLOYMENT.md](VPS-DEPLOYMENT.md) pour Dokploy, Railway, etc.
+### Q: How to deploy to my VPS?
+**A:** See [docs/VPS-DEPLOYMENT.md](VPS-DEPLOYMENT.md) for Dokploy, Railway, etc.
 
-## 📚 Prochaines Étapes
+## 📚 Next Steps
 
-1. **[Configuration Modulaire](MODULAR-CONFIG.md)** - Comprendre l'architecture
-2. **[Docker Development](DOCKER-SETUP.md)** - Environnement de développement
-3. **[VPS Deployment](VPS-DEPLOYMENT.md)** - Déploiement production
+1. **[Modular Configuration](MODULAR-CONFIG.md)** - Understand the architecture
+2. **[Docker Development](DOCKER-SETUP.md)** - Development environment
+3. **[VPS Deployment](VPS-DEPLOYMENT.md)** - Production deployment
 
 ## 🆘 Support
 
-- **Documentation** : Tous les guides dans `/docs`
-- **Issues** : GitHub Issues pour les bugs
-- **Community** : Discord PayloadCMS pour les questions
+- **Documentation**: All guides in `/docs`
+- **Issues**: GitHub Issues for bugs
+- **Community**: PayloadCMS Discord for questions
 
 ---
 
-> 🎯 **Objectif** : Être productif avec PayloadCMS en moins de 5 minutes !
+> 🎯 **Goal**: Be productive with PayloadCMS in less than 5 minutes!

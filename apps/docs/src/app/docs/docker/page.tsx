@@ -5,7 +5,7 @@ import { marked } from 'marked'
 
 export const metadata: Metadata = {
   title: 'Docker Development Setup | PayloadKit',
-  description: 'Environnement de développement Docker complet avec PostgreSQL, Redis et MailHog',
+  description: 'Complete Docker development environment with PostgreSQL, Redis, and MailHog',
 }
 
 async function getMarkdownContent() {

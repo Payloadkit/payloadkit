@@ -1,82 +1,82 @@
-# Docker Development Setup PayloadKit
+# PayloadKit Docker Development Setup
 
-## 🐳 Vue d'ensemble
+## 🐳 Overview
 
-PayloadKit propose maintenant un **environnement de développement Docker complet** avec PostgreSQL, Redis, MailHog et pgAdmin. Un seul `docker-compose up` et vous avez un stack PayloadCMS prêt à développer !
+PayloadKit now offers a **complete Docker development environment** with PostgreSQL, Redis, MailHog, and pgAdmin. Just one `docker-compose up` and you have a PayloadCMS stack ready to develop!
 
-## ✨ Fonctionnalités
+## ✨ Features
 
-- **🐋 Multi-stage Dockerfile** : Dev, Build et Production optimisés
-- **📦 PostgreSQL 16** : Base de données avec extensions et health checks
-- **⚡ Hot-reload** : Développement avec rechargement automatique
-- **🔧 Services optionnels** : Redis, MailHog, pgAdmin
-- **🚀 Production ready** : Compatible Dokploy/VPS
-- **🛡️ Sécurisé** : Utilisateur non-root, health checks
+- **🐋 Multi-stage Dockerfile**: Optimized Dev, Build, and Production stages
+- **📦 PostgreSQL 16**: Database with extensions and health checks
+- **⚡ Hot-reload**: Development with automatic reload
+- **🔧 Optional Services**: Redis, MailHog, pgAdmin
+- **🚀 Production Ready**: Compatible with Dokploy/VPS
+- **🛡️ Secure**: Non-root user, health checks
 
-## 🚀 Démarrage Rapide
+## 🚀 Quick Start
 
-### 1. Lancement Standard
+### 1. Standard Launch
 ```bash
-# Environnement de base (app + PostgreSQL)
+# Basic environment (app + PostgreSQL)
 npm run docker:dev
 
-# Ou en arrière-plan
+# Or in background
 npm run docker:dev:detached
 ```
 
-### 2. Environnement Complet
+### 2. Full Environment
 ```bash
-# Avec Redis, MailHog et pgAdmin
+# With Redis, MailHog, and pgAdmin
 npm run docker:dev:full
 ```
 
-### 3. Premier Build
+### 3. First Build
 ```bash
-# Build et lancement
+# Build and launch
 npm run docker:dev:build
 ```
 
-## 📂 Structure Docker
+## 📂 Docker Structure
 
 ```
-projet/
+project/
 ├── Dockerfile              # Multi-stage (dev, builder, runner)
-├── docker-compose.yml      # Environnement complet
-├── .dockerignore          # Optimisation build context
-├── init.sql               # Initialisation PostgreSQL
-└── .env                   # Variables d'environnement
+├── docker-compose.yml      # Complete environment
+├── .dockerignore          # Build context optimization
+├── init.sql               # PostgreSQL initialization
+└── .env                   # Environment variables
 ```
 
-## 🔧 Services Disponibles
+## 🔧 Available Services
 
 | Service | Port | Description | Profile |
 |---------|------|-------------|---------|
-| **app** | 3000 | PayloadKit + Next.js | Toujours |
-| **postgres** | 5432 | PostgreSQL 16 + extensions | Toujours |
-| **redis** | 6379 | Cache et sessions | `full` |
-| **mailhog** | 8025 | Interface email de test | `full` |
-| **mailhog-smtp** | 1025 | Serveur SMTP de test | `full` |
-| **pgadmin** | 5050 | Administration PostgreSQL | `full` |
+| **app** | 3000 | PayloadKit + Next.js | Always |
+| **postgres** | 5432 | PostgreSQL 16 + extensions | Always |
+| **redis** | 6379 | Cache and sessions | `full` |
+| **mailhog** | 8025 | Test email interface | `full` |
+| **mailhog-smtp** | 1025 | Test SMTP server | `full` |
+| **pgadmin** | 5050 | PostgreSQL administration | `full` |
 
-## 📋 Scripts NPM Disponibles
+## 📋 Available NPM Scripts
 
 ```bash
-# Développement
-npm run docker:dev          # Lancement standard
-npm run docker:dev:build    # Build + lancement
-npm run docker:dev:detached # Lancement en arrière-plan
-npm run docker:dev:full     # Environnement complet
+# Development
+npm run docker:dev          # Standard launch
+npm run docker:dev:build    # Build + launch
+npm run docker:dev:detached # Background launch
+npm run docker:dev:full     # Full environment
 
-# Gestion
-npm run docker:stop         # Arrêter tous les services
-npm run docker:reset        # Reset complet (supprime volumes)
-npm run docker:logs         # Voir les logs de l'app
-npm run docker:db           # Connexion directe à PostgreSQL
+# Management
+npm run docker:stop         # Stop all services
+npm run docker:reset        # Complete reset (removes volumes)
+npm run docker:logs         # View app logs
+npm run docker:db           # Direct PostgreSQL connection
 ```
 
-## 🗄️ Configuration Base de Données
+## 🗄️ Database Configuration
 
-### Variables d'Environnement
+### Environment Variables
 ```bash
 # .env
 POSTGRES_USER=payloadkit
@@ -88,21 +88,21 @@ DATABASE_URI=postgresql://payloadkit:payloadkit@localhost:5432/payloadkit_dev
 PAYLOAD_SECRET=your-secret-key
 ```
 
-### Accès Direct à la DB
+### Direct DB Access
 ```bash
 # Via Docker Compose
 npm run docker:db
 
-# Ou directement
+# Or directly
 docker-compose exec postgres psql -U payloadkit -d payloadkit_dev
 ```
 
-### pgAdmin (Interface Web)
-- **URL** : http://localhost:5050
-- **Email** : admin@payloadkit.dev
-- **Mot de passe** : admin
+### pgAdmin (Web Interface)
+- **URL**: http://localhost:5050
+- **Email**: admin@payloadkit.dev
+- **Password**: admin
 
-## 📧 Test des Emails avec MailHog
+## 📧 Email Testing with MailHog
 
 ### Configuration
 ```bash
@@ -113,34 +113,34 @@ SMTP_USER=
 SMTP_PASS=
 ```
 
-### Interface Web
-- **URL** : http://localhost:8025
-- Tous les emails envoyés par PayloadCMS apparaissent ici
-- Parfait pour tester les workflows d'email
+### Web Interface
+- **URL**: http://localhost:8025
+- All emails sent by PayloadCMS appear here
+- Perfect for testing email workflows
 
-## 🚀 Production avec Dokploy/VPS
+## 🚀 Production with Dokploy/VPS
 
-### Dockerfile Multi-Stage
+### Multi-Stage Dockerfile
 
-Le Dockerfile inclut 3 stages optimisés :
+The Dockerfile includes 3 optimized stages:
 
 ```dockerfile
 # Stage 1: Development (hot-reload)
 FROM oven/bun:1-alpine AS dev
 
-# Stage 2: Build (génération types + build)
+# Stage 2: Build (type generation + build)
 FROM base AS builder
 ENV PAYLOAD_DISABLE_ADMIN=true
 ENV DATABASE_BUILD_URI=postgresql://...
 
-# Stage 3: Production (standalone optimisé)
+# Stage 3: Production (optimized standalone)
 FROM oven/bun:1-alpine AS runner
 ```
 
-### Variables de Production
+### Production Variables
 
 ```bash
-# Build-time (si base accessible au build)
+# Build-time (if base accessible at build)
 DATABASE_BUILD_URI=postgresql://build-user:pass@build-host:5432/build-db
 
 # Runtime
@@ -148,31 +148,31 @@ DATABASE_URI=postgresql://prod-user:pass@prod-host:5432/prod-db
 PAYLOAD_SECRET=your-production-secret
 NEXT_PUBLIC_SERVER_URL=https://yourdomain.com
 
-# Email production
+# Production email
 SMTP_HOST=smtp.yourdomain.com
 SMTP_PORT=587
 SMTP_USER=noreply@yourdomain.com
 SMTP_PASS=your-smtp-password
 ```
 
-### Build Production
+### Production Build
 
 ```bash
-# Build image de production
+# Build production image
 docker build --target runner -t payloadkit-prod .
 
-# Ou avec Dokploy (automatique)
-# Dokploy utilise automatiquement le stage 'runner'
+# Or with Dokploy (automatic)
+# Dokploy automatically uses the 'runner' stage
 ```
 
-## 🔧 Personnalisation
+## 🔧 Customization
 
-### Ajout de Services
+### Adding Services
 
 ```yaml
 # docker-compose.yml
 services:
-  # Service personnalisé
+  # Custom service
   elasticsearch:
     image: elasticsearch:8.11.0
     ports:
@@ -183,19 +183,19 @@ services:
       - search
 ```
 
-### Modification PostgreSQL
+### Modifying PostgreSQL
 
 ```sql
--- init.sql : Ajout d'extensions
+-- init.sql: Adding extensions
 CREATE EXTENSION IF NOT EXISTS "vector";
 CREATE EXTENSION IF NOT EXISTS "pg_trgm";
 
--- Utilisateur personnalisé
+-- Custom user
 CREATE ROLE my_app_user WITH LOGIN PASSWORD 'secure_password';
 GRANT ALL PRIVILEGES ON DATABASE payloadkit_dev TO my_app_user;
 ```
 
-### Variables d'Environnement Personnalisées
+### Custom Environment Variables
 
 ```yaml
 # docker-compose.yml
@@ -206,49 +206,49 @@ services:
       - FEATURE_FLAG_X=${FEATURE_FLAG_X:-false}
 ```
 
-## 🔍 Dépannage
+## 🔍 Troubleshooting
 
-### Problème : Port 5432 déjà utilisé
+### Problem: Port 5432 already in use
 ```bash
-# Changer le port PostgreSQL
+# Change PostgreSQL port
 # docker-compose.yml
 ports:
-  - '5433:5432'  # Port local différent
+  - '5433:5432'  # Different local port
 ```
 
-### Problème : Volumes corrompus
+### Problem: Corrupted volumes
 ```bash
-# Reset complet
+# Complete reset
 npm run docker:reset
 
-# Ou manuellement
+# Or manually
 docker-compose down -v
 docker system prune
 ```
 
-### Problème : Build échoue
+### Problem: Build fails
 ```bash
-# Vérifier les logs
+# Check logs
 docker-compose logs app
 
-# Rebuild sans cache
+# Rebuild without cache
 docker-compose build --no-cache app
 ```
 
-### Problème : Hot-reload ne fonctionne pas
+### Problem: Hot-reload not working
 ```bash
-# Vérifier les volumes dans docker-compose.yml
+# Check volumes in docker-compose.yml
 volumes:
-  - .:/app              # Code source
+  - .:/app              # Source code
   - /app/node_modules    # Exclude node_modules
   - /app/.next           # Exclude .next
 ```
 
-## 📊 Monitoring et Health Checks
+## 📊 Monitoring and Health Checks
 
-### Health Checks Intégrés
+### Built-in Health Checks
 
-Tous les services incluent des health checks :
+All services include health checks:
 
 ```yaml
 healthcheck:
@@ -259,46 +259,46 @@ healthcheck:
   start_period: 30s
 ```
 
-### Vérification Status
+### Status Verification
 
 ```bash
-# Status de tous les services
+# Status of all services
 docker-compose ps
 
-# Logs en temps réel
+# Real-time logs
 docker-compose logs -f
 
-# Logs d'un service spécifique
+# Specific service logs
 docker-compose logs -f postgres
 ```
 
-## 🎯 Workflows de Développement
+## 🎯 Development Workflows
 
-### Développement Local
+### Local Development
 ```bash
-1. npm run docker:dev          # Lancement
-2. Développer en hot-reload     # Code changes = auto-reload
+1. npm run docker:dev          # Launch
+2. Develop with hot-reload     # Code changes = auto-reload
 3. npm run docker:logs         # Debugging
-4. npm run docker:stop         # Arrêt propre
+4. npm run docker:stop         # Clean stop
 ```
 
-### Test avec Services Complets
+### Testing with Full Services
 ```bash
-1. npm run docker:dev:full     # Tous les services
-2. Tester emails sur :8025     # MailHog
-3. Gérer DB via :5050          # pgAdmin
-4. Caching Redis :6379         # Si configuré
+1. npm run docker:dev:full     # All services
+2. Test emails on :8025        # MailHog
+3. Manage DB via :5050         # pgAdmin
+4. Redis caching :6379         # If configured
 ```
 
-### Préparation Production
+### Production Preparation
 ```bash
 1. docker build --target runner -t my-app .
 2. docker run --env-file .env.prod my-app
-3. Tester l'image de production
-4. Déployer sur Dokploy/VPS
+3. Test production image
+4. Deploy to Dokploy/VPS
 ```
 
-## 📚 Ressources
+## 📚 Resources
 
 - [Docker Best Practices](https://docs.docker.com/develop/best-practices/)
 - [Docker Compose](https://docs.docker.com/compose/)
@@ -307,4 +307,4 @@ docker-compose logs -f postgres
 
 ---
 
-> 🚀 **Conseil** : Utilisez `npm run docker:dev` pour le développement quotidien et `npm run docker:dev:full` quand vous avez besoin de tester les emails ou gérer la base !
+> 🚀 **Tip**: Use `npm run docker:dev` for daily development and `npm run docker:dev:full` when you need to test emails or manage the database!

@@ -4,8 +4,8 @@ import { join } from 'path'
 import { marked } from 'marked'
 
 export const metadata: Metadata = {
-  title: 'Configuration Modulaire | PayloadKit',
-  description: 'Configuration PayloadCMS intelligente avec PostgreSQL/MongoDB et support VPS',
+  title: 'Modular Configuration | PayloadKit',
+  description: 'Smart PayloadCMS configuration with PostgreSQL/MongoDB and VPS support',
 }
 
 async function getMarkdownContent() {

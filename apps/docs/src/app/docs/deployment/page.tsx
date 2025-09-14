@@ -4,8 +4,8 @@ import { join } from 'path'
 import { marked } from 'marked'
 
 export const metadata: Metadata = {
-  title: 'Déploiement VPS | PayloadKit',
-  description: 'Déployez PayloadCMS sur VPS avec DATABASE_BUILD_URI pour Dokploy, Railway, etc.',
+  title: 'VPS Deployment | PayloadKit',
+  description: 'Deploy PayloadCMS on VPS with DATABASE_BUILD_URI for Dokploy, Railway, etc.',
 }
 
 async function getMarkdownContent() {
