@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 }
 
 async function getMarkdownContent() {
-  const filePath = join(process.cwd(), '../../docs/MODULAR-CONFIG.md')
+  const filePath = join(process.cwd(), 'docs/MODULAR-CONFIG.md')
   const content = readFileSync(filePath, 'utf8')
   return content
 }
