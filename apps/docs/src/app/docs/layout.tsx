@@ -9,13 +9,18 @@ export default function DocsLayout({
   return (
     <div className="min-h-screen bg-background">
       <Header />
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 flex-1 items-start md:grid md:grid-cols-[240px_minmax(0,1fr)] md:gap-8 lg:grid-cols-[280px_minmax(0,1fr)] lg:gap-12 xl:gap-16">
-        <aside className="fixed top-14 z-30 hidden h-[calc(100vh-3.5rem)] w-full shrink-0 overflow-y-auto md:sticky md:block">
+      <div className="flex flex-1">
+        {/* Sidebar collée à gauche */}
+        <aside className="fixed top-14 z-30 hidden w-80 h-[calc(100vh-3.5rem)] shrink-0 overflow-y-auto border-r bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 md:sticky md:block">
           <Sidebar />
         </aside>
-        <main className="relative py-8 lg:py-12 xl:grid xl:grid-cols-[1fr_300px]">
-          <div className="mx-auto w-full min-w-0 max-w-4xl px-4 lg:px-8">
-            {children}
+
+        {/* Contenu principal utilisant toute la largeur restante */}
+        <main className="flex-1 min-w-0 md:ml-80">
+          <div className="mx-auto max-w-none px-8 py-8 lg:px-12 lg:py-12 xl:px-16">
+            <div className="max-w-4xl">
+              {children}
+            </div>
           </div>
         </main>
       </div>
