@@ -1,7 +1,7 @@
 import { Metadata } from 'next'
 import { readFileSync } from 'fs'
 import { join } from 'path'
-import { MDXRemote } from 'next-mdx-remote/rsc'
+import { marked } from 'marked'
 
 export const metadata: Metadata = {
   title: 'Configuration Modulaire | PayloadKit',
@@ -9,17 +9,19 @@ export const metadata: Metadata = {
 }
 
 async function getMarkdownContent() {
-  const filePath = join(process.cwd(), 'docs/MODULAR-CONFIG.md')
+  const filePath = join(process.cwd(), '../../docs/MODULAR-CONFIG.md')
   const content = readFileSync(filePath, 'utf8')
-  return content
+  const html = await marked(content)
+  return html
 }
 
 export default async function ConfigurationPage() {
   const content = await getMarkdownContent()
 
   return (
-    <div className="prose prose-slate max-w-none dark:prose-invert">
-      <MDXRemote source={content} />
-    </div>
+    <div
+      className="prose prose-slate max-w-none dark:prose-invert"
+      dangerouslySetInnerHTML={{ __html: content }}
+    />
   )
 }
