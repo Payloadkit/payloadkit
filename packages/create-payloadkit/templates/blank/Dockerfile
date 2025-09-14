@@ -42,27 +42,26 @@ FROM base AS builder
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
-# Set build environment variables
+# Set build environment variables (compatible with Dokploy)
 ENV NODE_ENV=production
 ENV NEXT_TELEMETRY_DISABLED=1
 ENV NEXT_PHASE=phase-production-build
+ENV PAYLOAD_DISABLE_ADMIN=true
 ENV SKIP_ENV_VALIDATION=true
 
-# Dummy environment variables for build (will be overridden at runtime)
-ENV PAYLOAD_SECRET="build-time-secret-change-in-production"
-ENV DATABASE_URI="postgresql://build:build@localhost:5432/build"
+# Dummy environment variables for build (compatible with DATABASE_BUILD_URI logic)
+ENV PAYLOAD_SECRET="build-time-secret"
+ENV DATABASE_URI="postgresql://dummy:dummy@localhost:5432/dummy"
 ENV SMTP_HOST="localhost"
 ENV SMTP_PORT="587"
-ENV SMTP_USER="build"
-ENV SMTP_PASS="build"
+ENV SMTP_USER="dummy"
+ENV SMTP_PASS="dummy"
 
 # PayloadCMS needs node for tsx compatibility during build
 ENV PATH="/usr/local/bin:$PATH"
 RUN apk add --no-cache nodejs npm && \
-    npm install -g tsx
-
-# Generate PayloadCMS types and build
-RUN bunx payload generate:types && \
+    npm install -g tsx && \
+    bunx payload generate:types && \
     bunx payload generate:importmap && \
     bun run build
 
@@ -72,21 +71,24 @@ ENV NODE_ENV=production
 ENV NEXT_TELEMETRY_DISABLED=1
 ENV PORT=3000
 
-# Install runtime dependencies
-RUN apk add --no-cache \
-    netcat-openbsd \
-    nodejs && \
+# Install runtime dependencies and create user
+RUN apk add --no-cache netcat-openbsd && \
     addgroup --system --gid 1001 nodejs && \
     adduser --system --uid 1001 nextjs
 
-# Copy built application
+# Copy built application files
 COPY --from=builder /app/public ./public
 COPY --from=builder /app/package.json ./package.json
 
-# Set up Next.js standalone build
+# Create and configure .next directory
 RUN mkdir .next && chown nextjs:nodejs .next
-COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
+
+# Copy Next.js build output (works with or without standalone)
+COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./ 2>/dev/null || true
 COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
+
+# Fallback: copy full .next directory if standalone is not available
+COPY --from=builder --chown=nextjs:nodejs /app/.next ./.next
 
 # Health check for production
 HEALTHCHECK --interval=30s --timeout=3s --start-period=10s --retries=3 \
@@ -95,4 +97,5 @@ HEALTHCHECK --interval=30s --timeout=3s --start-period=10s --retries=3 \
 USER nextjs
 EXPOSE 3000
 
+# Use Next.js start command (compatible with both standalone and regular builds)
 CMD ["bun", "run", "start"]
