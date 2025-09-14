@@ -266,6 +266,51 @@
       "registryDependencies": []
     }
   },
+  "docker": {
+    "dockerfile-dev": {
+      "name": "dockerfile-dev",
+      "description": "Multi-stage Dockerfile optimized for PayloadCMS development with bun",
+      "category": "development",
+      "tags": ["docker", "bun", "payloadcms", "nextjs", "development", "production"],
+      "version": "0.1.0",
+      "files": [
+        "Dockerfile",
+        "payloadkit.json"
+      ],
+      "dependencies": [],
+      "optionalDependencies": [],
+      "registryDependencies": []
+    },
+    "docker-compose-dev": {
+      "name": "docker-compose-dev",
+      "description": "Complete development environment with PostgreSQL, Redis, and optional services",
+      "category": "development",
+      "tags": ["docker-compose", "postgresql", "redis", "mailhog", "pgadmin", "development"],
+      "version": "0.1.0",
+      "files": [
+        "docker-compose.yml",
+        "init.sql",
+        "payloadkit.json"
+      ],
+      "dependencies": [],
+      "optionalDependencies": [],
+      "registryDependencies": ["dockerfile-dev"]
+    },
+    "dockerignore": {
+      "name": "dockerignore",
+      "description": "Optimized .dockerignore for PayloadCMS + Next.js projects",
+      "category": "configuration",
+      "tags": ["dockerignore", "optimization", "payloadcms", "nextjs", "build"],
+      "version": "0.1.0",
+      "files": [
+        "dockerignore",
+        "payloadkit.json"
+      ],
+      "dependencies": [],
+      "optionalDependencies": [],
+      "registryDependencies": []
+    }
+  },
   "components": {
     "RichText": {
       "name": "RichText",

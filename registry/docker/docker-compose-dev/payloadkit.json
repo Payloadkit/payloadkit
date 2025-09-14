@@ -1,0 +1,93 @@
+{
+  "name": "docker-compose-dev",
+  "version": "0.1.0",
+  "description": "Complete development environment with PostgreSQL, Redis, and optional services",
+  "type": "docker",
+  "category": "development",
+  "tags": ["docker-compose", "postgresql", "redis", "mailhog", "pgadmin", "development"],
+  "files": [
+    "docker-compose.yml",
+    "init.sql"
+  ],
+  "dependencies": [],
+  "optionalDependencies": [],
+  "exports": {
+    "main": "./docker-compose.yml",
+    "init": "./init.sql"
+  },
+  "services": {
+    "postgres": {
+      "description": "PostgreSQL 16 database with Alpine Linux",
+      "port": 5432,
+      "healthcheck": true,
+      "volumes": ["postgres_data"]
+    },
+    "app": {
+      "description": "PayloadKit application with hot-reload",
+      "port": 3000,
+      "volumes": ["source_code", "node_modules", ".next"]
+    },
+    "redis": {
+      "description": "Redis cache and session store (optional)",
+      "port": 6379,
+      "profile": "full"
+    },
+    "mailhog": {
+      "description": "Email testing server (optional)",
+      "ports": [1025, 8025],
+      "profile": "full"
+    },
+    "pgadmin": {
+      "description": "PostgreSQL administration tool (optional)",
+      "port": 5050,
+      "profile": "full"
+    }
+  },
+  "profiles": {
+    "basic": "app + postgres only",
+    "full": "all services including Redis, MailHog, pgAdmin"
+  },
+  "envVars": {
+    "required": [
+      "PAYLOAD_SECRET"
+    ],
+    "optional": [
+      "POSTGRES_USER",
+      "POSTGRES_PASSWORD",
+      "POSTGRES_DB",
+      "PGADMIN_EMAIL",
+      "PGADMIN_PASSWORD",
+      "SMTP_HOST",
+      "SMTP_PORT",
+      "SMTP_USER",
+      "SMTP_PASS"
+    ]
+  },
+  "commands": {
+    "start_basic": "docker-compose up app postgres",
+    "start_full": "docker-compose --profile full up",
+    "start_detached": "docker-compose up -d",
+    "stop": "docker-compose down",
+    "reset": "docker-compose down -v && docker-compose up --build",
+    "logs": "docker-compose logs -f app",
+    "db_shell": "docker-compose exec postgres psql -U payloadkit -d payloadkit_dev"
+  },
+  "features": [
+    "PostgreSQL 16 with Alpine Linux",
+    "Hot-reload development environment",
+    "Database initialization scripts",
+    "Health checks for all services",
+    "Logging configuration",
+    "Optional Redis for caching",
+    "Optional MailHog for email testing",
+    "Optional pgAdmin for database management",
+    "Service profiles for different use cases",
+    "Persistent volumes for data",
+    "Network isolation"
+  ],
+  "usage": {
+    "development": "docker-compose up",
+    "full_stack": "docker-compose --profile full up",
+    "background": "docker-compose up -d"
+  }
+}

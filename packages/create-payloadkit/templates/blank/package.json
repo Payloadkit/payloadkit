@@ -10,7 +10,15 @@
     "generate:types": "payload generate:types",
     "generate:importmap": "payload generate:importmap",
     "lint": "next lint",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "docker:dev": "docker-compose up",
+    "docker:dev:build": "docker-compose up --build",
+    "docker:dev:detached": "docker-compose up -d",
+    "docker:dev:full": "docker-compose --profile full up",
+    "docker:stop": "docker-compose down",
+    "docker:reset": "docker-compose down -v && docker-compose up --build",
+    "docker:logs": "docker-compose logs -f app",
+    "docker:db": "docker-compose exec postgres psql -U payloadkit -d payloadkit_dev"
   },
   "dependencies": {
     "payload": "^3.55.1",
