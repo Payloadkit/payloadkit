@@ -5,6 +5,14 @@ import Link from 'next/link'
 
 const components = [
   {
+    name: "Banner",
+    slug: "banner",
+    description: "A dynamic banner block with image background and overlay content",
+    category: "Hero",
+    tags: ["banner", "hero", "image"],
+    status: "ready",
+  },
+  {
     name: "Call to Action",
     slug: "call-to-action",
     description: "A versatile call-to-action block with rich text content and customizable buttons",
@@ -13,11 +21,75 @@ const components = [
     status: "ready",
   },
   {
-    name: "Hero Block",  
+    name: "Content",
+    slug: "content",
+    description: "A flexible content block for rich text and structured content",
+    category: "Content",
+    tags: ["content", "rich-text", "text"],
+    status: "ready",
+  },
+  {
+    name: "FAQ",
+    slug: "faq",
+    description: "Frequently Asked Questions block with expandable accordion interface",
+    category: "Content",
+    tags: ["faq", "accordion", "questions"],
+    status: "ready",
+  },
+  {
+    name: "Feature",
+    slug: "feature",
+    description: "Feature showcase block with icons, titles and descriptions",
+    category: "Marketing",
+    tags: ["features", "showcase", "benefits"],
+    status: "ready",
+  },
+  {
+    name: "Hero Block",
     slug: "hero-block",
     description: "A flexible hero section with title, subtitle, description and CTA buttons",
     category: "Hero",
     tags: ["hero", "banner", "landing"],
+    status: "ready",
+  },
+  {
+    name: "Icon Block",
+    slug: "icon-block",
+    description: "Icon-based content blocks for visual storytelling",
+    category: "Content",
+    tags: ["icons", "visual", "content"],
+    status: "ready",
+  },
+  {
+    name: "Media Block",
+    slug: "media-block",
+    description: "Media-rich content blocks with images, videos and captions",
+    category: "Content",
+    tags: ["media", "images", "videos"],
+    status: "ready",
+  },
+  {
+    name: "Text Block",
+    slug: "text-block",
+    description: "Simple text content blocks for paragraphs and formatted text",
+    category: "Content",
+    tags: ["text", "paragraph", "simple"],
+    status: "ready",
+  },
+  {
+    name: "AuthProvider",
+    slug: "auth-provider",
+    description: "Authentication provider component for Better Auth integration",
+    category: "Auth",
+    tags: ["auth", "provider", "authentication"],
+    status: "ready",
+  },
+  {
+    name: "AuthView",
+    slug: "auth-view",
+    description: "Authentication views and forms for login, signup and user management",
+    category: "Auth",
+    tags: ["auth", "forms", "login"],
     status: "ready",
   },
 ]
@@ -25,7 +97,9 @@ const components = [
 const categories = [
   { name: "All", count: components.length },
   { name: "Hero", count: components.filter(c => c.category === "Hero").length },
+  { name: "Content", count: components.filter(c => c.category === "Content").length },
   { name: "Marketing", count: components.filter(c => c.category === "Marketing").length },
+  { name: "Auth", count: components.filter(c => c.category === "Auth").length },
 ]
 
 export default function ComponentsPage() {
