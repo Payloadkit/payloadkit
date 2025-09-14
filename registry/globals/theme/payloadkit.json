@@ -1,0 +1,80 @@
+{
+  "name": "theme",
+  "version": "0.1.0",
+  "description": "Complete theme system for PayloadCMS with shadcn/ui integration, color presets, and live preview",
+  "author": "PayloadKit",
+  "license": "MIT",
+  "type": "global",
+  "category": "ui",
+  "tags": ["theme", "colors", "design-system", "shadcn", "ui", "css-variables"],
+  "files": [
+    {
+      "name": "config.ts",
+      "type": "config"
+    },
+    {
+      "name": "defaultPresets.ts",
+      "type": "data"
+    },
+    {
+      "name": "initializeTheme.ts",
+      "type": "utility"
+    },
+    {
+      "name": "components/ThemeProvider.tsx",
+      "type": "component"
+    },
+    {
+      "name": "components/PresetManager.tsx",
+      "type": "component"
+    },
+    {
+      "name": "components/ThemePreview.tsx",
+      "type": "component"
+    },
+    {
+      "name": "utilities/themeUtils.ts",
+      "type": "utility"
+    },
+    {
+      "name": "index.ts",
+      "type": "main"
+    }
+  ],
+  "dependencies": {
+    "payload": "^3.0.0",
+    "@payloadcms/ui": "^3.0.0",
+    "react": "^18.0.0"
+  },
+  "registryDependencies": [
+    "fields/color-picker"
+  ],
+  "features": [
+    "4 built-in theme presets (Default, Zinc, Slate, New York)",
+    "Complete shadcn/ui color palette support",
+    "Live theme preview in PayloadCMS admin",
+    "Preset manager with export/import functionality",
+    "Automatic CSS variables generation",
+    "Light/dark mode support",
+    "Typography configuration (Sans, Serif, Mono fonts)",
+    "Design tokens (border radius, letter spacing)",
+    "Custom CSS variables support",
+    "Theme initialization utilities",
+    "React context provider for frontend"
+  ],
+  "usage": "Import Theme global configuration and add to your PayloadCMS globals array. Use ThemeProvider in your React app to apply theme.",
+  "examples": [
+    "// PayloadCMS config\nimport { Theme } from 'registry/globals/theme'\nexport default buildConfig({ globals: [Theme] })",
+    "// React app\nimport { ThemeProvider } from 'registry/globals/theme'\n<ThemeProvider><App /></ThemeProvider>",
+    "// Initialize with presets\nimport { initializeTheme } from 'registry/globals/theme'\nawait initializeTheme({ payload })"
+  ],
+  "setup": {
+    "installation": [
+      "Add Theme to your globals configuration",
+      "Include color-picker field dependency",
+      "Wrap your app with ThemeProvider",
+      "Initialize theme with default presets"
+    ],
+    "cssIntegration": "The theme system automatically generates CSS variables compatible with shadcn/ui. Include the generated CSS in your application."
+  }
+}

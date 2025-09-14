@@ -182,7 +182,29 @@
       "registryDependencies": ["Media"]
     }
   },
-  "globals": {},
+  "globals": {
+    "theme": {
+      "name": "theme",
+      "description": "Complete theme system for PayloadCMS with shadcn/ui integration, color presets, and live preview",
+      "category": "ui",
+      "tags": ["theme", "colors", "design-system", "shadcn", "ui", "css-variables"],
+      "version": "0.1.0",
+      "files": [
+        "config.ts",
+        "defaultPresets.ts",
+        "initializeTheme.ts",
+        "components/ThemeProvider.tsx",
+        "components/PresetManager.tsx",
+        "components/ThemePreview.tsx",
+        "utilities/themeUtils.ts",
+        "index.ts",
+        "payloadkit.json"
+      ],
+      "dependencies": ["react"],
+      "peerDependencies": ["payload", "@payloadcms/ui"],
+      "registryDependencies": ["color-picker"]
+    }
+  },
   "config": {
     "db-config": {
       "name": "db-config",
@@ -308,6 +330,23 @@
       ],
       "dependencies": [],
       "optionalDependencies": [],
+      "registryDependencies": []
+    }
+  },
+  "fields": {
+    "color-picker": {
+      "name": "color-picker",
+      "description": "Color picker field component for PayloadCMS with preset colors and RGB input",
+      "category": "forms",
+      "tags": ["color", "picker", "form", "ui"],
+      "version": "0.1.0",
+      "files": [
+        "index.ts",
+        "ColorPicker.tsx",
+        "payloadkit.json"
+      ],
+      "dependencies": ["react"],
+      "peerDependencies": ["payload", "@payloadcms/ui"],
       "registryDependencies": []
     }
   },

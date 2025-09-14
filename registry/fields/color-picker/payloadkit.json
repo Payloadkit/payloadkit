@@ -1,0 +1,38 @@
+{
+  "name": "color-picker",
+  "version": "0.1.0",
+  "description": "Color picker field component for PayloadCMS with preset colors and RGB input",
+  "author": "PayloadKit",
+  "license": "MIT",
+  "type": "field",
+  "category": "forms",
+  "tags": ["color", "picker", "form", "ui"],
+  "files": [
+    {
+      "name": "index.ts",
+      "type": "main"
+    },
+    {
+      "name": "ColorPicker.tsx",
+      "type": "component"
+    }
+  ],
+  "dependencies": {
+    "payload": "^3.0.0",
+    "@payloadcms/ui": "^3.0.0",
+    "react": "^18.0.0"
+  },
+  "features": [
+    "Native HTML5 color picker",
+    "Hex color input field",
+    "16 preset colors",
+    "RGB value inputs",
+    "Color preview swatch",
+    "Expandable interface"
+  ],
+  "usage": "Import colorPickerField and use it in your collection or global field definitions.",
+  "examples": [
+    "colorPickerField({ name: 'primaryColor', label: 'Primary Color' })",
+    "colorPickerField({ name: 'backgroundColor', label: 'Background', defaultValue: '#ffffff' })"
+  ]
+}
