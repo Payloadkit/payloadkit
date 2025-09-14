@@ -23,6 +23,15 @@ const sidebarNavItems = [
     ],
   },
   {
+    title: "Configuration",
+    items: [
+      {
+        title: "Cloud Storage",
+        href: "/docs/storage",
+      },
+    ],
+  },
+  {
     title: "Security & Authentication",
     items: [
       {
