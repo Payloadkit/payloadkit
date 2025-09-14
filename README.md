@@ -12,6 +12,9 @@ PayloadKit is an open source framework that provides a collection of reusable co
 - 🏗️ **Production Ready** - Battle-tested components and configurations
 - 🔧 **Customizable** - Modify components to fit your exact needs
 - 🏠 **IKEA Philosophy** - Templates as minimal shells, registry as reusable intelligence
+- 🗄️ **Smart Database** - PostgreSQL by default, MongoDB optional with auto-detection
+- ☁️ **Deploy Anywhere** - Auto-detection Vercel vs VPS with DATABASE_BUILD_URI support
+- 🐳 **Docker Ready** - Complete development environment with one command
 
 ## 🚀 Quick Start
 
@@ -31,7 +34,12 @@ npx create-payloadkit@latest my-business \
   --no-git
 
 cd my-app
+
+# Development with bun
 bun dev
+
+# Or with Docker (complete environment)
+npm run docker:dev
 ```
 
 ### Add to existing project
@@ -54,6 +62,12 @@ Visit our [documentation site](https://payloadkit.dev) for:
 - CLI usage
 - Examples and templates
 - Best practices
+
+### New in v0.2.0
+
+- **📋 [Modular Configuration](docs/MODULAR-CONFIG.md)** - Smart database setup with PostgreSQL/MongoDB auto-detection
+- **🐳 [Docker Development Setup](docs/DOCKER-SETUP.md)** - Complete environment with PostgreSQL, Redis, MailHog
+- **☁️ [VPS Deployment Guide](docs/VPS-DEPLOYMENT.md)** - DATABASE_BUILD_URI support for Dokploy and VPS deployments
 
 ## 🧩 Registry Components
 
@@ -78,10 +92,22 @@ Visit our [documentation site](https://payloadkit.dev) for:
 - **Pages** - Content page management
 
 ### 🏗️ Templates
-- **Blank** - Minimal foundation with essential collections and shadcn/ui
+- **Blank** - Minimal foundation with modular config, Docker setup, and shadcn/ui
 - **Blog** - Blog-focused setup with posts and categories (coming soon)
 - **Business** - Marketing website template (coming soon)
 - **E-commerce** - Online store template (coming soon)
+
+### ⚙️ Configuration (New!)
+- **db-config** - Smart database with PostgreSQL/MongoDB + VPS support
+- **collections-config** - Modular collections management
+- **plugins-config** - Essential PayloadCMS plugins
+- **email-config** - SMTP/development email setup
+- **jobs-config** - Background tasks with security
+
+### 🐳 Docker (New!)
+- **dockerfile-dev** - Multi-stage Dockerfile with bun optimization
+- **docker-compose-dev** - Complete development environment
+- **dockerignore** - Optimized .dockerignore for PayloadCMS
 
 ## 🛠️ CLI Commands
 
@@ -112,6 +138,10 @@ npx payloadkit list
 npx payloadkit add hero-block call-to-action
 npx payloadkit add Users Media
 npx payloadkit add RichText CMSLink
+
+# Add configuration modules (New!)
+npx payloadkit add db-config
+npx payloadkit add docker dockerfile-dev docker-compose-dev
 ```
 
 ## 🏗️ Development
@@ -130,6 +160,10 @@ bun run dev:docs
 
 # Start CLI development
 bun run dev
+
+# Docker development (New!)
+npm run docker:dev          # Basic environment
+npm run docker:dev:full     # Full stack with Redis, MailHog, pgAdmin
 ```
 
 ## 📁 Project Structure
@@ -143,6 +177,9 @@ payloadkit/
 │       └── templates/         # Project templates (blank, blog, etc.)
 ├── apps/
 │   └── docs/                 # Documentation website
+├── docs/                     # Documentation files (New!)
+│   ├── MODULAR-CONFIG.md     # Configuration modulaire guide
+│   └── DOCKER-SETUP.md       # Docker development guide
 └── registry/
     ├── index.json            # Registry metadata
     ├── blocks/               # PayloadCMS blocks
@@ -150,15 +187,24 @@ payloadkit/
     │   ├── call-to-action/
     │   ├── faq/
     │   └── ...
-    ├── components/           # React components  
+    ├── components/           # React components
     │   ├── RichText/
     │   ├── CMSLink/
     │   └── ...
-    └── collections/          # PayloadCMS collections
-        ├── Users/
-        ├── Media/
-        ├── Pages/
-        └── ...
+    ├── collections/          # PayloadCMS collections
+    │   ├── Users/
+    │   ├── Media/
+    │   ├── Pages/
+    │   └── ...
+    ├── config/               # Configuration modules (New!)
+    │   ├── db-config/        # Smart database setup
+    │   ├── collections-config/
+    │   ├── plugins-config/
+    │   └── ...
+    └── docker/               # Docker setup (New!)
+        ├── dockerfile-dev/   # Multi-stage Dockerfile
+        ├── docker-compose-dev/
+        └── dockerignore/
 ```
 
 ## 🤝 Contributing
