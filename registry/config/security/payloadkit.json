@@ -1,0 +1,102 @@
+{
+  "name": "security-middleware",
+  "version": "0.1.0", 
+  "description": "Comprehensive security middleware configuration for Next.js applications with PayloadCMS",
+  "type": "config",
+  "dependencies": [
+    "next"
+  ],
+  "files": [
+    "middleware.ts"
+  ],
+  "exports": {
+    "createSecurityMiddleware": "./middleware.ts",
+    "standardSecurityMiddleware": "./middleware.ts",
+    "strictSecurityMiddleware": "./middleware.ts"
+  },
+  "optionalEnvVars": [
+    "CORS_ORIGIN",
+    "IP_WHITELIST",
+    "IP_BLACKLIST"
+  ],
+  "features": [
+    "🔒 Content Security Policy (CSP) - XSS protection",
+    "🛡️ HTTP Strict Transport Security (HSTS) - Force HTTPS",
+    "🚫 X-Frame-Options - Clickjacking protection", 
+    "🔐 X-Content-Type-Options - MIME type sniffing protection",
+    "↩️ HTTPS Enforcement - Automatic redirect in production",
+    "🌍 CORS Configuration - Cross-origin request handling",
+    "🔍 IP Access Control - Whitelist/blacklist support",
+    "🚨 Suspicious Activity Detection - Bot and attack pattern detection"
+  ],
+  "security": {
+    "headers": [
+      "Content-Security-Policy",
+      "Strict-Transport-Security", 
+      "X-Frame-Options",
+      "X-Content-Type-Options",
+      "Referrer-Policy",
+      "X-XSS-Protection",
+      "Permissions-Policy"
+    ],
+    "protections": [
+      "XSS (Cross-Site Scripting)",
+      "Clickjacking",
+      "MIME type confusion",
+      "Man-in-the-middle attacks",
+      "Protocol downgrade attacks",
+      "Cross-origin attacks",
+      "Bot scraping",
+      "Directory traversal",
+      "SQL injection attempts"
+    ]
+  },
+  "usageExample": {
+    "standard": "export { standardSecurityMiddleware as middleware } from '@/config/security/middleware'",
+    "strict": "export { strictSecurityMiddleware as middleware } from '@/config/security/middleware'",
+    "custom": "export const middleware = createSecurityMiddleware({ frameOptions: 'SAMEORIGIN', cors: { origin: 'https://myapp.com' } })"
+  },
+  "category": "security",
+  "tags": ["middleware", "security", "headers", "csp", "hsts", "cors", "protection"],
+  "examples": [
+    {
+      "title": "Standard Security (PayloadCMS Compatible)",
+      "description": "Balanced security with PayloadCMS compatibility",
+      "code": "export { standardSecurityMiddleware as middleware } from '@/config/security/middleware'"
+    },
+    {
+      "title": "Strict Security (Maximum Protection)",
+      "description": "Maximum security for high-risk applications",
+      "code": "export { strictSecurityMiddleware as middleware } from '@/config/security/middleware'"
+    },
+    {
+      "title": "Custom Configuration",
+      "description": "Tailored security for specific requirements",
+      "code": "export const middleware = createSecurityMiddleware({ csp: { directives: { styleSrc: [\"'self'\", \"fonts.googleapis.com\"] } }, cors: { origin: ['https://app.com', 'https://admin.app.com'] } })"
+    },
+    {
+      "title": "IP Whitelist Example",
+      "description": "Restrict access to specific IP addresses",
+      "code": "// .env\nIP_WHITELIST=192.168.1.100,10.0.0.1\n\n// middleware.ts\nexport { standardSecurityMiddleware as middleware } from '@/config/security/middleware'"
+    }
+  ],
+  "cspDirectives": {
+    "defaultSrc": "Default source for all content types",
+    "styleSrc": "Valid sources for stylesheets",
+    "scriptSrc": "Valid sources for JavaScript",
+    "imgSrc": "Valid sources for images",
+    "connectSrc": "Valid sources for XMLHttpRequest, WebSocket, etc.",
+    "fontSrc": "Valid sources for fonts",
+    "objectSrc": "Valid sources for plugins",
+    "mediaSrc": "Valid sources for audio and video",
+    "frameSrc": "Valid sources for frames"
+  },
+  "suspiciousPatterns": [
+    "Bot/crawler detection: /bot|crawl|spider|scan/i",
+    "Automated tools: /wget|curl/i", 
+    "File extension scanning: /php|asp|jsp/i",
+    "Directory traversal: /\\.\\./ ",
+    "XSS attempts: /<script/i",
+    "SQL injection: /union.*select/i"
+  ]
+}

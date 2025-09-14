@@ -1,0 +1,101 @@
+{
+  "name": "rate-limiting", 
+  "version": "0.1.0",
+  "description": "Comprehensive rate limiting plugin for PayloadCMS with brute force protection and customizable endpoint rules",
+  "type": "plugin",
+  "dependencies": [
+    "express-rate-limit",
+    "payload"
+  ],
+  "files": [
+    "index.ts"
+  ],
+  "exports": {
+    "rateLimitingPlugin": "./index.ts",
+    "aggressiveRateLimitingPlugin": "./index.ts"
+  },
+  "optionalEnvVars": [
+    "ENABLE_RATE_LIMITING",
+    "SKIP_RATE_LIMITING",
+    "GENERAL_RATE_LIMIT",
+    "AUTH_RATE_LIMIT", 
+    "PASSWORD_RESET_RATE_LIMIT",
+    "TWOFA_RATE_LIMIT",
+    "UPLOAD_RATE_LIMIT"
+  ],
+  "features": [
+    "🛡️ Brute Force Protection - Authentication endpoint limiting",
+    "🚫 API Rate Limiting - General endpoint protection", 
+    "🔒 Password Reset Protection - Prevent reset abuse",
+    "📱 2FA Rate Limiting - Two-factor attempt limiting",
+    "📁 Upload Rate Limiting - File upload protection",
+    "⚙️ Custom Endpoint Rules - Flexible endpoint configuration",
+    "🔧 Development Overrides - Skip limiting in development",
+    "📊 Standard Headers - Proper rate limit response headers"
+  ],
+  "protection": {
+    "bruteForce": "5 authentication attempts per 15 minutes",
+    "apiAbuse": "100 API requests per 15 minutes",
+    "passwordReset": "3 reset attempts per hour",
+    "twoFactor": "10 2FA attempts per 15 minutes",
+    "fileUploads": "20 uploads per hour"
+  },
+  "usageExample": {
+    "basic": "rateLimitingPlugin()",
+    "aggressive": "aggressiveRateLimitingPlugin()",
+    "custom": "rateLimitingPlugin({ auth: { max: 3, windowMs: 10 * 60 * 1000 }, custom: { '/api/sensitive': { max: 1 } } })"
+  },
+  "category": "security",
+  "tags": ["rate-limiting", "security", "brute-force", "protection", "ddos", "abuse"],
+  "examples": [
+    {
+      "title": "Basic Rate Limiting",
+      "description": "Standard protection for all endpoints",
+      "code": "export default buildConfig({ plugins: [rateLimitingPlugin()] })"
+    },
+    {
+      "title": "Aggressive Protection",
+      "description": "Stricter limits for high-security environments",
+      "code": "export default buildConfig({ plugins: [aggressiveRateLimitingPlugin()] })"
+    },
+    {
+      "title": "Custom Endpoint Rules",
+      "description": "Specific limits for sensitive endpoints",
+      "code": "rateLimitingPlugin({ custom: { '/api/admin/users': { max: 10, windowMs: 60 * 60 * 1000 }, '/api/payments': { max: 5 } } })"
+    },
+    {
+      "title": "Development Override",
+      "description": "Skip rate limiting during development",
+      "code": "rateLimitingPlugin({ skip: (req) => process.env.NODE_ENV === 'development' })"
+    }
+  ],
+  "endpoints": {
+    "/api/*": "General API rate limiting",
+    "/api/auth/login": "Authentication attempts",
+    "/api/auth/register": "Registration attempts", 
+    "/api/better-auth/sign-in": "Better Auth sign-in",
+    "/api/better-auth/sign-up": "Better Auth sign-up",
+    "/api/auth/forgot-password": "Password reset requests",
+    "/api/auth/2fa/*": "Two-factor authentication",
+    "/api/media": "File upload operations"
+  },
+  "headers": {
+    "X-RateLimit-Limit": "Total number of requests allowed",
+    "X-RateLimit-Remaining": "Number of requests remaining",
+    "X-RateLimit-Reset": "Time when the rate limit resets",
+    "Retry-After": "Seconds to wait before retrying"
+  },
+  "security": {
+    "attackPrevention": [
+      "Brute force attacks on login",
+      "Password spray attacks",
+      "API abuse and scraping", 
+      "DDoS mitigation",
+      "Resource exhaustion",
+      "Account enumeration"
+    ],
+    "responseHeaders": true,
+    "ipBased": true,
+    "configurable": true
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "name": "AuthProvider",
+  "version": "0.1.0",
+  "description": "Better Auth UI Provider component for Next.js applications with PayloadCMS integration",
+  "type": "component",
+  "dependencies": [
+    "@daveyplate/better-auth-ui",
+    "better-auth",
+    "next",
+    "react"
+  ],
+  "files": [
+    "Component.tsx",
+    "auth-client.ts", 
+    "index.ts"
+  ],
+  "exports": {
+    "AuthProvider": "./Component.tsx",
+    "authClient": "./auth-client.ts"
+  },
+  "requiredEnvVars": [
+    "NEXT_PUBLIC_BETTER_AUTH_URL"
+  ],
+  "features": [
+    "Better Auth UI integration",
+    "Next.js App Router support",
+    "Session management",
+    "Navigation handling",
+    "TypeScript support"
+  ],
+  "usageExample": "import { AuthProvider } from '@/components/auth/AuthProvider'",
+  "category": "authentication",
+  "tags": ["auth", "provider", "better-auth", "ui", "session"]
+}

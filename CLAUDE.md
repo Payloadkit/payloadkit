@@ -352,6 +352,11 @@ registry/[type]/[component-name]/
 - Tests must cover most common usage scenarios
 - Edge cases and error conditions must be tested
 
+
+# Better Auth UI
+In order to implement a proper better auth page please use Better Auth UI : https://better-auth-ui.com/llms.txt
+
+
 # important-instruction-reminders
 Do what has been asked; nothing more, nothing less.
 NEVER create files unless they're absolutely necessary for achieving your goal.

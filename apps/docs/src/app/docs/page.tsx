@@ -10,8 +10,19 @@ export default function DocsHomePage() {
         <div className="space-y-3">
           <h1 className="text-4xl font-bold tracking-tight">PayloadKit</h1>
           <p className="text-xl text-muted-foreground">
-            Build PayloadCMS applications faster with reusable components and templates.
+            Build PayloadCMS applications faster with reusable components, templates, and <strong>enterprise-grade security by default</strong>.
           </p>
+          <div className="flex flex-wrap gap-2 mt-4">
+            <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200">
+              🛡️ 2FA Required
+            </span>
+            <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200">
+              ✨ Better Auth UI
+            </span>
+            <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-200">
+              🏗️ Registry-Based
+            </span>
+          </div>
         </div>
         
         <div className="flex flex-col gap-4 sm:flex-row">

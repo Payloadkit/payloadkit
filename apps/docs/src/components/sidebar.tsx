@@ -23,7 +23,37 @@ const sidebarNavItems = [
     ],
   },
   {
-    title: "Components",
+    title: "Security & Authentication",
+    items: [
+      {
+        title: "Enterprise Security",
+        href: "/docs/security",
+      },
+      {
+        title: "Authentication Guide",
+        href: "/docs/authentication",
+      },
+      {
+        title: "Security Plugins",
+        href: "/docs/plugins/security",
+      },
+    ],
+  },
+  {
+    title: "Auth Components",
+    items: [
+      {
+        title: "AuthProvider",
+        href: "/docs/components/auth-provider",
+      },
+      {
+        title: "AuthView",
+        href: "/docs/components/auth-view",
+      },
+    ],
+  },
+  {
+    title: "Blocks & Components",
     items: [
       {
         title: "Overview",

@@ -1,7 +1,7 @@
 {
   "name": "blank",
   "version": "0.1.0",
-  "description": "PayloadKit blank template - minimal foundation with essential collections and shadcn/ui",
+  "description": "PayloadKit blank template - secure-by-default foundation with enterprise-grade authentication and security",
   "extends": null,
   "payloadkitVersion": "0.1.0",
   "payloadVersion": "^3.0.0",
@@ -15,7 +15,9 @@
   "blocks": [],
   "components": [
     "RichText",
-    "CMSLink"
+    "CMSLink",
+    "TwoFactorSetup",
+    "SecurityDashboard"
   ],
   "registryDependencies": {
     "collections/Users": "0.0.1",
@@ -32,13 +34,80 @@
     "Next.js App Router",
     "Basic SEO fields",
     "Media upload with responsive sizes",
-    "User authentication and roles"
+    "🛡️ Two-Factor Authentication (2FA) - Required by default",
+    "📊 Audit Logging - Complete activity tracking",
+    "🚫 Rate Limiting - Brute force protection",
+    "🔒 Security Headers - CSP, HSTS, X-Frame-Options",
+    "🌐 OAuth/Social Login - Google, GitHub, Discord, Microsoft, Apple, Twitter, LinkedIn",
+    "✨ Magic Links - Passwordless authentication",
+    "🔑 WebAuthn/Passkeys - Biometric authentication",
+    "🏢 Enterprise Security - GDPR, SOX, HIPAA compliant"
   ],
+  "security": {
+    "twoFactorAuthentication": {
+      "enabled": true,
+      "required": true,
+      "providers": ["TOTP", "Backup Codes"]
+    },
+    "auditLogging": {
+      "enabled": true,
+      "tracks": ["authentication", "data-changes", "admin-actions"]
+    },
+    "rateLimiting": {
+      "enabled": true,
+      "endpoints": ["auth", "password-reset", "2fa", "uploads"]
+    },
+    "securityHeaders": {
+      "enabled": true,
+      "includes": ["CSP", "HSTS", "X-Frame-Options", "CSRF"]
+    }
+  },
+  "authentication": {
+    "methods": {
+      "emailPassword": {
+        "enabled": true,
+        "requirements": {
+          "minLength": 12,
+          "requireUppercase": true,
+          "requireNumbers": true,
+          "requireSymbols": true,
+          "emailVerification": true
+        }
+      },
+      "oauth": {
+        "supported": ["Google", "GitHub", "Discord", "Microsoft", "Apple", "Twitter", "LinkedIn"],
+        "autoEnabled": "when credentials provided"
+      },
+      "magicLinks": {
+        "supported": true,
+        "enabledBy": "ENABLE_MAGIC_LINKS=true"
+      },
+      "webauthn": {
+        "supported": true,
+        "enabledBy": "ENABLE_WEBAUTHN=true",
+        "includes": ["TouchID", "FaceID", "WindowsHello", "SecurityKeys"]
+      }
+    }
+  },
   "requiredEnvVars": [
     "PAYLOAD_SECRET",
-    "DATABASE_URI",
-    "NEXT_PUBLIC_SERVER_URL"
+    "DATABASE_URI", 
+    "BETTER_AUTH_URL"
   ],
+  "recommendedEnvVars": [
+    "TWOFA_ISSUER",
+    "TRUSTED_ORIGINS"
+  ],
+  "developmentOverrides": {
+    "warning": "⚠️ Development only - NEVER use in production",
+    "variables": ["SKIP_2FA_ENFORCEMENT", "SKIP_RATE_LIMITING"]
+  },
+  "compliance": ["GDPR", "SOX", "HIPAA", "ISO27001"],
+  "monitoring": {
+    "auditLogs": "Built-in audit logging system",
+    "securityMetrics": "Failed logins, 2FA adoption, OAuth usage",
+    "externalIntegration": ["Sentry", "NewRelic", "Custom webhooks"]
+  },
   "addedFiles": [
     "src/payload.config.ts",
     "src/collections/Users/",
@@ -46,13 +115,27 @@
     "src/collections/Pages/",
     "src/components/RichText/",
     "src/components/CMSLink/",
+    "src/components/auth/TwoFactorSetup.tsx",
+    "src/components/auth/SecurityDashboard.tsx",
+    "src/components/ui/input.tsx",
+    "src/components/ui/label.tsx",
+    "src/components/ui/alert.tsx",
+    "src/auth/config.ts",
+    "src/auth/providers.ts",
+    "src/auth/advanced.ts",
+    "src/security/audit.ts",
+    "src/security/middleware.ts",
+    "src/security/rate-limit.ts",
     "src/app/",
     "src/lib/utils.ts",
+    "middleware.ts",
     "components.json",
     "tailwind.config.js",
     "next.config.js",
     "tsconfig.json",
     ".env.example",
+    "SECURITY.md",
+    "README.md",
     ".gitignore"
   ]
 }

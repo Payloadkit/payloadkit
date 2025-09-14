@@ -1,0 +1,105 @@
+{
+  "name": "audit-logging",
+  "version": "0.1.0",
+  "description": "Comprehensive audit logging plugin for PayloadCMS with compliance features (GDPR, SOX, HIPAA)",
+  "type": "plugin",
+  "dependencies": [
+    "payload-auditor",
+    "payload"
+  ],
+  "files": [
+    "index.ts"
+  ],
+  "exports": {
+    "auditLoggingPlugin": "./index.ts",
+    "complianceAuditLoggingPlugin": "./index.ts"
+  },
+  "optionalEnvVars": [
+    "ENABLE_AUDIT_LOGGING",
+    "AUDIT_LOG_LEVEL",
+    "AUDIT_LOG_RETENTION",
+    "AUDIT_LOG_RETENTION_DAYS",
+    "AUDIT_LOG_ENDPOINT",
+    "APP_VERSION"
+  ],
+  "features": [
+    "📊 Complete Activity Tracking - All user actions logged",
+    "🔍 Authentication Events - Login, logout, failed attempts",
+    "📝 Data Modifications - Create, update, delete operations",
+    "🌍 IP & User Agent Tracking - Full request context",
+    "⏰ Configurable Retention - Automatic log cleanup",
+    "🔒 Privacy Protection - Sensitive field exclusion",
+    "📈 Compliance Ready - GDPR, SOX, HIPAA support",
+    "🔗 External Integration - Webhook support for log aggregation"
+  ],
+  "compliance": [
+    "GDPR - General Data Protection Regulation",
+    "SOX - Sarbanes-Oxley Act",
+    "HIPAA - Health Insurance Portability and Accountability Act",
+    "ISO 27001 - Information Security Management"
+  ],
+  "usageExample": {
+    "basic": "auditLoggingPlugin()",
+    "compliance": "complianceAuditLoggingPlugin()",
+    "custom": "auditLoggingPlugin({ collections: { users: true, orders: true }, retention: { days: 90 } })"
+  },
+  "category": "security",
+  "tags": ["audit", "logging", "compliance", "security", "tracking", "gdpr", "sox", "hipaa"],
+  "examples": [
+    {
+      "title": "Basic Audit Logging",
+      "description": "Standard audit logging for all operations",
+      "code": "export default buildConfig({ plugins: [auditLoggingPlugin()] })"
+    },
+    {
+      "title": "High Compliance Mode",
+      "description": "Enhanced logging for regulated industries",
+      "code": "export default buildConfig({ plugins: [complianceAuditLoggingPlugin()] })"
+    },
+    {
+      "title": "Custom Configuration",
+      "description": "Selective logging with custom retention",
+      "code": "auditLoggingPlugin({ collections: { users: true, orders: true }, operations: { create: true, update: true }, retention: { days: 90 } })"
+    },
+    {
+      "title": "External Log Aggregation",
+      "description": "Send audit logs to external service",
+      "code": "auditLoggingPlugin({ storage: { type: 'external', endpoint: 'https://logs.company.com/webhook' } })"
+    }
+  ],
+  "auditEvents": [
+    "USER_LOGIN_SUCCESS",
+    "USER_LOGIN_FAILED",
+    "USER_LOGOUT",
+    "USER_PASSWORD_RESET",
+    "USER_EMAIL_VERIFIED",
+    "USER_2FA_ENABLED",
+    "USER_2FA_DISABLED",
+    "COLLECTION_CREATE",
+    "COLLECTION_UPDATE", 
+    "COLLECTION_DELETE",
+    "GLOBAL_UPDATE",
+    "MEDIA_UPLOAD",
+    "MEDIA_DELETE",
+    "ADMIN_LOGIN",
+    "ADMIN_ACTION",
+    "SUSPICIOUS_ACTIVITY"
+  ],
+  "dataProtection": {
+    "excludedFields": [
+      "password",
+      "salt", 
+      "resetPasswordToken",
+      "twoFactorSecret",
+      "backupCodes",
+      "emailVerificationToken",
+      "socialSecurityNumber",
+      "creditCardNumber",
+      "bankAccountNumber",
+      "medicalRecordNumber"
+    ],
+    "retention": "Configurable retention with automatic cleanup",
+    "encryption": "Database-level encryption supported",
+    "anonymization": "Automatic PII anonymization options"
+  }
+}
