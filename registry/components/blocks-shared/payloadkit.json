@@ -1,0 +1,77 @@
+{
+  "name": "blocks-shared",
+  "version": "0.1.0",
+  "description": "Shared components and utilities for PayloadCMS blocks with shadcn/ui integration",
+  "author": "PayloadKit",
+  "license": "MIT",
+  "type": "component",
+  "category": "blocks",
+  "tags": ["blocks", "shared", "layout", "typography", "background", "theme"],
+  "files": [
+    {
+      "name": "BlockBackground.tsx",
+      "type": "component"
+    },
+    {
+      "name": "BlockSection.tsx",
+      "type": "component"
+    },
+    {
+      "name": "BlockLayout.tsx",
+      "type": "component"
+    },
+    {
+      "name": "BlockHeading.tsx",
+      "type": "component"
+    },
+    {
+      "name": "BlockText.tsx",
+      "type": "component"
+    },
+    {
+      "name": "useThemeColor.ts",
+      "type": "hook"
+    },
+    {
+      "name": "types.ts",
+      "type": "types"
+    },
+    {
+      "name": "index.ts",
+      "type": "main"
+    }
+  ],
+  "dependencies": [
+    "react",
+    "clsx",
+    "tailwind-merge"
+  ],
+  "peerDependencies": [
+    "tailwindcss"
+  ],
+  "registryDependencies": [
+    "cn"
+  ],
+  "features": [
+    "BlockBackground - Flexible background management (color, gradient, image, overlay)",
+    "BlockSection - Responsive section wrapper with spacing controls",
+    "BlockLayout - Grid system with multiple layout options",
+    "BlockHeading - Typography component for headings with theme integration",
+    "BlockText - Rich text and plain text rendering with prose support",
+    "useThemeColor - Hook for theme-aware color management",
+    "Comprehensive TypeScript types for all components"
+  ],
+  "usage": "Import shared components to build consistent block layouts across your PayloadCMS application.",
+  "examples": [
+    "// Basic usage\nimport { BlockBackground, BlockSection, BlockHeading } from 'registry/components/blocks-shared'",
+    "// Layout example\n<BlockBackground background={{ type: 'color', color: '#f1f5f9' }}>\n  <BlockSection paddingTop=\"xl\" paddingBottom=\"xl\">\n    <BlockHeading text=\"My Heading\" level=\"h2\" align=\"center\" />\n  </BlockSection>\n</BlockBackground>"
+  ],
+  "setup": {
+    "installation": [
+      "Install required dependencies: clsx, tailwind-merge",
+      "Ensure Tailwind CSS is configured in your project",
+      "Import components as needed in your block implementations"
+    ],
+    "tailwindConfig": "This component system uses standard Tailwind classes and is compatible with shadcn/ui color variables."
+  }
+}
