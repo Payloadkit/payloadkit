@@ -4,6 +4,7 @@ import Link from "next/link"
 import { useTheme } from "next-themes"
 import { Moon, Sun, Github } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { Search } from "@/components/search"
 
 export function Header() {
   const { setTheme, theme } = useTheme()
@@ -44,14 +45,7 @@ export function Header() {
 
         <div className="flex flex-1 items-center justify-between space-x-2 md:justify-end">
           <div className="w-full flex-1 md:w-auto md:flex-none">
-            <Button
-              variant="outline"
-              size="sm"
-              className="h-8 w-full justify-start text-sm font-normal text-muted-foreground shadow-none md:w-40 lg:w-64"
-            >
-              <span className="hidden lg:inline-flex">Search documentation...</span>
-              <span className="inline-flex lg:hidden">Search...</span>
-            </Button>
+            <Search />
           </div>
           <nav className="flex items-center">
             <Button
