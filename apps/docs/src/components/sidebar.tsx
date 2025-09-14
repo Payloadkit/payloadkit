@@ -144,6 +144,16 @@ const sidebarNavItems = [
       },
     ],
   },
+  {
+    title: "Project",
+    items: [
+      {
+        title: "Changelog",
+        href: "/docs/changelog",
+        badge: "New"
+      },
+    ],
+  },
 ]
 
 export function Sidebar() {

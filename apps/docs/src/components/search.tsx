@@ -147,6 +147,11 @@ export function Search({ ...props }: DialogProps) {
       href: "/docs/components/text-block",
       description: "Simple text content component",
     },
+    {
+      title: "Changelog",
+      href: "/docs/changelog",
+      description: "PayloadKit version history and release notes",
+    },
   ]
 
   const filteredPages = React.useMemo(() => {
