@@ -1,0 +1,58 @@
+{
+  "name": "blank",
+  "version": "0.1.0",
+  "description": "PayloadKit blank template - minimal foundation with essential collections and shadcn/ui",
+  "extends": null,
+  "payloadkitVersion": "0.1.0",
+  "payloadVersion": "^3.0.0",
+  "nextVersion": "^15.0.0",
+  "collections": [
+    "Users",
+    "Media", 
+    "Pages"
+  ],
+  "globals": [],
+  "blocks": [],
+  "components": [
+    "RichText",
+    "CMSLink"
+  ],
+  "registryDependencies": {
+    "collections/Users": "0.0.1",
+    "collections/Media": "0.0.1",
+    "collections/Pages": "0.0.1",
+    "components/RichText": "0.0.1",
+    "components/CMSLink": "0.0.1"
+  },
+  "features": [
+    "PostgreSQL database adapter",
+    "Lexical rich text editor",
+    "Tailwind CSS with shadcn/ui",
+    "TypeScript configuration",
+    "Next.js App Router",
+    "Basic SEO fields",
+    "Media upload with responsive sizes",
+    "User authentication and roles"
+  ],
+  "requiredEnvVars": [
+    "PAYLOAD_SECRET",
+    "DATABASE_URI",
+    "NEXT_PUBLIC_SERVER_URL"
+  ],
+  "addedFiles": [
+    "src/payload.config.ts",
+    "src/collections/Users/",
+    "src/collections/Media/",
+    "src/collections/Pages/",
+    "src/components/RichText/",
+    "src/components/CMSLink/",
+    "src/app/",
+    "src/lib/utils.ts",
+    "components.json",
+    "tailwind.config.js",
+    "next.config.js",
+    "tsconfig.json",
+    ".env.example",
+    ".gitignore"
+  ]
+}

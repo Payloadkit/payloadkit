@@ -1,6 +1,6 @@
 # PayloadKit
 
-> Build PayloadCMS applications faster with reusable components and templates.
+> IKEA for Web Development - Build PayloadCMS applications faster with reusable components and templates.
 
 PayloadKit is an open source framework that provides a collection of reusable components, blocks, and templates for PayloadCMS. Following the shadcn/ui philosophy, components are copied directly into your project, giving you full control and customization.
 
@@ -8,18 +8,30 @@ PayloadKit is an open source framework that provides a collection of reusable co
 
 - 🚀 **Lightning Fast** - Get your PayloadCMS project up and running in minutes
 - 📦 **Copy & Paste** - Components are copied into your project for full control
-- 🎨 **Modern Design** - Built with TypeScript, TailwindCSS, and modern patterns
+- 🎨 **Modern Design** - Built with TypeScript, TailwindCSS, and shadcn/ui
 - 🏗️ **Production Ready** - Battle-tested components and configurations
 - 🔧 **Customizable** - Modify components to fit your exact needs
+- 🏠 **IKEA Philosophy** - Templates as minimal shells, registry as reusable intelligence
 
 ## 🚀 Quick Start
 
 ### Create a new project
 
 ```bash
+# Create with default (blank) template
 npx create-payloadkit@latest my-app
+
+# Create with specific template
+npx create-payloadkit@latest my-blog --template blog
+
+# With custom options
+npx create-payloadkit@latest my-business \
+  --template business \
+  --package-manager bun \
+  --no-git
+
 cd my-app
-npm run dev
+bun dev
 ```
 
 ### Add to existing project
@@ -43,33 +55,63 @@ Visit our [documentation site](https://payloadkit.dev) for:
 - Examples and templates
 - Best practices
 
-## 🧩 Available Components
+## 🧩 Registry Components
 
-### Blocks
-- **Call to Action** - Versatile CTA sections with rich text and buttons
-- **Hero Block** - Flexible hero sections for landing pages
-- More components coming soon...
+### 📦 Blocks (PayloadCMS)
+- **Hero Block** - Flexible hero sections with title, subtitle, and CTA buttons
+- **Call to Action** - Versatile CTA sections with rich text and buttons  
+- **FAQ Block** - Frequently asked questions with shadcn/ui Accordion
+- **Banner Block** - Notification and announcement banners
+- **Content Block** - Rich text content sections
+- **Feature Block** - Feature showcase with cards and icons
+- **Logo Cloud** - Partner/client logo displays
+- **Quote Block** - Testimonials and quote sections
+- **Statistics** - Number displays with descriptions
 
-### Templates
-- **Basic** - Minimal PayloadCMS setup
-- **Blog** - Blog with posts and categories
-- **Business** - Business website template
-- **E-commerce** - Online store template
+### ⚛️ Components (React)
+- **RichText** - PayloadCMS rich text renderer with Lexical
+- **CMSLink** - Smart link component for internal/external navigation
+
+### 📁 Collections (PayloadCMS)
+- **Users** - Authentication and user management
+- **Media** - File and image management
+- **Pages** - Content page management
+
+### 🏗️ Templates
+- **Blank** - Minimal foundation with essential collections and shadcn/ui
+- **Blog** - Blog-focused setup with posts and categories (coming soon)
+- **Business** - Marketing website template (coming soon)
+- **E-commerce** - Online store template (coming soon)
 
 ## 🛠️ CLI Commands
 
+### create-payloadkit (Project Creation)
 ```bash
-# Create new project
+# Create new project with blank template
 npx create-payloadkit@latest my-app
 
-# Initialize in existing project
+# Create with specific template
+npx create-payloadkit@latest my-blog --template blog
+
+# Create with custom package manager
+npx create-payloadkit@latest my-app --package-manager bun
+
+# Skip installation and git initialization
+npx create-payloadkit@latest my-app --no-install --no-git
+```
+
+### payloadkit (Component Management)
+```bash
+# Initialize in existing PayloadCMS project
 npx payloadkit init
 
-# List available components
+# List available registry components
 npx payloadkit list
 
-# Add a component
-npx payloadkit add <component-name>
+# Add specific components
+npx payloadkit add hero-block call-to-action
+npx payloadkit add Users Media
+npx payloadkit add RichText CMSLink
 ```
 
 ## 🏗️ Development
@@ -95,16 +137,28 @@ bun run dev
 ```
 payloadkit/
 ├── packages/
-│   ├── core/              # Shared types and utilities
-│   ├── payloadkit/        # Main CLI
-│   └── create-payloadkit/ # Project creation CLI
+│   ├── core/                  # Shared types and utilities
+│   ├── payloadkit/            # Main CLI for component management
+│   └── create-payloadkit/     # Project creation CLI
+│       └── templates/         # Project templates (blank, blog, etc.)
 ├── apps/
-│   └── docs/             # Documentation website
-├── registry/
-│   ├── blocks/           # PayloadCMS blocks
-│   ├── components/       # React components
-│   └── index.json        # Registry metadata
-└── templates/            # Project templates
+│   └── docs/                 # Documentation website
+└── registry/
+    ├── index.json            # Registry metadata
+    ├── blocks/               # PayloadCMS blocks
+    │   ├── hero-block/
+    │   ├── call-to-action/
+    │   ├── faq/
+    │   └── ...
+    ├── components/           # React components  
+    │   ├── RichText/
+    │   ├── CMSLink/
+    │   └── ...
+    └── collections/          # PayloadCMS collections
+        ├── Users/
+        ├── Media/
+        ├── Pages/
+        └── ...
 ```
 
 ## 🤝 Contributing

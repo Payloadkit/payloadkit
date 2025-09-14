@@ -2,10 +2,14 @@ import { Command } from 'commander'
 import prompts from 'prompts'
 import { spawn } from 'child_process'
 import { existsSync } from 'fs'
-import { mkdir, writeFile } from 'fs/promises'
+import { mkdir, writeFile, readFile, cp } from 'fs/promises'
 import path from 'path'
 import chalk from 'chalk'
 import ora from 'ora'
+import { fileURLToPath } from 'url'
+
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = path.dirname(__filename)
 
 const program = new Command()
 
@@ -19,30 +23,81 @@ interface ProjectOptions {
 }
 
 const TEMPLATES = {
-  basic: {
-    name: 'Basic',
-    description: 'A minimal PayloadCMS setup with essential blocks',
-    features: ['Pages', 'Media', 'Users', 'Basic blocks']
+  blank: {
+    name: 'Blank',
+    description: 'PayloadKit minimal foundation with essential collections and shadcn/ui',
+    features: ['Users', 'Media', 'Pages', 'shadcn/ui', 'TypeScript', 'Tailwind CSS']
   },
   blog: {
     name: 'Blog',
-    description: 'A blog template with posts, categories, and SEO',
+    description: 'A blog template with posts, categories, and SEO (coming soon)',
     features: ['Blog posts', 'Categories', 'SEO', 'Comments']
   },
   business: {
-    name: 'Business',
-    description: 'A business website template with marketing blocks',
+    name: 'Business', 
+    description: 'A business website template with marketing blocks (coming soon)',
     features: ['Landing pages', 'CTA blocks', 'Contact forms', 'Testimonials']
   },
   ecommerce: {
     name: 'E-commerce',
-    description: 'An online store template with products and checkout',
+    description: 'An online store template with products and checkout (coming soon)',
     features: ['Products', 'Cart', 'Checkout', 'Orders']
   }
 }
 
+interface TemplateConfig {
+  name: string
+  version: string
+  description: string
+  extends: string | null
+  payloadkitVersion: string
+  payloadVersion: string
+  nextVersion: string
+  collections: string[]
+  globals: string[]
+  blocks: string[]
+  components: string[]
+  registryDependencies: Record<string, string>
+  features: string[]
+  requiredEnvVars: string[]
+  addedFiles: string[]
+}
+
+async function copyTemplate(templateName: string, projectPath: string) {
+  const templatePath = path.resolve(__dirname, '../templates', templateName)
+  
+  if (!existsSync(templatePath)) {
+    throw new Error(`Template "${templateName}" not found`)
+  }
+
+  // Copy all template files
+  await cp(templatePath, projectPath, {
+    recursive: true,
+    filter: (src) => {
+      const filename = path.basename(src)
+      // Skip template.json - it's metadata only
+      return filename !== 'template.json'
+    }
+  })
+}
+
+async function loadTemplateConfig(templateName: string): Promise<TemplateConfig> {
+  const templatePath = path.resolve(__dirname, '../templates', templateName)
+  const configPath = path.join(templatePath, 'template.json')
+  
+  if (!existsSync(configPath)) {
+    throw new Error(`Template config not found: ${configPath}`)
+  }
+
+  const configContent = await readFile(configPath, 'utf-8')
+  return JSON.parse(configContent)
+}
+
 async function createProject(name: string, options: Partial<ProjectOptions> = {}) {
-  console.log(chalk.cyan(`\n🚀 Creating PayloadKit project: ${name}\n`))
+  const templateName = options.template || 'blank'
+  
+  console.log(chalk.cyan(`\n🚀 Creating PayloadKit project: ${name}`))
+  console.log(chalk.gray(`   Template: ${templateName}\n`))
   
   const projectPath = path.resolve(process.cwd(), name)
   
@@ -52,113 +107,35 @@ async function createProject(name: string, options: Partial<ProjectOptions> = {}
     process.exit(1)
   }
 
-  // Create project directory
-  const spinner = ora('Creating project directory...').start()
-  await mkdir(projectPath, { recursive: true })
-  spinner.succeed('Project directory created')
-
-  // Create basic package.json
-  const packageJson = {
-    name,
-    version: '0.1.0',
-    description: 'A PayloadKit project',
-    type: 'module',
-    scripts: {
-      dev: 'next dev',
-      build: 'next build',
-      start: 'next start',
-      'generate:types': 'payload generate:types',
-      'generate:importmap': 'payload generate:importmap'
-    },
-    dependencies: {
-      'payload': '^3.0.0',
-      'next': '^15.0.0',
-      'react': '^18.0.0',
-      'react-dom': '^18.0.0',
-      '@payloadcms/db-postgres': '^3.0.0',
-      '@payloadcms/richtext-lexical': '^3.0.0'
-    },
-    devDependencies: {
-      '@types/node': '^22.0.0',
-      '@types/react': '^18.0.0',
-      '@types/react-dom': '^18.0.0',
-      'typescript': '^5.0.0',
-      'tailwindcss': '^3.4.0',
-      'autoprefixer': '^10.4.0',
-      'postcss': '^8.4.0'
-    }
-  }
-
-  spinner.start('Creating package.json...')
-  await writeFile(
-    path.join(projectPath, 'package.json'),
-    JSON.stringify(packageJson, null, 2)
-  )
-  spinner.succeed('package.json created')
-
-  // Create basic project structure
-  spinner.start('Creating project structure...')
+  // Load template config
+  const spinner = ora('Loading template...').start()
+  let templateConfig: TemplateConfig
   
-  const directories = [
-    'src/app',
-    'src/collections',
-    'src/blocks',
-    'src/components',
-    'src/utilities',
-    'public'
-  ]
-
-  for (const dir of directories) {
-    await mkdir(path.join(projectPath, dir), { recursive: true })
+  try {
+    templateConfig = await loadTemplateConfig(templateName)
+    spinner.succeed(`Template "${templateName}" loaded`)
+  } catch (error) {
+    spinner.fail(`Failed to load template: ${error}`)
+    process.exit(1)
   }
 
-  // Create basic payload config
-  const payloadConfig = `import { buildConfig } from 'payload'
-import { postgresAdapter } from '@payloadcms/db-postgres'
-import { lexicalEditor } from '@payloadcms/richtext-lexical'
-import path from 'path'
-import { fileURLToPath } from 'url'
+  // Copy template
+  spinner.start('Creating project from template...')
+  try {
+    await copyTemplate(templateName, projectPath)
+    spinner.succeed('Project created from template')
+  } catch (error) {
+    spinner.fail(`Failed to copy template: ${error}`)
+    process.exit(1)
+  }
 
-const filename = fileURLToPath(import.meta.url)
-const dirname = path.dirname(filename)
-
-export default buildConfig({
-  admin: {
-    user: 'users',
-    importMap: {
-      baseDir: path.resolve(dirname),
-    },
-  },
-  collections: [
-    // Collections will be added here
-  ],
-  editor: lexicalEditor(),
-  secret: process.env.PAYLOAD_SECRET || '',
-  typescript: {
-    outputFile: path.resolve(dirname, 'payload-types.ts'),
-  },
-  db: postgresAdapter({
-    pool: {
-      connectionString: process.env.DATABASE_URI || '',
-    },
-  }),
-})
-`
-
-  await writeFile(path.join(projectPath, 'src/payload.config.ts'), payloadConfig)
-
-  // Create .env.example
-  const envExample = `# PayloadCMS
-PAYLOAD_SECRET=your-payload-secret-here
-DATABASE_URI=postgresql://username:password@localhost:5432/database_name
-
-# Next.js
-NEXT_PUBLIC_SERVER_URL=http://localhost:3000
-`
-
-  await writeFile(path.join(projectPath, '.env.example'), envExample)
-
-  spinner.succeed('Project structure created')
+  // Update package.json with project name
+  spinner.start('Configuring project...')
+  const packageJsonPath = path.join(projectPath, 'package.json')
+  const packageJson = JSON.parse(await readFile(packageJsonPath, 'utf-8'))
+  packageJson.name = name
+  await writeFile(packageJsonPath, JSON.stringify(packageJson, null, 2))
+  spinner.succeed('Project configured')
 
   // Install dependencies
   if (options.install !== false) {
@@ -209,51 +186,6 @@ NEXT_PUBLIC_SERVER_URL=http://localhost:3000
         })
       })
       
-      // Create .gitignore
-      const gitignore = `# Dependencies
-node_modules/
-.pnp
-.pnp.js
-
-# Production
-/dist
-/.next/
-/build
-
-# Environment variables
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
-
-# Logs
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-pnpm-debug.log*
-lerna-debug.log*
-
-# OS
-.DS_Store
-.DS_Store?
-._*
-.Spotlight-V100
-.Trashes
-ehthumbs.db
-Thumbs.db
-
-# IDE
-.vscode/
-.idea/
-*.swp
-*.swo
-
-# PayloadCMS
-/media
-payload-types.ts
-`
-
-      await writeFile(path.join(projectPath, '.gitignore'), gitignore)
       spinner.succeed('Git repository initialized')
     } catch (error) {
       spinner.warn('Failed to initialize git repository')
@@ -263,18 +195,23 @@ payload-types.ts
   // Success message
   console.log(chalk.green(`\n✅ Successfully created ${name}!\n`))
   
-  console.log(chalk.cyan('Next steps:'))
+  console.log(chalk.cyan('Template Features:'))
+  templateConfig.features.forEach(feature => {
+    console.log(`  ✓ ${feature}`)
+  })
+  
+  console.log(chalk.cyan('\nNext steps:'))
   console.log(`  1. cd ${name}`)
   console.log(`  2. Copy .env.example to .env and update the values`)
   console.log(`  3. Setup your PostgreSQL database`)
   if (options.install === false) {
     console.log(`  4. Run your package manager install command`)
-    console.log(`  5. npm run dev (or equivalent)`)
+    console.log(`  5. bun dev`)
   } else {
-    console.log(`  4. npm run dev (or equivalent)`)
+    console.log(`  4. bun dev`)
   }
   
-  console.log(chalk.cyan(`\nThen add components with:`))
+  console.log(chalk.cyan(`\nThen add more components with:`))
   console.log(`  payloadkit add <component-name>`)
   
   console.log(chalk.dim(`\nHappy coding! 🎉\n`))
@@ -286,7 +223,7 @@ async function main() {
     .description('Create PayloadCMS projects with PayloadKit')
     .version('0.0.1')
     .argument('[project-name]', 'Name of the project to create')
-    .option('-t, --template <template>', 'Template to use', 'basic')
+    .option('-t, --template <template>', 'Template to use', 'blank')
     .option('--typescript', 'Use TypeScript (default: true)', true)
     .option('--no-install', 'Skip dependency installation')
     .option('--no-git', 'Skip git initialization')

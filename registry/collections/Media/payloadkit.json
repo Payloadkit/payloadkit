@@ -1,0 +1,14 @@
+{
+  "name": "Media",
+  "description": "Media upload collection with responsive image sizes and alt text support",
+  "category": "media",
+  "tags": ["media", "upload", "images", "files"],
+  "version": "0.0.1",
+  "files": [
+    "config.ts",
+    "index.ts"
+  ],
+  "dependencies": [],
+  "peerDependencies": ["payload"],
+  "registryDependencies": []
+}

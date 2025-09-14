@@ -138,7 +138,77 @@
       "registryDependencies": []
     }
   },
-  "collections": {},
+  "collections": {
+    "Users": {
+      "name": "Users",
+      "description": "User authentication and management collection with role-based access",
+      "category": "auth",
+      "tags": ["users", "authentication", "roles", "auth"],
+      "version": "0.0.1",
+      "files": [
+        "config.ts",
+        "index.ts"
+      ],
+      "dependencies": [],
+      "peerDependencies": ["payload"],
+      "registryDependencies": []
+    },
+    "Media": {
+      "name": "Media",
+      "description": "Media upload collection with responsive image sizes and alt text support",
+      "category": "media",
+      "tags": ["media", "upload", "images", "files"],
+      "version": "0.0.1",
+      "files": [
+        "config.ts",
+        "index.ts"
+      ],
+      "dependencies": [],
+      "peerDependencies": ["payload"],
+      "registryDependencies": []
+    },
+    "Pages": {
+      "name": "Pages",
+      "description": "Basic pages collection with SEO fields and publishing workflow",
+      "category": "content",
+      "tags": ["pages", "content", "seo", "cms"],
+      "version": "0.0.1",
+      "files": [
+        "config.ts",
+        "index.ts"
+      ],
+      "dependencies": [],
+      "peerDependencies": ["payload"],
+      "registryDependencies": ["Media"]
+    }
+  },
   "globals": {},
-  "components": {}
+  "components": {
+    "RichText": {
+      "name": "RichText",
+      "description": "Component to render PayloadCMS rich text content with Lexical support",
+      "category": "content",
+      "tags": ["richtext", "lexical", "content", "editor"],
+      "version": "0.0.1",
+      "files": [
+        "index.tsx"
+      ],
+      "dependencies": ["react"],
+      "peerDependencies": ["@payloadcms/richtext-lexical"],
+      "registryDependencies": []
+    },
+    "CMSLink": {
+      "name": "CMSLink",
+      "description": "Smart link component that handles both internal and external links from PayloadCMS",
+      "category": "navigation",
+      "tags": ["link", "navigation", "cms", "reference"],
+      "version": "0.0.1",
+      "files": [
+        "index.tsx"
+      ],
+      "dependencies": ["react", "next"],
+      "peerDependencies": ["payload"],
+      "registryDependencies": ["button"]
+    }
+  }
 }
