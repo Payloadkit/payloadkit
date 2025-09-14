@@ -13,6 +13,11 @@ const sidebarNavItems = [
         href: "/docs",
       },
       {
+        title: "Quick Start Guide",
+        href: "/docs/getting-started",
+        badge: "New"
+      },
+      {
         title: "Installation",
         href: "/docs/installation",
       },
@@ -26,8 +31,28 @@ const sidebarNavItems = [
     title: "Configuration",
     items: [
       {
+        title: "Modular Configuration",
+        href: "/docs/configuration",
+        badge: "New"
+      },
+      {
         title: "Cloud Storage",
         href: "/docs/storage",
+      },
+    ],
+  },
+  {
+    title: "Development & Deployment",
+    items: [
+      {
+        title: "Docker Development",
+        href: "/docs/docker",
+        badge: "New"
+      },
+      {
+        title: "VPS Deployment",
+        href: "/docs/deployment",
+        badge: "New"
       },
     ],
   },
@@ -138,13 +163,18 @@ export function Sidebar() {
                   key={index}
                   href={subItem.href}
                   className={cn(
-                    "group flex w-full items-center rounded-md border border-transparent px-2 py-1 hover:underline",
+                    "group flex w-full items-center justify-between rounded-md border border-transparent px-2 py-1 hover:underline",
                     pathname === subItem.href
                       ? "font-medium text-foreground"
                       : "text-muted-foreground"
                   )}
                 >
-                  {subItem.title}
+                  <span>{subItem.title}</span>
+                  {subItem.badge && (
+                    <span className="ml-2 inline-flex items-center rounded-full bg-blue-100 px-2 py-0.5 text-xs font-medium text-blue-800 dark:bg-blue-900 dark:text-blue-200">
+                      {subItem.badge}
+                    </span>
+                  )}
                 </Link>
               ))}
             </div>
