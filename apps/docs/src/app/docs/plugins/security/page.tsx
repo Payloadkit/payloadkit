@@ -2,7 +2,7 @@ import { Badge } from '@/components/ui/badge'
 
 export default function SecurityPluginsPage() {
   return (
-    <div className="container mx-auto max-w-4xl py-8">
+    <div className="py-8">
       <div className="space-y-8">
         {/* Header */}
         <div className="space-y-4">

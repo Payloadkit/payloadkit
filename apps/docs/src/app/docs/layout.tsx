@@ -15,12 +15,10 @@ export default function DocsLayout({
           <Sidebar />
         </aside>
 
-        {/* Contenu principal utilisant toute la largeur restante */}
-        <main className="flex-1 min-w-0 md:ml-80">
-          <div className="mx-auto max-w-none px-8 py-8 lg:px-12 lg:py-12 xl:px-16">
-            <div className="max-w-4xl">
-              {children}
-            </div>
+        {/* Contenu principal en pleine largeur collé après la sidebar */}
+        <main className="flex-1 md:ml-25">
+          <div className="px-6 py-8 lg:px-8 lg:py-12">
+            {children}
           </div>
         </main>
       </div>
