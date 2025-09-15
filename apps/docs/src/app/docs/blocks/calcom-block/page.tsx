@@ -7,6 +7,42 @@ export const metadata: Metadata = {
 }
 
 export default function CalComBlockPage() {
+  const codeExample = `// components/BookingSection.tsx
+import { CalComBlockComponent } from './blocks/calcom-block'
+
+export function BookingSection() {
+  return (
+    <CalComBlockComponent
+      calcomUsername="john-doe"
+      eventType="30-minute-consultation"
+      layout="split-content"
+      title="Book Your Free Consultation"
+      subtitle="Schedule a call with our expert team"
+      description="Choose a time that works best for you and let us discuss your project."
+      theme="auto"
+      height="lg"
+      features={[
+        {
+          icon: "calendar",
+          text: "Flexible scheduling"
+        },
+        {
+          icon: "clock",
+          text: "30-minute sessions"
+        },
+        {
+          icon: "shield",
+          text: "Secure & private"
+        },
+        {
+          icon: "check",
+          text: "No commitment required"
+        }
+      ]}
+    />
+  )
+}`
+
   return (
     <div className="space-y-6">
       {/* Header */}
@@ -122,78 +158,9 @@ export default buildConfig({
           <h3 className="text-lg font-medium">Frontend Component</h3>
           <div className="relative">
             <pre className="bg-muted p-4 rounded-md overflow-x-auto text-sm">
-              <code>{`// components/BookingSection.tsx
-import { CalComBlockComponent } from './blocks/calcom-block'
-
-export function BookingSection() {
-  return (
-    <CalComBlockComponent
-      calcomUsername="john-doe"
-      eventType="30-minute-consultation"
-      layout="split-content"
-      title="Book Your Free Consultation"
-      subtitle="Schedule a call with our expert team"
-      description="Choose a time that works best for you and let's discuss your project."
-      theme="auto"
-      height="lg"
-      features={[
-        {
-          icon: 'calendar',
-          text: 'Flexible scheduling'
-        },
-        {
-          icon: 'clock',
-          text: '30-minute sessions'
-        },
-        {
-          icon: 'shield',
-          text: 'Secure & private'
-        },
-        {
-          icon: 'check',
-          text: 'No commitment required'
-        }
-      ]}
-    />
-  )
-}`}</code>
+              <code>{codeExample}</code>
             </pre>
-            <CopyButton text={`// components/BookingSection.tsx
-import { CalComBlockComponent } from './blocks/calcom-block'
-
-export function BookingSection() {
-  return (
-    <CalComBlockComponent
-      calcomUsername="john-doe"
-      eventType="30-minute-consultation"
-      layout="split-content"
-      title="Book Your Free Consultation"
-      subtitle="Schedule a call with our expert team"
-      description="Choose a time that works best for you and let's discuss your project."
-      theme="auto"
-      height="lg"
-      features={[
-        {
-          icon: 'calendar',
-          text: 'Flexible scheduling'
-        },
-        {
-          icon: 'clock',
-          text: '30-minute sessions'
-        },
-        {
-          icon: 'shield',
-          text: 'Secure & private'
-        },
-        {
-          icon: 'check',
-          text: 'No commitment required'
-        }
-      ]}
-    />
-  )
-}`} />
-            </div>
+            <CopyButton text={codeExample} />
           </div>
         </div>
       </div>
@@ -250,57 +217,6 @@ export function BookingSection() {
               </tr>
             </tbody>
           </table>
-        </div>
-      </div>
-
-      {/* Layout Examples */}
-      <div className="space-y-4">
-        <h2 className="text-2xl font-semibold">Layout Examples</h2>
-
-        <div className="space-y-4">
-          <h3 className="text-lg font-medium">Full Width Layout</h3>
-          <div className="relative">
-            <pre className="bg-muted p-4 rounded-md overflow-x-auto text-sm">
-              <code>{`<CalComBlockComponent
-  calcomUsername="your-username"
-  layout="full-width"
-  height="lg"
-/>`}</code>
-            </pre>
-            <CopyButton text={`<CalComBlockComponent
-  calcomUsername="your-username"
-  layout="full-width"
-  height="lg"
-/>`} />
-          </div>
-        </div>
-
-        <div className="space-y-4">
-          <h3 className="text-lg font-medium">Split Layout with Content</h3>
-          <div className="relative">
-            <pre className="bg-muted p-4 rounded-md overflow-x-auto text-sm">
-              <code>{`<CalComBlockComponent
-  calcomUsername="your-username"
-  layout="split-content"
-  title="Schedule a Meeting"
-  subtitle="Let's discuss your project"
-  features={[
-    { icon: 'calendar', text: 'Flexible scheduling' },
-    { icon: 'clock', text: '30-minute sessions' }
-  ]}
-/>`}</code>
-            </pre>
-            <CopyButton text={`<CalComBlockComponent
-  calcomUsername="your-username"
-  layout="split-content"
-  title="Schedule a Meeting"
-  subtitle="Let's discuss your project"
-  features={[
-    { icon: 'calendar', text: 'Flexible scheduling' },
-    { icon: 'clock', text: '30-minute sessions' }
-  ]}
-/>`} />
-          </div>
         </div>
       </div>
 

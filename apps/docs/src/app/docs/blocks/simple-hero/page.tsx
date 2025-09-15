@@ -232,7 +232,7 @@ export function SimpleHero() {
               </tr>
               <tr>
                 <td className="border border-border px-4 py-2 font-mono text-sm">image</td>
-                <td className="border border-border px-4 py-2 text-sm">string | { url: string }</td>
+                <td className="border border-border px-4 py-2 text-sm">string | {`{ url: string }`}</td>
                 <td className="border border-border px-4 py-2 text-sm">-</td>
                 <td className="border border-border px-4 py-2 text-sm">Hero image for split layout</td>
               </tr>
