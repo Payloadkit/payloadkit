@@ -8,6 +8,7 @@ import { Badge } from '@/components/ui/badge'
 import { CopyButton } from '@/components/copy-button'
 import { Eye, Code2, Settings, ExternalLink, Smartphone, Monitor, Tablet } from 'lucide-react'
 import { cn } from '@/lib/utils'
+import { SyntaxHighlighter } from './syntax-highlighter'
 
 interface ComponentPreviewProps {
   name: string
@@ -38,6 +39,9 @@ export function ComponentPreview({
 }: ComponentPreviewProps) {
   const [activeTab, setActiveTab] = useState('preview')
   const [viewMode, setViewMode] = useState<'desktop' | 'tablet' | 'mobile'>('desktop')
+
+  // Count available tabs
+  const tabCount = 1 + (code.component ? 1 : 0) + (code.config ? 1 : 0) + (code.usage ? 1 : 0)
 
   const getViewportClass = () => {
     switch (viewMode) {
@@ -86,7 +90,7 @@ export function ComponentPreview({
       {/* Main preview */}
       <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
         <div className="flex items-center justify-between border-b bg-muted/20 rounded-t-lg">
-          <TabsList className="grid h-10 bg-transparent p-0 m-1">
+          <TabsList className="h-10 bg-transparent p-0 m-1 flex w-auto">
             <TabsTrigger
               value="preview"
               className="flex items-center gap-2 data-[state=active]:bg-background data-[state=active]:shadow-sm"
@@ -186,12 +190,14 @@ export function ComponentPreview({
         {/* Component code tab */}
         {code.component && (
           <TabsContent value="component" className="mt-0">
-            <div className="relative rounded-t-none border border-t-0 rounded-b-lg">
-              <pre className="bg-muted/50 p-4 overflow-x-auto text-sm rounded-b-lg">
-                <code className="language-tsx">
-                  {code.component}
-                </code>
-              </pre>
+            <div className="relative rounded-t-none border border-t-0 rounded-b-lg bg-muted/50">
+              <div className="p-4 overflow-x-auto text-sm">
+                <SyntaxHighlighter
+                  code={code.component}
+                  language="tsx"
+                  className="!bg-transparent !p-0 !m-0"
+                />
+              </div>
             </div>
           </TabsContent>
         )}
@@ -199,12 +205,14 @@ export function ComponentPreview({
         {/* Config code tab */}
         {code.config && (
           <TabsContent value="config" className="mt-0">
-            <div className="relative rounded-t-none border border-t-0 rounded-b-lg">
-              <pre className="bg-muted/50 p-4 overflow-x-auto text-sm rounded-b-lg">
-                <code className="language-typescript">
-                  {code.config}
-                </code>
-              </pre>
+            <div className="relative rounded-t-none border border-t-0 rounded-b-lg bg-muted/50">
+              <div className="p-4 overflow-x-auto text-sm">
+                <SyntaxHighlighter
+                  code={code.config}
+                  language="typescript"
+                  className="!bg-transparent !p-0 !m-0"
+                />
+              </div>
             </div>
           </TabsContent>
         )}
@@ -212,12 +220,14 @@ export function ComponentPreview({
         {/* Usage code tab */}
         {code.usage && (
           <TabsContent value="usage" className="mt-0">
-            <div className="relative rounded-t-none border border-t-0 rounded-b-lg">
-              <pre className="bg-muted/50 p-4 overflow-x-auto text-sm rounded-b-lg">
-                <code className="language-tsx">
-                  {code.usage}
-                </code>
-              </pre>
+            <div className="relative rounded-t-none border border-t-0 rounded-b-lg bg-muted/50">
+              <div className="p-4 overflow-x-auto text-sm">
+                <SyntaxHighlighter
+                  code={code.usage}
+                  language="tsx"
+                  className="!bg-transparent !p-0 !m-0"
+                />
+              </div>
             </div>
           </TabsContent>
         )}
@@ -276,11 +286,15 @@ export function SimplePreview({
           </div>
           <CopyButton text={code} />
         </div>
-        <pre className="bg-muted/50 p-4 overflow-x-auto text-sm rounded-t-none border border-t-0 rounded-b-lg">
-          <code className={`language-${language}`}>
-            {code}
-          </code>
-        </pre>
+        <div className="bg-muted/50 border border-t-0 rounded-t-none rounded-b-lg">
+          <div className="p-4 overflow-x-auto text-sm">
+            <SyntaxHighlighter
+              code={code}
+              language={language}
+              className="!bg-transparent !p-0 !m-0"
+            />
+          </div>
+        </div>
       </div>
     </div>
   )

@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Card, CardContent } from "@/components/ui/card"
 import { CopyButton } from "@/components/copy-button"
+import { SyntaxHighlighter } from "@/components/syntax-highlighter"
 import { Code2, Eye } from "lucide-react"
 
 interface CodeTabsProps {
@@ -73,12 +74,14 @@ export function CodeTabs({
         )}
 
         <TabsContent value="code" className="mt-0">
-          <div className="relative rounded-t-none border border-t-0 rounded-b-lg">
-            <pre className="bg-muted/50 p-4 overflow-x-auto text-sm rounded-b-lg">
-              <code className={`language-${language}`}>
-                {code}
-              </code>
-            </pre>
+          <div className="relative rounded-t-none border border-t-0 rounded-b-lg bg-muted/50">
+            <div className="p-4 overflow-x-auto text-sm">
+              <SyntaxHighlighter
+                code={code}
+                language={language}
+                className="!bg-transparent !p-0 !m-0"
+              />
+            </div>
           </div>
         </TabsContent>
       </Tabs>
@@ -110,11 +113,15 @@ export function CodeBlock({
           <CopyButton text={code} />
         </div>
 
-        <pre className="bg-muted/50 p-4 overflow-x-auto text-sm rounded-t-none border border-t-0 rounded-b-lg">
-          <code className={`language-${language}`}>
-            {code}
-          </code>
-        </pre>
+        <div className="bg-muted/50 border border-t-0 rounded-t-none rounded-b-lg">
+          <div className="p-4 overflow-x-auto text-sm">
+            <SyntaxHighlighter
+              code={code}
+              language={language}
+              className="!bg-transparent !p-0 !m-0"
+            />
+          </div>
+        </div>
       </div>
     </div>
   )
