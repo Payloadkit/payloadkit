@@ -264,8 +264,8 @@ export default function BlocksSharedPage() {
           <TabsContent value="background" className="space-y-4">
             <div>
               <h4 className="font-semibold mb-2">Block with Gradient Background</h4>
-              <pre className="bg-muted p-4 rounded-lg text-sm overflow-x-auto">
-                <code>{`<BlockBackground background={{
+              <CodeBlock
+                code={`<BlockBackground background={{
   type: 'gradient',
   gradientFrom: '#3b82f6',
   gradientTo: '#1d4ed8',
@@ -274,32 +274,36 @@ export default function BlocksSharedPage() {
   <BlockSection paddingTop="xl" paddingBottom="xl">
     <BlockHeading text="Your Content Here" level="h2" />
   </BlockSection>
-</BlockBackground>`}</code>
-              </pre>
+</BlockBackground>`}
+                language="tsx"
+                title="Gradient Background Example"
+              />
             </div>
           </TabsContent>
 
           <TabsContent value="layout" className="space-y-4">
             <div>
               <h4 className="font-semibold mb-2">3-Column Grid Layout</h4>
-              <pre className="bg-muted p-4 rounded-lg text-sm overflow-x-auto">
-                <code>{`<BlockLayout layout="grid-3" gap="lg" equalHeight={true}>
+              <CodeBlock
+                code={`<BlockLayout layout="grid-3" gap="lg" equalHeight={true}>
   {items.map((item, index) => (
     <div key={index} className="p-6 bg-white rounded-lg">
       <BlockHeading text={item.title} level="h3" />
       <BlockText richText={item.content} size="sm" />
     </div>
   ))}
-</BlockLayout>`}</code>
-              </pre>
+</BlockLayout>`}
+                language="tsx"
+                title="Grid Layout Example"
+              />
             </div>
           </TabsContent>
 
           <TabsContent value="typography" className="space-y-4">
             <div>
               <h4 className="font-semibold mb-2">Typography Components</h4>
-              <pre className="bg-muted p-4 rounded-lg text-sm overflow-x-auto">
-                <code>{`<BlockHeading
+              <CodeBlock
+                code={`<BlockHeading
   text="Main Title"
   level="h1"
   align="center"
@@ -312,28 +316,32 @@ export default function BlocksSharedPage() {
   align="center"
   prose={true}
   className="text-muted-foreground"
-/>`}</code>
-              </pre>
+/>`}
+                language="tsx"
+                title="Typography Example"
+              />
             </div>
           </TabsContent>
 
           <TabsContent value="image" className="space-y-4">
             <div>
               <h4 className="font-semibold mb-2">Basic Lazy Loading</h4>
-              <pre className="bg-muted p-4 rounded-lg text-sm overflow-x-auto">
-                <code>{`<OptimizedImage
+              <CodeBlock
+                code={`<OptimizedImage
   src="/images/hero-image.jpg"
   alt="Hero image"
   className="w-full h-64 object-cover rounded-lg"
   loading="lazy"
   sizes="(max-width: 768px) 100vw, 50vw"
-/>`}</code>
-              </pre>
+/>`}
+                language="tsx"
+                title="Basic Lazy Loading"
+              />
             </div>
             <div>
               <h4 className="font-semibold mb-2">Priority Image with Blur Placeholder</h4>
-              <pre className="bg-muted p-4 rounded-lg text-sm overflow-x-auto">
-                <code>{`<OptimizedImage
+              <CodeBlock
+                code={`<OptimizedImage
   src={featuredImage}
   alt="Featured article"
   className="aspect-video w-full object-cover"
@@ -342,13 +350,15 @@ export default function BlocksSharedPage() {
   blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD..."
   onLoad={() => console.log('Image loaded')}
   onError={() => console.log('Image failed to load')}
-/>`}</code>
-              </pre>
+/>`}
+                language="tsx"
+                title="Priority Image with Blur"
+              />
             </div>
             <div>
               <h4 className="font-semibold mb-2">Using with PayloadCMS Media</h4>
-              <pre className="bg-muted p-4 rounded-lg text-sm overflow-x-auto">
-                <code>{`// Media item from PayloadCMS
+              <CodeBlock
+                code={`// Media item from PayloadCMS
 const mediaItem = {
   url: '/images/photo.jpg',
   alt: 'Photo description',
@@ -364,16 +374,18 @@ const mediaItem = {
   alt="" // Uses media item alt
   className="w-full h-48 object-cover"
   sizes="(max-width: 640px) 400px, (max-width: 1024px) 800px, 1200px"
-/>`}</code>
-              </pre>
+/>`}
+                language="tsx"
+                title="PayloadCMS Media Integration"
+              />
             </div>
           </TabsContent>
 
           <TabsContent value="accessibility" className="space-y-4">
             <div>
               <h4 className="font-semibold mb-2">Keyboard Navigation Hook</h4>
-              <pre className="bg-muted p-4 rounded-lg text-sm overflow-x-auto">
-                <code>{`import { useKeyboardNavigation } from '../blocks-shared'
+              <CodeBlock
+                code={`import { useKeyboardNavigation } from '../blocks-shared'
 
 const MyComponent = () => {
   const [currentIndex, setCurrentIndex] = useState(0)
@@ -387,13 +399,15 @@ const MyComponent = () => {
   })
 
   return <div>Interactive content with keyboard support</div>
-}`}</code>
-              </pre>
+}`}
+                language="tsx"
+                title="Keyboard Navigation Hook"
+              />
             </div>
             <div>
               <h4 className="font-semibold mb-2">Focus Management for Lists</h4>
-              <pre className="bg-muted p-4 rounded-lg text-sm overflow-x-auto">
-                <code>{`import { useFocusManagement } from '../blocks-shared'
+              <CodeBlock
+                code={`import { useFocusManagement } from '../blocks-shared'
 
 const FAQList = ({ faqs }) => {
   const [focusedIndex, setFocusedIndex] = useState(0)
@@ -436,13 +450,15 @@ const FAQList = ({ faqs }) => {
       ))}
     </ul>
   )
-}`}</code>
-              </pre>
+}`}
+                language="tsx"
+                title="Focus Management Example"
+              />
             </div>
             <div>
               <h4 className="font-semibold mb-2">Using Accessibility Utility Classes</h4>
-              <pre className="bg-muted p-4 rounded-lg text-sm overflow-x-auto">
-                <code>{`import { focusClasses, buttonBaseClasses, srOnlyClasses } from '../blocks-shared'
+              <CodeBlock
+                code={`import { focusClasses, buttonBaseClasses, srOnlyClasses } from '../blocks-shared'
 
 const AccessibleButton = ({ children, onClick, ...props }) => (
   <button
@@ -462,8 +478,10 @@ const ThemedText = ({ theme = 'light', children }) => (
   <p className={contrastSafeColors[theme].text}>
     {children}
   </p>
-)`}</code>
-              </pre>
+)`}
+                language="tsx"
+                title="Accessibility Utilities"
+              />
             </div>
           </TabsContent>
         </Tabs>
@@ -629,8 +647,8 @@ const ThemedText = ({ theme = 'light', children }) => (
             <CardDescription>Using PayloadKit types in your components</CardDescription>
           </CardHeader>
           <CardContent>
-            <pre className="bg-muted p-4 rounded-lg text-sm overflow-x-auto">
-              <code>{`import type {
+            <CodeBlock
+              code={`import type {
   RichTextContent,
   MediaItem,
   CallToAction,
@@ -663,8 +681,10 @@ const CustomBlock: React.FC<CustomBlockProps> = ({
   ...props
 }) => {
   // Your component logic with full type safety
-}`}</code>
-            </pre>
+}`}
+              language="tsx"
+              title="TypeScript Interface Example"
+            />
           </CardContent>
         </Card>
 
@@ -712,8 +732,8 @@ const CustomBlock: React.FC<CustomBlockProps> = ({
               <div className="space-y-4">
                 <div>
                   <h4 className="font-semibold mb-2">Renamed Blocks</h4>
-                  <pre className="bg-muted p-4 rounded-lg text-sm overflow-x-auto">
-                    <code>{`// OLD (v1.x)
+                  <CodeBlock
+                    code={`// OLD (v1.x)
 payloadkit add faq           // Remove
 payloadkit add feature       // Remove
 payloadkit add banner        // Remove
@@ -721,8 +741,10 @@ payloadkit add banner        // Remove
 // NEW (v2.x)
 payloadkit add faq-block     // Use instead
 payloadkit add feature-block // Use instead
-payloadkit add banner-block  // Use instead`}</code>
-                  </pre>
+payloadkit add banner-block  // Use instead`}
+                    language="bash"
+                    title="Block Name Changes"
+                  />
                 </div>
                 <div>
                   <h4 className="font-semibold mb-2">Hero Block Hierarchy</h4>
@@ -745,8 +767,8 @@ payloadkit add banner-block  // Use instead`}</code>
               <div className="space-y-4">
                 <div>
                   <h4 className="font-semibold mb-2">Block Props Updates</h4>
-                  <pre className="bg-muted p-4 rounded-lg text-sm overflow-x-auto">
-                    <code>{`// OLD (v1.x) - Loose typing
+                  <CodeBlock
+                    code={`// OLD (v1.x) - Loose typing
 interface MyBlockProps {
   items: any[]
   content: any
@@ -764,21 +786,25 @@ interface MyBlockProps {
   }>
   content: RichTextContent
   layout: GridLayout
-}`}</code>
-                  </pre>
+}`}
+                    language="tsx"
+                    title="TypeScript Migration"
+                  />
                 </div>
                 <div>
                   <h4 className="font-semibold mb-2">Import Updates</h4>
-                  <pre className="bg-muted p-4 rounded-lg text-sm overflow-x-auto">
-                    <code>{`// Add type imports
+                  <CodeBlock
+                    code={`// Add type imports
 import type {
   RichTextContent,
   MediaItem,
   CallToAction,
   GridLayout,
   SpacingSize
-} from '../blocks-shared'`}</code>
-                  </pre>
+} from '../blocks-shared'`}
+                    language="tsx"
+                    title="Type Imports"
+                  />
                 </div>
               </div>
             </CardContent>
@@ -793,13 +819,15 @@ import type {
               <div className="space-y-4">
                 <div>
                   <h4 className="font-semibold mb-2">Required Components</h4>
-                  <pre className="bg-muted p-4 rounded-lg text-sm overflow-x-auto">
-                    <code>{`# Install shadcn/ui components used by PayloadKit blocks
+                  <CodeBlock
+                    code={`# Install shadcn/ui components used by PayloadKit blocks
 npx shadcn@latest add button card badge accordion
 
 # Optional: Install additional components for documentation
-npx shadcn@latest add tabs`}</code>
-                  </pre>
+npx shadcn@latest add tabs`}
+                    language="bash"
+                    title="shadcn/ui Installation"
+                  />
                 </div>
                 <div>
                   <h4 className="font-semibold mb-2">Component Updates</h4>
@@ -822,8 +850,8 @@ npx shadcn@latest add tabs`}</code>
               <div className="space-y-4">
                 <div>
                   <h4 className="font-semibold mb-2">New Accessibility Hooks</h4>
-                  <pre className="bg-muted p-4 rounded-lg text-sm overflow-x-auto">
-                    <code>{`// Import accessibility hooks (optional)
+                  <CodeBlock
+                    code={`// Import accessibility hooks (optional)
 import {
   useKeyboardNavigation,
   useFocusManagement,
@@ -832,8 +860,10 @@ import {
 } from '../blocks-shared'
 
 // Use in interactive components for better accessibility
-const { focusItem, moveFocus } = useFocusManagement(items.length)`}</code>
-                  </pre>
+const { focusItem, moveFocus } = useFocusManagement(items.length)`}
+                    language="tsx"
+                    title="Accessibility Hooks Import"
+                  />
                 </div>
                 <div>
                   <h4 className="font-semibold mb-2">ARIA Attributes</h4>
@@ -856,8 +886,8 @@ const { focusItem, moveFocus } = useFocusManagement(items.length)`}</code>
               <div className="space-y-4">
                 <div>
                   <h4 className="font-semibold mb-2">Image Optimization</h4>
-                  <pre className="bg-muted p-4 rounded-lg text-sm overflow-x-auto">
-                    <code>{`// OLD (v1.x) - Standard img tags
+                  <CodeBlock
+                    code={`// OLD (v1.x) - Standard img tags
 <img src={image.url} alt={image.alt} />
 
 // NEW (v2.x) - OptimizedImage with lazy loading
@@ -869,8 +899,10 @@ import { OptimizedImage } from '../blocks-shared'
   loading="lazy"
   className="w-full h-64 object-cover"
   sizes="(max-width: 768px) 100vw, 50vw"
-/>`}</code>
-                  </pre>
+/>`}
+                    language="tsx"
+                    title="Image Optimization Migration"
+                  />
                 </div>
                 <div>
                   <h4 className="font-semibold mb-2">Benefits</h4>
