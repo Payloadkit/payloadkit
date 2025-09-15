@@ -1,124 +1,268 @@
 import { Metadata } from 'next'
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
-import { Badge } from '@/components/ui/badge'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { ArrowLeft, Palette, Check } from 'lucide-react'
-import { CopyButton } from '@/components/copy-button'
+import { ArrowLeft } from 'lucide-react'
+import { PageDescription } from '@/components/page-description'
+import { ComponentPreview } from '@/components/component-preview'
+import { Snippet } from '@/components/snippet'
+import { TutorialSteps } from '@/components/tutorial-steps'
+import { CodeBlock } from '@/components/code-tabs'
+import { ApiReference } from '@/components/api-reference'
+import { PageTags } from '@/components/page-tags'
 
 export const metadata: Metadata = {
-  title: 'Theme Global',
-  description: 'Complete theme system with color presets, shadcn/ui integration, and live preview.',
+  title: 'Theme Global - PayloadKit',
+  description: 'Complete theme system with color presets, shadcn/ui integration, and live preview for PayloadCMS applications.',
 }
 
-const features = [
-  '4 built-in theme presets (Default, Zinc, Slate, New York)',
-  'Complete shadcn/ui color palette support',
-  'Live theme preview in PayloadCMS admin',
-  'Preset manager with export/import functionality',
-  'Automatic CSS variables generation',
-  'Light/dark mode support',
-  'Typography configuration (Sans, Serif, Mono fonts)',
-  'Design tokens (border radius, letter spacing)',
-  'Custom CSS variables support',
-  'Theme initialization utilities',
-  'React context provider for frontend'
-]
-
-const presets = [
-  {
-    name: 'Default',
-    description: 'Neutral palette with slate colors for professional applications',
-    colors: ['#0f172a', '#f1f5f9', '#64748b']
-  },
-  {
-    name: 'Zinc',
-    description: 'Modern grayscale with zinc tones for contemporary designs',
-    colors: ['#18181b', '#f4f4f5', '#71717a']
-  },
-  {
-    name: 'Slate',
-    description: 'Elegant slate colors for sophisticated interfaces',
-    colors: ['#020617', '#f1f5f9', '#64748b']
-  },
-  {
-    name: 'New York',
-    description: 'System UI fonts with neutral colors for clean layouts',
-    colors: ['#09090b', '#f4f4f5', '#71717a']
-  }
-]
-
-export default function ThemeGlobalPage() {
+// Theme preset demonstrations
+function ThemeDefault() {
   return (
-    <div className="space-y-8">
-      {/* Header */}
-      <div>
-        <div className="flex items-center gap-2 mb-4">
-          <Button variant="ghost" size="sm" asChild>
-            <Link href="/docs/globals">
-              <ArrowLeft className="mr-2 h-4 w-4" />
-              Back to Globals
-            </Link>
-          </Button>
+    <div className="space-y-4 w-full max-w-sm mx-auto">
+      <div className="bg-slate-900 text-slate-50 p-4 rounded-lg">
+        <h3 className="font-semibold text-lg mb-2">Default Theme</h3>
+        <p className="text-sm text-slate-300 mb-4">Professional slate colors for business applications</p>
+        <div className="flex gap-2">
+          <div className="bg-slate-700 px-3 py-2 rounded text-sm">Primary</div>
+          <div className="bg-slate-600 px-3 py-2 rounded text-sm">Secondary</div>
         </div>
-        <div className="flex items-center gap-4 mb-4">
-          <div className="flex items-center justify-center w-12 h-12 rounded-lg bg-primary/10">
-            <Palette className="h-6 w-6 text-primary" />
-          </div>
-          <div>
-            <h1 className="text-4xl font-bold tracking-tight">Theme Global</h1>
-            <div className="flex items-center gap-2 mt-2">
-              <Badge>Design</Badge>
-              <Badge variant="outline">v0.1.0</Badge>
-              <Badge variant="secondary">Stable</Badge>
-            </div>
-          </div>
-        </div>
-        <p className="text-xl text-muted-foreground">
-          Complete theme system with color presets, shadcn/ui integration, and live preview.
-        </p>
       </div>
+      <div className="flex gap-1 justify-center">
+        <div className="w-8 h-8 rounded-full bg-slate-900 border-2 border-white shadow-sm"></div>
+        <div className="w-8 h-8 rounded-full bg-slate-600 border-2 border-white shadow-sm"></div>
+        <div className="w-8 h-8 rounded-full bg-slate-300 border-2 border-white shadow-sm"></div>
+      </div>
+    </div>
+  )
+}
 
-      {/* Installation */}
-      <Card>
-        <CardHeader>
-          <CardTitle>Installation</CardTitle>
-          <CardDescription>
-            Add the theme global to your PayloadCMS project using the PayloadKit CLI.
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <div className="space-y-4">
-            <div>
-              <h4 className="font-semibold mb-2">Install via CLI</h4>
-              <div className="relative">
-                <pre className="bg-muted p-4 rounded-lg text-sm overflow-x-auto">
-                  <code>payloadkit add theme</code>
-                </pre>
-                <CopyButton
-                  text="payloadkit add theme"
-                  className="absolute top-2 right-2"
-                />
-              </div>
-            </div>
-            <div>
-              <h4 className="font-semibold mb-2">Add to your PayloadCMS config</h4>
-              <pre className="bg-muted p-4 rounded-lg text-sm overflow-x-auto">
-                <code>{`import { Theme } from './globals/theme'
+function ThemeZinc() {
+  return (
+    <div className="space-y-4 w-full max-w-sm mx-auto">
+      <div className="bg-zinc-900 text-zinc-50 p-4 rounded-lg">
+        <h3 className="font-semibold text-lg mb-2">Zinc Theme</h3>
+        <p className="text-sm text-zinc-300 mb-4">Modern grayscale for contemporary designs</p>
+        <div className="flex gap-2">
+          <div className="bg-zinc-700 px-3 py-2 rounded text-sm">Primary</div>
+          <div className="bg-zinc-600 px-3 py-2 rounded text-sm">Secondary</div>
+        </div>
+      </div>
+      <div className="flex gap-1 justify-center">
+        <div className="w-8 h-8 rounded-full bg-zinc-900 border-2 border-white shadow-sm"></div>
+        <div className="w-8 h-8 rounded-full bg-zinc-600 border-2 border-white shadow-sm"></div>
+        <div className="w-8 h-8 rounded-full bg-zinc-300 border-2 border-white shadow-sm"></div>
+      </div>
+    </div>
+  )
+}
 
-export default buildConfig({
-  // ... other config
-  globals: [Theme],
-})`}</code>
-              </pre>
-            </div>
-            <div>
-              <h4 className="font-semibold mb-2">Wrap your app with ThemeProvider</h4>
-              <pre className="bg-muted p-4 rounded-lg text-sm overflow-x-auto">
-                <code>{`import { ThemeProvider } from './globals/theme'
+function ThemeNewYork() {
+  return (
+    <div className="space-y-4 w-full max-w-sm mx-auto">
+      <div className="bg-neutral-900 text-neutral-50 p-4 rounded-lg font-mono">
+        <h3 className="font-semibold text-lg mb-2">New York</h3>
+        <p className="text-sm text-neutral-300 mb-4">System fonts with clean layouts</p>
+        <div className="flex gap-2">
+          <div className="bg-neutral-700 px-3 py-2 rounded text-sm">Primary</div>
+          <div className="bg-neutral-600 px-3 py-2 rounded text-sm">Secondary</div>
+        </div>
+      </div>
+      <div className="flex gap-1 justify-center">
+        <div className="w-8 h-8 rounded-full bg-neutral-900 border-2 border-white shadow-sm"></div>
+        <div className="w-8 h-8 rounded-full bg-neutral-600 border-2 border-white shadow-sm"></div>
+        <div className="w-8 h-8 rounded-full bg-neutral-300 border-2 border-white shadow-sm"></div>
+      </div>
+    </div>
+  )
+}
+
+const componentCode = `// Component.tsx - Theme Provider for frontend
+import { createContext, useContext, useEffect, useState } from 'react'
+
+interface ThemeContextType {
+  theme: ThemeConfig
+  setTheme: (theme: ThemeConfig) => void
+  mode: 'light' | 'dark'
+  toggleMode: () => void
+  isDarkMode: boolean
+}
+
+const ThemeContext = createContext<ThemeContextType | null>(null)
+
+export function ThemeProvider({ children }: { children: React.ReactNode }) {
+  const [theme, setTheme] = useState<ThemeConfig>(defaultTheme)
+  const [mode, setMode] = useState<'light' | 'dark'>('light')
+
+  useEffect(() => {
+    // Apply theme CSS variables to document
+    applyThemeToDocument(theme, mode)
+  }, [theme, mode])
+
+  const toggleMode = () => {
+    setMode(prev => prev === 'light' ? 'dark' : 'light')
+  }
+
+  return (
+    <ThemeContext.Provider value={{
+      theme,
+      setTheme,
+      mode,
+      toggleMode,
+      isDarkMode: mode === 'dark'
+    }}>
+      {children}
+    </ThemeContext.Provider>
+  )
+}
+
+export function useTheme() {
+  const context = useContext(ThemeContext)
+  if (!context) {
+    throw new Error('useTheme must be used within ThemeProvider')
+  }
+  return context
+}`
+
+const configCode = `// config.ts - PayloadCMS Global Configuration
+import type { GlobalConfig } from 'payload'
+import { ColorPickerField } from '@payloadcms/plugin-form-builder'
+
+export const Theme: GlobalConfig = {
+  slug: 'theme',
+  label: 'Theme Settings',
+  access: {
+    read: () => true,
+    update: ({ req }) => req.user?.role === 'admin',
+  },
+  fields: [
+    {
+      name: 'preset',
+      type: 'select',
+      label: 'Theme Preset',
+      required: true,
+      defaultValue: 'default',
+      options: [
+        { label: 'Default', value: 'default' },
+        { label: 'Zinc', value: 'zinc' },
+        { label: 'Slate', value: 'slate' },
+        { label: 'New York', value: 'new-york' }
+      ]
+    },
+    {
+      name: 'customColors',
+      type: 'group',
+      label: 'Custom Colors',
+      fields: [
+        {
+          name: 'primary',
+          type: 'text',
+          label: 'Primary Color',
+          admin: {
+            components: {
+              Field: ColorPickerField,
+            },
+          },
+        },
+        {
+          name: 'secondary',
+          type: 'text',
+          label: 'Secondary Color',
+          admin: {
+            components: {
+              Field: ColorPickerField,
+            },
+          },
+        }
+      ]
+    },
+    {
+      name: 'typography',
+      type: 'group',
+      label: 'Typography',
+      fields: [
+        {
+          name: 'fontFamily',
+          type: 'select',
+          label: 'Font Family',
+          options: [
+            { label: 'Inter (Sans)', value: 'sans' },
+            { label: 'Times (Serif)', value: 'serif' },
+            { label: 'JetBrains Mono', value: 'mono' }
+          ]
+        }
+      ]
+    }
+  ]
+}`
+
+const usageCode = `// Usage in Next.js layout
+import { ThemeProvider } from '@/globals/theme'
 
 export default function RootLayout({ children }) {
+  return (
+    <html lang="en">
+      <body>
+        <ThemeProvider>
+          {children}
+        </ThemeProvider>
+      </body>
+    </html>
+  )
+}
+
+// Using theme in components
+import { useTheme } from '@/globals/theme'
+
+function ThemeButton() {
+  const { theme, toggleMode, isDarkMode } = useTheme()
+
+  return (
+    <button
+      onClick={toggleMode}
+      className="px-4 py-2 rounded bg-primary text-primary-foreground"
+    >
+      Switch to {isDarkMode ? 'Light' : 'Dark'} Mode
+    </button>
+  )
+}`
+
+export default function ThemeGlobalPage() {
+  const steps = [
+    {
+      title: 'Install Theme Global',
+      keyword: 'Install',
+      description: 'Add the theme global to your PayloadCMS project',
+      content: (
+        <Snippet command="payloadkit add theme">
+          Install the theme global using the PayloadKit CLI. This adds all necessary files and dependencies.
+        </Snippet>
+      )
+    },
+    {
+      title: 'Configure PayloadCMS',
+      keyword: 'Configure',
+      description: 'Add the theme global to your Payload configuration',
+      content: (
+        <CodeBlock
+          code={`import { Theme } from './globals/theme'
+
+export default buildConfig({
+  globals: [Theme],
+  // ... rest of config
+})`}
+          language="typescript"
+        />
+      )
+    },
+    {
+      title: 'Wrap Application',
+      keyword: 'Integrate',
+      description: 'Add ThemeProvider to your Next.js layout',
+      content: (
+        <CodeBlock
+          code={`import { ThemeProvider } from './globals/theme'
+
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html>
       <body>
@@ -128,272 +272,173 @@ export default function RootLayout({ children }) {
       </body>
     </html>
   )
-}`}</code>
-              </pre>
-            </div>
-          </div>
-        </CardContent>
-      </Card>
+}`}
+          language="tsx"
+        />
+      )
+    },
+    {
+      title: 'Configure Theme',
+      keyword: 'Setup',
+      description: 'Set up your theme in PayloadCMS admin',
+      content: (
+        <div className="space-y-3">
+          <p className="text-sm text-muted-foreground">
+            Navigate to <code>yourdomain.com/admin/globals/theme</code> to configure:
+          </p>
+          <ul className="text-sm space-y-2">
+            <li>• Select from 4 built-in presets</li>
+            <li>• Customize primary and secondary colors</li>
+            <li>• Choose typography settings</li>
+            <li>• Preview changes in real-time</li>
+          </ul>
+        </div>
+      )
+    }
+  ]
 
-      {/* Features */}
-      <Card>
-        <CardHeader>
-          <CardTitle>Features</CardTitle>
-          <CardDescription>
-            Everything included with the Theme global system.
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <div className="grid gap-2">
-            {features.map((feature, index) => (
-              <div key={index} className="flex items-start gap-3">
-                <Check className="h-5 w-5 text-green-600 mt-0.5 flex-shrink-0" />
-                <span className="text-sm">{feature}</span>
-              </div>
-            ))}
-          </div>
-        </CardContent>
-      </Card>
-
-      {/* Built-in Presets */}
-      <Card>
-        <CardHeader>
-          <CardTitle>Built-in Theme Presets</CardTitle>
-          <CardDescription>
-            4 carefully crafted theme presets ready to use in your application.
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <div className="grid gap-4 md:grid-cols-2">
-            {presets.map((preset) => (
-              <div key={preset.name} className="border rounded-lg p-4">
-                <div className="flex items-center justify-between mb-3">
-                  <h4 className="font-semibold">{preset.name}</h4>
-                  <div className="flex gap-1">
-                    {preset.colors.map((color, index) => (
-                      <div
-                        key={index}
-                        className="w-4 h-4 rounded-full border border-gray-200"
-                        style={{ backgroundColor: color }}
-                      />
-                    ))}
-                  </div>
-                </div>
-                <p className="text-sm text-muted-foreground">{preset.description}</p>
-              </div>
-            ))}
-          </div>
-        </CardContent>
-      </Card>
-
-      {/* Usage Examples */}
-      <div>
-        <h2 className="text-2xl font-bold mb-6">Usage Examples</h2>
-        <Tabs defaultValue="initialization" className="w-full">
-          <TabsList className="grid w-full grid-cols-3">
-            <TabsTrigger value="initialization">Initialization</TabsTrigger>
-            <TabsTrigger value="frontend">Frontend Usage</TabsTrigger>
-            <TabsTrigger value="customization">Customization</TabsTrigger>
-          </TabsList>
-
-          <TabsContent value="initialization" className="space-y-4">
-            <Card>
-              <CardHeader>
-                <CardTitle>Theme Initialization</CardTitle>
-                <CardDescription>
-                  Initialize the theme system with default presets after PayloadCMS starts.
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <pre className="bg-muted p-4 rounded-lg text-sm overflow-x-auto">
-                  <code>{`import { buildConfig } from 'payload'
-import { Theme, createThemeInitializer } from './globals/theme'
-
-export default buildConfig({
-  globals: [Theme],
-  onInit: async (payload) => {
-    // Initialize theme with default presets
-    const initTheme = createThemeInitializer({
-      overwrite: false // Don't overwrite existing theme
-    })
-
-    await initTheme(payload)
-  },
-  // ... other config
-})`}</code>
-                </pre>
-              </CardContent>
-            </Card>
-          </TabsContent>
-
-          <TabsContent value="frontend" className="space-y-4">
-            <Card>
-              <CardHeader>
-                <CardTitle>Frontend Integration</CardTitle>
-                <CardDescription>
-                  Use the theme system in your React application.
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <pre className="bg-muted p-4 rounded-lg text-sm overflow-x-auto">
-                  <code>{`import { ThemeProvider, useTheme } from './globals/theme'
-
-// Wrap your app
-export default function App({ children }) {
-  return (
-    <ThemeProvider>
-      {children}
-    </ThemeProvider>
-  )
-}
-
-// Use theme in components
-function MyComponent() {
-  const { theme, setTheme, mode, isDarkMode } = useTheme()
+  const apiProps = [
+    {
+      name: 'theme',
+      type: 'ThemeConfig',
+      description: 'Current theme configuration object',
+      required: false
+    },
+    {
+      name: 'setTheme',
+      type: '(theme: ThemeConfig) => void',
+      description: 'Function to update the theme configuration',
+      required: false
+    },
+    {
+      name: 'mode',
+      type: "'light' | 'dark'",
+      description: 'Current theme mode',
+      required: false
+    },
+    {
+      name: 'toggleMode',
+      type: '() => void',
+      description: 'Function to toggle between light and dark mode',
+      required: false
+    },
+    {
+      name: 'isDarkMode',
+      type: 'boolean',
+      description: 'Boolean indicating if dark mode is active',
+      required: false
+    }
+  ]
 
   return (
-    <div>
-      <button onClick={() => setTheme(newTheme)}>
-        Change Theme
-      </button>
-      <p>Current mode: {mode}</p>
-      <p>Dark mode: {isDarkMode ? 'Yes' : 'No'}</p>
-    </div>
-  )
-}`}</code>
-                </pre>
-              </CardContent>
-            </Card>
-          </TabsContent>
-
-          <TabsContent value="customization" className="space-y-4">
-            <Card>
-              <CardHeader>
-                <CardTitle>Custom Theme Creation</CardTitle>
-                <CardDescription>
-                  Create and apply custom themes programmatically.
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <pre className="bg-muted p-4 rounded-lg text-sm overflow-x-auto">
-                  <code>{`import {
-  generateThemeCSS,
-  applyThemeToDocument
-} from './globals/theme'
-
-// Create custom theme
-const customTheme = {
-  primaryColor: '#3b82f6',
-  backgroundColor: '#ffffff',
-  foregroundColor: '#1f2937',
-  fontSans: 'Inter, sans-serif',
-  borderRadius: '0.375rem'
-}
-
-// Generate CSS variables
-const css = generateThemeCSS(customTheme)
-console.log(css)
-
-// Apply to document
-applyThemeToDocument(customTheme)`}</code>
-                </pre>
-              </CardContent>
-            </Card>
-          </TabsContent>
-        </Tabs>
+    <div className="space-y-8">
+      {/* Navigation */}
+      <div className="flex items-center gap-2">
+        <Button variant="ghost" size="sm" asChild>
+          <Link href="/docs/globals">
+            <ArrowLeft className="mr-2 h-4 w-4" />
+            Back to Globals
+          </Link>
+        </Button>
       </div>
 
-      {/* Color System */}
-      <Card>
-        <CardHeader>
-          <CardTitle>shadcn/ui Color System</CardTitle>
-          <CardDescription>
-            Complete integration with shadcn/ui color palette and CSS variables.
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <div className="grid gap-4 md:grid-cols-2">
-            <div>
-              <h4 className="font-semibold mb-2">Base Colors</h4>
-              <ul className="text-sm text-muted-foreground space-y-1">
-                <li><code>background</code> - Main background</li>
-                <li><code>foreground</code> - Main text color</li>
-                <li><code>card</code> - Card background</li>
-                <li><code>muted</code> - Muted backgrounds</li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="font-semibold mb-2">Interactive Colors</h4>
-              <ul className="text-sm text-muted-foreground space-y-1">
-                <li><code>primary</code> - Primary actions</li>
-                <li><code>secondary</code> - Secondary actions</li>
-                <li><code>accent</code> - Hover/focus states</li>
-                <li><code>destructive</code> - Error/danger</li>
-              </ul>
-            </div>
-          </div>
-        </CardContent>
-      </Card>
+      {/* Page Description */}
+      <PageDescription
+        title="Theme Global"
+        description="Complete theme system with color presets, shadcn/ui integration, and live preview for PayloadCMS applications."
+        category="globals"
+        version="0.1.0"
+        payloadVersion="3.0+"
+        difficulty="beginner"
+        estimatedTime="5 minutes"
+        lastUpdated="January 2025"
+      />
 
-      {/* Admin Interface */}
-      <Card>
-        <CardHeader>
-          <CardTitle>PayloadCMS Admin Interface</CardTitle>
-          <CardDescription>
-            Manage your theme settings directly from the PayloadCMS admin panel.
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <div className="space-y-4">
-            <div>
-              <h4 className="font-semibold mb-2">Preset Manager</h4>
-              <p className="text-sm text-muted-foreground">
-                Switch between built-in presets, create custom themes, and export/import theme configurations.
-              </p>
-            </div>
-            <div>
-              <h4 className="font-semibold mb-2">Color Picker Fields</h4>
-              <p className="text-sm text-muted-foreground">
-                Interactive color pickers with preset swatches and RGB inputs for precise color selection.
-              </p>
-            </div>
-            <div>
-              <h4 className="font-semibold mb-2">Live Preview</h4>
-              <p className="text-sm text-muted-foreground">
-                See your theme changes in real-time with component previews and sample content.
-              </p>
-            </div>
-          </div>
-        </CardContent>
-      </Card>
+      {/* Component Preview */}
+      <ComponentPreview
+        name="Theme Presets"
+        description="Interactive demonstration of the 4 built-in theme presets with live color palettes"
+        variants={[
+          {
+            name: 'Default',
+            description: 'Professional slate colors for business applications',
+            component: <ThemeDefault />
+          },
+          {
+            name: 'Zinc',
+            description: 'Modern grayscale for contemporary designs',
+            component: <ThemeZinc />
+          },
+          {
+            name: 'New York',
+            description: 'System fonts with clean layouts',
+            component: <ThemeNewYork />
+          }
+        ]}
+        code={{
+          component: componentCode,
+          config: configCode,
+          usage: usageCode
+        }}
+        responsive
+        interactive
+      />
 
-      {/* Dependencies */}
-      <Card>
-        <CardHeader>
-          <CardTitle>Dependencies</CardTitle>
-          <CardDescription>
-            Required packages and registry dependencies.
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <div className="grid gap-4 md:grid-cols-2">
-            <div>
-              <h4 className="font-semibold mb-2">NPM Dependencies</h4>
-              <ul className="text-sm text-muted-foreground space-y-1">
-                <li><code>react</code> - React framework</li>
-                <li><code>payload</code> - PayloadCMS</li>
-                <li><code>@payloadcms/ui</code> - PayloadCMS UI components</li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="font-semibold mb-2">Registry Dependencies</h4>
-              <ul className="text-sm text-muted-foreground space-y-1">
-                <li><code>color-picker</code> - Color picker field component</li>
-              </ul>
-            </div>
-          </div>
-        </CardContent>
-      </Card>
+      {/* Tutorial Steps */}
+      <TutorialSteps
+        title="Installation & Setup"
+        steps={steps}
+        allowSkip
+      />
+
+      {/* API Reference */}
+      <ApiReference
+        title="Theme Hook API"
+        description="Complete reference for the useTheme() hook provided by ThemeProvider"
+        props={apiProps}
+      />
+
+      {/* Type Definitions */}
+      <div className="space-y-4">
+        <div className="text-lg font-semibold">Type Definitions</div>
+        <CodeBlock
+          code={`interface ThemeConfig {
+  preset: 'default' | 'zinc' | 'slate' | 'new-york'
+  customColors?: {
+    primary?: string
+    secondary?: string
+    accent?: string
+    destructive?: string
+  }
+  typography?: {
+    fontFamily: 'sans' | 'serif' | 'mono'
+    fontSize?: {
+      base?: string
+      lg?: string
+      xl?: string
+    }
+  }
+  borderRadius?: string
+  shadows?: boolean
+}
+
+interface ThemeContextType {
+  theme: ThemeConfig
+  setTheme: (theme: ThemeConfig) => void
+  mode: 'light' | 'dark'
+  toggleMode: () => void
+  isDarkMode: boolean
+}`}
+          language="typescript"
+        />
+      </div>
+
+      {/* Tags */}
+      <PageTags
+        category="globals"
+        dependencies={['@payloadcms/ui', 'react', 'color-picker-field']}
+        tags={['theme', 'design-system', 'shadcn-ui', 'colors', 'typography', 'dark-mode', 'presets']}
+      />
     </div>
   )
 }

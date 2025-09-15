@@ -1,56 +1,150 @@
-import { Badge } from '@/components/ui/badge'
+import { Metadata } from 'next'
+import Link from 'next/link'
+import { Button } from '@/components/ui/button'
+import { ArrowLeft, UserCheck, Shield, Loader2 } from 'lucide-react'
+import { PageDescription } from '@/components/page-description'
+import { ComponentPreview } from '@/components/component-preview'
+import { Snippet } from '@/components/snippet'
+import { TutorialSteps } from '@/components/tutorial-steps'
+import { CodeBlock } from '@/components/code-tabs'
+import { ApiReference } from '@/components/api-reference'
+import { PageTags } from '@/components/page-tags'
 
-export default function AuthProviderPage() {
+export const metadata: Metadata = {
+  title: 'AuthProvider Component - PayloadKit',
+  description: 'Global authentication context provider using Better Auth UI for Next.js applications.',
+}
+
+// Demo components for AuthProvider
+function AuthProviderDemo() {
   return (
-    <div className="py-8">
-      <div className="space-y-8">
-        {/* Header */}
-        <div className="space-y-4">
-          <div className="flex items-center gap-2">
-            <h1 className="text-4xl font-bold">AuthProvider</h1>
-            <Badge variant="outline">Better Auth UI</Badge>
-            <Badge variant="default">Registry Component</Badge>
-          </div>
-          <p className="text-xl text-muted-foreground">
-            Global authentication context provider using Better Auth UI for Next.js applications.
-          </p>
+    <div className="space-y-4 w-full max-w-md mx-auto p-6 border rounded-lg bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-950/20 dark:to-indigo-950/20">
+      <div className="text-center">
+        <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-blue-100 dark:bg-blue-900 mb-4">
+          <UserCheck className="w-6 h-6 text-blue-600 dark:text-blue-400" />
         </div>
-
-        {/* Overview */}
-        <div className="rounded-lg border p-6 bg-blue-50 dark:bg-blue-950/20">
-          <h2 className="text-2xl font-semibold mb-4">🎯 Purpose</h2>
-          <p className="text-muted-foreground">
-            AuthProvider is a registry component that wraps your entire Next.js application with Better Auth UI context,
-            enabling authentication functionality across all pages and components.
-          </p>
+        <h3 className="font-semibold text-lg mb-2">AuthProvider Active</h3>
+        <p className="text-sm text-muted-foreground mb-4">
+          Authentication context available throughout your app
+        </p>
+      </div>
+      <div className="space-y-2 text-sm">
+        <div className="flex items-center gap-2">
+          <div className="w-2 h-2 rounded-full bg-green-500"></div>
+          <span>Better Auth client configured</span>
         </div>
+        <div className="flex items-center gap-2">
+          <div className="w-2 h-2 rounded-full bg-green-500"></div>
+          <span>Session management active</span>
+        </div>
+        <div className="flex items-center gap-2">
+          <div className="w-2 h-2 rounded-full bg-green-500"></div>
+          <span>Authentication hooks available</span>
+        </div>
+      </div>
+    </div>
+  )
+}
 
-        {/* Installation */}
-        <section className="space-y-4">
-          <h2 className="text-3xl font-semibold">📦 Installation</h2>
-          <div className="rounded-lg border p-6">
-            <p className="text-muted-foreground mb-4">
-              AuthProvider is included automatically when you create a PayloadKit project with the blank template.
-            </p>
-            <div className="bg-muted rounded p-4 text-sm">
-              <code>
-                npx create-payloadkit my-app --template blank
-                <br />
-                <span className="text-muted-foreground"># AuthProvider already configured!</span>
-              </code>
-            </div>
-          </div>
-        </section>
+function LoadingStateDemo() {
+  return (
+    <div className="space-y-4 w-full max-w-md mx-auto p-6 border rounded-lg">
+      <div className="text-center">
+        <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-muted mb-4">
+          <Loader2 className="w-6 h-6 animate-spin" />
+        </div>
+        <h3 className="font-semibold text-lg mb-2">Loading State</h3>
+        <p className="text-sm text-muted-foreground">
+          Authentication status being determined
+        </p>
+      </div>
+      <div className="bg-muted/50 p-3 rounded text-sm font-mono">
+        <span className="text-muted-foreground">const</span> {`{ isLoading } = useAuth()`}<br/>
+        <span className="text-muted-foreground">if</span> (isLoading) <span className="text-muted-foreground">return</span> <span className="text-green-600">&lt;Loading /&gt;</span>
+      </div>
+    </div>
+  )
+}
 
-        {/* Usage */}
-        <section className="space-y-4">
-          <h2 className="text-3xl font-semibold">🔧 Usage</h2>
-          
-          <div className="rounded-lg border p-6">
-            <h3 className="text-xl font-semibold mb-4">Basic Setup (Root Layout)</h3>
-            <div className="bg-muted rounded p-4 text-sm mb-4">
-              <code>{`// src/app/layout.tsx
-import { AuthProvider } from '@payloadkit/registry/components/auth/AuthProvider'
+function ProtectedRouteDemo() {
+  return (
+    <div className="space-y-4 w-full max-w-md mx-auto p-6 border rounded-lg bg-gradient-to-r from-amber-50 to-orange-50 dark:from-amber-950/20 dark:to-orange-950/20">
+      <div className="text-center">
+        <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-amber-100 dark:bg-amber-900 mb-4">
+          <Shield className="w-6 h-6 text-amber-600 dark:text-amber-400" />
+        </div>
+        <h3 className="font-semibold text-lg mb-2">Protected Route</h3>
+        <p className="text-sm text-muted-foreground">
+          Route protection with automatic redirects
+        </p>
+      </div>
+      <div className="space-y-2 text-xs">
+        <div className="bg-green-100 dark:bg-green-900/30 px-3 py-2 rounded">
+          ✅ User authenticated → Allow access
+        </div>
+        <div className="bg-red-100 dark:bg-red-900/30 px-3 py-2 rounded">
+          ❌ No user → Redirect to /auth/sign-in
+        </div>
+      </div>
+    </div>
+  )
+}
+
+const componentCode = `// AuthProvider.tsx - Global authentication context
+'use client'
+
+import { AuthProvider as BetterAuthProvider } from '@daveyplate/better-auth-ui'
+import { authClient } from './auth-client'
+
+interface AuthProviderProps {
+  children: React.ReactNode
+}
+
+export function AuthProvider({ children }: AuthProviderProps) {
+  return (
+    <BetterAuthProvider
+      client={authClient}
+      // Configuration options
+      options={{
+        autoRedirect: true,
+        redirectTo: '/dashboard',
+        loginRedirectTo: '/auth/sign-in',
+        // Enable loading states
+        suspense: true,
+      }}
+    >
+      {children}
+    </BetterAuthProvider>
+  )
+}
+
+// Export authentication hooks for convenience
+export { useAuth, useSession } from '@daveyplate/better-auth-ui'`
+
+const configCode = `// auth-client.ts - Better Auth client configuration
+import { betterAuthClient } from 'better-auth/client'
+
+export const authClient = betterAuthClient({
+  // Base URL for authentication endpoints
+  baseURL: process.env.NEXT_PUBLIC_BETTER_AUTH_URL || 'http://localhost:3000',
+
+  // Client-side plugins (must match server configuration)
+  plugins: [
+    // Add client plugins here
+    // Example: twoFactorClient(), oauthClient(), etc.
+  ],
+
+  // Additional configuration
+  session: {
+    cookieName: 'better-auth.session',
+    maxAge: 60 * 60 * 24 * 7, // 7 days
+  },
+})
+
+export default authClient`
+
+const usageCode = `// app/layout.tsx - Root layout integration
+import { AuthProvider } from '@/components/auth/AuthProvider'
 
 export default function RootLayout({
   children,
@@ -59,6 +153,82 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      <body className={inter.className}>
+        <AuthProvider>
+          {children}
+        </AuthProvider>
+      </body>
+    </html>
+  )
+}
+
+// components/UserProfile.tsx - Using authentication
+import { useAuth } from '@/components/auth/AuthProvider'
+
+export function UserProfile() {
+  const { user, isLoading, signOut } = useAuth()
+
+  if (isLoading) {
+    return <div className="animate-pulse">Loading...</div>
+  }
+
+  if (!user) {
+    return <div>Please sign in to continue</div>
+  }
+
+  return (
+    <div className="space-y-4">
+      <h2>Welcome, {user.name}!</h2>
+      <p className="text-muted-foreground">Email: {user.email}</p>
+      <button
+        onClick={signOut}
+        className="px-4 py-2 bg-destructive text-destructive-foreground rounded-md"
+      >
+        Sign Out
+      </button>
+    </div>
+  )
+}`
+
+export default function AuthProviderPage() {
+  const steps = [
+    {
+      title: 'Install AuthProvider',
+      keyword: 'Install',
+      description: 'Add the authentication provider to your project',
+      content: (
+        <Snippet command="payloadkit add auth-provider">
+          Install AuthProvider component with Better Auth UI integration. This includes the provider and authentication client configuration.
+        </Snippet>
+      )
+    },
+    {
+      title: 'Configure Environment',
+      keyword: 'Environment',
+      description: 'Set up required environment variables',
+      content: (
+        <CodeBlock
+          code={`# .env.local
+NEXT_PUBLIC_BETTER_AUTH_URL=http://localhost:3000
+
+# Required for Better Auth server
+BETTER_AUTH_SECRET=your-secret-key
+DATABASE_URL=your-database-url`}
+          language="bash"
+        />
+      )
+    },
+    {
+      title: 'Wrap Application',
+      keyword: 'Integration',
+      description: 'Add AuthProvider to your root layout',
+      content: (
+        <CodeBlock
+          code={`import { AuthProvider } from '@/components/auth/AuthProvider'
+
+export default function RootLayout({ children }) {
+  return (
+    <html>
       <body>
         <AuthProvider>
           {children}
@@ -66,348 +236,205 @@ export default function RootLayout({
       </body>
     </html>
   )
-}`}</code>
-            </div>
-            <div className="bg-green-50 dark:bg-green-950/20 rounded p-4 border border-green-200 dark:border-green-800">
-              <p className="text-green-800 dark:text-green-200 text-sm">
-                ✅ <strong>That's it!</strong> All authentication functionality is now available throughout your app.
-              </p>
-            </div>
-          </div>
-        </section>
+}`}
+          language="tsx"
+        />
+      )
+    },
+    {
+      title: 'Use Authentication',
+      keyword: 'Usage',
+      description: 'Start using authentication in your components',
+      content: (
+        <CodeBlock
+          code={`import { useAuth } from '@/components/auth/AuthProvider'
 
-        {/* What It Provides */}
-        <section className="space-y-4">
-          <h2 className="text-3xl font-semibuted">⚡ What AuthProvider Provides</h2>
-          
-          <div className="grid md:grid-cols-2 gap-6">
-            <div className="rounded-lg border p-4">
-              <h4 className="font-semibold mb-2">🔗 Better Auth Client</h4>
-              <div className="text-sm text-muted-foreground space-y-1">
-                <div>• Pre-configured Better Auth client</div>
-                <div>• Automatic server sync</div>
-                <div>• Plugin integration</div>
-                <div>• Type-safe API calls</div>
-              </div>
-            </div>
-            
-            <div className="rounded-lg border p-4">
-              <h4 className="font-semibold mb-2">🧭 Next.js Navigation</h4>
-              <div className="text-sm text-muted-foreground space-y-1">
-                <div>• <code>useRouter</code> integration</div>
-                <div>• Automatic redirects</div>
-                <div>• Navigation after auth</div>
-                <div>• Link component support</div>
-              </div>
-            </div>
-            
-            <div className="rounded-lg border p-4">
-              <h4 className="font-semibold mb-2">👤 Session Management</h4>
-              <div className="text-sm text-muted-foreground space-y-1">
-                <div>• Real-time session state</div>
-                <div>• Automatic session refresh</div>
-                <div>• Token management</div>
-                <div>• Logout handling</div>
-              </div>
-            </div>
-            
-            <div className="rounded-lg border p-4">
-              <h4 className="font-semibold mb-2">🎣 Authentication Hooks</h4>
-              <div className="text-sm text-muted-foreground space-y-1">
-                <div>• <code>useAuth()</code> hook</div>
-                <div>• <code>useSession()</code> hook</div>
-                <div>• Loading states</div>
-                <div>• Error handling</div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Configuration */}
-        <section className="space-y-4">
-          <h2 className="text-3xl font-semibold">⚙️ Configuration</h2>
-          
-          <div className="rounded-lg border p-6">
-            <h3 className="text-xl font-semibold mb-4">Environment Variables</h3>
-            <div className="bg-muted rounded p-4 text-sm font-mono mb-4">
-              <div className="text-green-600"># Required for AuthProvider</div>
-              <div>NEXT_PUBLIC_BETTER_AUTH_URL=http://localhost:3000</div>
-              <div className="mt-2 text-muted-foreground"># Used by auth-client.ts</div>
-            </div>
-            
-            <div className="bg-yellow-50 dark:bg-yellow-950/20 rounded p-4 border border-yellow-200 dark:border-yellow-800">
-              <p className="text-yellow-800 dark:text-yellow-200 text-sm">
-                📝 <strong>Note:</strong> The <code>NEXT_PUBLIC_</code> prefix is required for client-side access in Next.js.
-              </p>
-            </div>
-          </div>
-
-          <div className="rounded-lg border p-6">
-            <h3 className="text-xl font-semibold mb-4">Custom Client Configuration</h3>
-            <p className="text-muted-foreground mb-4">
-              Need to customize the Better Auth client? Modify the auth-client.ts file in the registry component.
-            </p>
-            
-            <div className="bg-muted rounded p-4 text-sm">
-              <code>{`// registry/components/auth/AuthProvider/auth-client.ts
-import { betterAuthClient } from 'better-auth/client'
-
-export const authClient = betterAuthClient({
-  baseURL: process.env.NEXT_PUBLIC_BETTER_AUTH_URL || 'http://localhost:3000',
-  plugins: [
-    // Add client-side plugins here
-    // Must match server-side configuration
-  ],
-})`}</code>
-            </div>
-          </div>
-        </section>
-
-        {/* Using Authentication */}
-        <section className="space-y-4">
-          <h2 className="text-3xl font-semibold">🎣 Using Authentication</h2>
-          
-          <div className="grid lg:grid-cols-2 gap-6">
-            <div className="rounded-lg border p-6">
-              <h3 className="text-xl font-semibold mb-4">useAuth Hook</h3>
-              <div className="bg-muted rounded p-4 text-sm mb-4">
-                <code>{`import { useAuth } from '@daveyplate/better-auth-ui'
-
-function UserProfile() {
-  const { 
-    user,        // Current user object
-    isLoading,   // Loading state
-    signOut,     // Sign out function
-    session      // Current session
-  } = useAuth()
-
-  if (isLoading) return <div>Loading...</div>
-  if (!user) return <div>Please sign in</div>
-
-  return (
-    <div>
-      <h2>Welcome, {user.name}!</h2>
-      <p>Email: {user.email}</p>
-      <button onClick={signOut}>
-        Sign out
-      </button>
-    </div>
-  )
-}`}</code>
-              </div>
-            </div>
-            
-            <div className="rounded-lg border p-6">
-              <h3 className="text-xl font-semibold mb-4">Protected Routes</h3>
-              <div className="bg-muted rounded p-4 text-sm mb-4">
-                <code>{`// components/ProtectedRoute.tsx
-import { useAuth } from '@daveyplate/better-auth-ui'
-import { useRouter } from 'next/navigation'
-import { useEffect } from 'react'
-
-export function ProtectedRoute({ children }) {
+function MyComponent() {
   const { user, isLoading } = useAuth()
-  const router = useRouter()
-
-  useEffect(() => {
-    if (!isLoading && !user) {
-      router.push('/auth/sign-in')
-    }
-  }, [user, isLoading, router])
 
   if (isLoading) return <div>Loading...</div>
-  if (!user) return null
 
-  return <>{children}</>
-}`}</code>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Advanced Usage */}
-        <section className="space-y-4">
-          <h2 className="text-3xl font-semibold">🚀 Advanced Usage</h2>
-          
-          <div className="rounded-lg border p-6">
-            <h3 className="text-xl font-semibold mb-4">Custom AuthProvider Wrapper</h3>
-            <p className="text-muted-foreground mb-4">
-              Need to add additional providers or configuration? Create a custom wrapper.
-            </p>
-            
-            <div className="bg-muted rounded p-4 text-sm">
-              <code>{`// components/providers/AllProviders.tsx
-import { AuthProvider } from '@payloadkit/registry/components/auth/AuthProvider'
-import { ThemeProvider } from 'next-themes'
-import { Toaster } from 'sonner'
-
-export function AllProviders({ children }) {
-  return (
-    <ThemeProvider
-      attribute="class"
-      defaultTheme="system"
-      enableSystem
-      disableTransitionOnChange
-    >
-      <AuthProvider>
-        {children}
-        <Toaster position="top-right" />
-      </AuthProvider>
-    </ThemeProvider>
+  return user ? (
+    <div>Welcome {user.name}!</div>
+  ) : (
+    <div>Please sign in</div>
   )
+}`}
+          language="tsx"
+        />
+      )
+    }
+  ]
+
+  const apiProps = [
+    {
+      name: 'children',
+      type: 'React.ReactNode',
+      description: 'The application components to wrap with authentication context',
+      required: true
+    },
+    {
+      name: 'client',
+      type: 'BetterAuthClient',
+      description: 'Better Auth client instance (automatically configured)',
+      required: false,
+      defaultValue: 'authClient'
+    },
+    {
+      name: 'options',
+      type: 'AuthProviderOptions',
+      description: 'Configuration options for the authentication provider',
+      required: false
+    }
+  ]
+
+  const hookProps = [
+    {
+      name: 'user',
+      type: 'User | null',
+      description: 'Current authenticated user object, null if not signed in'
+    },
+    {
+      name: 'isLoading',
+      type: 'boolean',
+      description: 'Boolean indicating if authentication state is being determined'
+    },
+    {
+      name: 'session',
+      type: 'Session | null',
+      description: 'Current user session with tokens and metadata'
+    },
+    {
+      name: 'signOut',
+      type: '() => Promise<void>',
+      description: 'Function to sign out the current user'
+    },
+    {
+      name: 'refresh',
+      type: '() => Promise<void>',
+      description: 'Function to refresh the current session'
+    }
+  ]
+
+  return (
+    <div className="space-y-8">
+      {/* Navigation */}
+      <div className="flex items-center gap-2">
+        <Button variant="ghost" size="sm" asChild>
+          <Link href="/docs/components">
+            <ArrowLeft className="mr-2 h-4 w-4" />
+            Back to Components
+          </Link>
+        </Button>
+      </div>
+
+      {/* Page Description */}
+      <PageDescription
+        title="AuthProvider"
+        description="Global authentication context provider using Better Auth UI for Next.js applications."
+        category="components"
+        version="0.1.0"
+        payloadVersion="3.0+"
+        difficulty="beginner"
+        estimatedTime="3 minutes"
+        lastUpdated="January 2025"
+      />
+
+      {/* Component Preview */}
+      <ComponentPreview
+        name="AuthProvider States"
+        description="Interactive demonstration of different authentication states and functionality"
+        variants={[
+          {
+            name: 'Active Provider',
+            description: 'AuthProvider successfully configured and active',
+            component: <AuthProviderDemo />
+          },
+          {
+            name: 'Loading State',
+            description: 'Authentication status being determined',
+            component: <LoadingStateDemo />
+          },
+          {
+            name: 'Protected Route',
+            description: 'Route protection with automatic redirects',
+            component: <ProtectedRouteDemo />
+          }
+        ]}
+        code={{
+          component: componentCode,
+          config: configCode,
+          usage: usageCode
+        }}
+        responsive
+        interactive
+      />
+
+      {/* Tutorial Steps */}
+      <TutorialSteps
+        title="Installation & Setup"
+        steps={steps}
+        allowSkip
+      />
+
+      {/* API Reference */}
+      <ApiReference
+        title="AuthProvider Props"
+        description="Configuration options for the AuthProvider component"
+        props={apiProps}
+      />
+
+      {/* Hook API */}
+      <ApiReference
+        title="useAuth Hook"
+        description="Authentication hook provided by AuthProvider for accessing user state"
+        props={hookProps}
+      />
+
+      {/* Type Definitions */}
+      <div className="space-y-4">
+        <div className="text-lg font-semibold">Type Definitions</div>
+        <CodeBlock
+          code={`interface User {
+  id: string
+  email: string
+  name?: string
+  image?: string
+  emailVerified: boolean
+  twoFactorEnabled: boolean
+  role?: string
+  createdAt: Date
+  updatedAt: Date
 }
 
-// src/app/layout.tsx
-import { AllProviders } from '@/components/providers/AllProviders'
+interface Session {
+  id: string
+  userId: string
+  expiresAt: Date
+  token: string
+  ipAddress?: string
+  userAgent?: string
+}
 
-export default function RootLayout({ children }) {
-  return (
-    <html lang="en">
-      <body>
-        <AllProviders>
-          {children}
-        </AllProviders>
-      </body>
-    </html>
-  )
-}`}</code>
-            </div>
-          </div>
-
-          <div className="rounded-lg border p-6">
-            <h3 className="text-xl font-semibold mb-4">Server-Side Authentication</h3>
-            <div className="bg-muted rounded p-4 text-sm">
-              <code>{`// Server components and API routes
-// PayloadCMS provides server-side auth through req.user
-
-// In PayloadCMS hooks
-export const Users: CollectionConfig = {
-  slug: 'users',
-  hooks: {
-    beforeChange: [
-      ({ req, operation, data }) => {
-        // Server-side authenticated user
-        console.log('Authenticated user:', req.user)
-        
-        // Check permissions
-        if (!req.user) {
-          throw new Error('Authentication required')
-        }
-        
-        return data
-      }
-    ]
-  },
-  access: {
-    read: ({ req }) => {
-      // Use PayloadCMS access control
-      return req.user ? true : false
-    }
-  }
-}`}</code>
-            </div>
-          </div>
-        </section>
-
-        {/* Troubleshooting */}
-        <section className="space-y-4">
-          <h2 className="text-3xl font-semibold">🔧 Troubleshooting</h2>
-          
-          <div className="space-y-4">
-            <div className="rounded-lg border p-4 bg-red-50 dark:bg-red-950/20 border-red-200 dark:border-red-800">
-              <h4 className="font-semibold text-red-800 dark:text-red-200 mb-2">❌ AuthProvider not working</h4>
-              <div className="text-red-700 dark:text-red-300 text-sm space-y-2">
-                <div><strong>Check:</strong></div>
-                <div>• <code>NEXT_PUBLIC_BETTER_AUTH_URL</code> is set correctly</div>
-                <div>• AuthProvider wraps your entire app in layout.tsx</div>
-                <div>• Better Auth server is running</div>
-                <div>• No conflicting auth providers</div>
-              </div>
-            </div>
-            
-            <div className="rounded-lg border p-4 bg-yellow-50 dark:bg-yellow-950/20 border-yellow-200 dark:border-yellow-800">
-              <h4 className="font-semibold text-yellow-800 dark:text-yellow-200 mb-2">⚠️ Hydration errors</h4>
-              <div className="text-yellow-700 dark:text-yellow-300 text-sm space-y-2">
-                <div><strong>Solution:</strong></div>
-                <div>• Use loading states properly: <code>if (isLoading) return &lt;Loading /&gt;</code></div>
-                <div>• Don't render user data until <code>!isLoading</code></div>
-                <div>• Use <code>suppressHydrationWarning</code> on html tag if needed</div>
-              </div>
-            </div>
-            
-            <div className="rounded-lg border p-4 bg-blue-50 dark:bg-blue-950/20 border-blue-200 dark:border-blue-800">
-              <h4 className="font-semibold text-blue-800 dark:text-blue-200 mb-2">💡 Session not persisting</h4>
-              <div className="text-blue-700 dark:text-blue-300 text-sm space-y-2">
-                <div><strong>Check:</strong></div>
-                <div>• Cookies are enabled in browser</div>
-                <div>• Same domain for client and server</div>
-                <div>• HTTPS in production</div>
-                <div>• Session configuration in Better Auth server</div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Registry Info */}
-        <section className="space-y-4">
-          <h2 className="text-3xl font-semibold">📦 Registry Information</h2>
-          
-          <div className="rounded-lg border p-6 bg-muted/50">
-            <div className="grid md:grid-cols-2 gap-4">
-              <div>
-                <h4 className="font-semibold mb-2">Component Details</h4>
-                <div className="text-sm text-muted-foreground space-y-1">
-                  <div><strong>Name:</strong> AuthProvider</div>
-                  <div><strong>Version:</strong> 0.1.0</div>
-                  <div><strong>Type:</strong> Component</div>
-                  <div><strong>Category:</strong> Authentication</div>
-                </div>
-              </div>
-              <div>
-                <h4 className="font-semibold mb-2">Dependencies</h4>
-                <div className="text-sm text-muted-foreground space-y-1">
-                  <div>• @daveyplate/better-auth-ui</div>
-                  <div>• better-auth</div>
-                  <div>• next</div>
-                  <div>• react</div>
-                </div>
-              </div>
-            </div>
-            
-            <div className="mt-4 p-4 bg-background rounded border">
-              <h4 className="font-semibold mb-2">Registry Path</h4>
-              <code className="text-sm">@payloadkit/registry/components/auth/AuthProvider</code>
-            </div>
-          </div>
-        </section>
-
-        {/* Related Components */}
-        <section className="space-y-4">
-          <h2 className="text-3xl font-semibold">🔗 Related Components</h2>
-          
-          <div className="grid md:grid-cols-2 gap-4">
-            <div className="rounded-lg border p-4">
-              <h4 className="font-semibold mb-2">📄 AuthView</h4>
-              <p className="text-sm text-muted-foreground mb-2">
-                Pre-built authentication pages using Better Auth UI
-              </p>
-              <code className="text-xs bg-muted px-2 py-1 rounded">
-                @payloadkit/registry/components/auth/AuthView
-              </code>
-            </div>
-            
-            <div className="rounded-lg border p-4">
-              <h4 className="font-semibold mb-2">🔐 SecurityDashboard</h4>
-              <p className="text-sm text-muted-foreground mb-2">
-                User security settings and 2FA management
-              </p>
-              <code className="text-xs bg-muted px-2 py-1 rounded">
-                @payloadkit/registry/components/auth/SecurityDashboard
-              </code>
-            </div>
-          </div>
-        </section>
+interface AuthProviderOptions {
+  autoRedirect?: boolean
+  redirectTo?: string
+  loginRedirectTo?: string
+  suspense?: boolean
+  onSignIn?: (user: User) => void
+  onSignOut?: () => void
+  onError?: (error: Error) => void
+}`}
+          language="typescript"
+        />
       </div>
+
+      {/* Tags */}
+      <PageTags
+        category="components"
+        dependencies={['@daveyplate/better-auth-ui', 'better-auth', 'next', 'react']}
+        tags={['authentication', 'context', 'provider', 'better-auth', 'session-management', 'hooks']}
+      />
     </div>
   )
 }
