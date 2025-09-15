@@ -5,10 +5,13 @@ import { Badge } from '@/components/ui/badge'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { ArrowLeft, Box, Check } from 'lucide-react'
-import { CopyButton } from '@/components/copy-button'
+import { PageDescription } from '@/components/page-description'
+import { CodeBlock } from '@/components/code-tabs'
+import { Snippet } from '@/components/snippet'
+import { Separator } from '@/components/ui/separator'
 
 export const metadata: Metadata = {
-  title: 'Blocks Shared',
+  title: 'Blocks Shared - PayloadKit',
   description: 'Shared components and utilities for PayloadCMS blocks including backgrounds, layouts, headings, and theme integration.',
 }
 
@@ -27,29 +30,26 @@ const components = [
 export default function BlocksSharedPage() {
   return (
     <div className="space-y-8">
-      {/* Header */}
-      <div>
-        <Link href="/docs/components" className="inline-flex items-center text-sm text-muted-foreground hover:text-foreground mb-4">
-          <ArrowLeft className="mr-2 h-4 w-4" />
-          Back to Components
-        </Link>
-        <div className="flex items-center gap-4 mb-2">
-          <div className="flex items-center justify-center w-12 h-12 rounded-lg bg-primary/10">
-            <Box className="w-6 h-6 text-primary" />
-          </div>
-          <div>
-            <h1 className="text-4xl font-bold tracking-tight">Blocks Shared</h1>
-            <div className="flex items-center gap-2 mt-2">
-              <Badge variant="outline">Utility</Badge>
-              <Badge className="bg-green-600">v0.1.0</Badge>
-              <Badge variant="default" className="bg-green-600">NEW</Badge>
-            </div>
-          </div>
-        </div>
-        <p className="text-xl text-muted-foreground">
-          Shared components and utilities for PayloadCMS blocks including backgrounds, layouts, headings, and theme integration. Required dependency for all advanced blocks.
-        </p>
+      {/* Navigation */}
+      <div className="flex items-center gap-2">
+        <Button variant="ghost" size="sm" asChild>
+          <Link href="/docs/components">
+            <ArrowLeft className="mr-2 h-4 w-4" />
+            Back to Components
+          </Link>
+        </Button>
       </div>
+
+      {/* Page Description */}
+      <PageDescription
+        title="Blocks Shared"
+        description="Shared components and utilities for PayloadCMS blocks including backgrounds, layouts, headings, and theme integration. Required dependency for all advanced blocks."
+        category="components"
+        version="0.1.0"
+        difficulty="intermediate"
+        estimatedTime="20 minutes"
+        lastUpdated="January 2025"
+      />
 
       {/* Installation */}
       <section className="space-y-4">
@@ -63,21 +63,15 @@ export default function BlocksSharedPage() {
           <TabsContent value="cli" className="space-y-4">
             <div>
               <h4 className="font-semibold mb-2">Install with PayloadKit CLI</h4>
-              <div className="relative">
-                <pre className="bg-muted p-4 rounded-lg text-sm overflow-x-auto">
-                  <code>payloadkit add blocks-shared</code>
-                </pre>
-                <CopyButton
-                  text="payloadkit add blocks-shared"
-                  className="absolute top-2 right-2"
-                />
-              </div>
+              <Snippet
+                command="payloadkit add blocks-shared"
+                title="Install Blocks Shared"
+              />
             </div>
             <div>
               <h4 className="font-semibold mb-2">Import in your blocks</h4>
-              <div className="relative">
-                <pre className="bg-muted p-4 rounded-lg text-sm overflow-x-auto">
-                  <code>{`import {
+              <CodeBlock
+                code={`import {
   BlockBackground,
   BlockSection,
   BlockLayout,
@@ -87,9 +81,10 @@ export default function BlocksSharedPage() {
   useKeyboardNavigation,
   useFocusManagement,
   useThemeColor
-} from '../blocks-shared'`}</code>
-                </pre>
-              </div>
+} from '../blocks-shared'`}
+                language="typescript"
+                title="Component Imports"
+              />
             </div>
           </TabsContent>
 
@@ -97,11 +92,10 @@ export default function BlocksSharedPage() {
             <div className="space-y-4">
               <div>
                 <h4 className="font-semibold mb-2">Dependencies</h4>
-                <div className="relative">
-                  <pre className="bg-muted p-4 rounded-lg text-sm overflow-x-auto">
-                    <code>npm install react tailwindcss</code>
-                  </pre>
-                </div>
+                <Snippet
+                  command="npm install react tailwindcss"
+                  title="Install Dependencies"
+                />
               </div>
             </div>
           </TabsContent>

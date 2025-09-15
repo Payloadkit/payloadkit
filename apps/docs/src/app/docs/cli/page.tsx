@@ -1,119 +1,149 @@
-import { Button } from '@/components/ui/button'
-import { ArrowRight } from 'lucide-react'
+import { Metadata } from 'next'
 import Link from 'next/link'
+import { Button } from '@/components/ui/button'
+import { ArrowLeft, ArrowRight } from 'lucide-react'
+import { PageDescription } from '@/components/page-description'
+import { CodeBlock } from '@/components/code-tabs'
+import { Snippet } from '@/components/snippet'
+import { Alert, AlertDescription } from '@/components/ui/alert'
+import { Separator } from '@/components/ui/separator'
+
+export const metadata: Metadata = {
+  title: 'CLI Usage - PayloadKit',
+  description: 'Learn how to use the PayloadKit CLI to manage components and create projects',
+}
 
 export default function CLIPage() {
   return (
     <div className="space-y-8">
-      <div className="space-y-3">
-        <h1 className="text-4xl font-bold tracking-tight">CLI Usage</h1>
-        <p className="text-xl text-muted-foreground">
-          Learn how to use the PayloadKit CLI to manage components and create projects.
-        </p>
+      {/* Navigation */}
+      <div className="flex items-center gap-2">
+        <Button variant="ghost" size="sm" asChild>
+          <Link href="/docs">
+            <ArrowLeft className="mr-2 h-4 w-4" />
+            Back to Documentation
+          </Link>
+        </Button>
       </div>
 
-      <div className="space-y-6">
-        <section className="space-y-4">
-          <h2 className="text-2xl font-semibold tracking-tight border-b pb-2">
-            Available Commands
-          </h2>
-          
-          <div className="space-y-6">
+      {/* Page Description */}
+      <PageDescription
+        title="CLI Usage"
+        description="Learn how to use the PayloadKit CLI to manage components and create projects efficiently."
+        category="guides"
+        version="0.1.0"
+        difficulty="beginner"
+        estimatedTime="10 minutes"
+        lastUpdated="January 2025"
+      />
+
+      {/* Available Commands */}
+      <section className="space-y-6">
+        <h2 className="text-2xl font-semibold">Available Commands</h2>
+
+        <div className="space-y-8">
+          {/* create-payloadkit */}
+          <div className="space-y-4">
+            <h3 className="text-xl font-semibold">create-payloadkit</h3>
+            <p className="text-muted-foreground">
+              Create a new PayloadCMS project with PayloadKit pre-configured.
+            </p>
+
+            <Snippet
+              command="npx create-payloadkit@latest [project-name] [options]"
+              title="Create Project Command"
+            />
+
             <div className="space-y-3">
-              <h3 className="text-xl font-semibold">create-payloadkit</h3>
-              <p className="text-muted-foreground">
-                Create a new PayloadCMS project with PayloadKit pre-configured.
-              </p>
-              
-              <div className="rounded-lg border bg-muted/50 p-6">
-                <pre className="bg-background p-3 rounded border">
-                  <code>npx create-payloadkit@latest [project-name] [options]</code>
-                </pre>
-              </div>
-              
-              <div className="space-y-2">
-                <h4 className="font-medium">Options:</h4>
-                <ul className="space-y-1 text-sm text-muted-foreground ml-4">
-                  <li><code>-t, --template &lt;template&gt;</code> - Template to use (default: basic)</li>
-                  <li><code>--no-install</code> - Skip dependency installation</li>
-                  <li><code>--no-git</code> - Skip git initialization</li>
-                  <li><code>-p, --package-manager &lt;pm&gt;</code> - Package manager to use (default: bun)</li>
+              <h4 className="font-medium">Options:</h4>
+              <div className="rounded-lg border p-4">
+                <ul className="space-y-2 text-sm">
+                  <li><code className="bg-muted px-2 py-1 rounded text-xs">-t, --template &lt;template&gt;</code> - Template to use (default: basic)</li>
+                  <li><code className="bg-muted px-2 py-1 rounded text-xs">--no-install</code> - Skip dependency installation</li>
+                  <li><code className="bg-muted px-2 py-1 rounded text-xs">--no-git</code> - Skip git initialization</li>
+                  <li><code className="bg-muted px-2 py-1 rounded text-xs">-p, --package-manager &lt;pm&gt;</code> - Package manager to use (default: bun)</li>
                 </ul>
               </div>
-              
-              <div className="space-y-2">
-                <h4 className="font-medium">Examples:</h4>
-                <div className="rounded-lg border bg-muted/50 p-4">
-                  <pre className="text-sm space-y-1">
-{`# Create with default settings
+            </div>
+
+            <div className="space-y-3">
+              <h4 className="font-medium">Examples:</h4>
+              <CodeBlock
+                code={`# Create with default settings
 npx create-payloadkit@latest my-app
 
 # Create with custom options
 npx create-payloadkit@latest my-blog --template blog --package-manager npm`}
-                  </pre>
-                </div>
-              </div>
+                language="bash"
+                title="Usage Examples"
+              />
             </div>
+          </div>
 
-            <div className="space-y-3">
-              <h3 className="text-xl font-semibold">payloadkit init</h3>
-              <p className="text-muted-foreground">
-                Initialize PayloadKit in an existing PayloadCMS project.
-              </p>
-              
-              <div className="rounded-lg border bg-muted/50 p-6">
-                <pre className="bg-background p-3 rounded border">
-                  <code>npx payloadkit init</code>
-                </pre>
-              </div>
-              
-              <p className="text-sm text-muted-foreground">
+          {/* payloadkit init */}
+          <div className="space-y-4">
+            <h3 className="text-xl font-semibold">payloadkit init</h3>
+            <p className="text-muted-foreground">
+              Initialize PayloadKit in an existing PayloadCMS project.
+            </p>
+
+            <Snippet
+              command="npx payloadkit init"
+              title="Initialize PayloadKit"
+            />
+
+            <Alert>
+              <AlertDescription>
                 This creates a <code>payloadkit.json</code> configuration file and sets up the recommended folder structure.
-              </p>
-            </div>
+              </AlertDescription>
+            </Alert>
+          </div>
 
-            <div className="space-y-3">
-              <h3 className="text-xl font-semibold">payloadkit list</h3>
-              <p className="text-muted-foreground">
-                List all available components in the PayloadKit registry.
-              </p>
-              
-              <div className="rounded-lg border bg-muted/50 p-6">
-                <pre className="bg-background p-3 rounded border">
-                  <code>npx payloadkit list</code>
-                </pre>
-              </div>
-              
-              <p className="text-sm text-muted-foreground">
+          {/* payloadkit list */}
+          <div className="space-y-4">
+            <h3 className="text-xl font-semibold">payloadkit list</h3>
+            <p className="text-muted-foreground">
+              List all available components in the PayloadKit registry.
+            </p>
+
+            <Snippet
+              command="npx payloadkit list"
+              title="List Components"
+            />
+
+            <Alert>
+              <AlertDescription>
                 Shows available blocks and components with their descriptions and categories.
-              </p>
-            </div>
+              </AlertDescription>
+            </Alert>
+          </div>
+
+          {/* payloadkit add */}
+          <div className="space-y-4">
+            <h3 className="text-xl font-semibold">payloadkit add</h3>
+            <p className="text-muted-foreground">
+              Add a component to your project.
+            </p>
+
+            <Snippet
+              command="npx payloadkit add <component-name> [options]"
+              title="Add Component Command"
+            />
 
             <div className="space-y-3">
-              <h3 className="text-xl font-semibold">payloadkit add</h3>
-              <p className="text-muted-foreground">
-                Add a component to your project.
-              </p>
-              
-              <div className="rounded-lg border bg-muted/50 p-6">
-                <pre className="bg-background p-3 rounded border">
-                  <code>npx payloadkit add &lt;component-name&gt; [options]</code>
-                </pre>
-              </div>
-              
-              <div className="space-y-2">
-                <h4 className="font-medium">Options:</h4>
-                <ul className="space-y-1 text-sm text-muted-foreground ml-4">
-                  <li><code>-f, --force</code> - Overwrite existing components</li>
-                  <li><code>-p, --path &lt;path&gt;</code> - Custom installation path</li>
+              <h4 className="font-medium">Options:</h4>
+              <div className="rounded-lg border p-4">
+                <ul className="space-y-2 text-sm">
+                  <li><code className="bg-muted px-2 py-1 rounded text-xs">-f, --force</code> - Overwrite existing components</li>
+                  <li><code className="bg-muted px-2 py-1 rounded text-xs">-p, --path &lt;path&gt;</code> - Custom installation path</li>
                 </ul>
               </div>
-              
-              <div className="space-y-2">
-                <h4 className="font-medium">Examples:</h4>
-                <div className="rounded-lg border bg-muted/50 p-4">
-                  <pre className="text-sm space-y-1">
-{`# Add a call-to-action block
+            </div>
+
+            <div className="space-y-3">
+              <h4 className="font-medium">Examples:</h4>
+              <CodeBlock
+                code={`# Add a call-to-action block
 npx payloadkit add call-to-action
 
 # Add with force overwrite
@@ -121,25 +151,24 @@ npx payloadkit add hero-block --force
 
 # Add to custom path
 npx payloadkit add call-to-action --path ./src/custom-blocks`}
-                  </pre>
-                </div>
-              </div>
+                language="bash"
+                title="Add Component Examples"
+              />
             </div>
           </div>
-        </section>
+        </div>
+      </section>
 
-        <section className="space-y-4">
-          <h2 className="text-2xl font-semibold tracking-tight border-b pb-2">
-            Configuration
-          </h2>
-          
-          <p className="text-muted-foreground">
-            The <code>payloadkit.json</code> file in your project root contains configuration for PayloadKit:
-          </p>
-          
-          <div className="rounded-lg border bg-muted/50 p-6">
-            <pre className="bg-background p-3 rounded border text-sm">
-{`{
+      {/* Configuration */}
+      <section className="space-y-4">
+        <h2 className="text-2xl font-semibold">Configuration</h2>
+
+        <p className="text-muted-foreground">
+          The <code>payloadkit.json</code> file in your project root contains configuration for PayloadKit:
+        </p>
+
+        <CodeBlock
+          code={`{
   "version": "0.0.1",
   "components": {
     "blocks": {
@@ -156,74 +185,95 @@ npx payloadkit add call-to-action --path ./src/custom-blocks`}
     }
   }
 }`}
-            </pre>
-          </div>
-          
-          <p className="text-sm text-muted-foreground">
+          language="json"
+          title="payloadkit.json Configuration"
+        />
+
+        <Alert>
+          <AlertDescription>
             You can customize the paths where components are installed by editing this file.
-          </p>
-        </section>
+          </AlertDescription>
+        </Alert>
+      </section>
 
-        <section className="space-y-4">
-          <h2 className="text-2xl font-semibold tracking-tight border-b pb-2">
-            Workflow
-          </h2>
-          
-          <p className="text-muted-foreground">
-            Here's a typical workflow when using PayloadKit:
-          </p>
-          
-          <div className="space-y-4">
-            <div className="rounded-lg border p-4">
-              <div className="flex items-center gap-3 mb-2">
-                <div className="flex h-6 w-6 items-center justify-center rounded-full bg-primary text-primary-foreground text-xs font-bold">
-                  1
-                </div>
-                <h3 className="font-medium">Browse Components</h3>
-              </div>
-              <p className="text-sm text-muted-foreground ml-9">
-                Use <code>npx payloadkit list</code> to see available components
-              </p>
-            </div>
-            
-            <div className="rounded-lg border p-4">
-              <div className="flex items-center gap-3 mb-2">
-                <div className="flex h-6 w-6 items-center justify-center rounded-full bg-primary text-primary-foreground text-xs font-bold">
-                  2
-                </div>
-                <h3 className="font-medium">Add Component</h3>
-              </div>
-              <p className="text-sm text-muted-foreground ml-9">
-                Use <code>npx payloadkit add [component-name]</code> to copy it to your project
-              </p>
-            </div>
-            
-            <div className="rounded-lg border p-4">
-              <div className="flex items-center gap-3 mb-2">
-                <div className="flex h-6 w-6 items-center justify-center rounded-full bg-primary text-primary-foreground text-xs font-bold">
-                  3
-                </div>
-                <h3 className="font-medium">Register & Customize</h3>
-              </div>
-              <p className="text-sm text-muted-foreground ml-9">
-                Register the block in your PayloadCMS config and customize as needed
-              </p>
-            </div>
-          </div>
-        </section>
+      {/* Workflow */}
+      <section className="space-y-4">
+        <h2 className="text-2xl font-semibold">Typical Workflow</h2>
 
-        <div className="flex flex-col gap-4 pt-6 border-t">
-          <p className="text-muted-foreground">
-            Ready to explore the available components?
-          </p>
-          
-          <div>
-            <Button asChild>
-              <Link href="/docs/components">
-                View Components <ArrowRight className="ml-2 h-4 w-4" />
-              </Link>
-            </Button>
+        <p className="text-muted-foreground">
+          Here's a typical workflow when using PayloadKit:
+        </p>
+
+        <div className="space-y-4">
+          <div className="rounded-lg border p-6">
+            <div className="flex items-center gap-3 mb-3">
+              <div className="flex h-8 w-8 items-center justify-center rounded-full bg-primary text-primary-foreground text-sm font-bold">
+                1
+              </div>
+              <h3 className="font-medium text-lg">Browse Components</h3>
+            </div>
+            <p className="text-muted-foreground ml-11">
+              Use <code className="bg-muted px-2 py-1 rounded text-xs">npx payloadkit list</code> to see available components
+            </p>
           </div>
+
+          <div className="rounded-lg border p-6">
+            <div className="flex items-center gap-3 mb-3">
+              <div className="flex h-8 w-8 items-center justify-center rounded-full bg-primary text-primary-foreground text-sm font-bold">
+                2
+              </div>
+              <h3 className="font-medium text-lg">Add Component</h3>
+            </div>
+            <p className="text-muted-foreground ml-11">
+              Use <code className="bg-muted px-2 py-1 rounded text-xs">npx payloadkit add [component-name]</code> to copy it to your project
+            </p>
+          </div>
+
+          <div className="rounded-lg border p-6">
+            <div className="flex items-center gap-3 mb-3">
+              <div className="flex h-8 w-8 items-center justify-center rounded-full bg-primary text-primary-foreground text-sm font-bold">
+                3
+              </div>
+              <h3 className="font-medium text-lg">Register & Customize</h3>
+            </div>
+            <p className="text-muted-foreground ml-11">
+              Register the block in your PayloadCMS config and customize as needed
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <Separator />
+
+      {/* Next Steps */}
+      <section className="space-y-4">
+        <h2 className="text-2xl font-semibold">Next Steps</h2>
+        <p className="text-muted-foreground">
+          Ready to explore the available components?
+        </p>
+
+        <div className="grid gap-4 sm:grid-cols-2">
+          <Button asChild>
+            <Link href="/docs/components">
+              View Components <ArrowRight className="ml-2 h-4 w-4" />
+            </Link>
+          </Button>
+          <Button variant="outline" asChild>
+            <Link href="/docs/blocks">
+              Browse Blocks <ArrowRight className="ml-2 h-4 w-4" />
+            </Link>
+          </Button>
+        </div>
+      </section>
+
+      {/* Tags */}
+      <div className="border-t pt-6">
+        <div className="flex flex-wrap gap-2">
+          {['CLI', 'Commands', 'Components', 'Blocks', 'Installation', 'Configuration'].map(tag => (
+            <span key={tag} className="px-2 py-1 text-xs bg-muted rounded-full">
+              {tag}
+            </span>
+          ))}
         </div>
       </div>
     </div>

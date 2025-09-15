@@ -152,7 +152,11 @@ export default function SecurityPage() {
             <div className="rounded-lg border p-6">
               <h3 className="text-xl font-semibold mb-4">🔧 Simple Setup</h3>
               <CodeBlock
-                code="import { AuthView } from '@payloadkit/registry/components/auth/AuthView'\n\nexport default function AuthPage({ params }) {\n  return <AuthView pathname={params.authView} />\n}"
+                code={`import { AuthView } from '@payloadkit/registry/components/auth/AuthView'
+
+export default function AuthPage({ params }) {
+  return <AuthView pathname={params.authView} />
+}`}
                 language="typescript"
                 title="Simple Auth Setup"
               />
@@ -166,7 +170,18 @@ export default function SecurityPage() {
           <div className="rounded-lg border p-6">
             <h3 className="text-xl font-semibold mb-4">Environment Variables</h3>
             <CodeBlock
-              code="# Required\nPAYLOAD_SECRET=your-secret\nDATABASE_URI=postgresql://user:password@localhost:5432/payloadkit\nBETTER_AUTH_URL=https://yourapp.com\n\n# Optional OAuth\nGOOGLE_CLIENT_ID=your-client-id\nGOOGLE_CLIENT_SECRET=your-client-secret\n\n# Optional Features\nENABLE_MAGIC_LINKS=true\nENABLE_WEBAUTHN=true"
+              code={`# Required
+PAYLOAD_SECRET=your-secret
+DATABASE_URI=postgresql://user:password@localhost:5432/payloadkit
+BETTER_AUTH_URL=https://yourapp.com
+
+# Optional OAuth
+GOOGLE_CLIENT_ID=your-client-id
+GOOGLE_CLIENT_SECRET=your-client-secret
+
+# Optional Features
+ENABLE_MAGIC_LINKS=true
+ENABLE_WEBAUTHN=true`}
               language="bash"
               title="Environment Variables"
             />

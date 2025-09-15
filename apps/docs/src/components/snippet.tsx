@@ -68,8 +68,8 @@ export function Snippet({
         </div>
 
         <div className="p-4">
-          <pre className="text-sm font-mono text-foreground">
-            <code className={`language-${language}`}>
+          <pre className="text-sm font-mono text-foreground" suppressHydrationWarning>
+            <code className={`language-${language}`} suppressHydrationWarning>
               {command}
             </code>
           </pre>
