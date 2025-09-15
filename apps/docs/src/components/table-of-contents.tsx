@@ -32,6 +32,8 @@ export function TableOfContents({ className }: TableOfContentsProps) {
       const headingElements = mainContent.querySelectorAll("h1, h2, h3, h4, h5, h6")
       const headingArray: Heading[] = []
 
+      const usedIds = new Set<string>()
+
       headingElements.forEach((heading, index) => {
         // Skip if heading is empty or only whitespace
         const text = heading.textContent?.trim()
@@ -39,12 +41,36 @@ export function TableOfContents({ className }: TableOfContentsProps) {
 
         // Create ID if it doesn't exist
         if (!heading.id) {
-          const id = text
+          let baseId = text
             .toLowerCase()
             .replace(/[^a-z0-9\s]+/g, "")
             .replace(/\s+/g, "-")
             .replace(/(^-|-$)/g, "")
-          heading.id = id || `heading-${index}`
+
+          if (!baseId) {
+            baseId = `heading-${index}`
+          }
+
+          // Ensure ID is unique
+          let finalId = baseId
+          let counter = 1
+          while (usedIds.has(finalId)) {
+            finalId = `${baseId}-${counter}`
+            counter++
+          }
+
+          heading.id = finalId
+          usedIds.add(finalId)
+        } else {
+          // Mark existing ID as used
+          let finalId = heading.id
+          let counter = 1
+          while (usedIds.has(finalId)) {
+            finalId = `${heading.id}-${counter}`
+            counter++
+          }
+          heading.id = finalId
+          usedIds.add(finalId)
         }
 
         headingArray.push({
