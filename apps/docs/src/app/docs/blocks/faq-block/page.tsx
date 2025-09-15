@@ -31,7 +31,7 @@ function FaqDemo() {
   return (
     <div className="w-full max-w-2xl mx-auto">
       <div className="space-y-4 mb-8">
-        <h2 className="text-2xl font-bold text-center">Frequently Asked Questions</h2>
+        <div className="text-2xl font-bold text-center">Frequently Asked Questions</div>
         <p className="text-muted-foreground text-center">
           Everything you need to know about PayloadKit
         </p>
@@ -183,30 +183,13 @@ export default function FaqBlockPage() {
       {/* Page Description */}
       <PageDescription
         title="FAQ Block"
-        description="Interactive FAQ block with accordion functionality, built with shadcn/ui Accordion component for optimal accessibility and user experience. Perfect for support pages, product documentation, and customer service sections."
+        description="Interactive FAQ section with collapsible questions and answers. Built with shadcn/ui Accordion for accessibility and smooth animations."
         category="blocks"
         version="0.1.0"
+        payloadVersion="3.0+"
         difficulty="beginner"
         estimatedTime="5 minutes"
         lastUpdated="January 2025"
-        features={[
-          'Built with shadcn/ui Accordion component',
-          'Full Radix UI integration with WCAG compliance',
-          'Single or multiple expandable modes',
-          'Smooth native animations',
-          '15 optional Lucide React icons',
-          'Two layout options: single/two-column',
-          'Customizable borders and backgrounds',
-          'Rich text support for answers',
-          'Mobile-first responsive design',
-          'Theme integration with design tokens'
-        ]}
-        dependencies={[
-          '@radix-ui/react-accordion',
-          'lucide-react',
-          'clsx',
-          'tailwind-merge'
-        ]}
       />
 
       {/* Component Preview */}
@@ -434,9 +417,15 @@ const exampleFaqs = [
         </div>
       </div>
 
-      {/* Tags at the bottom */}
+      {/* Tags and Dependencies at the bottom */}
       <PageTags
         category="blocks"
+        dependencies={[
+          '@radix-ui/react-accordion',
+          'lucide-react',
+          'clsx',
+          'tailwind-merge'
+        ]}
         tags={[
           'FAQ',
           'Accordion',

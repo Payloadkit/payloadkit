@@ -20,6 +20,7 @@ interface PageDescriptionProps {
   description: string
   category?: 'blocks' | 'components' | 'globals' | 'examples' | 'guides'
   version?: string
+  payloadVersion?: string
   lastUpdated?: string
   difficulty?: 'beginner' | 'intermediate' | 'advanced'
   estimatedTime?: string
@@ -80,6 +81,7 @@ export function PageDescription({
   description,
   category,
   version,
+  payloadVersion,
   lastUpdated,
   difficulty,
   estimatedTime,
@@ -106,15 +108,23 @@ export function PageDescription({
         </div>
 
         {/* Status bar right after title */}
-        {(estimatedTime || lastUpdated || difficulty || version) && (
+        {(estimatedTime || lastUpdated || difficulty || version || payloadVersion) && (
           <Card>
             <CardContent className="p-4">
-              <div className="grid grid-cols-1 md:grid-cols-4 gap-4 text-sm">
+              <div className="grid grid-cols-1 md:grid-cols-5 gap-4 text-sm">
                 {version && (
                   <div className="flex items-center gap-2">
                     <Package className="h-4 w-4 text-muted-foreground" />
                     <span className="text-muted-foreground">Version:</span>
                     <span className="font-medium">v{version}</span>
+                  </div>
+                )}
+
+                {payloadVersion && (
+                  <div className="flex items-center gap-2">
+                    <Zap className="h-4 w-4 text-muted-foreground" />
+                    <span className="text-muted-foreground">Payload:</span>
+                    <span className="font-medium">{payloadVersion}</span>
                   </div>
                 )}
 
@@ -146,28 +156,10 @@ export function PageDescription({
           </Card>
         )}
 
-        {/* Combined description with features */}
-        <div className="space-y-4">
-          <p className="text-lg text-muted-foreground leading-relaxed">
-            {description}
-          </p>
-
-          {features.length > 0 && (
-            <div className="text-muted-foreground">
-              <span className="font-medium">Key features include:</span>{' '}
-              {features.join(', ')}.
-            </div>
-          )}
-
-          {dependencies.length > 0 && (
-            <div className="text-muted-foreground">
-              <span className="font-medium">Dependencies:</span>{' '}
-              <code className="text-xs bg-muted px-1 rounded">
-                {dependencies.join(', ')}
-              </code>
-            </div>
-          )}
-        </div>
+        {/* Simplified description */}
+        <p className="text-lg text-muted-foreground leading-relaxed">
+          {description}
+        </p>
       </div>
 
       <Separator />
