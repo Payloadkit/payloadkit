@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 }
 
 async function getMarkdownContent() {
-  const filePath = join(process.cwd(), '../../docs/CHANGELOG.md')
+  const filePath = join(process.cwd(), '../../CHANGELOG.md')
   const content = readFileSync(filePath, 'utf8')
   const html = await marked(content)
   return html
