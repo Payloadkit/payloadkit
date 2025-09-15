@@ -193,19 +193,19 @@ export default buildConfig({
               </tr>
               <tr>
                 <td className="border border-border px-4 py-2 font-mono text-sm">layout</td>
-                <td className="border border-border px-4 py-2 text-sm">'full-width' | 'split-content' | 'split-calendar'</td>
+                <td className="border border-border px-4 py-2 text-sm">{`'full-width' | 'split-content' | 'split-calendar'`}</td>
                 <td className="border border-border px-4 py-2 text-sm">'full-width'</td>
                 <td className="border border-border px-4 py-2 text-sm">Block layout style</td>
               </tr>
               <tr>
                 <td className="border border-border px-4 py-2 font-mono text-sm">theme</td>
-                <td className="border border-border px-4 py-2 text-sm">'auto' | 'light' | 'dark'</td>
+                <td className="border border-border px-4 py-2 text-sm">{`'auto' | 'light' | 'dark'`}</td>
                 <td className="border border-border px-4 py-2 text-sm">'auto'</td>
                 <td className="border border-border px-4 py-2 text-sm">Calendar theme</td>
               </tr>
               <tr>
                 <td className="border border-border px-4 py-2 font-mono text-sm">height</td>
-                <td className="border border-border px-4 py-2 text-sm">'sm' | 'md' | 'lg' | 'auto'</td>
+                <td className="border border-border px-4 py-2 text-sm">{`'sm' | 'md' | 'lg' | 'auto'`}</td>
                 <td className="border border-border px-4 py-2 text-sm">'lg'</td>
                 <td className="border border-border px-4 py-2 text-sm">Calendar height</td>
               </tr>
