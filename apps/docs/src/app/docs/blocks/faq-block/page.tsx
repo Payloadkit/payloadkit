@@ -26,8 +26,8 @@ export const metadata: Metadata = {
   description: 'Interactive FAQ block with accordion functionality, built with shadcn/ui Accordion component for optimal accessibility and user experience.',
 }
 
-// Demo component for preview
-function FaqDemo() {
+// Demo components for different variants
+function FaqDemoDefault() {
   return (
     <div className="w-full max-w-2xl mx-auto">
       <div className="space-y-4 mb-8">
@@ -71,6 +71,92 @@ function FaqDemo() {
           </AccordionTrigger>
           <AccordionContent>
             Yes! PayloadKit is completely free and open-source under the MIT license. You can use it in any project, commercial or personal.
+          </AccordionContent>
+        </AccordionItem>
+      </Accordion>
+    </div>
+  )
+}
+
+function FaqDemoCompact() {
+  return (
+    <div className="w-full max-w-xl mx-auto">
+      <Accordion type="single" collapsible className="w-full">
+        <AccordionItem value="item-1">
+          <AccordionTrigger className="text-left text-sm">
+            What is PayloadKit?
+          </AccordionTrigger>
+          <AccordionContent className="text-sm">
+            An open-source framework for PayloadCMS applications.
+          </AccordionContent>
+        </AccordionItem>
+
+        <AccordionItem value="item-2">
+          <AccordionTrigger className="text-left text-sm">
+            How does it work?
+          </AccordionTrigger>
+          <AccordionContent className="text-sm">
+            Components are copied directly into your project.
+          </AccordionContent>
+        </AccordionItem>
+
+        <AccordionItem value="item-3">
+          <AccordionTrigger className="text-left text-sm">
+            Is it free?
+          </AccordionTrigger>
+          <AccordionContent className="text-sm">
+            Yes! Completely free and open-source.
+          </AccordionContent>
+        </AccordionItem>
+      </Accordion>
+    </div>
+  )
+}
+
+function FaqDemoMultiple() {
+  return (
+    <div className="w-full max-w-2xl mx-auto">
+      <div className="space-y-4 mb-8">
+        <div className="text-2xl font-bold text-center">Support Center</div>
+        <p className="text-muted-foreground text-center">
+          Multiple sections can be open at the same time
+        </p>
+      </div>
+
+      <Accordion type="multiple" className="w-full">
+        <AccordionItem value="item-1">
+          <AccordionTrigger className="text-left">
+            <div className="flex items-center gap-3">
+              <Target className="h-4 w-4 text-primary" />
+              Getting Started
+            </div>
+          </AccordionTrigger>
+          <AccordionContent>
+            Start by installing PayloadKit CLI and exploring the available templates and components.
+          </AccordionContent>
+        </AccordionItem>
+
+        <AccordionItem value="item-2">
+          <AccordionTrigger className="text-left">
+            <div className="flex items-center gap-3">
+              <Lightbulb className="h-4 w-4 text-primary" />
+              Best Practices
+            </div>
+          </AccordionTrigger>
+          <AccordionContent>
+            Follow TypeScript conventions, use proper component structure, and maintain consistent styling patterns.
+          </AccordionContent>
+        </AccordionItem>
+
+        <AccordionItem value="item-3">
+          <AccordionTrigger className="text-left">
+            <div className="flex items-center gap-3">
+              <Zap className="h-4 w-4 text-primary" />
+              Troubleshooting
+            </div>
+          </AccordionTrigger>
+          <AccordionContent>
+            Check the documentation, ensure dependencies are installed, and verify your PayloadCMS configuration.
           </AccordionContent>
         </AccordionItem>
       </Accordion>
@@ -196,7 +282,23 @@ export default function FaqBlockPage() {
       <ComponentPreview
         name="FAQ Block Preview"
         description="Interactive demonstration of the FAQ block with multiple questions and smooth accordion functionality."
-        component={<FaqDemo />}
+        variants={[
+          {
+            name: "Default",
+            description: "Standard FAQ layout with icons, full descriptions, and single-open behavior",
+            component: <FaqDemoDefault />
+          },
+          {
+            name: "Compact",
+            description: "Minimal FAQ layout without icons, shorter text, and smaller spacing",
+            component: <FaqDemoCompact />
+          },
+          {
+            name: "Multiple Open",
+            description: "Allow multiple accordion sections to be expanded simultaneously",
+            component: <FaqDemoMultiple />
+          }
+        ]}
         code={{
           component: `'use client'
 

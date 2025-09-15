@@ -10,10 +10,17 @@ import { Eye, Code2, Settings, ExternalLink, Smartphone, Monitor, Tablet } from 
 import { cn } from '@/lib/utils'
 import { SyntaxHighlighter } from './syntax-highlighter'
 
-interface ComponentPreviewProps {
+interface PreviewVariant {
   name: string
   description?: string
   component: React.ReactNode
+}
+
+interface ComponentPreviewProps {
+  name: string
+  description?: string
+  component?: React.ReactNode
+  variants?: PreviewVariant[]
   code: {
     component?: string
     config?: string
@@ -30,6 +37,7 @@ export function ComponentPreview({
   name,
   description,
   component,
+  variants,
   code,
   dependencies = [],
   features = [],
@@ -39,6 +47,11 @@ export function ComponentPreview({
 }: ComponentPreviewProps) {
   const [activeTab, setActiveTab] = useState('preview')
   const [viewMode, setViewMode] = useState<'desktop' | 'tablet' | 'mobile'>('desktop')
+  const [selectedVariant, setSelectedVariant] = useState(0)
+
+  // Use variants if provided, otherwise fallback to single component
+  const displayVariants = variants || (component ? [{ name: 'Default', component }] : [])
+  const currentVariant = displayVariants[selectedVariant] || displayVariants[0]
 
   // Count available tabs
   const tabCount = 1 + (code.component ? 1 : 0) + (code.config ? 1 : 0) + (code.usage ? 1 : 0)
@@ -105,6 +118,23 @@ export function ComponentPreview({
           </TabsList>
 
           <div className="flex items-center gap-2 p-2">
+            {/* Variant selector */}
+            {activeTab === 'preview' && displayVariants.length > 1 && (
+              <div className="flex items-center gap-1">
+                {displayVariants.map((variant, index) => (
+                  <Button
+                    key={index}
+                    size="sm"
+                    variant={selectedVariant === index ? 'default' : 'outline'}
+                    className="h-7 px-3 text-xs"
+                    onClick={() => setSelectedVariant(index)}
+                  >
+                    {variant.name}
+                  </Button>
+                ))}
+              </div>
+            )}
+
             {/* Responsive controls */}
             {activeTab === 'preview' && responsive && (
               <div className="flex items-center gap-1">
@@ -152,12 +182,21 @@ export function ComponentPreview({
         <TabsContent value="preview" className="mt-0">
           <Card className="rounded-t-none border-t-0">
             <CardContent className="p-8">
+              {/* Variant description */}
+              {currentVariant?.description && displayVariants.length > 1 && (
+                <div className="mb-6 p-3 bg-muted/30 rounded-lg border-l-4 border-primary/30">
+                  <p className="text-sm text-muted-foreground">
+                    <strong className="text-foreground">{currentVariant.name}:</strong> {currentVariant.description}
+                  </p>
+                </div>
+              )}
+
               <div className={cn(
                 'flex items-center justify-center transition-all duration-300 mx-auto min-h-[400px]',
                 getViewportClass()
               )}>
                 <div className="w-full">
-                  {component}
+                  {currentVariant?.component}
                 </div>
               </div>
             </CardContent>
