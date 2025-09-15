@@ -1,6 +1,7 @@
 "use client"
 
 import { useEffect, useState } from "react"
+import { usePathname } from "next/navigation"
 import { cn } from "@/lib/utils"
 
 interface Heading {
@@ -16,8 +17,12 @@ interface TableOfContentsProps {
 export function TableOfContents({ className }: TableOfContentsProps) {
   const [headings, setHeadings] = useState<Heading[]>([])
   const [activeId, setActiveId] = useState<string>("")
+  const pathname = usePathname()
 
   useEffect(() => {
+    // Reset state when pathname changes
+    setHeadings([])
+    setActiveId("")
     // Wait for the DOM to be fully loaded
     const timer = setTimeout(() => {
       // Extract headings only from the main content area, not from navigation
@@ -86,10 +91,10 @@ export function TableOfContents({ className }: TableOfContentsProps) {
           })
         }
       }
-    }, 100) // Small delay to ensure content is rendered
+    }, 300) // Delay to ensure new page content is rendered
 
     return () => clearTimeout(timer)
-  }, [])
+  }, [pathname]) // Re-run when pathname changes
 
   const handleClick = (id: string) => {
     const element = document.getElementById(id)
