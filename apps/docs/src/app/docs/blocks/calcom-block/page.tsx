@@ -8,6 +8,9 @@ import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
 import { Separator } from '@/components/ui/separator'
 import { ArrowLeft, Calendar, Check, Info, AlertCircle } from 'lucide-react'
 import { CopyButton } from '@/components/copy-button'
+import { DocsBreadcrumb } from '@/components/docs-breadcrumb'
+import { PropsTable, createPropDefinition } from '@/components/props-table'
+import { CodeTabs } from '@/components/code-tabs'
 
 export const metadata: Metadata = {
   title: 'Cal.com Block',
@@ -27,6 +30,39 @@ const features = [
 ]
 
 const icons = ['calendar', 'clock', 'message-circle', 'phone', 'target', 'check', 'star', 'shield']
+
+// Props definition for the PropsTable
+const calcomProps = [
+  createPropDefinition(
+    "calcomUsername",
+    "string",
+    "Your Cal.com username (required)",
+    { required: true }
+  ),
+  createPropDefinition(
+    "eventType",
+    "string",
+    "Specific event type slug (optional)"
+  ),
+  createPropDefinition(
+    "layout",
+    "'full-width' | 'split-content' | 'split-calendar'",
+    "Block layout style",
+    { default: "'full-width'" }
+  ),
+  createPropDefinition(
+    "theme",
+    "'auto' | 'light' | 'dark'",
+    "Calendar theme",
+    { default: "'auto'" }
+  ),
+  createPropDefinition(
+    "height",
+    "'sm' | 'md' | 'lg' | 'auto'",
+    "Calendar height",
+    { default: "'lg'" }
+  ),
+]
 
 export default function CalComBlockPage() {
   const codeExample = `// components/BookingSection.tsx
@@ -67,6 +103,9 @@ export function BookingSection() {
 
   return (
     <div className="space-y-8">
+      {/* Breadcrumb */}
+      <DocsBreadcrumb />
+
       {/* Header */}
       <div>
         <div className="flex items-center gap-2 mb-4">
@@ -284,69 +323,7 @@ export function RenderBlocks({ blocks }) {
           <CardDescription>Available props for the Cal.com Block component</CardDescription>
         </CardHeader>
         <CardContent>
-          <div className="space-y-6">
-            <div className="space-y-4">
-              <div className="grid gap-4">
-                <div className="space-y-3 p-4 border rounded-lg">
-                  <div className="flex items-center justify-between">
-                    <code className="text-sm font-mono bg-muted px-2 py-1 rounded">calcomUsername</code>
-                    <Badge variant="destructive">Required</Badge>
-                  </div>
-                  <div className="space-y-1">
-                    <p className="text-sm"><strong>Type:</strong> string</p>
-                    <p className="text-sm text-muted-foreground">Your Cal.com username (required)</p>
-                  </div>
-                </div>
-
-                <div className="space-y-3 p-4 border rounded-lg">
-                  <div className="flex items-center justify-between">
-                    <code className="text-sm font-mono bg-muted px-2 py-1 rounded">eventType</code>
-                    <Badge variant="outline">Optional</Badge>
-                  </div>
-                  <div className="space-y-1">
-                    <p className="text-sm"><strong>Type:</strong> string</p>
-                    <p className="text-sm text-muted-foreground">Specific event type slug (optional)</p>
-                  </div>
-                </div>
-
-                <div className="space-y-3 p-4 border rounded-lg">
-                  <div className="flex items-center justify-between">
-                    <code className="text-sm font-mono bg-muted px-2 py-1 rounded">layout</code>
-                    <Badge variant="outline">Optional</Badge>
-                  </div>
-                  <div className="space-y-1">
-                    <p className="text-sm"><strong>Type:</strong> 'full-width' | 'split-content' | 'split-calendar'</p>
-                    <p className="text-sm"><strong>Default:</strong> 'full-width'</p>
-                    <p className="text-sm text-muted-foreground">Block layout style</p>
-                  </div>
-                </div>
-
-                <div className="space-y-3 p-4 border rounded-lg">
-                  <div className="flex items-center justify-between">
-                    <code className="text-sm font-mono bg-muted px-2 py-1 rounded">theme</code>
-                    <Badge variant="outline">Optional</Badge>
-                  </div>
-                  <div className="space-y-1">
-                    <p className="text-sm"><strong>Type:</strong> 'auto' | 'light' | 'dark'</p>
-                    <p className="text-sm"><strong>Default:</strong> 'auto'</p>
-                    <p className="text-sm text-muted-foreground">Calendar theme</p>
-                  </div>
-                </div>
-
-                <div className="space-y-3 p-4 border rounded-lg">
-                  <div className="flex items-center justify-between">
-                    <code className="text-sm font-mono bg-muted px-2 py-1 rounded">height</code>
-                    <Badge variant="outline">Optional</Badge>
-                  </div>
-                  <div className="space-y-1">
-                    <p className="text-sm"><strong>Type:</strong> 'sm' | 'md' | 'lg' | 'auto'</p>
-                    <p className="text-sm"><strong>Default:</strong> 'lg'</p>
-                    <p className="text-sm text-muted-foreground">Calendar height</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+          <PropsTable props={calcomProps} />
         </CardContent>
       </Card>
 
