@@ -8,6 +8,7 @@ import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
 import { Separator } from '@/components/ui/separator'
 import { ArrowLeft, Sparkles, Check, Info, Lightbulb, Zap } from 'lucide-react'
 import { CopyButton } from '@/components/copy-button'
+import { CodeTabs } from '@/components/code-tabs'
 
 export const metadata: Metadata = {
   title: 'Simple Hero Block',
@@ -164,10 +165,9 @@ export default buildConfig({
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold">Usage</h2>
         <div className="space-y-4">
-          <h3 className="text-lg font-medium">PayloadCMS Configuration</h3>
-          <div className="relative">
-            <pre className="bg-muted p-4 rounded-md overflow-x-auto text-sm">
-              <code>{`// payload.config.ts
+          <CodeTabs
+            title="PayloadCMS Configuration"
+            code={`// payload.config.ts
 import { SimpleHero } from './blocks/simple-hero'
 
 export default buildConfig({
@@ -176,99 +176,17 @@ export default buildConfig({
     SimpleHero,
     // ... other blocks
   ],
-})`}</code>
-            </pre>
-            <CopyButton text={`// payload.config.ts
-import { SimpleHero } from './blocks/simple-hero'
-
-export default buildConfig({
-  // ... other config
-  blocks: [
-    SimpleHero,
-    // ... other blocks
-  ],
-})`} />
-          </div>
+})`}
+            language="tsx"
+          />
         </div>
 
         <div className="space-y-4">
-          <h3 className="text-lg font-medium">Frontend Component</h3>
-          <div className="relative">
-            <pre className="bg-muted p-4 rounded-md overflow-x-auto text-sm">
-              <code>{`// components/SimpleHero.tsx
-import { SimpleHeroComponent } from './blocks/simple-hero'
-
-export function SimpleHero() {
-  return (
-    <SimpleHeroComponent
-      eyebrow="Welcome"
-      title="Clean, Simple, Effective"
-      subtitle="Beautiful hero sections without the complexity"
-      description="Perfect for content-focused websites that prioritize readability and user experience."
-      layout="centered"
-      contentWidth="medium"
-      titleSize="lg"
-      background={{
-        type: 'gradient',
-        gradientFrom: '#f8fafc',
-        gradientTo: '#e2e8f0',
-        gradientDirection: 'to-br'
-      }}
-      callToActions={[
-        {
-          label: 'Get Started',
-          url: '/start',
-          appearance: 'primary',
-          size: 'default'
-        },
-        {
-          label: 'Learn More',
-          url: '/about',
-          appearance: 'outline',
-          size: 'default'
-        }
-      ]}
-    />
-  )
-}`}</code>
-            </pre>
-            <CopyButton text={`// components/SimpleHero.tsx
-import { SimpleHeroComponent } from './blocks/simple-hero'
-
-export function SimpleHero() {
-  return (
-    <SimpleHeroComponent
-      eyebrow="Welcome"
-      title="Clean, Simple, Effective"
-      subtitle="Beautiful hero sections without the complexity"
-      description="Perfect for content-focused websites that prioritize readability and user experience."
-      layout="centered"
-      contentWidth="medium"
-      titleSize="lg"
-      background={{
-        type: 'gradient',
-        gradientFrom: '#f8fafc',
-        gradientTo: '#e2e8f0',
-        gradientDirection: 'to-br'
-      }}
-      callToActions={[
-        {
-          label: 'Get Started',
-          url: '/start',
-          appearance: 'primary',
-          size: 'default'
-        },
-        {
-          label: 'Learn More',
-          url: '/about',
-          appearance: 'outline',
-          size: 'default'
-        }
-      ]}
-    />
-  )
-}`} />
-          </div>
+          <CodeTabs
+            title="Frontend Component"
+            code={codeExample}
+            language="tsx"
+          />
         </div>
       </div>
 
@@ -338,65 +256,43 @@ export function SimpleHero() {
         <h2 className="text-2xl font-semibold">Layout Examples</h2>
 
         <div className="space-y-4">
-          <h3 className="text-lg font-medium">Centered Layout</h3>
-          <div className="relative">
-            <pre className="bg-muted p-4 rounded-md overflow-x-auto text-sm">
-              <code>{`<SimpleHeroComponent
+          <CodeTabs
+            title="Centered Layout"
+            code={`<SimpleHeroComponent
   title="Welcome to Our Platform"
   layout="centered"
   contentWidth="medium"
   textAlignment="center"
-/>`}</code>
-            </pre>
-            <CopyButton text={`<SimpleHeroComponent
-  title="Welcome to Our Platform"
-  layout="centered"
-  contentWidth="medium"
-  textAlignment="center"
-/>`} />
-          </div>
+/>`}
+            language="tsx"
+          />
         </div>
 
         <div className="space-y-4">
-          <h3 className="text-lg font-medium">Split Layout with Image</h3>
-          <div className="relative">
-            <pre className="bg-muted p-4 rounded-md overflow-x-auto text-sm">
-              <code>{`<SimpleHeroComponent
+          <CodeTabs
+            title="Split Layout with Image"
+            code={`<SimpleHeroComponent
   title="Powerful Features"
   subtitle="Everything you need to succeed"
   layout="split"
   image="/hero-image.jpg"
   imagePosition="right"
-/>`}</code>
-            </pre>
-            <CopyButton text={`<SimpleHeroComponent
-  title="Powerful Features"
-  subtitle="Everything you need to succeed"
-  layout="split"
-  image="/hero-image.jpg"
-  imagePosition="right"
-/>`} />
-          </div>
+/>`}
+            language="tsx"
+          />
         </div>
 
         <div className="space-y-4">
-          <h3 className="text-lg font-medium">Left-Aligned Layout</h3>
-          <div className="relative">
-            <pre className="bg-muted p-4 rounded-md overflow-x-auto text-sm">
-              <code>{`<SimpleHeroComponent
+          <CodeTabs
+            title="Left-Aligned Layout"
+            code={`<SimpleHeroComponent
   title="Start Your Journey"
   layout="left"
   contentWidth="wide"
   titleSize="xl"
-/>`}</code>
-            </pre>
-            <CopyButton text={`<SimpleHeroComponent
-  title="Start Your Journey"
-  layout="left"
-  contentWidth="wide"
-  titleSize="xl"
-/>`} />
-          </div>
+/>`}
+            language="tsx"
+          />
         </div>
       </div>
 

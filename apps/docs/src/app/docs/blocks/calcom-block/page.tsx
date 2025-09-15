@@ -228,55 +228,28 @@ export default buildConfig({
           </TabsList>
 
           <TabsContent value="basic" className="space-y-4">
-            <Card>
-              <CardHeader>
-                <CardTitle>Basic Integration</CardTitle>
-                <CardDescription>Simple Cal.com integration with minimal configuration</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="relative">
-                  <pre className="bg-muted p-4 rounded-lg text-sm overflow-x-auto">
-                    <code>{`// Minimal setup - just username
+            <CodeTabs
+              title="Basic Integration - Simple Cal.com integration with minimal configuration"
+              code={`// Minimal setup - just username
 <CalComBlockComponent
   calcomUsername="your-username"
-/>`}</code>
-                  </pre>
-                  <CopyButton text={`// Minimal setup - just username
-<CalComBlockComponent
-  calcomUsername="your-username"
-/>`} />
-                </div>
-              </CardContent>
-            </Card>
+/>`}
+              language="tsx"
+            />
           </TabsContent>
 
           <TabsContent value="advanced" className="space-y-4">
-            <Card>
-              <CardHeader>
-                <CardTitle>Advanced Configuration</CardTitle>
-                <CardDescription>Full configuration with all available options</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="relative">
-                  <pre className="bg-muted p-4 rounded-lg text-sm overflow-x-auto">
-                    <code>{codeExample}</code>
-                  </pre>
-                  <CopyButton text={codeExample} />
-                </div>
-              </CardContent>
-            </Card>
+            <CodeTabs
+              title="Advanced Configuration - Full configuration with all available options"
+              code={codeExample}
+              language="tsx"
+            />
           </TabsContent>
 
           <TabsContent value="frontend" className="space-y-4">
-            <Card>
-              <CardHeader>
-                <CardTitle>Frontend Implementation</CardTitle>
-                <CardDescription>How to render the Cal.com block in your React components</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="relative">
-                  <pre className="bg-muted p-4 rounded-lg text-sm overflow-x-auto">
-                    <code>{`// src/blocks/RenderBlocks.tsx
+            <CodeTabs
+              title="Frontend Implementation - How to render the Cal.com block in your React components"
+              code={`// src/blocks/RenderBlocks.tsx
 import { CalComBlockComponent } from './calcom-block/Component'
 
 const blockComponents = {
@@ -291,27 +264,9 @@ export function RenderBlocks({ blocks }) {
 
     return <BlockComponent key={index} {...block} />
   })
-}`}</code>
-                  </pre>
-                  <CopyButton text={`// src/blocks/RenderBlocks.tsx
-import { CalComBlockComponent } from './calcom-block/Component'
-
-const blockComponents = {
-  'calcom-block': CalComBlockComponent,
-  // ... other blocks
-}
-
-export function RenderBlocks({ blocks }) {
-  return blocks?.map((block, index) => {
-    const BlockComponent = blockComponents[block.blockType]
-    if (!BlockComponent) return null
-
-    return <BlockComponent key={index} {...block} />
-  })
-}`} />
-                </div>
-              </CardContent>
-            </Card>
+}`}
+              language="tsx"
+            />
           </TabsContent>
         </Tabs>
       </div>

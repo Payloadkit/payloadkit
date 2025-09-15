@@ -8,6 +8,7 @@ import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
 import { Separator } from '@/components/ui/separator'
 import { ArrowLeft, FileText, Check, Info } from 'lucide-react'
 import { CopyButton } from '@/components/copy-button'
+import { CodeTabs } from '@/components/code-tabs'
 
 export const metadata: Metadata = {
   title: 'Outline Block',
@@ -107,10 +108,9 @@ export default function OutlineBlockPage() {
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold">Usage</h2>
         <div className="space-y-4">
-          <h3 className="text-lg font-medium">PayloadCMS Configuration</h3>
-          <div className="relative">
-            <pre className="bg-muted p-4 rounded-md overflow-x-auto text-sm">
-              <code>{`// payload.config.ts
+          <CodeTabs
+            title="PayloadCMS Configuration"
+            code={`// payload.config.ts
 import { OutlineBlock } from './blocks/outline-block'
 
 export default buildConfig({
@@ -119,26 +119,15 @@ export default buildConfig({
     OutlineBlock,
     // ... other blocks
   ],
-})`}</code>
-            </pre>
-            <CopyButton text={`// payload.config.ts
-import { OutlineBlock } from './blocks/outline-block'
-
-export default buildConfig({
-  // ... other config
-  blocks: [
-    OutlineBlock,
-    // ... other blocks
-  ],
-})`} />
-          </div>
+})`}
+            language="tsx"
+          />
         </div>
 
         <div className="space-y-4">
-          <h3 className="text-lg font-medium">Auto-Detection Mode</h3>
-          <div className="relative">
-            <pre className="bg-muted p-4 rounded-md overflow-x-auto text-sm">
-              <code>{`// components/TableOfContents.tsx
+          <CodeTabs
+            title="Auto-Detection Mode"
+            code={`// components/TableOfContents.tsx
 import { OutlineBlockComponent } from './blocks/outline-block'
 
 export function TableOfContents() {
@@ -158,37 +147,15 @@ export function TableOfContents() {
       smoothScroll={true}
     />
   )
-}`}</code>
-            </pre>
-            <CopyButton text={`// components/TableOfContents.tsx
-import { OutlineBlockComponent } from './blocks/outline-block'
-
-export function TableOfContents() {
-  return (
-    <OutlineBlockComponent
-      sourceType="auto"
-      contentSelector=".prose, .content, article"
-      headingLevels={[
-        { level: 'h2' },
-        { level: 'h3' },
-        { level: 'h4' }
-      ]}
-      position="sticky-right"
-      style="card"
-      highlightActive={true}
-      showProgress={true}
-      smoothScroll={true}
-    />
-  )
-}`} />
-          </div>
+}`}
+            language="tsx"
+          />
         </div>
 
         <div className="space-y-4">
-          <h3 className="text-lg font-medium">Manual Mode</h3>
-          <div className="relative">
-            <pre className="bg-muted p-4 rounded-md overflow-x-auto text-sm">
-              <code>{`// components/CustomOutline.tsx
+          <CodeTabs
+            title="Manual Mode"
+            code={`// components/CustomOutline.tsx
 import { OutlineBlockComponent } from './blocks/outline-block'
 
 const manualItems = [
@@ -210,32 +177,9 @@ export function CustomOutline() {
       initiallyCollapsed={false}
     />
   )
-}`}</code>
-            </pre>
-            <CopyButton text={`// components/CustomOutline.tsx
-import { OutlineBlockComponent } from './blocks/outline-block'
-
-const manualItems = [
-  { title: 'Introduction', anchor: '#introduction', level: 1 },
-  { title: 'Getting Started', anchor: '#getting-started', level: 1 },
-  { title: 'Installation', anchor: '#installation', level: 2 },
-  { title: 'Configuration', anchor: '#configuration', level: 2 },
-  { title: 'Advanced Usage', anchor: '#advanced', level: 1 }
-]
-
-export function CustomOutline() {
-  return (
-    <OutlineBlockComponent
-      sourceType="manual"
-      manualItems={manualItems}
-      position="floating"
-      style="numbered"
-      collapsible={true}
-      initiallyCollapsed={false}
-    />
-  )
-}`} />
-          </div>
+}`}
+            language="tsx"
+          />
         </div>
       </div>
 
@@ -312,47 +256,34 @@ export function CustomOutline() {
 
         <div className="grid gap-4">
           <div className="space-y-2">
-            <h3 className="text-lg font-medium">Sticky Right (Documentation)</h3>
-            <div className="relative">
-              <pre className="bg-muted p-4 rounded-md overflow-x-auto text-sm">
-                <code>{`position="sticky-right"
+            <CodeTabs
+              title="Sticky Right (Documentation)"
+              code={`position="sticky-right"
 style="card"
-maxWidth="md"`}</code>
-              </pre>
-              <CopyButton text={`position="sticky-right"
-style="card"
-maxWidth="md"`} />
-            </div>
+maxWidth="md"`}
+              language="tsx"
+            />
           </div>
 
           <div className="space-y-2">
-            <h3 className="text-lg font-medium">Floating (Mobile-Friendly)</h3>
-            <div className="relative">
-              <pre className="bg-muted p-4 rounded-md overflow-x-auto text-sm">
-                <code>{`position="floating"
+            <CodeTabs
+              title="Floating (Mobile-Friendly)"
+              code={`position="floating"
 style="pills"
 collapsible={true}
-autoHide={true}`}</code>
-              </pre>
-              <CopyButton text={`position="floating"
-style="pills"
-collapsible={true}
-autoHide={true}`} />
-            </div>
+autoHide={true}`}
+              language="tsx"
+            />
           </div>
 
           <div className="space-y-2">
-            <h3 className="text-lg font-medium">Inline (Content Flow)</h3>
-            <div className="relative">
-              <pre className="bg-muted p-4 rounded-md overflow-x-auto text-sm">
-                <code>{`position="inline"
+            <CodeTabs
+              title="Inline (Content Flow)"
+              code={`position="inline"
 style="numbered"
-maxWidth="full"`}</code>
-              </pre>
-              <CopyButton text={`position="inline"
-style="numbered"
-maxWidth="full"`} />
-            </div>
+maxWidth="full"`}
+              language="tsx"
+            />
           </div>
         </div>
       </div>

@@ -8,6 +8,7 @@ import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
 import { Separator } from '@/components/ui/separator'
 import { ArrowLeft, Monitor, Check, AlertTriangle, Info } from 'lucide-react'
 import { CopyButton } from '@/components/copy-button'
+import { CodeTabs } from '@/components/code-tabs'
 
 export const metadata: Metadata = {
   title: 'Big Hero Block',

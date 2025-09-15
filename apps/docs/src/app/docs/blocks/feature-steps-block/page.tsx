@@ -8,6 +8,7 @@ import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
 import { Separator } from '@/components/ui/separator'
 import { ArrowLeft, Layers, Check, Info } from 'lucide-react'
 import { CopyButton } from '@/components/copy-button'
+import { CodeTabs } from '@/components/code-tabs'
 
 export const metadata: Metadata = {
   title: 'Feature Steps Block',
@@ -174,63 +175,32 @@ export default buildConfig({
           </TabsList>
 
           <TabsContent value="basic" className="space-y-4">
-            <Card>
-              <CardHeader>
-                <CardTitle>Basic Implementation</CardTitle>
-                <CardDescription>Simple feature steps with minimal configuration</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="relative">
-                  <pre className="bg-muted p-4 rounded-lg text-sm overflow-x-auto">
-                    <code>{`// Minimal setup
+            <CodeTabs
+              title="Basic Implementation - Simple feature steps with minimal configuration"
+              code={`// Minimal setup
 <FeatureStepsBlockComponent
   title="How It Works"
   steps={[
     { icon: 'target', title: 'Step 1', description: 'First step description' },
     { icon: 'lightbulb', title: 'Step 2', description: 'Second step description' }
   ]}
-/>`}</code>
-                  </pre>
-                  <CopyButton text={`// Minimal setup
-<FeatureStepsBlockComponent
-  title="How It Works"
-  steps={[
-    { icon: 'target', title: 'Step 1', description: 'First step description' },
-    { icon: 'lightbulb', title: 'Step 2', description: 'Second step description' }
-  ]}
-/>`} />
-                </div>
-              </CardContent>
-            </Card>
+/>`}
+              language="tsx"
+            />
           </TabsContent>
 
           <TabsContent value="advanced" className="space-y-4">
-            <Card>
-              <CardHeader>
-                <CardTitle>Advanced Configuration</CardTitle>
-                <CardDescription>Full configuration with all available options</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="relative">
-                  <pre className="bg-muted p-4 rounded-lg text-sm overflow-x-auto">
-                    <code>{codeExample}</code>
-                  </pre>
-                  <CopyButton text={codeExample} />
-                </div>
-              </CardContent>
-            </Card>
+            <CodeTabs
+              title="Advanced Configuration - Full configuration with all available options"
+              code={codeExample}
+              language="tsx"
+            />
           </TabsContent>
 
           <TabsContent value="frontend" className="space-y-4">
-            <Card>
-              <CardHeader>
-                <CardTitle>Frontend Implementation</CardTitle>
-                <CardDescription>How to render the Feature Steps block in your React components</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="relative">
-                  <pre className="bg-muted p-4 rounded-lg text-sm overflow-x-auto">
-                    <code>{`// src/blocks/RenderBlocks.tsx
+            <CodeTabs
+              title="Frontend Implementation - How to render the Feature Steps block in your React components"
+              code={`// src/blocks/RenderBlocks.tsx
 import { FeatureStepsBlockComponent } from './feature-steps-block/Component'
 
 const blockComponents = {
@@ -245,27 +215,9 @@ export function RenderBlocks({ blocks }) {
 
     return <BlockComponent key={index} {...block} />
   })
-}`}</code>
-                  </pre>
-                  <CopyButton text={`// src/blocks/RenderBlocks.tsx
-import { FeatureStepsBlockComponent } from './feature-steps-block/Component'
-
-const blockComponents = {
-  'feature-steps-block': FeatureStepsBlockComponent,
-  // ... other blocks
-}
-
-export function RenderBlocks({ blocks }) {
-  return blocks?.map((block, index) => {
-    const BlockComponent = blockComponents[block.blockType]
-    if (!BlockComponent) return null
-
-    return <BlockComponent key={index} {...block} />
-  })
-}`} />
-                </div>
-              </CardContent>
-            </Card>
+}`}
+              language="tsx"
+            />
           </TabsContent>
         </Tabs>
       </div>
