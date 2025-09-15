@@ -328,7 +328,7 @@ export default function AuthPage({ params }) {
             <CodeBlock
               code={`# Required
 PAYLOAD_SECRET=your-secret
-DATABASE_URI=postgresql://...
+DATABASE_URI=postgresql://user:password@localhost:5432/payloadkit
 BETTER_AUTH_URL=https://yourapp.com
 
 # Optional OAuth
