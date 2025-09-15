@@ -196,6 +196,81 @@
       "dependencies": ["react", "next", "tailwindcss"],
       "peerDependencies": ["payload"],
       "registryDependencies": ["blocks-shared"]
+    },
+    "feature-steps-block": {
+      "name": "feature-steps-block",
+      "description": "Step-by-step process block with 16 icons and 5 layout options including advanced stair layout",
+      "category": "marketing",
+      "tags": ["steps", "process", "features", "icons", "layout", "stair"],
+      "version": "0.1.0",
+      "files": [
+        "Component.tsx",
+        "config.ts",
+        "index.ts"
+      ],
+      "dependencies": ["react", "lucide-react"],
+      "peerDependencies": ["payload"],
+      "registryDependencies": ["blocks-shared"]
+    },
+    "big-hero": {
+      "name": "big-hero",
+      "description": "Advanced hero section with video background support, scroll indicators, and parallax effects",
+      "category": "hero",
+      "tags": ["hero", "video", "background", "parallax", "scroll", "landing"],
+      "version": "0.1.0",
+      "files": [
+        "Component.tsx",
+        "config.ts",
+        "index.ts"
+      ],
+      "dependencies": ["react", "lucide-react"],
+      "peerDependencies": ["payload"],
+      "registryDependencies": ["blocks-shared"]
+    },
+    "calcom-block": {
+      "name": "calcom-block",
+      "description": "Cal.com integration block with iframe embedding, multiple themes, and responsive layouts",
+      "category": "integration",
+      "tags": ["calcom", "calendar", "booking", "scheduling", "iframe", "integration"],
+      "version": "0.1.0",
+      "files": [
+        "Component.tsx",
+        "config.ts",
+        "index.ts"
+      ],
+      "dependencies": ["react", "lucide-react"],
+      "peerDependencies": ["payload"],
+      "registryDependencies": ["blocks-shared"]
+    },
+    "outline-block": {
+      "name": "outline-block",
+      "description": "Automatic table of contents generator with client-side heading detection and scroll tracking",
+      "category": "navigation",
+      "tags": ["outline", "toc", "table-of-contents", "navigation", "headings", "scroll"],
+      "version": "0.1.0",
+      "files": [
+        "Component.tsx",
+        "config.ts",
+        "index.ts"
+      ],
+      "dependencies": ["react", "lucide-react"],
+      "peerDependencies": ["payload"],
+      "registryDependencies": ["blocks-shared"]
+    },
+    "simple-hero": {
+      "name": "simple-hero",
+      "description": "Clean hero section with customizable backgrounds and call-to-action buttons",
+      "category": "hero",
+      "tags": ["hero", "simple", "clean", "background", "cta", "landing"],
+      "version": "0.1.0",
+      "files": [
+        "Component.tsx",
+        "config.ts",
+        "index.ts"
+      ],
+      "dependencies": ["react", "lucide-react"],
+      "peerDependencies": ["payload"],
+      "registryDependencies": ["blocks-shared"]
     }
   },
   "collections": {

@@ -18,6 +18,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Enhanced Blocks**: shadcn/ui components integration in PayloadKit blocks
 - **Auth Security**: Better authentication system in blank template
 - **S3 Documentation**: Cloud storage configuration guides
+- **Feature Steps Block**: Step-by-step process block with 16 icons and 5 layout options including advanced stair layout
+- **Big Hero Block**: Advanced hero section with video background support, scroll indicators, and parallax effects
+- **Cal.com Block**: Cal.com integration block with iframe embedding, multiple themes, and responsive layouts
+- **Outline Block**: Automatic table of contents generator with client-side heading detection and scroll tracking
+- **Simple Hero Block**: Clean hero section with customizable backgrounds and call-to-action buttons
+- **Block Documentation**: Complete documentation pages for all new blocks with usage examples and prop tables
+- **Navigation Updates**: Enhanced sidebar navigation with "New" badges for block discovery
 
 ### Changed
 - **Template System**: Blank template now includes modular configuration
@@ -28,6 +35,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Documentation**: Resolved React conflicts and accessibility issues
 - **File Paths**: Corrected markdown file loading in Next.js documentation
 - **Search Dialog**: Added required DialogTitle for screen readers
+- **JSX Syntax Errors**: Fixed template string parsing errors in documentation pages with unescaped characters
+- **Build Errors**: Resolved multiple JSX parsing failures preventing documentation site compilation
+- **Cal.com Documentation**: Complete rewrite of Cal.com block documentation page to fix complex template string issues
 
 ## [0.0.1] - 2024-09-12
 
