@@ -55,7 +55,7 @@ export function ComponentPreview({
     <div className={cn('space-y-4', className)}>
       {/* Header */}
       <div className="space-y-2">
-        <h3 className="text-lg font-semibold">{name}</h3>
+        <div className="text-lg font-semibold">{name}</div>
         {description && (
           <p className="text-muted-foreground text-sm">{description}</p>
         )}
@@ -245,7 +245,7 @@ export function SimplePreview({
 }: SimplePreviewProps) {
   return (
     <div className="space-y-4">
-      {title && <h4 className="font-semibold">{title}</h4>}
+      {title && <div className="font-semibold">{title}</div>}
 
       {/* Preview */}
       <Card>

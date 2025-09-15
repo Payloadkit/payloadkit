@@ -59,7 +59,7 @@ export function TutorialSteps({
     <div className={cn('space-y-6', className)}>
       {title && (
         <div>
-          <h2 className="text-2xl font-semibold mb-2">{title}</h2>
+          <div className="text-2xl font-semibold mb-2">{title}</div>
           <p className="text-muted-foreground">
             Follow these steps to complete the setup
           </p>

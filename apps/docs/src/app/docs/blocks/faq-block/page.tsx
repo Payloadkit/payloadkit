@@ -391,7 +391,7 @@ const exampleFaqs = [
 
       {/* Type Definitions */}
       <div className="space-y-4">
-        <h3 className="text-lg font-semibold">Type Definitions</h3>
+        <div className="text-lg font-semibold">Type Definitions</div>
 
         <div className="space-y-4">
           <CodeBlock
