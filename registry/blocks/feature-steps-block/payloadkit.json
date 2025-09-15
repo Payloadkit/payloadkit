@@ -1,0 +1,63 @@
+{
+  "name": "feature-steps-block",
+  "version": "0.1.0",
+  "description": "Feature steps block with numbered steps, multiple layouts, and advantages section. Perfect for explaining processes, workflows, and step-by-step guides.",
+  "author": "PayloadKit",
+  "license": "MIT",
+  "type": "block",
+  "category": "marketing",
+  "tags": ["steps", "process", "workflow", "features", "guide", "tutorial"],
+  "files": [
+    {
+      "name": "config.ts",
+      "type": "config"
+    },
+    {
+      "name": "Component.tsx",
+      "type": "component"
+    },
+    {
+      "name": "index.ts",
+      "type": "main"
+    }
+  ],
+  "dependencies": [
+    "react",
+    "lucide-react",
+    "tailwindcss"
+  ],
+  "peerDependencies": [
+    "payload"
+  ],
+  "registryDependencies": [
+    "blocks-shared"
+  ],
+  "features": [
+    "Two section layouts: stacked or two-column",
+    "Rich header content: eyebrow, title, subtitle, description",
+    "16 Lucide React icons for steps",
+    "5 step layouts: 2-col, 3-col, 4-col grid, vertical list, staggered stair",
+    "Optional step numbering with customizable styling",
+    "3 card styles: elevated, flat, minimal",
+    "Stair layout with optional images for each step",
+    "Optional advantages section with checkmarks",
+    "Flexible background options: color, gradient, image, none",
+    "Text color theming: dark, light, primary",
+    "Responsive design with mobile-first approach",
+    "Left or center alignment for step content",
+    "Rich text support for descriptions"
+  ],
+  "usage": "Perfect for explaining processes, onboarding flows, how-it-works sections, tutorials, step-by-step guides, and feature explanations with clear progression.",
+  "examples": [
+    "// In your PayloadCMS config\nimport { FeatureStepsBlock } from 'registry/blocks/feature-steps-block'\nexport default buildConfig({ collections: [], globals: [], blocks: [FeatureStepsBlock] })",
+    "// In your frontend\nimport { FeatureStepsBlockComponent } from 'registry/blocks/feature-steps-block'\n<FeatureStepsBlockComponent title=\"How It Works\" stepsLayout=\"grid-3\" showStepNumbers={true} steps={processSteps} showAdvantages={true} advantages={keyBenefits} />"
+  ],
+  "preview": {
+    "description": "Feature steps block with numbered processes and advantages",
+    "image": null
+  },
+  "setup": {
+    "dependencies": "Make sure you have Lucide React and Tailwind CSS configured in your project.",
+    "components": "This block uses the blocks-shared registry components. Make sure to install them first: payloadkit add blocks-shared"
+  }
+}

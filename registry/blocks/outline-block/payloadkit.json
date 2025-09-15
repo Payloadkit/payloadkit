@@ -1,0 +1,69 @@
+{
+  "name": "outline-block",
+  "version": "0.1.0",
+  "description": "Automatic table of contents generator with multiple positioning options, styles, and interactive features. Perfect for long-form content, documentation, and articles.",
+  "author": "PayloadKit",
+  "license": "MIT",
+  "type": "block",
+  "category": "navigation",
+  "tags": ["table-of-contents", "navigation", "outline", "toc", "headings", "scroll"],
+  "files": [
+    {
+      "name": "config.ts",
+      "type": "config"
+    },
+    {
+      "name": "Component.tsx",
+      "type": "component"
+    },
+    {
+      "name": "index.ts",
+      "type": "main"
+    }
+  ],
+  "dependencies": [
+    "react",
+    "lucide-react",
+    "tailwindcss"
+  ],
+  "peerDependencies": [
+    "payload"
+  ],
+  "registryDependencies": [
+    "blocks-shared"
+  ],
+  "features": [
+    "2 content source modes: auto-detect from page content or manual items",
+    "Automatic heading extraction from customizable content selectors",
+    "Support for H1-H6 heading levels with configurable inclusion",
+    "4 positioning options: inline, sticky-left, sticky-right, floating",
+    "5 visual styles: simple, card, pills, numbered, dots",
+    "Collapsible interface with expand/collapse functionality",
+    "Active section highlighting during scroll",
+    "Smooth scrolling animation with customizable offset",
+    "Reading progress indicator with visual progress bar",
+    "Auto-hide on mobile devices for better UX",
+    "4 color themes: default, primary, neutral, dark",
+    "3 font sizes and 3 spacing options for customization",
+    "Exclude selectors to skip specific headings",
+    "Automatic ID generation for headings without IDs",
+    "Mobile-responsive design with adaptive behavior",
+    "Custom CSS injection for advanced styling",
+    "TypeScript interfaces for complete type safety",
+    "Accessibility features with proper ARIA labels"
+  ],
+  "usage": "Essential for documentation sites, blog articles, long-form content, tutorials, and any page where users need quick navigation to different sections.",
+  "examples": [
+    "// In your PayloadCMS config\nimport { OutlineBlock } from 'registry/blocks/outline-block'\nexport default buildConfig({ collections: [], globals: [], blocks: [OutlineBlock] })",
+    "// In your frontend\nimport { OutlineBlockComponent } from 'registry/blocks/outline-block'\n<OutlineBlockComponent sourceType=\"auto\" position=\"sticky-right\" style=\"card\" highlightActive={true} showProgress={true} smoothScroll={true} />"
+  ],
+  "preview": {
+    "description": "Interactive table of contents with scroll tracking",
+    "image": null
+  },
+  "setup": {
+    "dependencies": "Make sure you have Lucide React and Tailwind CSS configured in your project.",
+    "components": "This component is client-side only and uses browser APIs for content detection and scroll tracking.",
+    "content": "For auto-detection mode, ensure your content has proper heading structure (H1-H6) and is wrapped in containers matching your content selectors."
+  }
+}

@@ -136,6 +136,66 @@
       "dependencies": ["react"],
       "peerDependencies": ["payload"],
       "registryDependencies": []
+    },
+    "feature-block": {
+      "name": "feature-block",
+      "description": "Advanced feature showcase block with 16 icons, 4 layouts, and responsive grid system",
+      "category": "marketing",
+      "tags": ["features", "grid", "icons", "showcase", "benefits", "layout", "responsive"],
+      "version": "0.1.0",
+      "files": [
+        "Component.tsx",
+        "config.ts",
+        "index.ts"
+      ],
+      "dependencies": ["react", "lucide-react"],
+      "peerDependencies": ["payload"],
+      "registryDependencies": ["blocks-shared"]
+    },
+    "faq-block": {
+      "name": "faq-block",
+      "description": "FAQ block with collapsible accordion, optional icons, and advanced styling options",
+      "category": "content",
+      "tags": ["faq", "accordion", "questions", "answers", "support", "icons"],
+      "version": "0.1.0",
+      "files": [
+        "Component.tsx",
+        "config.ts",
+        "index.ts"
+      ],
+      "dependencies": ["react", "lucide-react"],
+      "peerDependencies": ["payload"],
+      "registryDependencies": ["blocks-shared"]
+    },
+    "archive-block": {
+      "name": "archive-block",
+      "description": "Display collections of content with filtering, sorting, and multiple layout options",
+      "category": "content",
+      "tags": ["archive", "collection", "list", "grid", "content", "blog", "posts"],
+      "version": "0.1.0",
+      "files": [
+        "Component.tsx",
+        "config.ts",
+        "index.ts"
+      ],
+      "dependencies": ["react", "next", "lucide-react"],
+      "peerDependencies": ["payload"],
+      "registryDependencies": ["blocks-shared"]
+    },
+    "banner-block": {
+      "name": "banner-block",
+      "description": "Hero banner block with customizable backgrounds, text alignment, and call-to-action buttons",
+      "category": "content",
+      "tags": ["banner", "hero", "cta", "background", "landing"],
+      "version": "0.1.0",
+      "files": [
+        "Component.tsx",
+        "config.ts",
+        "index.ts"
+      ],
+      "dependencies": ["react", "next", "tailwindcss"],
+      "peerDependencies": ["payload"],
+      "registryDependencies": ["blocks-shared"]
     }
   },
   "collections": {
@@ -376,6 +436,25 @@
       "dependencies": ["react", "next"],
       "peerDependencies": ["payload"],
       "registryDependencies": ["button"]
+    },
+    "blocks-shared": {
+      "name": "blocks-shared",
+      "description": "Shared components and utilities for PayloadCMS blocks including backgrounds, layouts, headings, and theme integration",
+      "category": "blocks",
+      "tags": ["shared", "utilities", "blocks", "layout", "theme", "background"],
+      "version": "0.1.0",
+      "files": [
+        "index.ts",
+        "BlockBackground.tsx",
+        "BlockSection.tsx",
+        "BlockLayout.tsx",
+        "BlockHeading.tsx",
+        "BlockText.tsx",
+        "useThemeColor.ts"
+      ],
+      "dependencies": ["react", "tailwindcss"],
+      "peerDependencies": [],
+      "registryDependencies": []
     }
   }
 }

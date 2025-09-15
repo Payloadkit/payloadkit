@@ -4,13 +4,57 @@ import { ArrowRight } from 'lucide-react'
 import Link from 'next/link'
 
 const components = [
+  // Advanced Blocks (New from jenny-english.com)
   {
-    name: "Banner",
-    slug: "banner",
-    description: "A dynamic banner block with image background and overlay content",
-    category: "Hero",
-    tags: ["banner", "hero", "image"],
+    name: "Feature Block",
+    slug: "feature-block",
+    description: "Advanced feature showcase with 16 icons, 4 layouts, and theme integration",
+    category: "Marketing",
+    tags: ["features", "icons", "layouts", "showcase"],
     status: "ready",
+    version: "0.1.0",
+    isNew: true,
+  },
+  {
+    name: "FAQ Block",
+    slug: "faq-block",
+    description: "Interactive FAQ section with accordion functionality and optional icons",
+    category: "Content",
+    tags: ["faq", "accordion", "questions", "icons"],
+    status: "ready",
+    version: "0.1.0",
+    isNew: true,
+  },
+  {
+    name: "Archive Block",
+    slug: "archive-block",
+    description: "Display collections of content with filtering, sorting, and multiple layouts",
+    category: "Content",
+    tags: ["archive", "collection", "list", "grid", "blog"],
+    status: "ready",
+    version: "0.1.0",
+    isNew: true,
+  },
+  {
+    name: "Banner Block",
+    slug: "banner-block",
+    description: "Hero banner with customizable backgrounds, text alignment, and CTAs",
+    category: "Hero",
+    tags: ["banner", "hero", "cta", "background"],
+    status: "ready",
+    version: "0.1.0",
+    isNew: true,
+  },
+
+  // Existing Blocks
+  {
+    name: "Hero Block",
+    slug: "hero-block",
+    description: "A flexible hero section with title, subtitle, description and CTA buttons",
+    category: "Hero",
+    tags: ["hero", "banner", "landing"],
+    status: "ready",
+    version: "0.0.2",
   },
   {
     name: "Call to Action",
@@ -19,87 +63,111 @@ const components = [
     category: "Marketing",
     tags: ["cta", "buttons", "conversion"],
     status: "ready",
+    version: "0.0.2",
+  },
+  {
+    name: "Banner",
+    slug: "banner",
+    description: "A prominent banner section with title, description, and call-to-action buttons",
+    category: "Marketing",
+    tags: ["banner", "hero", "marketing", "cta"],
+    status: "ready",
+    version: "0.0.2",
   },
   {
     name: "Content",
     slug: "content",
-    description: "A flexible content block for rich text and structured content",
+    description: "Rich content block with flexible column layouts and rich text editor",
     category: "Content",
-    tags: ["content", "rich-text", "text"],
+    tags: ["content", "text", "columns", "rich-text"],
     status: "ready",
+    version: "0.0.1",
   },
   {
     name: "FAQ",
     slug: "faq",
-    description: "Frequently Asked Questions block with expandable accordion interface",
+    description: "FAQ block with collapsible question and answer pairs",
     category: "Content",
-    tags: ["faq", "accordion", "questions"],
+    tags: ["faq", "questions", "answers", "accordion"],
     status: "ready",
+    version: "0.0.2",
   },
   {
     name: "Feature",
     slug: "feature",
-    description: "Feature showcase block with icons, titles and descriptions",
+    description: "Feature showcase block with icons, titles, descriptions and grid layout",
     category: "Marketing",
-    tags: ["features", "showcase", "benefits"],
+    tags: ["features", "grid", "icons", "showcase"],
     status: "ready",
-  },
-  {
-    name: "Hero Block",
-    slug: "hero-block",
-    description: "A flexible hero section with title, subtitle, description and CTA buttons",
-    category: "Hero",
-    tags: ["hero", "banner", "landing"],
-    status: "ready",
+    version: "0.0.2",
   },
   {
     name: "Icon Block",
     slug: "icon-block",
-    description: "Icon-based content blocks for visual storytelling",
+    description: "Icon-based content block with customizable icon, title and description",
     category: "Content",
-    tags: ["icons", "visual", "content"],
+    tags: ["icon", "visual", "highlight", "callout"],
     status: "ready",
+    version: "0.0.1",
   },
   {
     name: "Media Block",
     slug: "media-block",
-    description: "Media-rich content blocks with images, videos and captions",
+    description: "Simple media display block for images and videos with optional caption",
     category: "Content",
-    tags: ["media", "images", "videos"],
+    tags: ["media", "image", "video", "gallery"],
     status: "ready",
+    version: "0.0.1",
   },
   {
     name: "Text Block",
     slug: "text-block",
-    description: "Simple text content blocks for paragraphs and formatted text",
+    description: "Simple text block with optional title and rich text content",
     category: "Content",
-    tags: ["text", "paragraph", "simple"],
+    tags: ["text", "content", "simple", "basic"],
     status: "ready",
+    version: "0.0.1",
+  },
+
+  // Utility Components
+  {
+    name: "RichText",
+    slug: "richtext",
+    description: "Component to render PayloadCMS rich text content with Lexical support",
+    category: "Utility",
+    tags: ["richtext", "lexical", "content", "editor"],
+    status: "ready",
+    version: "0.0.1",
+    hasPage: false,
   },
   {
-    name: "AuthProvider",
-    slug: "auth-provider",
-    description: "Authentication provider component for Better Auth integration",
-    category: "Auth",
-    tags: ["auth", "provider", "authentication"],
+    name: "CMSLink",
+    slug: "cmslink",
+    description: "Smart link component for both internal and external links from PayloadCMS",
+    category: "Utility",
+    tags: ["link", "navigation", "cms", "reference"],
     status: "ready",
+    version: "0.0.1",
+    hasPage: false,
   },
   {
-    name: "AuthView",
-    slug: "auth-view",
-    description: "Authentication views and forms for login, signup and user management",
-    category: "Auth",
-    tags: ["auth", "forms", "login"],
+    name: "Blocks Shared",
+    slug: "blocks-shared",
+    description: "Shared components and utilities for PayloadCMS blocks",
+    category: "Utility",
+    tags: ["shared", "utilities", "blocks", "layout"],
     status: "ready",
+    version: "0.1.0",
+    isNew: true,
   },
 ]
 
 const categories = [
   { name: "All", count: components.length },
   { name: "Hero", count: components.filter(c => c.category === "Hero").length },
-  { name: "Content", count: components.filter(c => c.category === "Content").length },
   { name: "Marketing", count: components.filter(c => c.category === "Marketing").length },
-  { name: "Auth", count: components.filter(c => c.category === "Auth").length },
+  { name: "Content", count: components.filter(c => c.category === "Content").length },
+  { name: "Utility", count: components.filter(c => c.category === "Utility").length },
 ]
 
 export default function ComponentsPage() {
@@ -131,7 +199,10 @@ export default function ComponentsPage() {
               <div key={component.slug} className="rounded-lg border p-6 space-y-4">
                 <div className="space-y-2">
                   <div className="flex items-center justify-between">
-                    <h3 className="text-xl font-semibold">{component.name}</h3>
+                    <div className="flex items-center gap-2">
+                      <h3 className="text-xl font-semibold">{component.name}</h3>
+                      {component.isNew && <Badge variant="default" className="bg-green-600">NEW</Badge>}
+                    </div>
                     <Badge variant="outline">{component.category}</Badge>
                   </div>
                   <p className="text-muted-foreground">{component.description}</p>
@@ -155,11 +226,17 @@ export default function ComponentsPage() {
                     </div>
                   </div>
                   
-                  <Button asChild size="sm">
-                    <Link href={`/docs/components/${component.slug}`}>
-                      View Details <ArrowRight className="ml-2 h-3 w-3" />
-                    </Link>
-                  </Button>
+                  {component.hasPage === false ? (
+                    <Button size="sm" variant="outline" disabled>
+                      Documentation Coming Soon
+                    </Button>
+                  ) : (
+                    <Button asChild size="sm">
+                      <Link href={component.isNew ? `/docs/blocks/${component.slug}` : `/docs/components/${component.slug}`}>
+                        View Details <ArrowRight className="ml-2 h-3 w-3" />
+                      </Link>
+                    </Button>
+                  )}
                 </div>
               </div>
             ))}

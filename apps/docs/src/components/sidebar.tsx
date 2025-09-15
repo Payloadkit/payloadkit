@@ -87,7 +87,75 @@ const sidebarNavItems = [
     ],
   },
   {
-    title: "Blocks & Components",
+    title: "Blocks",
+    items: [
+      {
+        title: "Overview",
+        href: "/docs/blocks",
+      },
+      {
+        title: "Feature Block",
+        href: "/docs/blocks/feature-block",
+        badge: "New"
+      },
+      {
+        title: "FAQ Block",
+        href: "/docs/blocks/faq-block",
+        badge: "New"
+      },
+      {
+        title: "Archive Block",
+        href: "/docs/blocks/archive-block",
+        badge: "New"
+      },
+      {
+        title: "Banner Block",
+        href: "/docs/blocks/banner-block",
+        badge: "New"
+      },
+      {
+        title: "Feature Steps Block",
+        href: "/docs/blocks/feature-steps-block",
+        badge: "New"
+      },
+      {
+        title: "Big Hero Block",
+        href: "/docs/blocks/big-hero",
+        badge: "New"
+      },
+      {
+        title: "Cal.com Block",
+        href: "/docs/blocks/calcom-block",
+        badge: "New"
+      },
+      {
+        title: "Outline Block",
+        href: "/docs/blocks/outline-block",
+        badge: "New"
+      },
+      {
+        title: "Simple Hero Block",
+        href: "/docs/blocks/simple-hero",
+        badge: "New"
+      },
+    ],
+  },
+  {
+    title: "Globals",
+    items: [
+      {
+        title: "Overview",
+        href: "/docs/globals",
+      },
+      {
+        title: "Theme System",
+        href: "/docs/globals/theme",
+        badge: "New"
+      },
+    ],
+  },
+  {
+    title: "Components",
     items: [
       {
         title: "Overview",
@@ -128,6 +196,11 @@ const sidebarNavItems = [
       {
         title: "Text Block",
         href: "/docs/components/text-block",
+      },
+      {
+        title: "Blocks Shared",
+        href: "/docs/components/blocks-shared",
+        badge: "New"
       },
     ],
   },
