@@ -27,6 +27,8 @@ import {
   BlockText,
   useThemeColor,
   type ColorFieldValue,
+  type RichTextContent,
+  type BackgroundFieldValue,
 } from '../blocks-shared'
 
 // Icon mapping
@@ -53,7 +55,7 @@ interface FeatureItemProps {
   icon?: keyof typeof iconMap
   iconColor?: string
   title?: string
-  description?: any // Rich text data
+  description?: RichTextContent
   link?: {
     text?: string
     url?: string
@@ -151,18 +153,14 @@ export interface FeatureBlockProps {
   eyebrow?: string
   eyebrowStyle?: 'text' | 'badge'
   title?: string
-  description?: any
+  description?: RichTextContent
   layout?: 'grid-2' | 'grid-3' | 'grid-4' | 'list'
-  background?: {
-    type: 'none' | 'color' | 'gradient' | 'image'
-    color?: string
-    image?: string | { url: string }
-  }
+  background?: BackgroundFieldValue
   features?: Array<{
     icon?: keyof typeof iconMap
     iconColor?: string
     title?: string
-    description?: any
+    description?: RichTextContent
     link?: {
       text?: string
       url?: string

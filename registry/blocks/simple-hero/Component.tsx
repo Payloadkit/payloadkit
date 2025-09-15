@@ -1,36 +1,27 @@
 import React from 'react'
+import { Button } from '@/components/ui/button'
 import {
   BlockBackground,
   BlockSection,
   BlockHeading,
   BlockText,
+  type RichTextContent,
+  type CallToAction,
+  type BackgroundFieldValue,
+  type MediaItem,
 } from '../blocks-shared'
-
-interface CallToAction {
-  label: string
-  url: string
-  appearance?: 'primary' | 'secondary' | 'outline'
-  size?: 'sm' | 'default' | 'lg'
-}
 
 export interface SimpleHeroBlockProps {
   eyebrow?: string
   title: string
   subtitle?: string
-  description?: any
+  description?: RichTextContent
   callToActions?: CallToAction[]
   layout?: 'centered' | 'left' | 'right' | 'split'
   contentWidth?: 'narrow' | 'medium' | 'wide' | 'full'
-  image?: string | { url: string }
+  image?: MediaItem | string
   imagePosition?: 'right' | 'left'
-  background?: {
-    type: 'color' | 'gradient' | 'image' | 'none'
-    color?: string
-    gradientFrom?: string
-    gradientTo?: string
-    gradientDirection?: string
-    image?: string | { url: string }
-  }
+  background?: BackgroundFieldValue
   textColor?: 'dark' | 'light' | 'primary'
   titleSize?: 'sm' | 'md' | 'lg' | 'xl'
   paddingTop?: 'none' | 'sm' | 'md' | 'lg' | 'xl'
@@ -105,22 +96,32 @@ const getJustifyClass = (layout: string = 'centered') => {
   }
 }
 
-const getButtonClasses = (appearance: string = 'primary', size: string = 'default') => {
-  const baseClasses = 'inline-flex items-center justify-center rounded-md font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50'
-
-  const sizeClasses = {
-    sm: 'h-9 px-3 text-sm',
-    default: 'h-10 px-4 py-2',
-    lg: 'h-11 px-8'
+// Convert CallToAction appearance to Button variant
+const getButtonVariant = (appearance?: string): 'default' | 'secondary' | 'outline' | 'ghost' | 'destructive' | 'link' => {
+  switch (appearance) {
+    case 'secondary':
+      return 'secondary'
+    case 'outline':
+      return 'outline'
+    case 'ghost':
+      return 'ghost'
+    case 'primary':
+    default:
+      return 'default'
   }
+}
 
-  const appearanceClasses = {
-    primary: 'bg-primary text-primary-foreground hover:bg-primary/90',
-    secondary: 'bg-secondary text-secondary-foreground hover:bg-secondary/80',
-    outline: 'border border-input bg-background hover:bg-accent hover:text-accent-foreground'
+// Convert CallToAction size to Button size
+const getButtonSize = (size?: string): 'default' | 'sm' | 'lg' | 'icon' => {
+  switch (size) {
+    case 'sm':
+      return 'sm'
+    case 'lg':
+      return 'lg'
+    case 'default':
+    default:
+      return 'default'
   }
-
-  return `${baseClasses} ${sizeClasses[size as keyof typeof sizeClasses]} ${appearanceClasses[appearance as keyof typeof appearanceClasses]}`
 }
 
 export const SimpleHero: React.FC<SimpleHeroBlockProps> = ({
@@ -199,13 +200,23 @@ export const SimpleHero: React.FC<SimpleHeroBlockProps> = ({
           }`}
         >
           {callToActions.map((cta, index) => (
-            <a
+            <Button
               key={index}
-              href={cta.url}
-              className={getButtonClasses(cta.appearance, cta.size)}
+              asChild
+              variant={getButtonVariant(cta.appearance)}
+              size={getButtonSize(cta.size)}
             >
-              {cta.label}
-            </a>
+              <a
+                href={cta.url}
+                target={cta.newTab ? '_blank' : undefined}
+                rel={cta.newTab ? 'noopener noreferrer' : undefined}
+              >
+                {cta.label}
+                {cta.newTab && (
+                  <span className="sr-only">(opens in new tab)</span>
+                )}
+              </a>
+            </Button>
           ))}
         </div>
       )}
@@ -220,8 +231,10 @@ export const SimpleHero: React.FC<SimpleHeroBlockProps> = ({
         <div className="relative max-w-lg w-full">
           <img
             src={typeof image === 'string' ? image : image.url}
-            alt=""
+            alt={typeof image === 'string' ? '' : image.alt || ''}
             className="w-full h-auto rounded-lg shadow-lg"
+            loading="lazy"
+            decoding="async"
           />
         </div>
       </div>

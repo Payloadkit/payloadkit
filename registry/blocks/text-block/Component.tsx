@@ -1,8 +1,9 @@
 import React from 'react'
+import type { RichTextContent } from '../blocks-shared'
 
 interface TextBlockProps {
   title?: string
-  richText: any // Rich text content
+  richText: RichTextContent
   textAlignment?: 'left' | 'center' | 'right'
   maxWidth?: 'prose' | 'medium' | 'large' | 'full'
   htmlId?: string
@@ -31,7 +32,7 @@ export const TextBlock: React.FC<TextBlockProps> = ({
   }
 
   // Simple function to render rich text
-  const renderRichText = (richText: any) => {
+  const renderRichText = (richText: RichTextContent) => {
     if (typeof richText === 'string') {
       return <div dangerouslySetInnerHTML={{ __html: richText }} />
     }

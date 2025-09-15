@@ -1,7 +1,6 @@
 'use client'
 
 import React from 'react'
-import { ChevronDown } from 'lucide-react'
 import {
   HelpCircle,
   Lightbulb,
@@ -20,11 +19,19 @@ import {
 } from 'lucide-react'
 
 import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from '@/components/ui/accordion'
+import {
   BlockBackground,
   BlockSection,
   BlockLayout,
   BlockHeading,
   BlockText,
+  type RichTextContent,
+  type BackgroundFieldValue,
 } from '../blocks-shared'
 
 // Icon mapping
@@ -45,98 +52,25 @@ const iconMap = {
   settings: Settings,
 } as const
 
-interface FaqItemProps {
-  icon?: keyof typeof iconMap | ''
-  question: string
-  answer: any
-  showBorder: boolean
-  isOpen: boolean
-  onToggle: () => void
-}
-
-const FaqItem: React.FC<FaqItemProps> = ({
-  icon,
-  question,
-  answer,
-  showBorder,
-  isOpen,
-  onToggle,
-}) => {
-  const IconComponent = icon ? iconMap[icon] : null
-
-  return (
-    <div
-      className={`${
-        showBorder ? 'border-b border-border last:border-b-0' : ''
-      } py-6`}
-    >
-      <button
-        onClick={onToggle}
-        className="flex justify-between items-start w-full text-left transition-colors group hover:text-foreground"
-        aria-expanded={isOpen}
-      >
-        <div className="flex items-start gap-3 flex-1 pr-8">
-          {/* Optional Icon */}
-          {IconComponent && (
-            <div className="mt-0.5 flex-shrink-0">
-              <div className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-primary/10">
-                <IconComponent className="w-4 h-4 text-primary" />
-              </div>
-            </div>
-          )}
-
-          {/* Question */}
-          <h3 className="text-lg font-semibold text-foreground leading-7">
-            {question}
-          </h3>
-        </div>
-
-        {/* Toggle Icon */}
-        <div className="flex-shrink-0 ml-4">
-          <ChevronDown
-            className={`w-5 h-5 text-muted-foreground transition-transform duration-200 ${
-              isOpen ? 'rotate-180' : ''
-            }`}
-          />
-        </div>
-      </button>
-
-      {/* Answer */}
-      {isOpen && (
-        <div
-          className={`mt-4 ${IconComponent ? 'ml-11' : ''} pr-8 animate-in slide-in-from-top-2 duration-200`}
-        >
-          <BlockText
-            richText={answer}
-            size="base"
-            prose={true}
-            className="text-muted-foreground"
-          />
-        </div>
-      )}
-    </div>
-  )
-}
-
 export interface FaqBlockProps {
   eyebrow?: string
   title?: string
-  description?: any
+  description?: RichTextContent
   layout?: 'single' | 'two-column'
   showBorder?: boolean
-  background?: {
-    type: 'none' | 'color' | 'gradient' | 'image'
-    color?: string
-    image?: string | { url: string }
-  }
+  background?: BackgroundFieldValue
   cardBackground?: string
   faqs?: Array<{
     icon?: keyof typeof iconMap | ''
     question?: string
-    answer?: any
+    answer?: RichTextContent
   }>
   paddingTop?: 'none' | 'sm' | 'md' | 'lg' | 'xl'
   paddingBottom?: 'none' | 'sm' | 'md' | 'lg' | 'xl'
+  // Accordion specific props
+  type?: 'single' | 'multiple'
+  collapsible?: boolean
+  defaultValue?: string | string[]
 }
 
 export const FaqBlock: React.FC<FaqBlockProps> = ({
@@ -148,29 +82,57 @@ export const FaqBlock: React.FC<FaqBlockProps> = ({
   background = { type: 'none' },
   cardBackground,
   faqs = [],
-  paddingTop = 'lg',
-  paddingBottom = 'lg',
+  paddingTop = 'xl',
+  paddingBottom = 'xl',
+  type = 'single',
+  collapsible = true,
+  defaultValue,
 }) => {
-  const [openItems, setOpenItems] = React.useState<Set<number>>(new Set())
+  if (!faqs.length) {
+    return null
+  }
 
-  const toggleItem = (index: number) => {
-    const newOpenItems = new Set(openItems)
-    if (openItems.has(index)) {
-      newOpenItems.delete(index)
-    } else {
-      newOpenItems.add(index)
-    }
-    setOpenItems(newOpenItems)
+  const renderFaqItem = (faq: any, index: number) => {
+    const IconComponent = faq.icon ? iconMap[faq.icon as keyof typeof iconMap] : null
+
+    return (
+      <AccordionItem key={index} value={`item-${index}`} className={showBorder ? '' : 'border-none'}>
+        <AccordionTrigger className="flex items-start gap-3 text-left hover:no-underline">
+          {/* Optional Icon */}
+          {IconComponent && (
+            <div className="mt-0.5 flex-shrink-0">
+              <div className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-primary/10">
+                <IconComponent className="w-4 h-4 text-primary" />
+              </div>
+            </div>
+          )}
+
+          {/* Question */}
+          <span className="text-lg font-semibold text-foreground leading-7 flex-1">
+            {faq.question || ''}
+          </span>
+        </AccordionTrigger>
+
+        <AccordionContent className={IconComponent ? 'ml-11' : ''}>
+          <BlockText
+            richText={faq.answer}
+            size="base"
+            prose={true}
+            className="text-muted-foreground"
+          />
+        </AccordionContent>
+      </AccordionItem>
+    )
   }
 
   return (
     <BlockBackground background={background}>
       <BlockSection paddingTop={paddingTop} paddingBottom={paddingBottom}>
-        <BlockLayout layout={layout} gap="xl">
-          {/* Header Section */}
-          <div className={layout === 'two-column' ? 'lg:pr-8' : 'text-center mb-16 max-w-3xl mx-auto'}>
+        <BlockLayout layout={layout === 'two-column' ? 'split' : 'single'}>
+          {/* Header Content */}
+          <div className={`${layout === 'two-column' ? 'w-full lg:w-1/3' : 'w-full max-w-3xl mx-auto'} mb-12`}>
             {eyebrow && (
-              <div className="mb-4">
+              <div className={`mb-4 ${layout === 'two-column' ? 'text-left' : 'text-center'}`}>
                 <span className="text-primary text-sm font-semibold tracking-wide uppercase">
                   {eyebrow}
                 </span>
@@ -198,7 +160,7 @@ export const FaqBlock: React.FC<FaqBlockProps> = ({
           </div>
 
           {/* FAQ Section */}
-          <div className="w-full">
+          <div className={`${layout === 'two-column' ? 'w-full lg:w-2/3' : 'w-full max-w-3xl mx-auto'}`}>
             <div
               className={`rounded-xl ${
                 cardBackground
@@ -211,25 +173,14 @@ export const FaqBlock: React.FC<FaqBlockProps> = ({
                   : undefined
               }
             >
-              {faqs.length > 0 ? (
-                <div className="space-y-0">
-                  {faqs.map((faq, index) => (
-                    <FaqItem
-                      key={index}
-                      icon={faq.icon}
-                      question={faq.question || ''}
-                      answer={faq.answer}
-                      showBorder={showBorder}
-                      isOpen={openItems.has(index)}
-                      onToggle={() => toggleItem(index)}
-                    />
-                  ))}
-                </div>
-              ) : (
-                <div className="text-center py-12">
-                  <p className="text-muted-foreground">No FAQs available</p>
-                </div>
-              )}
+              <Accordion
+                type={type}
+                collapsible={collapsible}
+                defaultValue={defaultValue}
+                className="w-full"
+              >
+                {faqs.map((faq, index) => renderFaqItem(faq, index))}
+              </Accordion>
             </div>
           </div>
         </BlockLayout>

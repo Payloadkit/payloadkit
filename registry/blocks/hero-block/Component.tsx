@@ -1,17 +1,14 @@
 import React from 'react'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
+import type { MediaItem, CallToAction } from '../blocks-shared'
 
 export interface HeroBlockProps {
   title?: string
   subtitle?: string
   description?: string
-  backgroundImage?: any
-  buttons?: Array<{
-    label: string
-    url: string
-    type?: 'primary' | 'secondary'
-  }>
+  backgroundImage?: MediaItem | string
+  buttons?: CallToAction[]
 }
 
 export const HeroBlock: React.FC<HeroBlockProps> = ({

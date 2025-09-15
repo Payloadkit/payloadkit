@@ -1,8 +1,9 @@
 import React from 'react'
+import type { RichTextContent } from '../blocks-shared'
 
 interface Column {
   size: 'oneThird' | 'half' | 'twoThirds' | 'full'
-  richText: any // In a real app, this would be the rich text content
+  richText: RichTextContent
   enableLink?: boolean
   link?: {
     text?: string
@@ -30,7 +31,7 @@ export const ContentBlock: React.FC<ContentBlockProps> = ({
   }
 
   // Simple function to render rich text (in a real app, use proper rich text renderer)
-  const renderRichText = (richText: any) => {
+  const renderRichText = (richText: RichTextContent) => {
     // This is a simplified version - in practice you'd use the actual Lexical renderer
     if (typeof richText === 'string') {
       return <div dangerouslySetInnerHTML={{ __html: richText }} />

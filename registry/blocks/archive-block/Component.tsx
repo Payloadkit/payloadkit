@@ -1,6 +1,8 @@
 import React from 'react'
 import Link from 'next/link'
 import { Calendar, User, Tag, ArrowRight } from 'lucide-react'
+import { Card, CardContent } from '@/components/ui/card'
+import { Badge } from '@/components/ui/badge'
 
 import {
   BlockBackground,
@@ -8,10 +10,30 @@ import {
   BlockLayout,
   BlockHeading,
   BlockText,
+  type RichTextContent,
+  type BackgroundFieldValue,
+  type MediaItem,
 } from '../blocks-shared'
 
+// Generic collection item interface for archive display
+interface CollectionItem {
+  id: string | number
+  title?: string
+  slug?: string
+  excerpt?: string
+  description?: RichTextContent
+  featuredImage?: MediaItem
+  image?: MediaItem
+  categories?: Array<{ id: string | number; title?: string; slug?: string }>
+  author?: { name?: string; firstName?: string; lastName?: string }
+  publishedAt?: string
+  createdAt?: string
+  collection?: string
+  [key: string]: any // Allow additional fields from different collections
+}
+
 interface ArchiveItemProps {
-  item: any
+  item: CollectionItem
   showImage?: boolean
   showExcerpt?: boolean
   showDate?: boolean
@@ -52,8 +74,10 @@ const ArchiveItem: React.FC<ArchiveItemProps> = ({
           <Link href={href}>
             <img
               src={imageUrl}
-              alt={item.title}
+              alt={item.title || 'Article image'}
               className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+              loading="lazy"
+              decoding="async"
             />
           </Link>
         </div>
@@ -64,7 +88,7 @@ const ArchiveItem: React.FC<ArchiveItemProps> = ({
         {/* Categories */}
         {showCategories && categories.length > 0 && (
           <div className="flex flex-wrap gap-2 mb-3">
-            {categories.slice(0, 2).map((category: any, index: number) => (
+            {categories.slice(0, 2).map((category, index: number) => (
               <span
                 key={index}
                 className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-primary/10 text-primary"
@@ -136,28 +160,24 @@ const ArchiveItem: React.FC<ArchiveItemProps> = ({
 export interface ArchiveBlockProps {
   eyebrow?: string
   title?: string
-  description?: any
+  description?: RichTextContent
   populateBy?: 'collection' | 'selection'
   relationTo?: string
-  categories?: any[]
+  categories?: Array<{ id: string | number; title?: string; slug?: string }>
   limit?: number
   sortBy?: string
-  selectedDocs?: any[]
+  selectedDocs?: CollectionItem[]
   layout?: 'grid-2' | 'grid-3' | 'grid-4' | 'list' | 'masonry'
   showImage?: boolean
   showExcerpt?: boolean
   showDate?: boolean
   showAuthor?: boolean
   showCategories?: boolean
-  background?: {
-    type: 'none' | 'color' | 'gradient' | 'image'
-    color?: string
-    image?: string | { url: string }
-  }
+  background?: BackgroundFieldValue
   paddingTop?: 'none' | 'sm' | 'md' | 'lg' | 'xl'
   paddingBottom?: 'none' | 'sm' | 'md' | 'lg' | 'xl'
   // Props for server-side data fetching
-  items?: any[]
+  items?: CollectionItem[]
 }
 
 export const ArchiveBlock: React.FC<ArchiveBlockProps> = ({

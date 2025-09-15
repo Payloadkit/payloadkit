@@ -1,18 +1,16 @@
 import React from 'react'
 import { ChevronDown } from 'lucide-react'
+import { Button } from '@/components/ui/button'
 import {
   BlockBackground,
   BlockSection,
   BlockHeading,
   BlockText,
+  type RichTextContent,
+  type CallToAction,
+  type BackgroundFieldValue,
+  type MediaItem,
 } from '../blocks-shared'
-
-interface CallToAction {
-  label: string
-  url: string
-  appearance?: 'primary' | 'secondary' | 'outline'
-  size?: 'sm' | 'default' | 'lg'
-}
 
 export interface BigHeroBlockProps {
   height?: '100vh' | '90vh' | '80vh' | '70vh' | 'auto'
@@ -21,17 +19,11 @@ export interface BigHeroBlockProps {
   eyebrow?: string
   title: string
   subtitle?: string
-  description?: any
+  description?: RichTextContent
   callToActions?: CallToAction[]
-  background?: {
-    type: 'color' | 'gradient' | 'image' | 'video' | 'none'
-    color?: string
-    gradientFrom?: string
-    gradientTo?: string
-    gradientDirection?: string
-    image?: string | { url: string }
+  background?: BackgroundFieldValue & {
     videoUrl?: string
-    videoPoster?: string | { url: string }
+    videoPoster?: MediaItem | string
   }
   overlay?: {
     enabled: boolean
@@ -108,22 +100,32 @@ const getContentPositionClasses = (position: string = 'center') => {
   }
 }
 
-const getButtonClasses = (appearance: string = 'primary', size: string = 'lg') => {
-  const baseClasses = 'inline-flex items-center justify-center rounded-md font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50'
-
-  const sizeClasses = {
-    sm: 'h-9 px-3 text-sm',
-    default: 'h-10 px-4 py-2',
-    lg: 'h-11 px-8 text-lg'
+// Convert CallToAction appearance to Button variant
+const getButtonVariant = (appearance?: string): 'default' | 'secondary' | 'outline' | 'ghost' | 'destructive' | 'link' => {
+  switch (appearance) {
+    case 'secondary':
+      return 'secondary'
+    case 'outline':
+      return 'outline'
+    case 'ghost':
+      return 'ghost'
+    case 'primary':
+    default:
+      return 'default'
   }
+}
 
-  const appearanceClasses = {
-    primary: 'bg-primary text-primary-foreground hover:bg-primary/90',
-    secondary: 'bg-secondary text-secondary-foreground hover:bg-secondary/80',
-    outline: 'border border-input bg-background hover:bg-accent hover:text-accent-foreground'
+// Convert CallToAction size to Button size
+const getButtonSize = (size?: string): 'default' | 'sm' | 'lg' | 'icon' => {
+  switch (size) {
+    case 'sm':
+      return 'sm'
+    case 'lg':
+      return 'lg'
+    case 'default':
+    default:
+      return 'lg' // Default to lg for hero blocks
   }
-
-  return `${baseClasses} ${sizeClasses[size as keyof typeof sizeClasses]} ${appearanceClasses[appearance as keyof typeof appearanceClasses]}`
 }
 
 export const BigHero: React.FC<BigHeroBlockProps> = ({
@@ -168,8 +170,12 @@ export const BigHero: React.FC<BigHeroBlockProps> = ({
         playsInline
         className="absolute inset-0 w-full h-full object-cover z-0"
         poster={typeof background.videoPoster === 'string' ? background.videoPoster : background.videoPoster?.url}
+        aria-hidden="true"
+        role="presentation"
+        preload="metadata"
       >
         <source src={background.videoUrl} type="video/mp4" />
+        <track kind="captions" src="" srcLang="en" label="English" default />
         Your browser does not support the video tag.
       </video>
     )
@@ -286,13 +292,26 @@ export const BigHero: React.FC<BigHeroBlockProps> = ({
                   } ${enableAnimations ? 'animate-fade-in-up [--animation-delay:0.8s]' : ''}`}
                 >
                   {callToActions.map((cta, index) => (
-                    <a
+                    <Button
                       key={index}
-                      href={cta.url}
-                      className={getButtonClasses(cta.appearance, cta.size)}
+                      asChild
+                      variant={getButtonVariant(cta.appearance)}
+                      size={getButtonSize(cta.size)}
                     >
-                      {cta.label}
-                    </a>
+                      <a
+                        href={cta.url}
+                        target={cta.newTab ? '_blank' : undefined}
+                        rel={cta.newTab ? 'noopener noreferrer' : undefined}
+                        aria-describedby={cta.newTab ? `cta-${index}-external` : undefined}
+                      >
+                        {cta.label}
+                        {cta.newTab && (
+                          <span id={`cta-${index}-external`} className="sr-only">
+                            (opens in new tab)
+                          </span>
+                        )}
+                      </a>
+                    </Button>
                   ))}
                 </div>
               )}

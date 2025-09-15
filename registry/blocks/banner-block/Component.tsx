@@ -6,34 +6,20 @@ import {
   BlockSection,
   BlockHeading,
   BlockText,
+  type RichTextContent,
+  type CallToAction,
+  type BackgroundFieldValue,
 } from '../blocks-shared'
-
-interface CallToAction {
-  label: string
-  url: string
-  style: 'primary' | 'secondary' | 'ghost'
-  size: 'sm' | 'md' | 'lg'
-  newTab?: boolean
-}
 
 export interface BannerBlockProps {
   eyebrow?: string
   eyebrowStyle?: 'text' | 'badge'
   title: string
   subtitle?: string
-  description?: any
+  description?: RichTextContent
   textAlignment?: 'center' | 'left' | 'right'
   textColor?: 'light' | 'dark' | 'primary'
-  background?: {
-    type: 'color' | 'gradient' | 'image'
-    color?: string
-    gradientFrom?: string
-    gradientTo?: string
-    gradientDirection?: string
-    image?: string | { url: string }
-    overlay?: boolean
-    overlayOpacity?: string
-  }
+  background?: BackgroundFieldValue
   callToActions?: CallToAction[]
   height?: 'auto' | 'small' | 'medium' | 'large' | 'full'
   paddingTop?: 'none' | 'sm' | 'md' | 'lg' | 'xl'
@@ -91,6 +77,14 @@ const getButtonClass = (
         return `${baseClasses} bg-background text-foreground hover:bg-background/90`
       }
     case 'secondary':
+      if (textColor === 'light') {
+        return `${baseClasses} border-2 border-white text-white hover:bg-white hover:text-gray-900`
+      } else if (textColor === 'dark') {
+        return `${baseClasses} border-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground`
+      } else {
+        return `${baseClasses} border-2 border-background text-background hover:bg-background hover:text-foreground`
+      }
+    case 'outline':
       if (textColor === 'light') {
         return `${baseClasses} border-2 border-white text-white hover:bg-white hover:text-gray-900`
       } else if (textColor === 'dark') {
@@ -190,7 +184,7 @@ export const BannerBlock: React.FC<BannerBlockProps> = ({
                     href={cta.url}
                     target={cta.newTab ? '_blank' : undefined}
                     rel={cta.newTab ? 'noopener noreferrer' : undefined}
-                    className={getButtonClass(cta.style, cta.size, textColor)}
+                    className={getButtonClass(cta.appearance || 'primary', cta.size || 'md', textColor)}
                   >
                     {cta.label}
                   </Link>

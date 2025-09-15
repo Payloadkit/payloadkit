@@ -1,12 +1,13 @@
 import React from 'react'
 import { cn } from '../../utils/cn'
+import type { RichTextContent, LexicalNode } from './types'
 
 export type TextSize = 'xs' | 'sm' | 'base' | 'lg' | 'xl' | '2xl'
 export type TextAlign = 'left' | 'center' | 'right' | 'justify'
 export type TextWeight = 'light' | 'normal' | 'medium' | 'semibold' | 'bold'
 
 export interface BlockTextProps {
-  richText?: any // Rich text from PayloadCMS
+  richText?: RichTextContent
   text?: string // Plain text
   size?: TextSize
   align?: TextAlign
@@ -41,7 +42,7 @@ const weightMap: Record<TextWeight, string> = {
 }
 
 // Simple function to render rich text (can be enhanced with a proper rich text renderer)
-const renderRichText = (content: any): string => {
+const renderRichText = (content: RichTextContent): string => {
   if (!content) return ''
 
   // Handle different rich text formats
@@ -67,7 +68,7 @@ const renderRichText = (content: any): string => {
   return JSON.stringify(content)
 }
 
-const extractTextFromLexical = (children: any[]): string => {
+const extractTextFromLexical = (children: LexicalNode[]): string => {
   return children.map(child => {
     if (child.text) return child.text
     if (child.children) return extractTextFromLexical(child.children)

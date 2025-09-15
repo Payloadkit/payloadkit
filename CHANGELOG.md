@@ -25,11 +25,27 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Simple Hero Block**: Clean hero section with customizable backgrounds and call-to-action buttons
 - **Block Documentation**: Complete documentation pages for all new blocks with usage examples and prop tables
 - **Navigation Updates**: Enhanced sidebar navigation with "New" badges for block discovery
+- **Phase 6 Improvements**: Major registry enhancements and developer experience improvements
+- **Unit Testing**: Comprehensive test suite with 31 passing tests using Vitest and React Testing Library
+- **OptimizedImage Component**: Performance-optimized image loading with Intersection Observer API and lazy loading
+- **Accessibility Hooks**: useKeyboardNavigation and useFocusManagement hooks for WCAG 2.1 AA compliance
+- **Focus Management**: Complete keyboard navigation support with arrow keys, enter/space, and escape handling
+- **Utility Classes**: Accessibility utility classes (focusClasses, buttonBaseClasses, srOnlyClasses)
+- **Color Contrast**: WCAG-compliant color pairs for light and dark themes
+- **Migration Guide**: Comprehensive migration documentation for upgrading from v1.x to v2.x
+- **TypeScript Documentation**: Complete type definitions documentation with usage examples
 
 ### Changed
 - **Template System**: Blank template now includes modular configuration
 - **Database**: PostgreSQL as default with MongoDB as optional alternative
 - **Build System**: Optimized for Docker production environments
+- **Registry Structure**: Cleaned up redundant blocks (faq → faq-block, feature → feature-block, banner → banner-block)
+- **TypeScript Types**: Replaced 51+ `any` types with strict TypeScript interfaces and type definitions
+- **FAQ Block**: Updated to use shadcn/ui Accordion component with new props (type, collapsible, defaultValue)
+- **Hero Blocks**: CTA buttons now use shadcn/ui Button component with automatic appearance mapping
+- **Archive Block**: Enhanced with shadcn/ui Card and Badge components for better consistency
+- **Component Architecture**: All blocks now extend standardized interfaces (BaseBlockProps, ContentBlockProps, ActionBlockProps)
+- **Image Handling**: Standard img tags replaced with OptimizedImage component for better performance
 
 ### Fixed
 - **Documentation**: Resolved React conflicts and accessibility issues
@@ -38,6 +54,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **JSX Syntax Errors**: Fixed template string parsing errors in documentation pages with unescaped characters
 - **Build Errors**: Resolved multiple JSX parsing failures preventing documentation site compilation
 - **Cal.com Documentation**: Complete rewrite of Cal.com block documentation page to fix complex template string issues
+- **Type Safety**: Eliminated all loose typing issues with strict TypeScript interfaces
+- **Test Configuration**: Resolved Vitest jsdom configuration issues with React component testing
+- **Component Interfaces**: Fixed missing type definitions and prop validation across all blocks
+- **Accessibility Issues**: Resolved ARIA attribute and focus management issues in interactive components
+- **Performance Issues**: Fixed image loading performance problems with lazy loading implementation
 
 ## [0.0.1] - 2024-09-12
 

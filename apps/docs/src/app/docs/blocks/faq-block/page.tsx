@@ -13,7 +13,10 @@ export const metadata: Metadata = {
 }
 
 const features = [
-  'Accordion-style FAQ items with smooth animations',
+  '✨ NEW: Built with shadcn/ui Accordion component for better accessibility',
+  '✨ NEW: Full Radix UI integration with WCAG-compliant keyboard navigation',
+  '✨ NEW: Single or multiple expandable modes (collapsible support)',
+  'Accordion-style FAQ items with smooth native animations',
   '15 optional Lucide React icons for questions',
   'Two layout options: single column or two-column (title left, FAQ right)',
   'Customizable borders between FAQ items',
@@ -21,8 +24,8 @@ const features = [
   'Rich text support for answers',
   'Card background styling options',
   'Responsive design with mobile-first approach',
-  'Theme integration with shadcn/ui colors',
-  'Smooth expand/collapse transitions'
+  'Theme integration with shadcn/ui design tokens',
+  'Native focus management and screen reader support'
 ]
 
 export default function FaqBlockPage() {
@@ -150,6 +153,8 @@ export default buildConfig({
   "description": "Find answers to common questions about our service.",
   "layout": "single",
   "showBorder": true,
+  "type": "single",
+  "collapsible": true,
   "faqs": [
     {
       "icon": "help-circle",
@@ -190,6 +195,9 @@ export default buildConfig({
   "description": "We're here to help with any questions you might have.",
   "layout": "two-column",
   "showBorder": false,
+  "type": "multiple",
+  "collapsible": true,
+  "defaultValue": ["item-0"],
   "background": {
     "type": "color",
     "color": "#f8fafc"
@@ -247,6 +255,9 @@ export default function SupportPage() {
         title="Frequently Asked Questions"
         layout="single"
         showBorder={true}
+        type="single"
+        collapsible={true}
+        defaultValue="item-0"
         faqs={faqs}
         paddingTop="lg"
         paddingBottom="lg"
@@ -345,6 +356,59 @@ export default function SupportPage() {
         </CardContent>
       </Card>
 
+      {/* Accordion Configuration */}
+      <Card>
+        <CardHeader>
+          <CardTitle>Accordion Configuration</CardTitle>
+          <CardDescription>
+            Configure the behavior and interaction of the FAQ accordion.
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <div className="space-y-4">
+            <div>
+              <h4 className="font-semibold mb-2">Type</h4>
+              <p className="text-sm text-muted-foreground mb-2">
+                Controls how many FAQ items can be open at once.
+              </p>
+              <div className="grid gap-2 md:grid-cols-2">
+                <div>
+                  <code className="text-sm bg-muted px-2 py-1 rounded">type: "single"</code>
+                  <p className="text-xs text-muted-foreground mt-1">Only one FAQ can be open at a time</p>
+                </div>
+                <div>
+                  <code className="text-sm bg-muted px-2 py-1 rounded">type: "multiple"</code>
+                  <p className="text-xs text-muted-foreground mt-1">Multiple FAQs can be open simultaneously</p>
+                </div>
+              </div>
+            </div>
+            <div>
+              <h4 className="font-semibold mb-2">Collapsible</h4>
+              <p className="text-sm text-muted-foreground mb-2">
+                Whether the accordion items can be collapsed after being opened.
+              </p>
+              <code className="text-sm bg-muted px-2 py-1 rounded">collapsible: true | false</code>
+            </div>
+            <div>
+              <h4 className="font-semibold mb-2">Default Value</h4>
+              <p className="text-sm text-muted-foreground mb-2">
+                Set which FAQ items are open by default when the component loads.
+              </p>
+              <div className="grid gap-2">
+                <div>
+                  <code className="text-sm bg-muted px-2 py-1 rounded">defaultValue: "item-0"</code>
+                  <p className="text-xs text-muted-foreground mt-1">For single type: opens the first FAQ</p>
+                </div>
+                <div>
+                  <code className="text-sm bg-muted px-2 py-1 rounded">defaultValue: ["item-0", "item-2"]</code>
+                  <p className="text-xs text-muted-foreground mt-1">For multiple type: opens first and third FAQs</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </CardContent>
+      </Card>
+
       {/* Dependencies */}
       <Card>
         <CardHeader>
@@ -360,12 +424,14 @@ export default function SupportPage() {
               <ul className="text-sm text-muted-foreground space-y-1">
                 <li><code>react</code> - React framework</li>
                 <li><code>lucide-react</code> - Icon library</li>
+                <li><code>@radix-ui/react-accordion</code> - Accessible accordion primitives</li>
               </ul>
             </div>
             <div>
               <h4 className="font-semibold mb-2">Registry Dependencies</h4>
               <ul className="text-sm text-muted-foreground space-y-1">
                 <li><code>blocks-shared</code> - Shared block components</li>
+                <li><code>ui/accordion</code> - shadcn/ui Accordion component</li>
               </ul>
             </div>
           </div>

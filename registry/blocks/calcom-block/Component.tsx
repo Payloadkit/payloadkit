@@ -15,6 +15,8 @@ import {
   BlockSection,
   BlockHeading,
   BlockText,
+  type RichTextContent,
+  type BackgroundFieldValue,
 } from '../blocks-shared'
 
 const iconMap = {
@@ -42,16 +44,9 @@ export interface CalComBlockProps {
   eyebrow?: string
   title?: string
   subtitle?: string
-  description?: any
+  description?: RichTextContent
   features?: Feature[]
-  background?: {
-    type: 'color' | 'gradient' | 'image' | 'none'
-    color?: string
-    gradientFrom?: string
-    gradientTo?: string
-    gradientDirection?: string
-    image?: string | { url: string }
-  }
+  background?: BackgroundFieldValue
   textColor?: 'dark' | 'light' | 'primary'
   paddingTop?: 'none' | 'sm' | 'md' | 'lg' | 'xl'
   paddingBottom?: 'none' | 'sm' | 'md' | 'lg' | 'xl'

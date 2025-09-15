@@ -24,6 +24,9 @@ import {
   BlockSection,
   BlockHeading,
   BlockText,
+  type RichTextContent,
+  type BackgroundFieldValue,
+  type MediaItem,
 } from '../blocks-shared'
 
 const iconMap = {
@@ -48,9 +51,9 @@ const iconMap = {
 interface Step {
   icon: keyof typeof iconMap
   title: string
-  description: any
+  description: RichTextContent
   showImage?: boolean
-  image?: string | { url: string }
+  image?: MediaItem | string
 }
 
 interface Advantage {
@@ -62,15 +65,8 @@ export interface FeatureStepsBlockProps {
   eyebrow?: string
   title: string
   subtitle?: string
-  description?: any
-  background?: {
-    type: 'color' | 'gradient' | 'image' | 'none'
-    color?: string
-    gradientFrom?: string
-    gradientTo?: string
-    gradientDirection?: string
-    image?: string | { url: string }
-  }
+  description?: RichTextContent
+  background?: BackgroundFieldValue
   textColor?: 'dark' | 'light' | 'primary'
   stepsTitle?: string
   stepsLayout?: 'grid-2' | 'grid-3' | 'grid-4' | 'vertical' | 'stair'

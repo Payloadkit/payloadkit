@@ -4,9 +4,9 @@
   "blocks": {
     "hero-block": {
       "name": "hero-block",
-      "description": "A flexible hero section with title, subtitle, description and CTA buttons",
+      "description": "Basic hero section with gradient background and CTA buttons - Perfect for simple landing pages",
       "category": "hero",
-      "tags": ["hero", "banner", "landing", "cta"],
+      "tags": ["hero", "banner", "landing", "cta", "basic", "simple"],
       "version": "0.0.2",
       "files": [
         "Component.tsx",
@@ -32,21 +32,6 @@
       "peerDependencies": ["payload", "@payloadcms/richtext-lexical"],
       "registryDependencies": ["RichText", "CMSLink", "card", "button"]
     },
-    "banner": {
-      "name": "banner",
-      "description": "A prominent banner section with title, description, background options and call-to-action buttons",
-      "category": "marketing",
-      "tags": ["banner", "hero", "marketing", "cta", "background"],
-      "version": "0.0.2",
-      "files": [
-        "Component.tsx",
-        "config.ts",
-        "index.ts"
-      ],
-      "dependencies": ["react"],
-      "peerDependencies": ["payload"],
-      "registryDependencies": ["button", "badge"]
-    },
     "media-block": {
       "name": "media-block",
       "description": "Simple media display block for images and videos with optional caption",
@@ -62,21 +47,6 @@
       "peerDependencies": ["payload"],
       "registryDependencies": []
     },
-    "feature": {
-      "name": "feature",
-      "description": "Feature showcase block with icons, titles, descriptions and customizable grid layout",
-      "category": "marketing",
-      "tags": ["features", "grid", "icons", "showcase", "benefits"],
-      "version": "0.0.2",
-      "files": [
-        "Component.tsx",
-        "config.ts",
-        "index.ts"
-      ],
-      "dependencies": ["react"],
-      "peerDependencies": ["payload"],
-      "registryDependencies": ["card", "badge", "button"]
-    },
     "content": {
       "name": "content",
       "description": "Rich content block with flexible column layouts and rich text editor",
@@ -91,21 +61,6 @@
       "dependencies": ["react"],
       "peerDependencies": ["payload", "@payloadcms/richtext-lexical"],
       "registryDependencies": []
-    },
-    "faq": {
-      "name": "faq",
-      "description": "FAQ block with collapsible question and answer pairs, perfect for support pages",
-      "category": "content",
-      "tags": ["faq", "questions", "answers", "support", "accordion"],
-      "version": "0.0.2",
-      "files": [
-        "Component.tsx",
-        "config.ts",
-        "index.ts"
-      ],
-      "dependencies": ["react"],
-      "peerDependencies": ["payload", "@payloadcms/richtext-lexical"],
-      "registryDependencies": ["accordion"]
     },
     "text-block": {
       "name": "text-block",
@@ -214,9 +169,9 @@
     },
     "big-hero": {
       "name": "big-hero",
-      "description": "Advanced hero section with video background support, scroll indicators, and parallax effects",
+      "description": "Advanced hero section with video backgrounds, parallax effects, and animations - Perfect for premium marketing sites",
       "category": "hero",
-      "tags": ["hero", "video", "background", "parallax", "scroll", "landing"],
+      "tags": ["hero", "advanced", "video", "parallax", "animations", "marketing", "premium"],
       "version": "0.1.0",
       "files": [
         "Component.tsx",
@@ -259,9 +214,9 @@
     },
     "simple-hero": {
       "name": "simple-hero",
-      "description": "Clean hero section with customizable backgrounds and call-to-action buttons",
+      "description": "Intermediate hero section with 4 layouts, image support and advanced backgrounds - Perfect for corporate sites",
       "category": "hero",
-      "tags": ["hero", "simple", "clean", "background", "cta", "landing"],
+      "tags": ["hero", "intermediate", "layouts", "image", "background", "corporate"],
       "version": "0.1.0",
       "files": [
         "Component.tsx",

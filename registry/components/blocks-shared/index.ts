@@ -52,5 +52,20 @@ export {
   default as ThemeColor
 } from './useThemeColor'
 
+// Optimized components
+export {
+  OptimizedImage,
+  type OptimizedImageProps,
+  default as Image
+} from './OptimizedImage'
+
+// Accessibility hooks
+export {
+  useKeyboardNavigation,
+  useFocusManagement,
+  type KeyboardNavigationOptions,
+  default as KeyboardNavigation
+} from './useKeyboardNavigation'
+
 // Types
 export * from './types'
