@@ -9,6 +9,7 @@ import { ComponentPreview } from '@/components/component-preview'
 import { Snippet } from '@/components/snippet'
 import { TutorialSteps } from '@/components/tutorial-steps'
 import { CodeBlock } from '@/components/code-tabs'
+import { ApiReference } from '@/components/api-reference'
 
 // Import accordion for demo
 import {
@@ -370,6 +371,83 @@ const exampleFaqs = [
         steps={installationSteps}
         allowSkip
       />
+
+      {/* API Reference */}
+      <ApiReference
+        title="API Reference"
+        description="Complete reference for all props and configuration options available for the FAQ Block component."
+        props={[
+          {
+            name: 'faqs',
+            type: 'FaqItem[]',
+            description: 'Array of FAQ items to display in the accordion',
+            required: true,
+            example: '[{ question: "What is PayloadKit?", answer: "...", icon: "help-circle" }]'
+          },
+          {
+            name: 'title',
+            type: 'string',
+            description: 'Main heading displayed above the FAQ list',
+            example: 'title="Frequently Asked Questions"'
+          },
+          {
+            name: 'description',
+            type: 'string',
+            description: 'Subtitle or description text below the title',
+            example: 'description="Everything you need to know"'
+          },
+          {
+            name: 'layout',
+            type: '"single" | "two-column"',
+            description: 'Controls the visual layout of FAQ items',
+            defaultValue: '"single"',
+            example: 'layout="two-column"'
+          },
+          {
+            name: 'allowMultiple',
+            type: 'boolean',
+            description: 'Allow multiple accordion items to be open simultaneously',
+            defaultValue: 'false',
+            example: 'allowMultiple={true}'
+          },
+          {
+            name: 'className',
+            type: 'string',
+            description: 'Additional CSS classes to apply to the container',
+            example: 'className="my-custom-class"'
+          }
+        ]}
+      />
+
+      {/* Type Definitions */}
+      <div className="space-y-4">
+        <h3 className="text-lg font-semibold">Type Definitions</h3>
+
+        <div className="space-y-3">
+          <div className="bg-muted/50 p-4 rounded-lg">
+            <h4 className="text-sm font-semibold mb-2">FaqItem</h4>
+            <code className="text-xs font-mono block">
+{`interface FaqItem {
+  question: string
+  answer: string | React.ReactNode
+  icon?: 'help-circle' | 'lightbulb' | 'zap' | 'target' | 'star'
+}`}
+            </code>
+          </div>
+
+          <div className="bg-muted/50 p-4 rounded-lg">
+            <h4 className="text-sm font-semibold mb-2">Available Icons</h4>
+            <code className="text-xs font-mono block">
+{`type IconType =
+  | 'help-circle'   // HelpCircle from lucide-react
+  | 'lightbulb'     // Lightbulb from lucide-react
+  | 'zap'           // Zap from lucide-react
+  | 'target'        // Target from lucide-react
+  | 'star'          // Star from lucide-react`}
+            </code>
+          </div>
+        </div>
+      </div>
     </div>
   )
 }
