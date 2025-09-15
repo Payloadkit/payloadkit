@@ -10,6 +10,7 @@ import { Snippet } from '@/components/snippet'
 import { TutorialSteps } from '@/components/tutorial-steps'
 import { CodeBlock } from '@/components/code-tabs'
 import { ApiReference } from '@/components/api-reference'
+import { PageTags } from '@/components/page-tags'
 
 // Import accordion for demo
 import {
@@ -80,6 +81,7 @@ function FaqDemo() {
 const installationSteps = [
   {
     title: 'Install the FAQ Block',
+    keyword: 'Install',
     description: 'Add the FAQ block to your PayloadKit project using the CLI.',
     content: (
       <Snippet
@@ -92,6 +94,7 @@ const installationSteps = [
   },
   {
     title: 'Add to PayloadCMS Config',
+    keyword: 'Configure',
     description: 'Import and configure the block in your PayloadCMS configuration.',
     content: (
       <CodeBlock
@@ -120,6 +123,7 @@ export default buildConfig({
   },
   {
     title: 'Render in Frontend',
+    keyword: 'Implement',
     description: 'Use the block component in your React frontend.',
     content: (
       <CodeBlock
@@ -144,6 +148,7 @@ export function PageRenderer({ layout }) {
   },
   {
     title: 'Customize (Optional)',
+    keyword: 'Customize',
     description: 'Modify the component to match your design requirements.',
     content: (
       <div className="space-y-3">
@@ -183,7 +188,7 @@ export default function FaqBlockPage() {
         version="0.1.0"
         difficulty="beginner"
         estimatedTime="5 minutes"
-        lastUpdated="December 2024"
+        lastUpdated="January 2025"
         features={[
           'Built with shadcn/ui Accordion component',
           'Full Radix UI integration with WCAG compliance',
@@ -196,14 +201,11 @@ export default function FaqBlockPage() {
           'Mobile-first responsive design',
           'Theme integration with design tokens'
         ]}
-        tags={[
-          'FAQ',
-          'Accordion',
-          'Accessibility',
-          'shadcn/ui',
-          'Radix UI',
-          'Interactive',
-          'Support'
+        dependencies={[
+          '@radix-ui/react-accordion',
+          'lucide-react',
+          'clsx',
+          'tailwind-merge'
         ]}
       />
 
@@ -348,21 +350,6 @@ const exampleFaqs = [
   }
 ]`
         }}
-        dependencies={[
-          '@radix-ui/react-accordion',
-          'lucide-react',
-          'clsx',
-          'tailwind-merge'
-        ]}
-        features={[
-          'Keyboard Navigation',
-          'Screen Reader Support',
-          'Smooth Animations',
-          'Customizable Icons',
-          'Rich Text Content'
-        ]}
-        responsive
-        interactive
       />
 
       {/* Installation Tutorial */}
@@ -423,31 +410,46 @@ const exampleFaqs = [
       <div className="space-y-4">
         <h3 className="text-lg font-semibold">Type Definitions</h3>
 
-        <div className="space-y-3">
-          <div className="bg-muted/50 p-4 rounded-lg">
-            <h4 className="text-sm font-semibold mb-2">FaqItem</h4>
-            <code className="text-xs font-mono block">
-{`interface FaqItem {
+        <div className="space-y-4">
+          <CodeBlock
+            title="FaqItem Interface"
+            code={`interface FaqItem {
   question: string
   answer: string | React.ReactNode
   icon?: 'help-circle' | 'lightbulb' | 'zap' | 'target' | 'star'
 }`}
-            </code>
-          </div>
+            language="typescript"
+          />
 
-          <div className="bg-muted/50 p-4 rounded-lg">
-            <h4 className="text-sm font-semibold mb-2">Available Icons</h4>
-            <code className="text-xs font-mono block">
-{`type IconType =
+          <CodeBlock
+            title="Available Icons"
+            code={`type IconType =
   | 'help-circle'   // HelpCircle from lucide-react
   | 'lightbulb'     // Lightbulb from lucide-react
   | 'zap'           // Zap from lucide-react
   | 'target'        // Target from lucide-react
   | 'star'          // Star from lucide-react`}
-            </code>
-          </div>
+            language="typescript"
+          />
         </div>
       </div>
+
+      {/* Tags at the bottom */}
+      <PageTags
+        category="blocks"
+        tags={[
+          'FAQ',
+          'Accordion',
+          'Accessibility',
+          'shadcn/ui',
+          'Radix UI',
+          'Interactive',
+          'Support',
+          'PayloadCMS',
+          'React',
+          'TypeScript'
+        ]}
+      />
     </div>
   )
 }

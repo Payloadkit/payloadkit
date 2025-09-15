@@ -55,35 +55,9 @@ export function ComponentPreview({
     <div className={cn('space-y-4', className)}>
       {/* Header */}
       <div className="space-y-2">
-        <div className="flex items-center justify-between">
-          <h3 className="text-lg font-semibold">{name}</h3>
-          <div className="flex items-center gap-2">
-            {interactive && (
-              <Badge variant="secondary" className="text-xs">
-                Interactive
-              </Badge>
-            )}
-            {responsive && (
-              <Badge variant="outline" className="text-xs">
-                Responsive
-              </Badge>
-            )}
-          </div>
-        </div>
-
+        <h3 className="text-lg font-semibold">{name}</h3>
         {description && (
           <p className="text-muted-foreground text-sm">{description}</p>
-        )}
-
-        {/* Features list */}
-        {features.length > 0 && (
-          <div className="flex flex-wrap gap-1">
-            {features.map((feature, index) => (
-              <Badge key={index} variant="outline" className="text-xs">
-                {feature}
-              </Badge>
-            ))}
-          </div>
         )}
       </div>
 
@@ -177,9 +151,9 @@ export function ComponentPreview({
         {/* Preview tab */}
         <TabsContent value="preview" className="mt-0">
           <Card className="rounded-t-none border-t-0">
-            <CardContent className="p-6">
+            <CardContent className="p-8">
               <div className={cn(
-                'flex items-center justify-center transition-all duration-300 mx-auto',
+                'flex items-center justify-center transition-all duration-300 mx-auto min-h-[400px]',
                 getViewportClass()
               )}>
                 <div className="w-full">
@@ -251,19 +225,6 @@ export function ComponentPreview({
         )}
       </Tabs>
 
-      {/* Dependencies */}
-      {dependencies.length > 0 && (
-        <div className="pt-4 border-t">
-          <h4 className="text-sm font-semibold mb-2">Dependencies</h4>
-          <div className="flex flex-wrap gap-2">
-            {dependencies.map((dep, index) => (
-              <code key={index} className="px-2 py-1 bg-muted rounded text-xs">
-                {dep}
-              </code>
-            ))}
-          </div>
-        </div>
-      )}
     </div>
   )
 }

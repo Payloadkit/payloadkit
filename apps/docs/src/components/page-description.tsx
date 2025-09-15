@@ -25,6 +25,7 @@ interface PageDescriptionProps {
   estimatedTime?: string
   features?: string[]
   tags?: string[]
+  dependencies?: string[]
   className?: string
 }
 
@@ -84,13 +85,14 @@ export function PageDescription({
   estimatedTime,
   features = [],
   tags = [],
+  dependencies = [],
   className
 }: PageDescriptionProps) {
   const CategoryIcon = category ? categoryInfo[category].icon : Package
 
   return (
     <div className={cn('space-y-6', className)}>
-      {/* Hero section */}
+      {/* Hero section with title */}
       <div className="space-y-4">
         <div className="flex items-center gap-3">
           {category && (
@@ -100,96 +102,73 @@ export function PageDescription({
           )}
           <div className="flex-1">
             <h1 className="text-3xl font-bold tracking-tight">{title}</h1>
-            <div className="flex items-center gap-2 mt-2">
-              {category && (
-                <Badge className={categoryInfo[category].color}>
-                  {categoryInfo[category].label}
-                </Badge>
-              )}
-              {version && (
-                <Badge variant="outline">
-                  v{version}
-                </Badge>
-              )}
-              {difficulty && (
-                <Badge className={difficultyInfo[difficulty].color}>
-                  {difficultyInfo[difficulty].label}
-                </Badge>
-              )}
-            </div>
           </div>
         </div>
 
-        <p className="text-lg text-muted-foreground leading-relaxed">
-          {description}
-        </p>
-      </div>
+        {/* Status bar right after title */}
+        {(estimatedTime || lastUpdated || difficulty || version) && (
+          <Card>
+            <CardContent className="p-4">
+              <div className="grid grid-cols-1 md:grid-cols-4 gap-4 text-sm">
+                {version && (
+                  <div className="flex items-center gap-2">
+                    <Package className="h-4 w-4 text-muted-foreground" />
+                    <span className="text-muted-foreground">Version:</span>
+                    <span className="font-medium">v{version}</span>
+                  </div>
+                )}
 
-      {/* Meta information */}
-      {(estimatedTime || lastUpdated || difficulty) && (
-        <Card>
-          <CardContent className="p-4">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
-              {estimatedTime && (
-                <div className="flex items-center gap-2">
-                  <Clock className="h-4 w-4 text-muted-foreground" />
-                  <span className="text-muted-foreground">Est. time:</span>
-                  <span className="font-medium">{estimatedTime}</span>
-                </div>
-              )}
+                {estimatedTime && (
+                  <div className="flex items-center gap-2">
+                    <Clock className="h-4 w-4 text-muted-foreground" />
+                    <span className="text-muted-foreground">Est. time:</span>
+                    <span className="font-medium">{estimatedTime}</span>
+                  </div>
+                )}
 
-              {difficulty && (
-                <div className="flex items-center gap-2">
-                  <Users className="h-4 w-4 text-muted-foreground" />
-                  <span className="text-muted-foreground">Difficulty:</span>
-                  <span className="font-medium">{difficultyInfo[difficulty].description}</span>
-                </div>
-              )}
+                {difficulty && (
+                  <div className="flex items-center gap-2">
+                    <Users className="h-4 w-4 text-muted-foreground" />
+                    <span className="text-muted-foreground">Difficulty:</span>
+                    <span className="font-medium">{difficultyInfo[difficulty].label}</span>
+                  </div>
+                )}
 
-              {lastUpdated && (
-                <div className="flex items-center gap-2">
-                  <Star className="h-4 w-4 text-muted-foreground" />
-                  <span className="text-muted-foreground">Updated:</span>
-                  <span className="font-medium">{lastUpdated}</span>
-                </div>
-              )}
-            </div>
-          </CardContent>
-        </Card>
-      )}
-
-      {/* Features */}
-      {features.length > 0 && (
-        <div className="space-y-3">
-          <h3 className="text-lg font-semibold">Key Features</h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
-            {features.map((feature, index) => (
-              <div key={index} className="flex items-start gap-3">
-                <div className="flex items-center justify-center w-5 h-5 rounded-full bg-green-100 text-green-600 dark:bg-green-900 dark:text-green-400 mt-0.5">
-                  <svg className="w-3 h-3" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M20 6L9 17L4 12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                  </svg>
-                </div>
-                <span className="text-sm text-muted-foreground">{feature}</span>
+                {lastUpdated && (
+                  <div className="flex items-center gap-2">
+                    <Star className="h-4 w-4 text-muted-foreground" />
+                    <span className="text-muted-foreground">Updated:</span>
+                    <span className="font-medium">{lastUpdated}</span>
+                  </div>
+                )}
               </div>
-            ))}
-          </div>
-        </div>
-      )}
+            </CardContent>
+          </Card>
+        )}
 
-      {/* Tags */}
-      {tags.length > 0 && (
-        <div className="space-y-3">
-          <h3 className="text-lg font-semibold">Related Topics</h3>
-          <div className="flex flex-wrap gap-2">
-            {tags.map((tag, index) => (
-              <Badge key={index} variant="secondary" className="text-xs">
-                {tag}
-              </Badge>
-            ))}
-          </div>
+        {/* Combined description with features */}
+        <div className="space-y-4">
+          <p className="text-lg text-muted-foreground leading-relaxed">
+            {description}
+          </p>
+
+          {features.length > 0 && (
+            <div className="text-muted-foreground">
+              <span className="font-medium">Key features include:</span>{' '}
+              {features.join(', ')}.
+            </div>
+          )}
+
+          {dependencies.length > 0 && (
+            <div className="text-muted-foreground">
+              <span className="font-medium">Dependencies:</span>{' '}
+              <code className="text-xs bg-muted px-1 rounded">
+                {dependencies.join(', ')}
+              </code>
+            </div>
+          )}
         </div>
-      )}
+      </div>
 
       <Separator />
     </div>

@@ -8,6 +8,7 @@ import { cn } from '@/lib/utils'
 
 interface Step {
   title: string
+  keyword?: string
   description?: string
   content: React.ReactNode
   optional?: boolean
@@ -91,7 +92,7 @@ export function TutorialSteps({
                 )}
               </span>
               <span className="truncate">
-                Step {index + 1}
+                Step {index + 1}{step.keyword && ` - ${step.keyword}`}
                 {step.optional && (
                   <span className="ml-1 text-xs opacity-75">(optional)</span>
                 )}
@@ -115,7 +116,7 @@ export function TutorialSteps({
                   {currentStep + 1}
                 </span>
                 <h3 className="text-lg font-semibold">
-                  {steps[currentStep].title}
+                  Step {currentStep + 1}: {steps[currentStep].title}
                 </h3>
                 {steps[currentStep].optional && (
                   <span className="px-2 py-1 text-xs bg-muted rounded text-muted-foreground">
