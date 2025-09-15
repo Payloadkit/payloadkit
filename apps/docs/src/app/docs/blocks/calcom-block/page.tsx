@@ -1,10 +1,32 @@
 import { Metadata } from 'next'
+import Link from 'next/link'
+import { Button } from '@/components/ui/button'
+import { Badge } from '@/components/ui/badge'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
+import { Separator } from '@/components/ui/separator'
+import { ArrowLeft, Calendar, Check, Info, AlertCircle } from 'lucide-react'
 import { CopyButton } from '@/components/copy-button'
 
 export const metadata: Metadata = {
   title: 'Cal.com Block',
   description: 'Cal.com integration block for seamless appointment scheduling. Features multiple layouts, customizable content, and full Cal.com embed support with themes and event types.',
 }
+
+const features = [
+  'Full Cal.com integration with iframe embedding',
+  'Support for specific event types and general booking pages',
+  '3 calendar themes: auto, light, dark',
+  '3 layout options: full-width, split-content, split-calendar',
+  '4 calendar height options: small, medium, large, auto',
+  'Rich header content: eyebrow, title, subtitle, description',
+  'Feature list with 8 Lucide React icons',
+  'Auto-loading of Cal.com embed script',
+  'Responsive design with mobile-first approach'
+]
+
+const icons = ['calendar', 'clock', 'message-circle', 'phone', 'target', 'check', 'star', 'shield']
 
 export default function CalComBlockPage() {
   const codeExample = `// components/BookingSection.tsx
@@ -44,233 +66,379 @@ export function BookingSection() {
 }`
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-8">
       {/* Header */}
-      <div className="space-y-3">
-        <div className="flex items-center gap-2">
-          <h1 className="text-3xl font-bold">Cal.com Block</h1>
-          <span className="px-2 py-1 text-xs font-medium bg-green-100 text-green-800 rounded-full dark:bg-green-900 dark:text-green-300">
-            New
-          </span>
+      <div>
+        <div className="flex items-center gap-2 mb-4">
+          <Button variant="ghost" size="sm" asChild>
+            <Link href="/docs/blocks">
+              <ArrowLeft className="mr-2 h-4 w-4" />
+              Back to Blocks
+            </Link>
+          </Button>
         </div>
-        <p className="text-lg text-muted-foreground">
+        <div className="flex items-center gap-4 mb-4">
+          <div className="flex items-center justify-center w-12 h-12 rounded-lg bg-primary/10">
+            <Calendar className="h-6 w-6 text-primary" />
+          </div>
+          <div>
+            <h1 className="text-4xl font-bold tracking-tight">Cal.com Block</h1>
+            <div className="flex items-center gap-2 mt-2">
+              <Badge>Integration</Badge>
+              <Badge variant="outline">v0.1.0</Badge>
+              <Badge variant="secondary">Stable</Badge>
+            </div>
+          </div>
+        </div>
+        <p className="text-xl text-muted-foreground">
           Cal.com integration block for seamless appointment scheduling. Features multiple layouts, customizable content, and full Cal.com embed support with themes and event types.
         </p>
       </div>
 
       {/* Installation */}
-      <div className="space-y-4">
-        <h2 className="text-2xl font-semibold">Installation</h2>
-        <div className="relative">
-          <pre className="bg-muted p-4 rounded-md overflow-x-auto">
-            <code>payloadkit add calcom-block</code>
-          </pre>
-          <CopyButton text="payloadkit add calcom-block" />
-        </div>
-      </div>
-
-      {/* Features */}
-      <div className="space-y-4">
-        <h2 className="text-2xl font-semibold">Features</h2>
-        <div className="grid gap-3">
-          <div className="flex items-start gap-2">
-            <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0" />
-            <span>Full Cal.com integration with iframe embedding</span>
-          </div>
-          <div className="flex items-start gap-2">
-            <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0" />
-            <span>Support for specific event types and general booking pages</span>
-          </div>
-          <div className="flex items-start gap-2">
-            <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0" />
-            <span>3 calendar themes: auto, light, dark</span>
-          </div>
-          <div className="flex items-start gap-2">
-            <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0" />
-            <span>3 layout options: full-width, split-content, split-calendar</span>
-          </div>
-          <div className="flex items-start gap-2">
-            <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0" />
-            <span>4 calendar height options: small, medium, large, auto</span>
-          </div>
-          <div className="flex items-start gap-2">
-            <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0" />
-            <span>Rich header content: eyebrow, title, subtitle, description</span>
-          </div>
-          <div className="flex items-start gap-2">
-            <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0" />
-            <span>Feature list with 8 Lucide React icons</span>
-          </div>
-          <div className="flex items-start gap-2">
-            <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0" />
-            <span>Auto-loading of Cal.com embed script</span>
-          </div>
-          <div className="flex items-start gap-2">
-            <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0" />
-            <span>Responsive design with mobile-first approach</span>
-          </div>
-        </div>
-      </div>
-
-      {/* Prerequisites */}
-      <div className="space-y-4">
-        <h2 className="text-2xl font-semibold">Prerequisites</h2>
-        <div className="p-4 border border-blue-200 bg-blue-50 rounded-md dark:border-blue-800 dark:bg-blue-900/20">
-          <h3 className="font-medium text-blue-800 dark:text-blue-200 mb-2">Cal.com Account Required</h3>
-          <p className="text-sm text-blue-700 dark:text-blue-300">
-            You'll need a Cal.com account and username. Set up your event types in your Cal.com dashboard before using this component.
-          </p>
-        </div>
-      </div>
-
-      {/* Usage Example */}
-      <div className="space-y-4">
-        <h2 className="text-2xl font-semibold">Usage</h2>
-        <div className="space-y-4">
-          <h3 className="text-lg font-medium">PayloadCMS Configuration</h3>
-          <div className="relative">
-            <pre className="bg-muted p-4 rounded-md overflow-x-auto text-sm">
-              <code>{`// payload.config.ts
-import { CalComBlock } from './blocks/calcom-block'
+      <Card>
+        <CardHeader>
+          <CardTitle>Installation</CardTitle>
+          <CardDescription>
+            Add the Cal.com block to your PayloadCMS project using the PayloadKit CLI.
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <div className="space-y-4">
+            <div>
+              <h4 className="font-semibold mb-2">Install via CLI</h4>
+              <div className="relative">
+                <pre className="bg-muted p-4 rounded-lg text-sm overflow-x-auto">
+                  <code>payloadkit add calcom-block</code>
+                </pre>
+                <CopyButton text="payloadkit add calcom-block" />
+              </div>
+            </div>
+            <div>
+              <h4 className="font-semibold mb-2">Add to your PayloadCMS config</h4>
+              <pre className="bg-muted p-4 rounded-lg text-sm overflow-x-auto">
+                <code>{`import { CalComBlock } from './blocks/calcom-block'
 
 export default buildConfig({
   // ... other config
-  blocks: [
-    CalComBlock,
-    // ... other blocks
+  collections: [
+    {
+      slug: 'pages',
+      fields: [
+        {
+          name: 'layout',
+          type: 'blocks',
+          blocks: [CalComBlock], // Add here
+        },
+      ],
+    },
   ],
 })`}</code>
-            </pre>
-            <CopyButton text={`// payload.config.ts
-import { CalComBlock } from './blocks/calcom-block'
-
-export default buildConfig({
-  // ... other config
-  blocks: [
-    CalComBlock,
-    // ... other blocks
-  ],
-})`} />
+              </pre>
+            </div>
           </div>
-        </div>
+        </CardContent>
+      </Card>
 
-        <div className="space-y-4">
-          <h3 className="text-lg font-medium">Frontend Component</h3>
-          <div className="relative">
-            <pre className="bg-muted p-4 rounded-md overflow-x-auto text-sm">
-              <code>{codeExample}</code>
-            </pre>
-            <CopyButton text={codeExample} />
+      {/* Features */}
+      <Card>
+        <CardHeader>
+          <CardTitle>Features</CardTitle>
+          <CardDescription>
+            Everything included with the Cal.com Block component.
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <div className="grid gap-2">
+            {features.map((feature, index) => (
+              <div key={index} className="flex items-start gap-3">
+                <Check className="h-5 w-5 text-green-600 mt-0.5 flex-shrink-0" />
+                <span className="text-sm">{feature}</span>
+              </div>
+            ))}
           </div>
-        </div>
+        </CardContent>
+      </Card>
+
+      {/* Prerequisites */}
+      <Alert variant="info">
+        <Info className="h-4 w-4" />
+        <AlertTitle>Prerequisites</AlertTitle>
+        <AlertDescription>
+          You'll need a Cal.com account and username. Set up your event types in your Cal.com dashboard before using this component.
+          <br />
+          <a
+            href="https://cal.com"
+            className="text-primary hover:underline font-medium mt-2 inline-block"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Sign up at cal.com →
+          </a>
+        </AlertDescription>
+      </Alert>
+
+      {/* Usage Examples */}
+      <div>
+        <h2 className="text-2xl font-bold mb-6">Usage Examples</h2>
+        <Tabs defaultValue="basic" className="w-full">
+          <TabsList className="grid w-full grid-cols-3">
+            <TabsTrigger value="basic">Basic Usage</TabsTrigger>
+            <TabsTrigger value="advanced">Advanced Setup</TabsTrigger>
+            <TabsTrigger value="frontend">Frontend Component</TabsTrigger>
+          </TabsList>
+
+          <TabsContent value="basic" className="space-y-4">
+            <Card>
+              <CardHeader>
+                <CardTitle>Basic Integration</CardTitle>
+                <CardDescription>Simple Cal.com integration with minimal configuration</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="relative">
+                  <pre className="bg-muted p-4 rounded-lg text-sm overflow-x-auto">
+                    <code>{`// Minimal setup - just username
+<CalComBlockComponent
+  calcomUsername="your-username"
+/>`}</code>
+                  </pre>
+                  <CopyButton text={`// Minimal setup - just username
+<CalComBlockComponent
+  calcomUsername="your-username"
+/>`} />
+                </div>
+              </CardContent>
+            </Card>
+          </TabsContent>
+
+          <TabsContent value="advanced" className="space-y-4">
+            <Card>
+              <CardHeader>
+                <CardTitle>Advanced Configuration</CardTitle>
+                <CardDescription>Full configuration with all available options</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="relative">
+                  <pre className="bg-muted p-4 rounded-lg text-sm overflow-x-auto">
+                    <code>{codeExample}</code>
+                  </pre>
+                  <CopyButton text={codeExample} />
+                </div>
+              </CardContent>
+            </Card>
+          </TabsContent>
+
+          <TabsContent value="frontend" className="space-y-4">
+            <Card>
+              <CardHeader>
+                <CardTitle>Frontend Implementation</CardTitle>
+                <CardDescription>How to render the Cal.com block in your React components</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="relative">
+                  <pre className="bg-muted p-4 rounded-lg text-sm overflow-x-auto">
+                    <code>{`// src/blocks/RenderBlocks.tsx
+import { CalComBlockComponent } from './calcom-block/Component'
+
+const blockComponents = {
+  'calcom-block': CalComBlockComponent,
+  // ... other blocks
+}
+
+export function RenderBlocks({ blocks }) {
+  return blocks?.map((block, index) => {
+    const BlockComponent = blockComponents[block.blockType]
+    if (!BlockComponent) return null
+
+    return <BlockComponent key={index} {...block} />
+  })
+}`}</code>
+                  </pre>
+                  <CopyButton text={`// src/blocks/RenderBlocks.tsx
+import { CalComBlockComponent } from './calcom-block/Component'
+
+const blockComponents = {
+  'calcom-block': CalComBlockComponent,
+  // ... other blocks
+}
+
+export function RenderBlocks({ blocks }) {
+  return blocks?.map((block, index) => {
+    const BlockComponent = blockComponents[block.blockType]
+    if (!BlockComponent) return null
+
+    return <BlockComponent key={index} {...block} />
+  })
+}`} />
+                </div>
+              </CardContent>
+            </Card>
+          </TabsContent>
+        </Tabs>
       </div>
 
       {/* Props */}
-      <div className="space-y-4">
-        <h2 className="text-2xl font-semibold">Props</h2>
-        <div className="overflow-x-auto">
-          <table className="w-full border-collapse border border-border">
-            <thead>
-              <tr className="border-b border-border bg-muted/50">
-                <th className="border border-border px-4 py-2 text-left">Prop</th>
-                <th className="border border-border px-4 py-2 text-left">Type</th>
-                <th className="border border-border px-4 py-2 text-left">Default</th>
-                <th className="border border-border px-4 py-2 text-left">Description</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td className="border border-border px-4 py-2 font-mono text-sm">calcomUsername</td>
-                <td className="border border-border px-4 py-2 text-sm">string</td>
-                <td className="border border-border px-4 py-2 text-sm">-</td>
-                <td className="border border-border px-4 py-2 text-sm">Your Cal.com username (required)</td>
-              </tr>
-              <tr>
-                <td className="border border-border px-4 py-2 font-mono text-sm">eventType</td>
-                <td className="border border-border px-4 py-2 text-sm">string</td>
-                <td className="border border-border px-4 py-2 text-sm">-</td>
-                <td className="border border-border px-4 py-2 text-sm">Specific event type slug (optional)</td>
-              </tr>
-              <tr>
-                <td className="border border-border px-4 py-2 font-mono text-sm">layout</td>
-                <td className="border border-border px-4 py-2 text-sm">{`'full-width' | 'split-content' | 'split-calendar'`}</td>
-                <td className="border border-border px-4 py-2 text-sm">'full-width'</td>
-                <td className="border border-border px-4 py-2 text-sm">Block layout style</td>
-              </tr>
-              <tr>
-                <td className="border border-border px-4 py-2 font-mono text-sm">theme</td>
-                <td className="border border-border px-4 py-2 text-sm">{`'auto' | 'light' | 'dark'`}</td>
-                <td className="border border-border px-4 py-2 text-sm">'auto'</td>
-                <td className="border border-border px-4 py-2 text-sm">Calendar theme</td>
-              </tr>
-              <tr>
-                <td className="border border-border px-4 py-2 font-mono text-sm">height</td>
-                <td className="border border-border px-4 py-2 text-sm">{`'sm' | 'md' | 'lg' | 'auto'`}</td>
-                <td className="border border-border px-4 py-2 text-sm">'lg'</td>
-                <td className="border border-border px-4 py-2 text-sm">Calendar height</td>
-              </tr>
-              <tr>
-                <td className="border border-border px-4 py-2 font-mono text-sm">features</td>
-                <td className="border border-border px-4 py-2 text-sm">Feature[]</td>
-                <td className="border border-border px-4 py-2 text-sm">[]</td>
-                <td className="border border-border px-4 py-2 text-sm">Feature list for split layouts</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
+      <Card>
+        <CardHeader>
+          <CardTitle>Component Props</CardTitle>
+          <CardDescription>Available props for the Cal.com Block component</CardDescription>
+        </CardHeader>
+        <CardContent>
+          <div className="space-y-6">
+            <div className="space-y-4">
+              <div className="grid gap-4">
+                <div className="space-y-3 p-4 border rounded-lg">
+                  <div className="flex items-center justify-between">
+                    <code className="text-sm font-mono bg-muted px-2 py-1 rounded">calcomUsername</code>
+                    <Badge variant="destructive">Required</Badge>
+                  </div>
+                  <div className="space-y-1">
+                    <p className="text-sm"><strong>Type:</strong> string</p>
+                    <p className="text-sm text-muted-foreground">Your Cal.com username (required)</p>
+                  </div>
+                </div>
+
+                <div className="space-y-3 p-4 border rounded-lg">
+                  <div className="flex items-center justify-between">
+                    <code className="text-sm font-mono bg-muted px-2 py-1 rounded">eventType</code>
+                    <Badge variant="outline">Optional</Badge>
+                  </div>
+                  <div className="space-y-1">
+                    <p className="text-sm"><strong>Type:</strong> string</p>
+                    <p className="text-sm text-muted-foreground">Specific event type slug (optional)</p>
+                  </div>
+                </div>
+
+                <div className="space-y-3 p-4 border rounded-lg">
+                  <div className="flex items-center justify-between">
+                    <code className="text-sm font-mono bg-muted px-2 py-1 rounded">layout</code>
+                    <Badge variant="outline">Optional</Badge>
+                  </div>
+                  <div className="space-y-1">
+                    <p className="text-sm"><strong>Type:</strong> 'full-width' | 'split-content' | 'split-calendar'</p>
+                    <p className="text-sm"><strong>Default:</strong> 'full-width'</p>
+                    <p className="text-sm text-muted-foreground">Block layout style</p>
+                  </div>
+                </div>
+
+                <div className="space-y-3 p-4 border rounded-lg">
+                  <div className="flex items-center justify-between">
+                    <code className="text-sm font-mono bg-muted px-2 py-1 rounded">theme</code>
+                    <Badge variant="outline">Optional</Badge>
+                  </div>
+                  <div className="space-y-1">
+                    <p className="text-sm"><strong>Type:</strong> 'auto' | 'light' | 'dark'</p>
+                    <p className="text-sm"><strong>Default:</strong> 'auto'</p>
+                    <p className="text-sm text-muted-foreground">Calendar theme</p>
+                  </div>
+                </div>
+
+                <div className="space-y-3 p-4 border rounded-lg">
+                  <div className="flex items-center justify-between">
+                    <code className="text-sm font-mono bg-muted px-2 py-1 rounded">height</code>
+                    <Badge variant="outline">Optional</Badge>
+                  </div>
+                  <div className="space-y-1">
+                    <p className="text-sm"><strong>Type:</strong> 'sm' | 'md' | 'lg' | 'auto'</p>
+                    <p className="text-sm"><strong>Default:</strong> 'lg'</p>
+                    <p className="text-sm text-muted-foreground">Calendar height</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </CardContent>
+      </Card>
 
       {/* Available Icons */}
-      <div className="space-y-4">
-        <h2 className="text-2xl font-semibold">Available Icons</h2>
-        <div className="grid grid-cols-4 md:grid-cols-8 gap-4">
-          {['calendar', 'clock', 'message-circle', 'phone', 'target', 'check', 'star', 'shield'].map((icon) => (
-            <div key={icon} className="flex flex-col items-center gap-2 p-2 border rounded-md">
-              <div className="text-sm font-mono">{icon}</div>
-            </div>
-          ))}
-        </div>
-      </div>
+      <Card>
+        <CardHeader>
+          <CardTitle>Available Icons</CardTitle>
+          <CardDescription>Icons available for the features list</CardDescription>
+        </CardHeader>
+        <CardContent>
+          <div className="grid grid-cols-4 md:grid-cols-8 gap-4">
+            {icons.map((icon) => (
+              <div key={icon} className="flex flex-col items-center gap-2 p-3 border rounded-lg hover:bg-muted/50 transition-colors">
+                <div className="h-5 w-5 bg-primary/10 rounded flex items-center justify-center">
+                  <div className="w-3 h-3 bg-primary/30 rounded-full" />
+                </div>
+                <code className="text-xs font-mono text-center">{icon}</code>
+              </div>
+            ))}
+          </div>
+        </CardContent>
+      </Card>
 
       {/* Setup Guide */}
-      <div className="space-y-4">
-        <h2 className="text-2xl font-semibold">Setup Guide</h2>
-        <div className="space-y-4">
-          <div className="space-y-2">
-            <h3 className="text-lg font-medium">1. Create Cal.com Account</h3>
-            <p className="text-muted-foreground">
-              Sign up at <a href="https://cal.com" className="text-primary hover:underline" target="_blank" rel="noopener noreferrer">cal.com</a> and choose your username.
-            </p>
-          </div>
+      <Card>
+        <CardHeader>
+          <CardTitle>Setup Guide</CardTitle>
+          <CardDescription>Step-by-step guide to set up Cal.com integration</CardDescription>
+        </CardHeader>
+        <CardContent>
+          <div className="space-y-6">
+            <div className="space-y-3">
+              <div className="flex items-center gap-3">
+                <div className="flex items-center justify-center w-8 h-8 rounded-full bg-primary text-primary-foreground text-sm font-semibold">
+                  1
+                </div>
+                <h3 className="text-lg font-medium">Create Cal.com Account</h3>
+              </div>
+              <p className="text-muted-foreground ml-11">
+                Sign up at{' '}
+                <a href="https://cal.com" className="text-primary hover:underline font-medium" target="_blank" rel="noopener noreferrer">
+                  cal.com
+                </a>{' '}
+                and choose your username.
+              </p>
+            </div>
 
-          <div className="space-y-2">
-            <h3 className="text-lg font-medium">2. Set Up Event Types</h3>
-            <p className="text-muted-foreground">
-              Create your event types in the Cal.com dashboard (e.g., "30-minute-consultation", "discovery-call").
-            </p>
-          </div>
+            <Separator />
 
-          <div className="space-y-2">
-            <h3 className="text-lg font-medium">3. Use in PayloadKit</h3>
-            <div className="relative">
-              <pre className="bg-muted p-4 rounded-md overflow-x-auto text-sm">
-                <code>{`// For general booking page
+            <div className="space-y-3">
+              <div className="flex items-center gap-3">
+                <div className="flex items-center justify-center w-8 h-8 rounded-full bg-primary text-primary-foreground text-sm font-semibold">
+                  2
+                </div>
+                <h3 className="text-lg font-medium">Set Up Event Types</h3>
+              </div>
+              <p className="text-muted-foreground ml-11">
+                Create your event types in the Cal.com dashboard (e.g., "30-minute-consultation", "discovery-call").
+              </p>
+            </div>
+
+            <Separator />
+
+            <div className="space-y-3">
+              <div className="flex items-center gap-3">
+                <div className="flex items-center justify-center w-8 h-8 rounded-full bg-primary text-primary-foreground text-sm font-semibold">
+                  3
+                </div>
+                <h3 className="text-lg font-medium">Use in PayloadKit</h3>
+              </div>
+              <div className="ml-11">
+                <div className="relative">
+                  <pre className="bg-muted p-4 rounded-lg text-sm overflow-x-auto">
+                    <code>{`// For general booking page
 calcomUsername="your-username"
 
 // For specific event type
 calcomUsername="your-username"
 eventType="30-minute-consultation"`}</code>
-              </pre>
-              <CopyButton text={`// For general booking page
+                  </pre>
+                  <CopyButton text={`// For general booking page
 calcomUsername="your-username"
 
 // For specific event type
 calcomUsername="your-username"
 eventType="30-minute-consultation"`} />
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-      </div>
+        </CardContent>
+      </Card>
     </div>
   )
 }
