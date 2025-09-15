@@ -30,7 +30,7 @@ export default function ChangelogPage() {
         title="Changelog"
         description="Complete version history and release notes for PayloadKit. Track new features, improvements, and bug fixes across all releases."
         category="guides"
-        version="0.1.0"
+        version="0.2.0"
         difficulty="beginner"
         estimatedTime="5 minutes"
         lastUpdated="January 2025"
@@ -55,6 +55,25 @@ export default function ChangelogPage() {
           </Badge>
         </div>
 
+        <div className="rounded-lg border p-6 bg-muted/20">
+          <p className="text-muted-foreground text-center italic">
+            No unreleased changes yet. Check back soon for upcoming features!
+          </p>
+        </div>
+      </section>
+
+      <Separator />
+
+      {/* Version 0.2.0 */}
+      <section className="space-y-6">
+        <div className="flex items-center gap-3">
+          <Calendar className="h-6 w-6 text-blue-600" />
+          <h2 className="text-3xl font-bold">0.2.0</h2>
+          <Badge variant="outline" className="bg-blue-50 text-blue-700 border-blue-200">
+            January 15, 2025
+          </Badge>
+        </div>
+
         <div className="grid gap-6 lg:grid-cols-2">
           {/* Added Features */}
           <div className="rounded-lg border p-6">
@@ -64,35 +83,32 @@ export default function ChangelogPage() {
             </div>
             <div className="space-y-3 text-sm">
               <div className="space-y-2">
-                <p><strong>Documentation Site:</strong> Complete Next.js documentation website with search functionality</p>
-                <p><strong>Search:</strong> Functional search with Ctrl+K shortcut and keyboard navigation</p>
-                <p><strong>Accessibility:</strong> Full WCAG compliance with screen reader support</p>
-                <p><strong>Docker Development:</strong> Complete Docker setup with PostgreSQL, Redis, and MailHog</p>
-                <p><strong>VPS Deployment:</strong> Production-ready Dockerfile optimized for Dokploy deployment</p>
-                <p><strong>Modular Configuration:</strong> Smart database detection with PostgreSQL/MongoDB support</p>
-                <p><strong>Enhanced Blocks:</strong> shadcn/ui components integration in PayloadKit blocks</p>
-                <p><strong>Auth Security:</strong> Better authentication system in blank template</p>
+                <p><strong>Interactive Documentation System:</strong> Complete overhaul with syntax highlighting and clipboard functionality</p>
+                <p><strong>Enhanced Developer Experience:</strong> 50+ interactive CodeBlock components replacing static code examples</p>
+                <p><strong>Unified Page Architecture:</strong> Consistent PageDescription, navigation, and component structure</p>
+                <p><strong>Migration Documentation:</strong> Comprehensive v1.x to v2.x upgrade guides with interactive examples</p>
+                <p><strong>Enhanced Accessibility:</strong> WCAG-compliant documentation with improved keyboard navigation</p>
               </div>
               <Separator className="my-3" />
               <div className="space-y-2">
-                <p className="font-medium text-blue-600">New Blocks:</p>
+                <p className="font-medium text-blue-600">Documentation Pages Updated:</p>
                 <ul className="ml-4 space-y-1 text-xs">
-                  <li>• Feature Steps Block - Step-by-step process with 16 icons and 5 layouts</li>
-                  <li>• Big Hero Block - Advanced hero with video background and parallax</li>
-                  <li>• Cal.com Block - Cal.com integration with iframe embedding</li>
-                  <li>• Outline Block - Automatic table of contents generator</li>
-                  <li>• Simple Hero Block - Clean hero with customizable backgrounds</li>
+                  <li>• CLI Documentation - Interactive command reference with copy functionality</li>
+                  <li>• Docker Guide - Complete containerization setup with code examples</li>
+                  <li>• Security Guide - Authentication and compliance documentation</li>
+                  <li>• Storage Configuration - Cloud storage setup with interactive examples</li>
+                  <li>• Component Library - blocks-shared, blog-template, and changelog enhanced</li>
                 </ul>
               </div>
               <Separator className="my-3" />
               <div className="space-y-2">
-                <p className="font-medium text-purple-600">Developer Experience:</p>
+                <p className="font-medium text-purple-600">Technical Improvements:</p>
                 <ul className="ml-4 space-y-1 text-xs">
-                  <li>• Unit Testing - 31 passing tests with Vitest and React Testing Library</li>
-                  <li>• OptimizedImage Component - Performance-optimized image loading</li>
-                  <li>• Accessibility Hooks - useKeyboardNavigation and useFocusManagement</li>
-                  <li>• Migration Guide - Comprehensive v1.x to v2.x upgrade documentation</li>
-                  <li>• TypeScript Documentation - Complete type definitions with examples</li>
+                  <li>• CodeBlock Integration - Syntax highlighting with Prism.js</li>
+                  <li>• Clipboard Functionality - Copy-to-clipboard on all code examples</li>
+                  <li>• Responsive Design - Mobile-first approach with consistent layouts</li>
+                  <li>• Component Architecture - Standardized documentation components</li>
+                  <li>• Performance Optimizations - Better image loading and responsive design</li>
                 </ul>
               </div>
             </div>
@@ -107,12 +123,12 @@ export default function ChangelogPage() {
                 <h3 className="text-xl font-semibold text-blue-700">Changed</h3>
               </div>
               <div className="space-y-2 text-sm">
-                <p><strong>Template System:</strong> Blank template now includes modular configuration</p>
-                <p><strong>Database:</strong> PostgreSQL as default with MongoDB as optional alternative</p>
-                <p><strong>Build System:</strong> Optimized for Docker production environments</p>
-                <p><strong>Registry Structure:</strong> Cleaned up redundant blocks (faq → faq-block)</p>
-                <p><strong>TypeScript Types:</strong> Replaced 51+ any types with strict interfaces</p>
-                <p><strong>Component Architecture:</strong> All blocks extend standardized interfaces</p>
+                <p><strong>Documentation Architecture:</strong> All pages transformed to use modern interactive components</p>
+                <p><strong>Code Examples:</strong> Replaced 50+ static pre/code blocks with interactive CodeBlock components</p>
+                <p><strong>Page Structure:</strong> Unified all documentation pages with consistent PageDescription headers</p>
+                <p><strong>Developer Experience:</strong> Enhanced clipboard functionality and syntax highlighting across all examples</p>
+                <p><strong>Navigation:</strong> Consistent navigation patterns and component structure throughout documentation</p>
+                <p><strong>Content Organization:</strong> Better categorization and tagging system for improved discoverability</p>
               </div>
             </div>
 
@@ -123,12 +139,12 @@ export default function ChangelogPage() {
                 <h3 className="text-xl font-semibold text-red-700">Fixed</h3>
               </div>
               <div className="space-y-2 text-sm">
-                <p><strong>Documentation:</strong> Resolved React conflicts and accessibility issues</p>
-                <p><strong>File Paths:</strong> Corrected markdown file loading in Next.js documentation</p>
-                <p><strong>Search Dialog:</strong> Added required DialogTitle for screen readers</p>
-                <p><strong>JSX Syntax Errors:</strong> Fixed template string parsing errors</p>
-                <p><strong>Type Safety:</strong> Eliminated all loose typing issues</p>
-                <p><strong>Performance Issues:</strong> Fixed image loading with lazy loading</p>
+                <p><strong>Hydration Issues:</strong> Resolved hydration mismatch errors in Snippet components with suppressHydrationWarning</p>
+                <p><strong>Layout Problems:</strong> Fixed horizontal scroll issues across CLI, Docker, Security, and Storage pages</p>
+                <p><strong>Template Strings:</strong> Converted escaped strings to template literals preventing width overflow issues</p>
+                <p><strong>Build Errors:</strong> Resolved JSX parsing failures and component rendering issues in documentation system</p>
+                <p><strong>Component Consistency:</strong> Standardized all documentation components for uniform experience</p>
+                <p><strong>Responsive Design:</strong> Fixed mobile layout issues and improved cross-device compatibility</p>
               </div>
             </div>
           </div>
