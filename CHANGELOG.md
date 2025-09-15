@@ -7,7 +7,28 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.2.0] - 2025-01-15
+
 ### Added
+- **Interactive Documentation System**: Complete overhaul of documentation with syntax highlighting and clipboard functionality
+- **Enhanced Developer Experience**: 50+ interactive CodeBlock components replacing static code examples
+- **Unified Page Architecture**: Consistent PageDescription, navigation, and component structure across all documentation
+- **Migration Documentation**: Comprehensive v1.x to v2.x upgrade guides with interactive code examples
+- **Enhanced Accessibility**: WCAG-compliant documentation with improved keyboard navigation and screen reader support
+
+### Changed
+- **Documentation Architecture**: All pages transformed to use modern interactive components instead of static HTML
+- **Code Examples**: Replaced 50+ static pre/code blocks with interactive CodeBlock components featuring copy functionality
+- **Page Structure**: Unified all documentation pages with consistent PageDescription headers and navigation
+- **Developer Experience**: Enhanced clipboard functionality and syntax highlighting across all code examples
+
+### Fixed
+- **Hydration Issues**: Resolved hydration mismatch errors in Snippet components with suppressHydrationWarning
+- **Layout Problems**: Fixed horizontal scroll issues across CLI, Docker, Security, and Storage documentation pages
+- **Template Strings**: Converted escaped strings to template literals preventing width overflow issues
+- **Build Errors**: Resolved JSX parsing failures and component rendering issues in documentation system
+
+### Added (Previous Features)
 - **Documentation Site**: Complete Next.js documentation website with search functionality
 - **Search**: Functional search with Ctrl+K shortcut and keyboard navigation
 - **Accessibility**: Full WCAG compliance with screen reader support

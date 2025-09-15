@@ -1,6 +1,6 @@
 {
   "name": "@payloadkit/core",
-  "version": "0.0.1",
+  "version": "0.2.0",
   "description": "Core types and utilities for PayloadKit",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
@@ -13,7 +13,7 @@
     },
     "./types": {
       "types": "./dist/types.d.ts",
-      "import": "./dist/types.mjs", 
+      "import": "./dist/types.mjs",
       "require": "./dist/types.js"
     },
     "./utils": {
