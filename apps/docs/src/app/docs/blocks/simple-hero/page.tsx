@@ -1,4 +1,12 @@
 import { Metadata } from 'next'
+import Link from 'next/link'
+import { Button } from '@/components/ui/button'
+import { Badge } from '@/components/ui/badge'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
+import { Separator } from '@/components/ui/separator'
+import { ArrowLeft, Sparkles, Check, Info, Lightbulb, Zap } from 'lucide-react'
 import { CopyButton } from '@/components/copy-button'
 
 export const metadata: Metadata = {
@@ -6,79 +14,151 @@ export const metadata: Metadata = {
   description: 'Clean and minimalist hero section with flexible layouts, perfect for landing pages, portfolios, and content-focused websites. Emphasizes simplicity and readability.',
 }
 
+const features = [
+  '4 layout options: centered, left-aligned, right-aligned, split with image',
+  '4 content width settings: narrow, medium, wide, full',
+  'Rich content support: eyebrow, title, subtitle, description',
+  'Up to 2 call-to-action buttons with 3 styles and 3 sizes',
+  'Image support for split layout with left/right positioning',
+  '4 background types: color, gradient, image, none',
+  '3 text color themes: dark, light, primary',
+  '4 title size options: sm, md, lg, xl',
+  'Mobile-responsive design with adaptive typography',
+  'Lightweight implementation without heavy dependencies'
+]
+
 export default function SimpleHeroPage() {
+  const codeExample = `// components/SimpleHero.tsx
+import { SimpleHeroComponent } from './blocks/simple-hero'
+
+export function SimpleHero() {
   return (
-    <div className="space-y-6">
+    <SimpleHeroComponent
+      eyebrow="Welcome"
+      title="Clean, Simple, Effective"
+      subtitle="Beautiful hero sections without the complexity"
+      description="Perfect for content-focused websites that prioritize readability and user experience."
+      layout="centered"
+      contentWidth="medium"
+      titleSize="lg"
+      background={{
+        type: 'gradient',
+        gradientFrom: '#f8fafc',
+        gradientTo: '#e2e8f0',
+        gradientDirection: 'to-br'
+      }}
+      callToActions={[
+        {
+          label: 'Get Started',
+          url: '/start',
+          appearance: 'primary',
+          size: 'default'
+        },
+        {
+          label: 'Learn More',
+          url: '/about',
+          appearance: 'outline',
+          size: 'default'
+        }
+      ]}
+    />
+  )
+}`
+
+  return (
+    <div className="space-y-8">
       {/* Header */}
-      <div className="space-y-3">
-        <div className="flex items-center gap-2">
-          <h1 className="text-3xl font-bold">Simple Hero Block</h1>
-          <span className="px-2 py-1 text-xs font-medium bg-green-100 text-green-800 rounded-full dark:bg-green-900 dark:text-green-300">
-            New
-          </span>
+      <div>
+        <div className="flex items-center gap-2 mb-4">
+          <Button variant="ghost" size="sm" asChild>
+            <Link href="/docs/blocks">
+              <ArrowLeft className="mr-2 h-4 w-4" />
+              Back to Blocks
+            </Link>
+          </Button>
         </div>
-        <p className="text-lg text-muted-foreground">
+        <div className="flex items-center gap-4 mb-4">
+          <div className="flex items-center justify-center w-12 h-12 rounded-lg bg-primary/10">
+            <Sparkles className="h-6 w-6 text-primary" />
+          </div>
+          <div>
+            <h1 className="text-4xl font-bold tracking-tight">Simple Hero Block</h1>
+            <div className="flex items-center gap-2 mt-2">
+              <Badge>Hero</Badge>
+              <Badge variant="outline">v0.1.0</Badge>
+              <Badge variant="secondary">New</Badge>
+            </div>
+          </div>
+        </div>
+        <p className="text-xl text-muted-foreground">
           Clean and minimalist hero section with flexible layouts, perfect for landing pages, portfolios, and content-focused websites. Emphasizes simplicity and readability.
         </p>
       </div>
 
       {/* Installation */}
-      <div className="space-y-4">
-        <h2 className="text-2xl font-semibold">Installation</h2>
-        <div className="relative">
-          <pre className="bg-muted p-4 rounded-md overflow-x-auto">
-            <code>payloadkit add simple-hero</code>
-          </pre>
-          <CopyButton text="payloadkit add simple-hero" />
-        </div>
-      </div>
+      <Card>
+        <CardHeader>
+          <CardTitle>Installation</CardTitle>
+          <CardDescription>
+            Add the Simple Hero block to your PayloadCMS project using the PayloadKit CLI.
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <div className="space-y-4">
+            <div>
+              <h4 className="font-semibold mb-2">Install via CLI</h4>
+              <div className="relative">
+                <pre className="bg-muted p-4 rounded-lg text-sm overflow-x-auto">
+                  <code>payloadkit add simple-hero</code>
+                </pre>
+                <CopyButton text="payloadkit add simple-hero" />
+              </div>
+            </div>
+            <div>
+              <h4 className="font-semibold mb-2">Add to your PayloadCMS config</h4>
+              <pre className="bg-muted p-4 rounded-lg text-sm overflow-x-auto">
+                <code>{`import { SimpleHero } from './blocks/simple-hero'
+
+export default buildConfig({
+  // ... other config
+  collections: [
+    {
+      slug: 'pages',
+      fields: [
+        {
+          name: 'layout',
+          type: 'blocks',
+          blocks: [SimpleHero], // Add here
+        },
+      ],
+    },
+  ],
+})`}</code>
+              </pre>
+            </div>
+          </div>
+        </CardContent>
+      </Card>
 
       {/* Features */}
-      <div className="space-y-4">
-        <h2 className="text-2xl font-semibold">Features</h2>
-        <div className="grid gap-3">
-          <div className="flex items-start gap-2">
-            <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0" />
-            <span>4 layout options: centered, left-aligned, right-aligned, split with image</span>
+      <Card>
+        <CardHeader>
+          <CardTitle>Features</CardTitle>
+          <CardDescription>
+            Everything included with the Simple Hero Block component.
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <div className="grid gap-2">
+            {features.map((feature, index) => (
+              <div key={index} className="flex items-start gap-3">
+                <Check className="h-5 w-5 text-green-600 mt-0.5 flex-shrink-0" />
+                <span className="text-sm">{feature}</span>
+              </div>
+            ))}
           </div>
-          <div className="flex items-start gap-2">
-            <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0" />
-            <span>4 content width settings: narrow, medium, wide, full</span>
-          </div>
-          <div className="flex items-start gap-2">
-            <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0" />
-            <span>Rich content support: eyebrow, title, subtitle, description</span>
-          </div>
-          <div className="flex items-start gap-2">
-            <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0" />
-            <span>Up to 2 call-to-action buttons with 3 styles and 3 sizes</span>
-          </div>
-          <div className="flex items-start gap-2">
-            <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0" />
-            <span>Image support for split layout with left/right positioning</span>
-          </div>
-          <div className="flex items-start gap-2">
-            <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0" />
-            <span>4 background types: color, gradient, image, none</span>
-          </div>
-          <div className="flex items-start gap-2">
-            <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0" />
-            <span>3 text color themes: dark, light, primary</span>
-          </div>
-          <div className="flex items-start gap-2">
-            <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0" />
-            <span>4 title size options: sm, md, lg, xl</span>
-          </div>
-          <div className="flex items-start gap-2">
-            <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0" />
-            <span>Mobile-responsive design with adaptive typography</span>
-          </div>
-          <div className="flex items-start gap-2">
-            <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0" />
-            <span>Lightweight implementation without heavy dependencies</span>
-          </div>
-        </div>
-      </div>
+        </CardContent>
+      </Card>
 
       {/* Usage Example */}
       <div className="space-y-4">

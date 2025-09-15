@@ -1,4 +1,12 @@
 import { Metadata } from 'next'
+import Link from 'next/link'
+import { Button } from '@/components/ui/button'
+import { Badge } from '@/components/ui/badge'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
+import { Separator } from '@/components/ui/separator'
+import { ArrowLeft, Layers, Check, Info } from 'lucide-react'
 import { CopyButton } from '@/components/copy-button'
 
 export const metadata: Metadata = {
@@ -6,260 +14,367 @@ export const metadata: Metadata = {
   description: 'Feature steps block with numbered steps, multiple layouts, and advantages section. Perfect for explaining processes, workflows, and step-by-step guides.',
 }
 
+const features = [
+  'Two section layouts: stacked or two-column',
+  'Rich header content: eyebrow, title, subtitle, description',
+  '16 Lucide React icons for steps',
+  '5 step layouts: 2-col, 3-col, 4-col grid, vertical list, staggered stair',
+  'Optional step numbering with customizable styling',
+  '3 card styles: elevated, flat, minimal',
+  'Stair layout with optional images for each step',
+  'Optional advantages section with checkmarks',
+  'Flexible background options: color, gradient, image, none',
+  'Responsive design with mobile-first approach'
+]
+
+const icons = ['target', 'message-circle', 'trending-up', 'book-open', 'lightbulb', 'zap', 'search', 'star', 'rocket', 'graduation-cap', 'settings', 'bar-chart', 'shield', 'heart', 'trophy', 'palette']
+
 export default function FeatureStepsBlockPage() {
+  const codeExample = `// components/FeatureSteps.tsx
+import { FeatureStepsBlockComponent } from './blocks/feature-steps-block'
+
+const exampleSteps = [
+  {
+    icon: 'target',
+    title: 'Define Your Goals',
+    description: 'Set clear, measurable objectives for your project.'
+  },
+  {
+    icon: 'lightbulb',
+    title: 'Plan Your Strategy',
+    description: 'Develop a comprehensive plan to achieve your goals.'
+  },
+  {
+    icon: 'rocket',
+    title: 'Execute & Launch',
+    description: 'Implement your plan and launch your project.'
+  }
+]
+
+export function FeatureSteps() {
   return (
-    <div className="space-y-6">
+    <FeatureStepsBlockComponent
+      title="How It Works"
+      stepsLayout="grid-3"
+      showStepNumbers={true}
+      steps={exampleSteps}
+      showAdvantages={true}
+      advantages={[
+        { text: "Easy to follow process" },
+        { text: "Proven methodology" },
+        { text: "Expert guidance" }
+      ]}
+    />
+  )
+}`
+
+  return (
+    <div className="space-y-8">
       {/* Header */}
-      <div className="space-y-3">
-        <div className="flex items-center gap-2">
-          <h1 className="text-3xl font-bold">Feature Steps Block</h1>
-          <span className="px-2 py-1 text-xs font-medium bg-green-100 text-green-800 rounded-full dark:bg-green-900 dark:text-green-300">
-            New
-          </span>
+      <div>
+        <div className="flex items-center gap-2 mb-4">
+          <Button variant="ghost" size="sm" asChild>
+            <Link href="/docs/blocks">
+              <ArrowLeft className="mr-2 h-4 w-4" />
+              Back to Blocks
+            </Link>
+          </Button>
         </div>
-        <p className="text-lg text-muted-foreground">
+        <div className="flex items-center gap-4 mb-4">
+          <div className="flex items-center justify-center w-12 h-12 rounded-lg bg-primary/10">
+            <Layers className="h-6 w-6 text-primary" />
+          </div>
+          <div>
+            <h1 className="text-4xl font-bold tracking-tight">Feature Steps Block</h1>
+            <div className="flex items-center gap-2 mt-2">
+              <Badge>Process</Badge>
+              <Badge variant="outline">v0.1.0</Badge>
+              <Badge variant="secondary">New</Badge>
+            </div>
+          </div>
+        </div>
+        <p className="text-xl text-muted-foreground">
           Feature steps block with numbered steps, multiple layouts, and advantages section. Perfect for explaining processes, workflows, and step-by-step guides.
         </p>
       </div>
 
       {/* Installation */}
-      <div className="space-y-4">
-        <h2 className="text-2xl font-semibold">Installation</h2>
-        <div className="relative">
-          <pre className="bg-muted p-4 rounded-md overflow-x-auto">
-            <code>payloadkit add feature-steps-block</code>
-          </pre>
-          <CopyButton text="payloadkit add feature-steps-block" />
-        </div>
-      </div>
-
-      {/* Features */}
-      <div className="space-y-4">
-        <h2 className="text-2xl font-semibold">Features</h2>
-        <div className="grid gap-3">
-          <div className="flex items-start gap-2">
-            <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0" />
-            <span>Two section layouts: stacked or two-column</span>
-          </div>
-          <div className="flex items-start gap-2">
-            <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0" />
-            <span>Rich header content: eyebrow, title, subtitle, description</span>
-          </div>
-          <div className="flex items-start gap-2">
-            <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0" />
-            <span>16 Lucide React icons for steps</span>
-          </div>
-          <div className="flex items-start gap-2">
-            <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0" />
-            <span>5 step layouts: 2-col, 3-col, 4-col grid, vertical list, staggered stair</span>
-          </div>
-          <div className="flex items-start gap-2">
-            <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0" />
-            <span>Optional step numbering with customizable styling</span>
-          </div>
-          <div className="flex items-start gap-2">
-            <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0" />
-            <span>3 card styles: elevated, flat, minimal</span>
-          </div>
-          <div className="flex items-start gap-2">
-            <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0" />
-            <span>Stair layout with optional images for each step</span>
-          </div>
-          <div className="flex items-start gap-2">
-            <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0" />
-            <span>Optional advantages section with checkmarks</span>
-          </div>
-          <div className="flex items-start gap-2">
-            <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0" />
-            <span>Flexible background options: color, gradient, image, none</span>
-          </div>
-          <div className="flex items-start gap-2">
-            <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0" />
-            <span>Responsive design with mobile-first approach</span>
-          </div>
-        </div>
-      </div>
-
-      {/* Usage Example */}
-      <div className="space-y-4">
-        <h2 className="text-2xl font-semibold">Usage</h2>
-        <div className="space-y-4">
-          <h3 className="text-lg font-medium">PayloadCMS Configuration</h3>
-          <div className="relative">
-            <pre className="bg-muted p-4 rounded-md overflow-x-auto text-sm">
-              <code>{`// payload.config.ts
-import { FeatureStepsBlock } from './blocks/feature-steps-block'
+      <Card>
+        <CardHeader>
+          <CardTitle>Installation</CardTitle>
+          <CardDescription>
+            Add the Feature Steps block to your PayloadCMS project using the PayloadKit CLI.
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <div className="space-y-4">
+            <div>
+              <h4 className="font-semibold mb-2">Install via CLI</h4>
+              <div className="relative">
+                <pre className="bg-muted p-4 rounded-lg text-sm overflow-x-auto">
+                  <code>payloadkit add feature-steps-block</code>
+                </pre>
+                <CopyButton text="payloadkit add feature-steps-block" />
+              </div>
+            </div>
+            <div>
+              <h4 className="font-semibold mb-2">Add to your PayloadCMS config</h4>
+              <pre className="bg-muted p-4 rounded-lg text-sm overflow-x-auto">
+                <code>{`import { FeatureStepsBlock } from './blocks/feature-steps-block'
 
 export default buildConfig({
   // ... other config
-  blocks: [
-    FeatureStepsBlock,
-    // ... other blocks
+  collections: [
+    {
+      slug: 'pages',
+      fields: [
+        {
+          name: 'layout',
+          type: 'blocks',
+          blocks: [FeatureStepsBlock], // Add here
+        },
+      ],
+    },
   ],
 })`}</code>
-            </pre>
-            <CopyButton text={`// payload.config.ts
-import { FeatureStepsBlock } from './blocks/feature-steps-block'
-
-export default buildConfig({
-  // ... other config
-  blocks: [
-    FeatureStepsBlock,
-    // ... other blocks
-  ],
-})`} />
+              </pre>
+            </div>
           </div>
-        </div>
+        </CardContent>
+      </Card>
 
-        <div className="space-y-4">
-          <h3 className="text-lg font-medium">Frontend Component</h3>
-          <div className="relative">
-            <pre className="bg-muted p-4 rounded-md overflow-x-auto text-sm">
-              <code>{`// components/FeatureSteps.tsx
-import { FeatureStepsBlockComponent } from './blocks/feature-steps-block'
+      {/* Features */}
+      <Card>
+        <CardHeader>
+          <CardTitle>Features</CardTitle>
+          <CardDescription>
+            Everything included with the Feature Steps Block component.
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <div className="grid gap-2">
+            {features.map((feature, index) => (
+              <div key={index} className="flex items-start gap-3">
+                <Check className="h-5 w-5 text-green-600 mt-0.5 flex-shrink-0" />
+                <span className="text-sm">{feature}</span>
+              </div>
+            ))}
+          </div>
+        </CardContent>
+      </Card>
 
-const exampleSteps = [
-  {
-    icon: 'target',
-    title: 'Define Your Goals',
-    description: 'Set clear, measurable objectives for your project.'
-  },
-  {
-    icon: 'lightbulb',
-    title: 'Plan Your Strategy',
-    description: 'Develop a comprehensive plan to achieve your goals.'
-  },
-  {
-    icon: 'rocket',
-    title: 'Execute & Launch',
-    description: 'Implement your plan and launch your project.'
-  }
-]
+      {/* Usage Examples */}
+      <div>
+        <h2 className="text-2xl font-bold mb-6">Usage Examples</h2>
+        <Tabs defaultValue="basic" className="w-full">
+          <TabsList className="grid w-full grid-cols-3">
+            <TabsTrigger value="basic">Basic Usage</TabsTrigger>
+            <TabsTrigger value="advanced">Advanced Setup</TabsTrigger>
+            <TabsTrigger value="frontend">Frontend Component</TabsTrigger>
+          </TabsList>
 
-export function FeatureSteps() {
-  return (
-    <FeatureStepsBlockComponent
-      title="How It Works"
-      stepsLayout="grid-3"
-      showStepNumbers={true}
-      steps={exampleSteps}
-      showAdvantages={true}
-      advantages={[
-        { text: "Easy to follow process" },
-        { text: "Proven methodology" },
-        { text: "Expert guidance" }
-      ]}
-    />
-  )
+          <TabsContent value="basic" className="space-y-4">
+            <Card>
+              <CardHeader>
+                <CardTitle>Basic Implementation</CardTitle>
+                <CardDescription>Simple feature steps with minimal configuration</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="relative">
+                  <pre className="bg-muted p-4 rounded-lg text-sm overflow-x-auto">
+                    <code>{`// Minimal setup
+<FeatureStepsBlockComponent
+  title="How It Works"
+  steps={[
+    { icon: 'target', title: 'Step 1', description: 'First step description' },
+    { icon: 'lightbulb', title: 'Step 2', description: 'Second step description' }
+  ]}
+/>`}</code>
+                  </pre>
+                  <CopyButton text={`// Minimal setup
+<FeatureStepsBlockComponent
+  title="How It Works"
+  steps={[
+    { icon: 'target', title: 'Step 1', description: 'First step description' },
+    { icon: 'lightbulb', title: 'Step 2', description: 'Second step description' }
+  ]}
+/>`} />
+                </div>
+              </CardContent>
+            </Card>
+          </TabsContent>
+
+          <TabsContent value="advanced" className="space-y-4">
+            <Card>
+              <CardHeader>
+                <CardTitle>Advanced Configuration</CardTitle>
+                <CardDescription>Full configuration with all available options</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="relative">
+                  <pre className="bg-muted p-4 rounded-lg text-sm overflow-x-auto">
+                    <code>{codeExample}</code>
+                  </pre>
+                  <CopyButton text={codeExample} />
+                </div>
+              </CardContent>
+            </Card>
+          </TabsContent>
+
+          <TabsContent value="frontend" className="space-y-4">
+            <Card>
+              <CardHeader>
+                <CardTitle>Frontend Implementation</CardTitle>
+                <CardDescription>How to render the Feature Steps block in your React components</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="relative">
+                  <pre className="bg-muted p-4 rounded-lg text-sm overflow-x-auto">
+                    <code>{`// src/blocks/RenderBlocks.tsx
+import { FeatureStepsBlockComponent } from './feature-steps-block/Component'
+
+const blockComponents = {
+  'feature-steps-block': FeatureStepsBlockComponent,
+  // ... other blocks
+}
+
+export function RenderBlocks({ blocks }) {
+  return blocks?.map((block, index) => {
+    const BlockComponent = blockComponents[block.blockType]
+    if (!BlockComponent) return null
+
+    return <BlockComponent key={index} {...block} />
+  })
 }`}</code>
-            </pre>
-            <CopyButton text={`// components/FeatureSteps.tsx
-import { FeatureStepsBlockComponent } from './blocks/feature-steps-block'
+                  </pre>
+                  <CopyButton text={`// src/blocks/RenderBlocks.tsx
+import { FeatureStepsBlockComponent } from './feature-steps-block/Component'
 
-const exampleSteps = [
-  {
-    icon: 'target',
-    title: 'Define Your Goals',
-    description: 'Set clear, measurable objectives for your project.'
-  },
-  {
-    icon: 'lightbulb',
-    title: 'Plan Your Strategy',
-    description: 'Develop a comprehensive plan to achieve your goals.'
-  },
-  {
-    icon: 'rocket',
-    title: 'Execute & Launch',
-    description: 'Implement your plan and launch your project.'
-  }
-]
+const blockComponents = {
+  'feature-steps-block': FeatureStepsBlockComponent,
+  // ... other blocks
+}
 
-export function FeatureSteps() {
-  return (
-    <FeatureStepsBlockComponent
-      title="How It Works"
-      stepsLayout="grid-3"
-      showStepNumbers={true}
-      steps={exampleSteps}
-      showAdvantages={true}
-      advantages={[
-        { text: "Easy to follow process" },
-        { text: "Proven methodology" },
-        { text: "Expert guidance" }
-      ]}
-    />
-  )
+export function RenderBlocks({ blocks }) {
+  return blocks?.map((block, index) => {
+    const BlockComponent = blockComponents[block.blockType]
+    if (!BlockComponent) return null
+
+    return <BlockComponent key={index} {...block} />
+  })
 }`} />
-          </div>
-        </div>
+                </div>
+              </CardContent>
+            </Card>
+          </TabsContent>
+        </Tabs>
       </div>
 
       {/* Props */}
-      <div className="space-y-4">
-        <h2 className="text-2xl font-semibold">Props</h2>
-        <div className="overflow-x-auto">
-          <table className="w-full border-collapse border border-border">
-            <thead>
-              <tr className="border-b border-border bg-muted/50">
-                <th className="border border-border px-4 py-2 text-left">Prop</th>
-                <th className="border border-border px-4 py-2 text-left">Type</th>
-                <th className="border border-border px-4 py-2 text-left">Default</th>
-                <th className="border border-border px-4 py-2 text-left">Description</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td className="border border-border px-4 py-2 font-mono text-sm">sectionLayout</td>
-                <td className="border border-border px-4 py-2 text-sm">'stacked' | 'two-column'</td>
-                <td className="border border-border px-4 py-2 text-sm">'stacked'</td>
-                <td className="border border-border px-4 py-2 text-sm">Overall section layout</td>
-              </tr>
-              <tr>
-                <td className="border border-border px-4 py-2 font-mono text-sm">stepsLayout</td>
-                <td className="border border-border px-4 py-2 text-sm">'grid-2' | 'grid-3' | 'grid-4' | 'vertical' | 'stair'</td>
-                <td className="border border-border px-4 py-2 text-sm">'grid-3'</td>
-                <td className="border border-border px-4 py-2 text-sm">Layout for steps section</td>
-              </tr>
-              <tr>
-                <td className="border border-border px-4 py-2 font-mono text-sm">cardStyle</td>
-                <td className="border border-border px-4 py-2 text-sm">'elevated' | 'flat' | 'minimal'</td>
-                <td className="border border-border px-4 py-2 text-sm">'elevated'</td>
-                <td className="border border-border px-4 py-2 text-sm">Visual style for step cards</td>
-              </tr>
-              <tr>
-                <td className="border border-border px-4 py-2 font-mono text-sm">showStepNumbers</td>
-                <td className="border border-border px-4 py-2 text-sm">boolean</td>
-                <td className="border border-border px-4 py-2 text-sm">true</td>
-                <td className="border border-border px-4 py-2 text-sm">Show numbered step indicators</td>
-              </tr>
-              <tr>
-                <td className="border border-border px-4 py-2 font-mono text-sm">steps</td>
-                <td className="border border-border px-4 py-2 text-sm">Step[]</td>
-                <td className="border border-border px-4 py-2 text-sm">[]</td>
-                <td className="border border-border px-4 py-2 text-sm">Array of step objects</td>
-              </tr>
-              <tr>
-                <td className="border border-border px-4 py-2 font-mono text-sm">showAdvantages</td>
-                <td className="border border-border px-4 py-2 text-sm">boolean</td>
-                <td className="border border-border px-4 py-2 text-sm">true</td>
-                <td className="border border-border px-4 py-2 text-sm">Show advantages section</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
+      <Card>
+        <CardHeader>
+          <CardTitle>Component Props</CardTitle>
+          <CardDescription>Available props for the Feature Steps Block component</CardDescription>
+        </CardHeader>
+        <CardContent>
+          <div className="space-y-6">
+            <div className="space-y-4">
+              <div className="grid gap-4">
+                <div className="space-y-3 p-4 border rounded-lg">
+                  <div className="flex items-center justify-between">
+                    <code className="text-sm font-mono bg-muted px-2 py-1 rounded">sectionLayout</code>
+                    <Badge variant="outline">Optional</Badge>
+                  </div>
+                  <div className="space-y-1">
+                    <p className="text-sm"><strong>Type:</strong> 'stacked' | 'two-column'</p>
+                    <p className="text-sm"><strong>Default:</strong> 'stacked'</p>
+                    <p className="text-sm text-muted-foreground">Overall section layout</p>
+                  </div>
+                </div>
+
+                <div className="space-y-3 p-4 border rounded-lg">
+                  <div className="flex items-center justify-between">
+                    <code className="text-sm font-mono bg-muted px-2 py-1 rounded">stepsLayout</code>
+                    <Badge variant="outline">Optional</Badge>
+                  </div>
+                  <div className="space-y-1">
+                    <p className="text-sm"><strong>Type:</strong> 'grid-2' | 'grid-3' | 'grid-4' | 'vertical' | 'stair'</p>
+                    <p className="text-sm"><strong>Default:</strong> 'grid-3'</p>
+                    <p className="text-sm text-muted-foreground">Layout for steps section</p>
+                  </div>
+                </div>
+
+                <div className="space-y-3 p-4 border rounded-lg">
+                  <div className="flex items-center justify-between">
+                    <code className="text-sm font-mono bg-muted px-2 py-1 rounded">cardStyle</code>
+                    <Badge variant="outline">Optional</Badge>
+                  </div>
+                  <div className="space-y-1">
+                    <p className="text-sm"><strong>Type:</strong> 'elevated' | 'flat' | 'minimal'</p>
+                    <p className="text-sm"><strong>Default:</strong> 'elevated'</p>
+                    <p className="text-sm text-muted-foreground">Visual style for step cards</p>
+                  </div>
+                </div>
+
+                <div className="space-y-3 p-4 border rounded-lg">
+                  <div className="flex items-center justify-between">
+                    <code className="text-sm font-mono bg-muted px-2 py-1 rounded">showStepNumbers</code>
+                    <Badge variant="outline">Optional</Badge>
+                  </div>
+                  <div className="space-y-1">
+                    <p className="text-sm"><strong>Type:</strong> boolean</p>
+                    <p className="text-sm"><strong>Default:</strong> true</p>
+                    <p className="text-sm text-muted-foreground">Show numbered step indicators</p>
+                  </div>
+                </div>
+
+                <div className="space-y-3 p-4 border rounded-lg">
+                  <div className="flex items-center justify-between">
+                    <code className="text-sm font-mono bg-muted px-2 py-1 rounded">steps</code>
+                    <Badge variant="destructive">Required</Badge>
+                  </div>
+                  <div className="space-y-1">
+                    <p className="text-sm"><strong>Type:</strong> Step[]</p>
+                    <p className="text-sm text-muted-foreground">Array of step objects with icon, title, description</p>
+                  </div>
+                </div>
+
+                <div className="space-y-3 p-4 border rounded-lg">
+                  <div className="flex items-center justify-between">
+                    <code className="text-sm font-mono bg-muted px-2 py-1 rounded">showAdvantages</code>
+                    <Badge variant="outline">Optional</Badge>
+                  </div>
+                  <div className="space-y-1">
+                    <p className="text-sm"><strong>Type:</strong> boolean</p>
+                    <p className="text-sm"><strong>Default:</strong> true</p>
+                    <p className="text-sm text-muted-foreground">Show advantages section</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </CardContent>
+      </Card>
 
       {/* Available Icons */}
-      <div className="space-y-4">
-        <h2 className="text-2xl font-semibold">Available Icons</h2>
-        <div className="grid grid-cols-4 md:grid-cols-8 gap-4">
-          {['target', 'message-circle', 'trending-up', 'book-open', 'lightbulb', 'zap', 'search', 'star', 'rocket', 'graduation-cap', 'settings', 'bar-chart', 'shield', 'heart', 'trophy', 'palette'].map((icon) => (
-            <div key={icon} className="flex flex-col items-center gap-2 p-2 border rounded-md">
-              <div className="text-sm font-mono">{icon}</div>
-            </div>
-          ))}
-        </div>
-      </div>
+      <Card>
+        <CardHeader>
+          <CardTitle>Available Icons</CardTitle>
+          <CardDescription>Icons available for the steps</CardDescription>
+        </CardHeader>
+        <CardContent>
+          <div className="grid grid-cols-4 md:grid-cols-8 gap-4">
+            {icons.map((icon) => (
+              <div key={icon} className="flex flex-col items-center gap-2 p-3 border rounded-lg hover:bg-muted/50 transition-colors">
+                <div className="h-5 w-5 bg-primary/10 rounded flex items-center justify-center">
+                  <div className="w-3 h-3 bg-primary/30 rounded-full" />
+                </div>
+                <code className="text-xs font-mono text-center">{icon}</code>
+              </div>
+            ))}
+          </div>
+        </CardContent>
+      </Card>
     </div>
   )
 }

@@ -1,4 +1,12 @@
 import { Metadata } from 'next'
+import Link from 'next/link'
+import { Button } from '@/components/ui/button'
+import { Badge } from '@/components/ui/badge'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
+import { Separator } from '@/components/ui/separator'
+import { ArrowLeft, FileText, Check, Info } from 'lucide-react'
 import { CopyButton } from '@/components/copy-button'
 
 export const metadata: Metadata = {
@@ -8,16 +16,31 @@ export const metadata: Metadata = {
 
 export default function OutlineBlockPage() {
   return (
-    <div className="space-y-6">
+    <div className="space-y-8">
       {/* Header */}
-      <div className="space-y-3">
-        <div className="flex items-center gap-2">
-          <h1 className="text-3xl font-bold">Outline Block</h1>
-          <span className="px-2 py-1 text-xs font-medium bg-green-100 text-green-800 rounded-full dark:bg-green-900 dark:text-green-300">
-            New
-          </span>
+      <div>
+        <div className="flex items-center gap-2 mb-4">
+          <Button variant="ghost" size="sm" asChild>
+            <Link href="/docs/blocks">
+              <ArrowLeft className="mr-2 h-4 w-4" />
+              Back to Blocks
+            </Link>
+          </Button>
         </div>
-        <p className="text-lg text-muted-foreground">
+        <div className="flex items-center gap-4 mb-4">
+          <div className="flex items-center justify-center w-12 h-12 rounded-lg bg-primary/10">
+            <FileText className="h-6 w-6 text-primary" />
+          </div>
+          <div>
+            <h1 className="text-4xl font-bold tracking-tight">Outline Block</h1>
+            <div className="flex items-center gap-2 mt-2">
+              <Badge>Content</Badge>
+              <Badge variant="outline">v0.1.0</Badge>
+              <Badge variant="secondary">New</Badge>
+            </div>
+          </div>
+        </div>
+        <p className="text-xl text-muted-foreground">
           Automatic table of contents generator with multiple positioning options, styles, and interactive features. Perfect for long-form content, documentation, and articles.
         </p>
       </div>

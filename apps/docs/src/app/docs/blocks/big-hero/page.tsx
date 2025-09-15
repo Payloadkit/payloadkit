@@ -1,4 +1,12 @@
 import { Metadata } from 'next'
+import Link from 'next/link'
+import { Button } from '@/components/ui/button'
+import { Badge } from '@/components/ui/badge'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
+import { Separator } from '@/components/ui/separator'
+import { ArrowLeft, Monitor, Check, AlertTriangle, Info } from 'lucide-react'
 import { CopyButton } from '@/components/copy-button'
 
 export const metadata: Metadata = {
@@ -6,79 +14,155 @@ export const metadata: Metadata = {
   description: 'Advanced hero section with full customization options including video backgrounds, animations, and flexible content positioning. Perfect for impactful landing pages and marketing websites.',
 }
 
+const features = [
+  '5 viewport height options: 100vh, 90vh, 80vh, 70vh, auto',
+  '5 content positioning options: center, top-center, bottom-center, left-center, right-center',
+  '5 background types: color, gradient, image, video, none',
+  'Video background support with poster image fallback',
+  'Background overlay with customizable color and opacity',
+  '3 text color themes: white, dark, primary',
+  '5 title size options: sm, md, lg, xl, hero',
+  'Parallax scrolling effect for background elements',
+  'Smooth scroll indicator with bounce animation',
+  'Up to 2 customizable call-to-action buttons'
+]
+
 export default function BigHeroPage() {
+  const codeExample = `// components/BigHero.tsx
+import { BigHeroComponent } from './blocks/big-hero'
+
+export function BigHero() {
   return (
-    <div className="space-y-6">
+    <BigHeroComponent
+      title="Welcome to the Future"
+      subtitle="Experience the next generation of technology"
+      height="100vh"
+      contentPosition="center"
+      background={{
+        type: 'video',
+        videoUrl: '/hero-video.mp4',
+        videoPoster: '/hero-poster.jpg'
+      }}
+      overlay={{
+        enabled: true,
+        color: '#000000',
+        opacity: 0.4
+      }}
+      textColor="white"
+      titleSize="hero"
+      showScrollIndicator={true}
+      callToActions={[
+        {
+          label: 'Get Started',
+          url: '/signup',
+          appearance: 'primary',
+          size: 'lg'
+        },
+        {
+          label: 'Learn More',
+          url: '/about',
+          appearance: 'outline',
+          size: 'lg'
+        }
+      ]}
+    />
+  )
+}`
+
+  return (
+    <div className="space-y-8">
       {/* Header */}
-      <div className="space-y-3">
-        <div className="flex items-center gap-2">
-          <h1 className="text-3xl font-bold">Big Hero Block</h1>
-          <span className="px-2 py-1 text-xs font-medium bg-green-100 text-green-800 rounded-full dark:bg-green-900 dark:text-green-300">
-            New
-          </span>
+      <div>
+        <div className="flex items-center gap-2 mb-4">
+          <Button variant="ghost" size="sm" asChild>
+            <Link href="/docs/blocks">
+              <ArrowLeft className="mr-2 h-4 w-4" />
+              Back to Blocks
+            </Link>
+          </Button>
         </div>
-        <p className="text-lg text-muted-foreground">
+        <div className="flex items-center gap-4 mb-4">
+          <div className="flex items-center justify-center w-12 h-12 rounded-lg bg-primary/10">
+            <Monitor className="h-6 w-6 text-primary" />
+          </div>
+          <div>
+            <h1 className="text-4xl font-bold tracking-tight">Big Hero Block</h1>
+            <div className="flex items-center gap-2 mt-2">
+              <Badge>Hero</Badge>
+              <Badge variant="outline">v0.1.0</Badge>
+              <Badge variant="secondary">New</Badge>
+            </div>
+          </div>
+        </div>
+        <p className="text-xl text-muted-foreground">
           Advanced hero section with full customization options including video backgrounds, animations, and flexible content positioning. Perfect for impactful landing pages and marketing websites.
         </p>
       </div>
 
       {/* Installation */}
-      <div className="space-y-4">
-        <h2 className="text-2xl font-semibold">Installation</h2>
-        <div className="relative">
-          <pre className="bg-muted p-4 rounded-md overflow-x-auto">
-            <code>payloadkit add big-hero</code>
-          </pre>
-          <CopyButton text="payloadkit add big-hero" />
-        </div>
-      </div>
+      <Card>
+        <CardHeader>
+          <CardTitle>Installation</CardTitle>
+          <CardDescription>
+            Add the Big Hero block to your PayloadCMS project using the PayloadKit CLI.
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <div className="space-y-4">
+            <div>
+              <h4 className="font-semibold mb-2">Install via CLI</h4>
+              <div className="relative">
+                <pre className="bg-muted p-4 rounded-lg text-sm overflow-x-auto">
+                  <code>payloadkit add big-hero</code>
+                </pre>
+                <CopyButton text="payloadkit add big-hero" />
+              </div>
+            </div>
+            <div>
+              <h4 className="font-semibold mb-2">Add to your PayloadCMS config</h4>
+              <pre className="bg-muted p-4 rounded-lg text-sm overflow-x-auto">
+                <code>{`import { BigHero } from './blocks/big-hero'
+
+export default buildConfig({
+  // ... other config
+  collections: [
+    {
+      slug: 'pages',
+      fields: [
+        {
+          name: 'layout',
+          type: 'blocks',
+          blocks: [BigHero], // Add here
+        },
+      ],
+    },
+  ],
+})`}</code>
+              </pre>
+            </div>
+          </div>
+        </CardContent>
+      </Card>
 
       {/* Features */}
-      <div className="space-y-4">
-        <h2 className="text-2xl font-semibold">Features</h2>
-        <div className="grid gap-3">
-          <div className="flex items-start gap-2">
-            <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0" />
-            <span>5 viewport height options: 100vh, 90vh, 80vh, 70vh, auto</span>
+      <Card>
+        <CardHeader>
+          <CardTitle>Features</CardTitle>
+          <CardDescription>
+            Everything included with the Big Hero Block component.
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <div className="grid gap-2">
+            {features.map((feature, index) => (
+              <div key={index} className="flex items-start gap-3">
+                <Check className="h-5 w-5 text-green-600 mt-0.5 flex-shrink-0" />
+                <span className="text-sm">{feature}</span>
+              </div>
+            ))}
           </div>
-          <div className="flex items-start gap-2">
-            <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0" />
-            <span>5 content positioning options: center, top-center, bottom-center, left-center, right-center</span>
-          </div>
-          <div className="flex items-start gap-2">
-            <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0" />
-            <span>5 background types: color, gradient, image, video, none</span>
-          </div>
-          <div className="flex items-start gap-2">
-            <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0" />
-            <span>Video background support with poster image fallback</span>
-          </div>
-          <div className="flex items-start gap-2">
-            <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0" />
-            <span>Background overlay with customizable color and opacity</span>
-          </div>
-          <div className="flex items-start gap-2">
-            <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0" />
-            <span>3 text color themes: white, dark, primary</span>
-          </div>
-          <div className="flex items-start gap-2">
-            <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0" />
-            <span>5 title size options: sm, md, lg, xl, hero</span>
-          </div>
-          <div className="flex items-start gap-2">
-            <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0" />
-            <span>Parallax scrolling effect for background elements</span>
-          </div>
-          <div className="flex items-start gap-2">
-            <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0" />
-            <span>Smooth scroll indicator with bounce animation</span>
-          </div>
-          <div className="flex items-start gap-2">
-            <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0" />
-            <span>Up to 2 customizable call-to-action buttons</span>
-          </div>
-        </div>
-      </div>
+        </CardContent>
+      </Card>
 
       {/* Usage Example */}
       <div className="space-y-4">
