@@ -23,8 +23,11 @@ interface SyntaxHighlighterProps {
 
 export function SyntaxHighlighter({ code, language, className = '' }: SyntaxHighlighterProps) {
   const [highlightedCode, setHighlightedCode] = useState('')
+  const [isClient, setIsClient] = useState(false)
 
   useEffect(() => {
+    setIsClient(true)
+
     // Map common language aliases
     const languageMap: Record<string, string> = {
       'tsx': 'tsx',
@@ -60,11 +63,20 @@ export function SyntaxHighlighter({ code, language, className = '' }: SyntaxHigh
     }
   }, [code, language])
 
+  // Server-side rendering: show plain code
+  if (!isClient) {
+    return (
+      <pre className={`${className} p-4 rounded-lg font-mono text-sm`}>
+        <code>{code}</code>
+      </pre>
+    )
+  }
+
+  // Client-side rendering: show highlighted code
   return (
-    <pre className={`language-${language.toLowerCase()} ${className} p-4 rounded-lg`}>
+    <pre className={`${className} p-4 rounded-lg font-mono text-sm`}>
       <code
-        className={`language-${language.toLowerCase()}`}
-        dangerouslySetInnerHTML={{ __html: highlightedCode }}
+        dangerouslySetInnerHTML={{ __html: highlightedCode || code }}
       />
     </pre>
   )
