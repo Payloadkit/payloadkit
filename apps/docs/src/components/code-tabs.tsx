@@ -75,11 +75,11 @@ export function CodeTabs({
 
         <TabsContent value="code" className="mt-0">
           <div className="relative rounded-t-none border border-t-0 rounded-b-lg bg-muted/50">
-            <div className="p-4 overflow-x-auto text-sm">
+            <div className="overflow-x-auto text-sm">
               <SyntaxHighlighter
                 code={code}
                 language={language}
-                className="!bg-transparent !p-0 !m-0"
+                className="!bg-transparent !m-0"
               />
             </div>
           </div>
@@ -114,11 +114,11 @@ export function CodeBlock({
         </div>
 
         <div className="bg-muted/50 border border-t-0 rounded-t-none rounded-b-lg">
-          <div className="p-4 overflow-x-auto text-sm">
+          <div className="overflow-x-auto text-sm">
             <SyntaxHighlighter
               code={code}
               language={language}
-              className="!bg-transparent !p-0 !m-0"
+              className="!bg-transparent !m-0"
             />
           </div>
         </div>

@@ -12,8 +12,8 @@ import 'prismjs/components/prism-json'
 import 'prismjs/components/prism-bash'
 import 'prismjs/components/prism-shell-session'
 
-// Import theme CSS
-import 'prismjs/themes/prism-tomorrow.css'
+// Import theme CSS - using light theme for better readability
+import 'prismjs/themes/prism.css'
 
 interface SyntaxHighlighterProps {
   code: string
@@ -61,7 +61,7 @@ export function SyntaxHighlighter({ code, language, className = '' }: SyntaxHigh
   }, [code, language])
 
   return (
-    <pre className={`language-${language.toLowerCase()} ${className}`}>
+    <pre className={`language-${language.toLowerCase()} ${className} p-4 rounded-lg`}>
       <code
         className={`language-${language.toLowerCase()}`}
         dangerouslySetInnerHTML={{ __html: highlightedCode }}

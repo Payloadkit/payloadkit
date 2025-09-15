@@ -102,6 +102,7 @@ export function ComponentPreview({
               <TabsTrigger
                 value="component"
                 className="flex items-center gap-2 data-[state=active]:bg-background data-[state=active]:shadow-sm"
+                title="React component code for frontend rendering"
               >
                 <Code2 className="h-3 w-3" />
                 Component
@@ -111,6 +112,7 @@ export function ComponentPreview({
               <TabsTrigger
                 value="config"
                 className="flex items-center gap-2 data-[state=active]:bg-background data-[state=active]:shadow-sm"
+                title="PayloadCMS block/field configuration"
               >
                 <Settings className="h-3 w-3" />
                 Config
@@ -120,6 +122,7 @@ export function ComponentPreview({
               <TabsTrigger
                 value="usage"
                 className="flex items-center gap-2 data-[state=active]:bg-background data-[state=active]:shadow-sm"
+                title="How to use this component in your project"
               >
                 <Code2 className="h-3 w-3" />
                 Usage
@@ -191,11 +194,16 @@ export function ComponentPreview({
         {code.component && (
           <TabsContent value="component" className="mt-0">
             <div className="relative rounded-t-none border border-t-0 rounded-b-lg bg-muted/50">
-              <div className="p-4 overflow-x-auto text-sm">
+              <div className="px-4 pt-3 pb-1">
+                <p className="text-xs text-muted-foreground mb-2">
+                  React component code • Create file: <code className="bg-primary/10 text-primary px-1.5 py-0.5 rounded text-xs font-mono">src/components/blocks/faq-block/Component.tsx</code>
+                </p>
+              </div>
+              <div className="overflow-x-auto text-sm">
                 <SyntaxHighlighter
                   code={code.component}
                   language="tsx"
-                  className="!bg-transparent !p-0 !m-0"
+                  className="!bg-transparent !m-0"
                 />
               </div>
             </div>
@@ -206,11 +214,16 @@ export function ComponentPreview({
         {code.config && (
           <TabsContent value="config" className="mt-0">
             <div className="relative rounded-t-none border border-t-0 rounded-b-lg bg-muted/50">
-              <div className="p-4 overflow-x-auto text-sm">
+              <div className="px-4 pt-3 pb-1">
+                <p className="text-xs text-muted-foreground mb-2">
+                  PayloadCMS configuration • Add to file: <code className="bg-primary/10 text-primary px-1.5 py-0.5 rounded text-xs font-mono">src/payload.config.ts</code>
+                </p>
+              </div>
+              <div className="overflow-x-auto text-sm">
                 <SyntaxHighlighter
                   code={code.config}
                   language="typescript"
-                  className="!bg-transparent !p-0 !m-0"
+                  className="!bg-transparent !m-0"
                 />
               </div>
             </div>
@@ -221,11 +234,16 @@ export function ComponentPreview({
         {code.usage && (
           <TabsContent value="usage" className="mt-0">
             <div className="relative rounded-t-none border border-t-0 rounded-b-lg bg-muted/50">
-              <div className="p-4 overflow-x-auto text-sm">
+              <div className="px-4 pt-3 pb-1">
+                <p className="text-xs text-muted-foreground mb-2">
+                  Usage example • Implement in: <code className="bg-primary/10 text-primary px-1.5 py-0.5 rounded text-xs font-mono">src/app/[...slug]/page.tsx</code>
+                </p>
+              </div>
+              <div className="overflow-x-auto text-sm">
                 <SyntaxHighlighter
                   code={code.usage}
                   language="tsx"
-                  className="!bg-transparent !p-0 !m-0"
+                  className="!bg-transparent !m-0"
                 />
               </div>
             </div>
@@ -287,11 +305,11 @@ export function SimplePreview({
           <CopyButton text={code} />
         </div>
         <div className="bg-muted/50 border border-t-0 rounded-t-none rounded-b-lg">
-          <div className="p-4 overflow-x-auto text-sm">
+          <div className="overflow-x-auto text-sm">
             <SyntaxHighlighter
               code={code}
               language={language}
-              className="!bg-transparent !p-0 !m-0"
+              className="!bg-transparent !m-0"
             />
           </div>
         </div>
