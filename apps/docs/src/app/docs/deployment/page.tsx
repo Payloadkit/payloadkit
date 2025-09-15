@@ -32,7 +32,7 @@ export default function DeploymentPage() {
       <PageDescription
         title="Deployment"
         description="PayloadKit simplifies VPS deployment by automatically managing differences between build-time and runtime database connections."
-        category="guide"
+        category="guides"
         version="0.1.0"
         difficulty="advanced"
         estimatedTime="20 minutes"
@@ -121,7 +121,6 @@ ERROR: Connection failed to postgresql://prod:pass@private-host:5432/db`}
       {/* VPS Configuration Tutorial */}
       <TutorialSteps
         title="VPS Configuration"
-        description="Set up your VPS deployment with PayloadKit's smart database detection"
         steps={[
           {
             title: 'Environment Variables',

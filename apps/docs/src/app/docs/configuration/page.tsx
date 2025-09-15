@@ -32,7 +32,7 @@ export default function ConfigurationPage() {
       <PageDescription
         title="Configuration"
         description="PayloadKit uses a modular configuration architecture that divides PayloadCMS configuration into reusable and maintainable modules."
-        category="guide"
+        category="guides"
         version="0.1.0"
         difficulty="intermediate"
         estimatedTime="15 minutes"
@@ -85,7 +85,6 @@ export default function ConfigurationPage() {
       {/* Setup Tutorial */}
       <TutorialSteps
         title="Basic Configuration Setup"
-        description="Set up modular configuration in your PayloadKit project"
         steps={[
           {
             title: 'Add Configuration',
@@ -294,7 +293,6 @@ DATABASE_URI=postgresql://localhost:5432/payloadkit_dev`}
       {/* Configuration Extension */}
       <TutorialSteps
         title="Extending Configuration"
-        description="Add custom collections, plugins, and other configurations"
         steps={[
           {
             title: 'Custom Collections',

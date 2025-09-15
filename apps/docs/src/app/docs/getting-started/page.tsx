@@ -31,7 +31,7 @@ export default function GettingStartedPage() {
       <PageDescription
         title="Getting Started"
         description="Set up your PayloadCMS project with PayloadKit in minutes. Choose between a new project or adding PayloadKit to an existing one."
-        category="guide"
+        category="guides"
         version="0.1.0"
         difficulty="beginner"
         estimatedTime="5 minutes"
@@ -41,7 +41,6 @@ export default function GettingStartedPage() {
       {/* Quick Installation Steps */}
       <TutorialSteps
         title="Quick Installation"
-        description="Choose your installation method and get started quickly"
         steps={[
           {
             title: 'New Project',
@@ -98,7 +97,6 @@ npx payloadkit add db-config  # Smart configuration`}
       {/* Environment Setup */}
       <TutorialSteps
         title="Choose Your Development Environment"
-        description="PayloadKit supports multiple development environments to match your workflow"
         steps={[
           {
             title: 'Standard Local',

@@ -46,7 +46,7 @@ export default function ExamplesPage() {
       <PageDescription
         title="Examples"
         description="Real-world examples and templates to get you started with PayloadKit quickly."
-        category="guide"
+        category="guides"
         version="0.1.0"
         difficulty="beginner"
         estimatedTime="5 minutes"
