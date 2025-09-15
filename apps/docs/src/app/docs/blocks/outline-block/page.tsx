@@ -1,345 +1,607 @@
 import { Metadata } from 'next'
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
-import { Badge } from '@/components/ui/badge'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
-import { Separator } from '@/components/ui/separator'
-import { ArrowLeft, FileText, Check, Info } from 'lucide-react'
-import { CopyButton } from '@/components/copy-button'
-import { CodeTabs } from '@/components/code-tabs'
+import { ArrowLeft } from 'lucide-react'
+import { PageDescription } from '@/components/page-description'
+import { ComponentPreview } from '@/components/component-preview'
+import { Snippet } from '@/components/snippet'
+import { TutorialSteps } from '@/components/tutorial-steps'
+import { CodeBlock } from '@/components/code-tabs'
+import { ApiReference } from '@/components/api-reference'
+import { PageTags } from '@/components/page-tags'
 
 export const metadata: Metadata = {
-  title: 'Outline Block',
+  title: 'Outline Block - PayloadKit',
   description: 'Automatic table of contents generator with multiple positioning options, styles, and interactive features. Perfect for long-form content, documentation, and articles.',
+}
+
+// Demo components
+function OutlineInline() {
+  return (
+    <div className="space-y-6 p-6 border rounded-lg bg-background">
+      <div className="space-y-3">
+        <h2 className="text-xl font-bold">Table of Contents</h2>
+        <p className="text-sm text-muted-foreground">Inline placement within content flow</p>
+      </div>
+      <div className="space-y-3 border rounded-lg p-4 bg-card">
+        <div className="flex items-center gap-3 p-2 hover:bg-muted/50 rounded cursor-pointer">
+          <div className="w-2 h-2 bg-primary rounded-full" />
+          <span className="text-sm font-medium">Introduction</span>
+        </div>
+        <div className="flex items-center gap-3 p-2 hover:bg-muted/50 rounded cursor-pointer ml-4">
+          <div className="w-2 h-2 bg-muted-foreground/40 rounded-full" />
+          <span className="text-sm text-muted-foreground">Getting Started</span>
+        </div>
+        <div className="flex items-center gap-3 p-2 hover:bg-muted/50 rounded cursor-pointer ml-4">
+          <div className="w-2 h-2 bg-muted-foreground/40 rounded-full" />
+          <span className="text-sm text-muted-foreground">Installation</span>
+        </div>
+        <div className="flex items-center gap-3 p-2 hover:bg-muted/50 rounded cursor-pointer">
+          <div className="w-2 h-2 bg-muted-foreground/40 rounded-full" />
+          <span className="text-sm text-muted-foreground">Configuration</span>
+        </div>
+        <div className="flex items-center gap-3 p-2 hover:bg-muted/50 rounded cursor-pointer ml-4">
+          <div className="w-2 h-2 bg-muted-foreground/40 rounded-full" />
+          <span className="text-sm text-muted-foreground">Basic Setup</span>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+function OutlineStickyRight() {
+  return (
+    <div className="flex gap-6 p-6 border rounded-lg bg-background min-h-[400px]">
+      <div className="flex-1 space-y-4">
+        <div className="space-y-2">
+          <h2 className="text-xl font-bold">Article Content</h2>
+          <p className="text-sm text-muted-foreground">Main content area with headings and sections.</p>
+        </div>
+        <div className="space-y-6">
+          <div className="p-4 border rounded bg-muted/30">
+            <h3 className="font-semibold mb-2">Introduction</h3>
+            <p className="text-sm text-muted-foreground">Lorem ipsum dolor sit amet, consectetur adipiscing elit...</p>
+          </div>
+          <div className="p-4 border rounded bg-muted/20">
+            <h3 className="font-semibold mb-2">Getting Started</h3>
+            <p className="text-sm text-muted-foreground">Sed do eiusmod tempor incididunt ut labore...</p>
+          </div>
+          <div className="p-4 border rounded bg-muted/20">
+            <h3 className="font-semibold mb-2">Configuration</h3>
+            <p className="text-sm text-muted-foreground">Ut enim ad minim veniam, quis nostrud...</p>
+          </div>
+        </div>
+      </div>
+      <div className="w-64 sticky top-4 h-fit">
+        <div className="p-4 border rounded-lg bg-card shadow-sm">
+          <h4 className="font-semibold text-sm mb-3">Contents</h4>
+          <div className="space-y-2">
+            <div className="flex items-center gap-2 p-1 bg-primary/10 text-primary rounded text-sm">
+              <div className="w-1 h-4 bg-primary rounded" />
+              <span className="font-medium">Introduction</span>
+            </div>
+            <div className="flex items-center gap-2 p-1 hover:bg-muted/50 rounded text-sm cursor-pointer">
+              <div className="w-1 h-4 bg-transparent" />
+              <span>Getting Started</span>
+            </div>
+            <div className="flex items-center gap-2 p-1 hover:bg-muted/50 rounded text-sm cursor-pointer">
+              <div className="w-1 h-4 bg-transparent" />
+              <span>Configuration</span>
+            </div>
+          </div>
+          <div className="mt-4 pt-3 border-t">
+            <div className="text-xs text-muted-foreground mb-1">Reading progress</div>
+            <div className="w-full bg-muted rounded-full h-1">
+              <div className="bg-primary h-1 rounded-full w-1/3"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+function OutlineFloating() {
+  return (
+    <div className="relative p-6 border rounded-lg bg-background min-h-[400px]">
+      <div className="space-y-4">
+        <div className="space-y-2">
+          <h2 className="text-xl font-bold">Mobile-First Design</h2>
+          <p className="text-sm text-muted-foreground">Floating outline that adapts to different screen sizes.</p>
+        </div>
+        <div className="grid gap-4">
+          <div className="p-4 border rounded bg-muted/30">
+            <h3 className="font-semibold mb-2">Overview</h3>
+            <p className="text-sm text-muted-foreground">Content section with responsive design...</p>
+          </div>
+          <div className="p-4 border rounded bg-muted/20">
+            <h3 className="font-semibold mb-2">Features</h3>
+            <p className="text-sm text-muted-foreground">Key features and capabilities...</p>
+          </div>
+        </div>
+      </div>
+
+      {/* Floating TOC */}
+      <div className="absolute top-4 right-4 w-48 bg-card border rounded-lg shadow-lg p-3">
+        <div className="flex items-center justify-between mb-2">
+          <h4 className="font-semibold text-xs">TOC</h4>
+          <button className="p-1 hover:bg-muted rounded">
+            <div className="w-3 h-3 border rounded-sm bg-muted-foreground/20" />
+          </button>
+        </div>
+        <div className="space-y-1">
+          {['Overview', 'Features', 'Usage', 'Examples'].map((item, i) => (
+            <div key={i} className={`px-2 py-1 rounded text-xs cursor-pointer transition-colors ${
+              i === 0 ? 'bg-primary/10 text-primary' : 'hover:bg-muted/50'
+            }`}>
+              {item}
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  )
 }
 
 export default function OutlineBlockPage() {
   return (
     <div className="space-y-8">
-      {/* Header */}
-      <div>
-        <div className="flex items-center gap-2 mb-4">
-          <Button variant="ghost" size="sm" asChild>
-            <Link href="/docs/blocks">
-              <ArrowLeft className="mr-2 h-4 w-4" />
-              Back to Blocks
-            </Link>
-          </Button>
-        </div>
-        <div className="flex items-center gap-4 mb-4">
-          <div className="flex items-center justify-center w-12 h-12 rounded-lg bg-primary/10">
-            <FileText className="h-6 w-6 text-primary" />
-          </div>
-          <div>
-            <h1 className="text-4xl font-bold tracking-tight">Outline Block</h1>
-            <div className="flex items-center gap-2 mt-2">
-              <Badge>Content</Badge>
-              <Badge variant="outline">v0.1.0</Badge>
-              <Badge variant="secondary">New</Badge>
-            </div>
-          </div>
-        </div>
-        <p className="text-xl text-muted-foreground">
-          Automatic table of contents generator with multiple positioning options, styles, and interactive features. Perfect for long-form content, documentation, and articles.
-        </p>
+      {/* Navigation */}
+      <div className="flex items-center gap-2">
+        <Button variant="ghost" size="sm" asChild>
+          <Link href="/docs/blocks">
+            <ArrowLeft className="mr-2 h-4 w-4" />
+            Back to Blocks
+          </Link>
+        </Button>
       </div>
 
-      {/* Installation */}
-      <div className="space-y-4">
-        <h2 className="text-2xl font-semibold">Installation</h2>
-        <div className="relative">
-          <pre className="bg-muted p-4 rounded-md overflow-x-auto">
-            <code>payloadkit add outline-block</code>
-          </pre>
-          <CopyButton text="payloadkit add outline-block" />
-        </div>
-      </div>
+      {/* Page Description */}
+      <PageDescription
+        title="Outline Block"
+        description="Automatic table of contents generator with multiple positioning options, styles, and interactive features. Perfect for long-form content, documentation, and articles."
+        category="blocks"
+        version="0.1.0"
+        payloadVersion="3.0+"
+        difficulty="intermediate"
+        estimatedTime="12 minutes"
+        lastUpdated="January 2025"
+      />
 
-      {/* Features */}
-      <div className="space-y-4">
-        <h2 className="text-2xl font-semibold">Features</h2>
-        <div className="grid gap-3">
-          <div className="flex items-start gap-2">
-            <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0" />
-            <span>2 content source modes: auto-detect from page content or manual items</span>
-          </div>
-          <div className="flex items-start gap-2">
-            <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0" />
-            <span>Automatic heading extraction from customizable content selectors</span>
-          </div>
-          <div className="flex items-start gap-2">
-            <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0" />
-            <span>Support for H1-H6 heading levels with configurable inclusion</span>
-          </div>
-          <div className="flex items-start gap-2">
-            <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0" />
-            <span>4 positioning options: inline, sticky-left, sticky-right, floating</span>
-          </div>
-          <div className="flex items-start gap-2">
-            <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0" />
-            <span>5 visual styles: simple, card, pills, numbered, dots</span>
-          </div>
-          <div className="flex items-start gap-2">
-            <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0" />
-            <span>Active section highlighting during scroll</span>
-          </div>
-          <div className="flex items-start gap-2">
-            <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0" />
-            <span>Smooth scrolling animation with customizable offset</span>
-          </div>
-          <div className="flex items-start gap-2">
-            <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0" />
-            <span>Reading progress indicator with visual progress bar</span>
-          </div>
-          <div className="flex items-start gap-2">
-            <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0" />
-            <span>Collapsible interface with expand/collapse functionality</span>
-          </div>
-          <div className="flex items-start gap-2">
-            <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0" />
-            <span>Auto-hide on mobile devices for better UX</span>
-          </div>
-        </div>
-      </div>
-
-      {/* Usage Example */}
-      <div className="space-y-4">
-        <h2 className="text-2xl font-semibold">Usage</h2>
-        <div className="space-y-4">
-          <CodeTabs
-            title="PayloadCMS Configuration"
-            code={`// payload.config.ts
-import { OutlineBlock } from './blocks/outline-block'
-
-export default buildConfig({
-  // ... other config
-  blocks: [
-    OutlineBlock,
-    // ... other blocks
-  ],
-})`}
-            language="tsx"
-          />
-        </div>
-
-        <div className="space-y-4">
-          <CodeTabs
-            title="Auto-Detection Mode"
-            code={`// components/TableOfContents.tsx
+      {/* Component Preview */}
+      <ComponentPreview
+        name="Outline Block Preview"
+        description="Interactive demonstration of different table of contents positioning and styling options."
+        variants={[
+          {
+            name: "Inline",
+            description: "Table of contents placed inline within the content flow.",
+            component: <OutlineInline />
+          },
+          {
+            name: "Sticky Right",
+            description: "Fixed position on the right side, perfect for documentation.",
+            component: <OutlineStickyRight />
+          },
+          {
+            name: "Floating",
+            description: "Collapsible floating TOC that adapts to mobile screens.",
+            component: <OutlineFloating />
+          }
+        ]}
+        code={{
+          component: `// React Component Usage
 import { OutlineBlockComponent } from './blocks/outline-block'
 
-export function TableOfContents() {
-  return (
-    <OutlineBlockComponent
-      sourceType="auto"
-      contentSelector=".prose, .content, article"
-      headingLevels={[
+// Auto-Detection Mode
+<OutlineBlockComponent
+  sourceType="auto"
+  contentSelector=".prose, .content, article"
+  headingLevels={[
+    { level: 'h2' },
+    { level: 'h3' },
+    { level: 'h4' }
+  ]}
+  position="sticky-right"
+  style="card"
+  highlightActive={true}
+  showProgress={true}
+  smoothScroll={true}
+/>
+
+// Manual Mode
+<OutlineBlockComponent
+  sourceType="manual"
+  manualItems={[
+    { title: 'Introduction', anchor: '#introduction', level: 1 },
+    { title: 'Getting Started', anchor: '#getting-started', level: 1 },
+    { title: 'Installation', anchor: '#installation', level: 2 },
+    { title: 'Configuration', anchor: '#configuration', level: 2 }
+  ]}
+  position="floating"
+  style="numbered"
+  collapsible={true}
+  initiallyCollapsed={false}
+/>
+
+// Inline Positioning
+<OutlineBlockComponent
+  sourceType="auto"
+  position="inline"
+  style="simple"
+  maxWidth="full"
+  highlightActive={false}
+/>`,
+          config: `// PayloadCMS Block Configuration
+import type { Block } from 'payload'
+
+export const OutlineBlock: Block = {
+  slug: 'outline-block',
+  labels: {
+    singular: 'Outline Block',
+    plural: 'Outline Blocks'
+  },
+  fields: [
+    {
+      name: 'sourceType',
+      type: 'select',
+      label: 'Content Source',
+      defaultValue: 'auto',
+      options: [
+        { label: 'Auto-detect', value: 'auto' },
+        { label: 'Manual', value: 'manual' }
+      ]
+    },
+    {
+      name: 'contentSelector',
+      type: 'text',
+      label: 'Content Selector',
+      defaultValue: '.prose, .content, article, main',
+      admin: {
+        condition: (_, siblingData) => siblingData.sourceType === 'auto',
+        description: 'CSS selector to find content headings'
+      }
+    },
+    {
+      name: 'headingLevels',
+      type: 'array',
+      label: 'Heading Levels',
+      defaultValue: [
         { level: 'h2' },
         { level: 'h3' },
         { level: 'h4' }
-      ]}
-      position="sticky-right"
-      style="card"
-      highlightActive={true}
-      showProgress={true}
-      smoothScroll={true}
-    />
-  )
-}`}
-            language="tsx"
-          />
-        </div>
+      ],
+      fields: [
+        {
+          name: 'level',
+          type: 'select',
+          options: [
+            { label: 'H1', value: 'h1' },
+            { label: 'H2', value: 'h2' },
+            { label: 'H3', value: 'h3' },
+            { label: 'H4', value: 'h4' },
+            { label: 'H5', value: 'h5' },
+            { label: 'H6', value: 'h6' }
+          ]
+        }
+      ],
+      admin: {
+        condition: (_, siblingData) => siblingData.sourceType === 'auto'
+      }
+    },
+    {
+      name: 'position',
+      type: 'select',
+      label: 'Position',
+      defaultValue: 'inline',
+      options: [
+        { label: 'Inline', value: 'inline' },
+        { label: 'Sticky Left', value: 'sticky-left' },
+        { label: 'Sticky Right', value: 'sticky-right' },
+        { label: 'Floating', value: 'floating' }
+      ]
+    },
+    {
+      name: 'style',
+      type: 'select',
+      label: 'Style',
+      defaultValue: 'card',
+      options: [
+        { label: 'Simple', value: 'simple' },
+        { label: 'Card', value: 'card' },
+        { label: 'Pills', value: 'pills' },
+        { label: 'Numbered', value: 'numbered' },
+        { label: 'Dots', value: 'dots' }
+      ]
+    }
+  ]
+}`,
+          usage: `// Frontend Implementation
+import { RenderBlocks } from '@/components/RenderBlocks'
 
-        <div className="space-y-4">
-          <CodeTabs
-            title="Manual Mode"
-            code={`// components/CustomOutline.tsx
-import { OutlineBlockComponent } from './blocks/outline-block'
-
-const manualItems = [
-  { title: 'Introduction', anchor: '#introduction', level: 1 },
-  { title: 'Getting Started', anchor: '#getting-started', level: 1 },
-  { title: 'Installation', anchor: '#installation', level: 2 },
-  { title: 'Configuration', anchor: '#configuration', level: 2 },
-  { title: 'Advanced Usage', anchor: '#advanced', level: 1 }
-]
-
-export function CustomOutline() {
+export default function DocumentationPage({ data }) {
   return (
-    <OutlineBlockComponent
-      sourceType="manual"
-      manualItems={manualItems}
-      position="floating"
-      style="numbered"
-      collapsible={true}
-      initiallyCollapsed={false}
-    />
+    <main>
+      <RenderBlocks blocks={data.layout} />
+    </main>
   )
+}
+
+// Block Rendering
+import { OutlineBlockComponent } from './outline-block/Component'
+
+const blockComponents = {
+  'outline-block': OutlineBlockComponent
+}
+
+export function RenderBlocks({ blocks }) {
+  return blocks?.map((block, index) => {
+    const BlockComponent = blockComponents[block.blockType]
+    if (!BlockComponent) return null
+
+    return <BlockComponent key={index} {...block} />
+  })
+}`
+        }}
+      />
+
+      {/* Installation Tutorial */}
+      <TutorialSteps
+        title="Installation & Setup"
+        steps={[
+          {
+            title: 'Install the Block',
+            keyword: 'Install',
+            description: 'Add Outline Block to your project via PayloadKit CLI.',
+            content: (
+              <Snippet command="payloadkit add outline-block" title="Install via PayloadKit CLI">
+                This will copy the Outline Block files and install dependencies for scroll detection and DOM manipulation.
+              </Snippet>
+            )
+          },
+          {
+            title: 'Add to PayloadCMS Config',
+            keyword: 'Configure',
+            description: 'Import and configure the block in your PayloadCMS setup.',
+            content: (
+              <CodeBlock
+                code={`import { OutlineBlock } from '@/blocks/outline-block'
+
+export default buildConfig({
+  collections: [
+    {
+      slug: 'pages',
+      fields: [
+        {
+          name: 'layout',
+          type: 'blocks',
+          blocks: [
+            OutlineBlock,
+            // ... other blocks
+          ]
+        }
+      ]
+    }
+  ]
+})`}
+                language="typescript"
+                title="payload.config.ts"
+              />
+            )
+          },
+          {
+            title: 'Prepare Content Structure',
+            keyword: 'Structure',
+            description: 'Ensure your content has proper heading hierarchy.',
+            content: (
+              <CodeBlock
+                code={`// Example content structure
+<article className="prose">
+  <h1>Main Title</h1>
+
+  <h2 id="introduction">Introduction</h2>
+  <p>Content here...</p>
+
+  <h2 id="getting-started">Getting Started</h2>
+  <p>More content...</p>
+
+  <h3 id="installation">Installation</h3>
+  <p>Installation steps...</p>
+
+  <h3 id="configuration">Configuration</h3>
+  <p>Configuration details...</p>
+</article>`}
+                language="html"
+                title="Content Structure"
+              />
+            )
+          },
+          {
+            title: 'Render in Frontend',
+            keyword: 'Implement',
+            description: 'Use the component in your React application.',
+            content: (
+              <CodeBlock
+                code={`import { OutlineBlockComponent } from '@/blocks/outline-block/Component'
+
+// Auto-detection for documentation
+<OutlineBlockComponent
+  sourceType="auto"
+  contentSelector=".prose, article"
+  headingLevels={[
+    { level: 'h2' },
+    { level: 'h3' },
+    { level: 'h4' }
+  ]}
+  position="sticky-right"
+  style="card"
+  highlightActive={true}
+  showProgress={true}
+  smoothScroll={true}
+  collapsible={true}
+/>
+
+// Manual mode for custom navigation
+<OutlineBlockComponent
+  sourceType="manual"
+  manualItems={[
+    { title: 'Overview', anchor: '#overview', level: 1 },
+    { title: 'Features', anchor: '#features', level: 1 },
+    { title: 'API Reference', anchor: '#api', level: 2 }
+  ]}
+  position="floating"
+  style="numbered"
+/>`}
+                language="tsx"
+                title="Page Component"
+              />
+            )
+          }
+        ]}
+        allowSkip
+      />
+
+      {/* API Reference */}
+      <ApiReference
+        title="API Reference"
+        description="Complete props reference for the Outline Block component."
+        props={[
+          {
+            name: 'sourceType',
+            type: '"auto" | "manual"',
+            description: 'Content source mode for generating the outline',
+            required: false,
+            defaultValue: '"auto"',
+            example: 'sourceType="auto"'
+          },
+          {
+            name: 'contentSelector',
+            type: 'string',
+            description: 'CSS selector for finding content headings (auto mode)',
+            required: false,
+            defaultValue: '".prose, .content, article, main"',
+            example: 'contentSelector=".prose, article"'
+          },
+          {
+            name: 'headingLevels',
+            type: 'HeadingLevel[]',
+            description: 'Array of heading levels to include (auto mode)',
+            required: false,
+            example: 'headingLevels={[{ level: "h2" }, { level: "h3" }]}'
+          },
+          {
+            name: 'manualItems',
+            type: 'OutlineItem[]',
+            description: 'Manual outline items (manual mode)',
+            required: false,
+            example: 'manualItems={[{ title: "Section", anchor: "#section", level: 1 }]}'
+          },
+          {
+            name: 'position',
+            type: '"inline" | "sticky-left" | "sticky-right" | "floating"',
+            description: 'Positioning strategy for the outline',
+            required: false,
+            defaultValue: '"inline"',
+            example: 'position="sticky-right"'
+          },
+          {
+            name: 'style',
+            type: '"simple" | "card" | "pills" | "numbered" | "dots"',
+            description: 'Visual style for the outline',
+            required: false,
+            defaultValue: '"card"',
+            example: 'style="card"'
+          },
+          {
+            name: 'highlightActive',
+            type: 'boolean',
+            description: 'Highlight the currently active section',
+            required: false,
+            defaultValue: 'true',
+            example: 'highlightActive={true}'
+          },
+          {
+            name: 'showProgress',
+            type: 'boolean',
+            description: 'Show reading progress indicator',
+            required: false,
+            defaultValue: 'false',
+            example: 'showProgress={true}'
+          },
+          {
+            name: 'smoothScroll',
+            type: 'boolean',
+            description: 'Enable smooth scrolling when clicking links',
+            required: false,
+            defaultValue: 'true',
+            example: 'smoothScroll={true}'
+          },
+          {
+            name: 'collapsible',
+            type: 'boolean',
+            description: 'Make the outline collapsible',
+            required: false,
+            defaultValue: 'false',
+            example: 'collapsible={true}'
+          },
+          {
+            name: 'initiallyCollapsed',
+            type: 'boolean',
+            description: 'Start in collapsed state (when collapsible is true)',
+            required: false,
+            defaultValue: 'false',
+            example: 'initiallyCollapsed={false}'
+          }
+        ]}
+      />
+
+      {/* Type Definitions */}
+      <div className="space-y-4">
+        <div className="text-lg font-semibold">Type Definitions</div>
+        <CodeBlock
+          title="OutlineBlockProps Interface"
+          code={`interface OutlineBlockProps {
+  sourceType?: 'auto' | 'manual'
+  contentSelector?: string
+  headingLevels?: HeadingLevel[]
+  manualItems?: OutlineItem[]
+  position?: 'inline' | 'sticky-left' | 'sticky-right' | 'floating'
+  style?: 'simple' | 'card' | 'pills' | 'numbered' | 'dots'
+  highlightActive?: boolean
+  showProgress?: boolean
+  smoothScroll?: boolean
+  collapsible?: boolean
+  initiallyCollapsed?: boolean
+  maxWidth?: 'sm' | 'md' | 'lg' | 'full'
+  scrollOffset?: number
+}
+
+interface HeadingLevel {
+  level: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6'
+}
+
+interface OutlineItem {
+  title: string
+  anchor: string
+  level: number
+}
+
+interface DetectedHeading {
+  id: string
+  text: string
+  level: number
+  element: HTMLElement
 }`}
-            language="tsx"
-          />
-        </div>
+          language="typescript"
+        />
       </div>
 
-      {/* Props */}
-      <div className="space-y-4">
-        <h2 className="text-2xl font-semibold">Props</h2>
-        <div className="overflow-x-auto">
-          <table className="w-full border-collapse border border-border">
-            <thead>
-              <tr className="border-b border-border bg-muted/50">
-                <th className="border border-border px-4 py-2 text-left">Prop</th>
-                <th className="border border-border px-4 py-2 text-left">Type</th>
-                <th className="border border-border px-4 py-2 text-left">Default</th>
-                <th className="border border-border px-4 py-2 text-left">Description</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td className="border border-border px-4 py-2 font-mono text-sm">sourceType</td>
-                <td className="border border-border px-4 py-2 text-sm">'auto' | 'manual'</td>
-                <td className="border border-border px-4 py-2 text-sm">'auto'</td>
-                <td className="border border-border px-4 py-2 text-sm">Content source mode</td>
-              </tr>
-              <tr>
-                <td className="border border-border px-4 py-2 font-mono text-sm">position</td>
-                <td className="border border-border px-4 py-2 text-sm">'inline' | 'sticky-left' | 'sticky-right' | 'floating'</td>
-                <td className="border border-border px-4 py-2 text-sm">'inline'</td>
-                <td className="border border-border px-4 py-2 text-sm">Outline positioning</td>
-              </tr>
-              <tr>
-                <td className="border border-border px-4 py-2 font-mono text-sm">style</td>
-                <td className="border border-border px-4 py-2 text-sm">'simple' | 'card' | 'pills' | 'numbered' | 'dots'</td>
-                <td className="border border-border px-4 py-2 text-sm">'card'</td>
-                <td className="border border-border px-4 py-2 text-sm">Visual style</td>
-              </tr>
-              <tr>
-                <td className="border border-border px-4 py-2 font-mono text-sm">contentSelector</td>
-                <td className="border border-border px-4 py-2 text-sm">string</td>
-                <td className="border border-border px-4 py-2 text-sm">'.prose, .content, article, main'</td>
-                <td className="border border-border px-4 py-2 text-sm">CSS selector for content area</td>
-              </tr>
-              <tr>
-                <td className="border border-border px-4 py-2 font-mono text-sm">highlightActive</td>
-                <td className="border border-border px-4 py-2 text-sm">boolean</td>
-                <td className="border border-border px-4 py-2 text-sm">true</td>
-                <td className="border border-border px-4 py-2 text-sm">Highlight active section</td>
-              </tr>
-              <tr>
-                <td className="border border-border px-4 py-2 font-mono text-sm">showProgress</td>
-                <td className="border border-border px-4 py-2 text-sm">boolean</td>
-                <td className="border border-border px-4 py-2 text-sm">false</td>
-                <td className="border border-border px-4 py-2 text-sm">Show reading progress</td>
-              </tr>
-              <tr>
-                <td className="border border-border px-4 py-2 font-mono text-sm">smoothScroll</td>
-                <td className="border border-border px-4 py-2 text-sm">boolean</td>
-                <td className="border border-border px-4 py-2 text-sm">true</td>
-                <td className="border border-border px-4 py-2 text-sm">Enable smooth scrolling</td>
-              </tr>
-              <tr>
-                <td className="border border-border px-4 py-2 font-mono text-sm">collapsible</td>
-                <td className="border border-border px-4 py-2 text-sm">boolean</td>
-                <td className="border border-border px-4 py-2 text-sm">false</td>
-                <td className="border border-border px-4 py-2 text-sm">Make collapsible</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-
-      {/* Position Examples */}
-      <div className="space-y-4">
-        <h2 className="text-2xl font-semibold">Position Examples</h2>
-
-        <div className="grid gap-4">
-          <div className="space-y-2">
-            <CodeTabs
-              title="Sticky Right (Documentation)"
-              code={`position="sticky-right"
-style="card"
-maxWidth="md"`}
-              language="tsx"
-            />
-          </div>
-
-          <div className="space-y-2">
-            <CodeTabs
-              title="Floating (Mobile-Friendly)"
-              code={`position="floating"
-style="pills"
-collapsible={true}
-autoHide={true}`}
-              language="tsx"
-            />
-          </div>
-
-          <div className="space-y-2">
-            <CodeTabs
-              title="Inline (Content Flow)"
-              code={`position="inline"
-style="numbered"
-maxWidth="full"`}
-              language="tsx"
-            />
-          </div>
-        </div>
-      </div>
-
-      {/* Style Examples */}
-      <div className="space-y-4">
-        <h2 className="text-2xl font-semibold">Style Variations</h2>
-        <div className="grid gap-4">
-          <div className="space-y-2">
-            <h3 className="text-lg font-medium">Card Style</h3>
-            <p className="text-sm text-muted-foreground">Clean card with border and background</p>
-          </div>
-          <div className="space-y-2">
-            <h3 className="text-lg font-medium">Pills Style</h3>
-            <p className="text-sm text-muted-foreground">Rounded pill-shaped items</p>
-          </div>
-          <div className="space-y-2">
-            <h3 className="text-lg font-medium">Numbered Style</h3>
-            <p className="text-sm text-muted-foreground">Items with numbered indicators</p>
-          </div>
-          <div className="space-y-2">
-            <h3 className="text-lg font-medium">Dots Style</h3>
-            <p className="text-sm text-muted-foreground">Simple dots as indicators</p>
-          </div>
-          <div className="space-y-2">
-            <h3 className="text-lg font-medium">Simple Style</h3>
-            <p className="text-sm text-muted-foreground">Minimal text-only list</p>
-          </div>
-        </div>
-      </div>
-
-      {/* Content Structure Tips */}
-      <div className="space-y-4">
-        <h2 className="text-2xl font-semibold">Content Structure Tips</h2>
-        <div className="space-y-3">
-          <div className="p-4 border border-blue-200 bg-blue-50 rounded-md dark:border-blue-800 dark:bg-blue-900/20">
-            <h3 className="font-medium text-blue-800 dark:text-blue-200 mb-2">For Auto-Detection Mode</h3>
-            <ul className="space-y-1 text-sm text-blue-700 dark:text-blue-300">
-              <li>• Ensure your content has proper heading structure (H1-H6)</li>
-              <li>• Wrap content in containers matching your content selectors</li>
-              <li>• Use semantic HTML for better accessibility</li>
-              <li>• Add unique IDs to headings for precise linking</li>
-            </ul>
-          </div>
-
-          <div className="p-4 border border-green-200 bg-green-50 rounded-md dark:border-green-800 dark:bg-green-900/20">
-            <h3 className="font-medium text-green-800 dark:text-green-200 mb-2">Performance Tips</h3>
-            <ul className="space-y-1 text-sm text-green-700 dark:text-green-300">
-              <li>• Component is client-side only for DOM access</li>
-              <li>• Uses passive scroll listeners for better performance</li>
-              <li>• Debounced scroll handlers prevent excessive updates</li>
-              <li>• Auto-hide on mobile reduces resource usage</li>
-            </ul>
-          </div>
-        </div>
-      </div>
+      {/* Tags and Dependencies */}
+      <PageTags
+        category="blocks"
+        dependencies={['blocks-shared', 'lucide-react', 'framer-motion']}
+        tags={['outline', 'table-of-contents', 'toc', 'navigation', 'scroll', 'documentation']}
+      />
     </div>
   )
 }

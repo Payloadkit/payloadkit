@@ -1,127 +1,353 @@
 import { Metadata } from 'next'
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
-import { Badge } from '@/components/ui/badge'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
-import { Separator } from '@/components/ui/separator'
-import { ArrowLeft, Sparkles, Check, Info, Lightbulb, Zap } from 'lucide-react'
-import { CopyButton } from '@/components/copy-button'
-import { CodeTabs } from '@/components/code-tabs'
+import { ArrowLeft } from 'lucide-react'
+import { PageDescription } from '@/components/page-description'
+import { ComponentPreview } from '@/components/component-preview'
+import { Snippet } from '@/components/snippet'
+import { TutorialSteps } from '@/components/tutorial-steps'
+import { CodeBlock } from '@/components/code-tabs'
+import { ApiReference } from '@/components/api-reference'
+import { PageTags } from '@/components/page-tags'
 
 export const metadata: Metadata = {
-  title: 'Simple Hero Block',
+  title: 'Simple Hero Block - PayloadKit',
   description: 'Clean and minimalist hero section with flexible layouts, perfect for landing pages, portfolios, and content-focused websites. Emphasizes simplicity and readability.',
 }
 
-const features = [
-  '4 layout options: centered, left-aligned, right-aligned, split with image',
-  '4 content width settings: narrow, medium, wide, full',
-  'Rich content support: eyebrow, title, subtitle, description',
-  'Up to 2 call-to-action buttons with 3 styles and 3 sizes',
-  'Image support for split layout with left/right positioning',
-  '4 background types: color, gradient, image, none',
-  '3 text color themes: dark, light, primary',
-  '4 title size options: sm, md, lg, xl',
-  'Mobile-responsive design with adaptive typography',
-  'Lightweight implementation without heavy dependencies'
-]
-
-export default function SimpleHeroPage() {
-  const codeExample = `// components/SimpleHero.tsx
-import { SimpleHeroComponent } from './blocks/simple-hero'
-
-export function SimpleHero() {
+// Demo components
+function SimpleHeroCentered() {
   return (
-    <SimpleHeroComponent
-      eyebrow="Welcome"
-      title="Clean, Simple, Effective"
-      subtitle="Beautiful hero sections without the complexity"
-      description="Perfect for content-focused websites that prioritize readability and user experience."
-      layout="centered"
-      contentWidth="medium"
-      titleSize="lg"
-      background={{
-        type: 'gradient',
-        gradientFrom: '#f8fafc',
-        gradientTo: '#e2e8f0',
-        gradientDirection: 'to-br'
-      }}
-      callToActions={[
-        {
-          label: 'Get Started',
-          url: '/start',
-          appearance: 'primary',
-          size: 'default'
-        },
-        {
-          label: 'Learn More',
-          url: '/about',
-          appearance: 'outline',
-          size: 'default'
-        }
-      ]}
-    />
-  )
-}`
-
-  return (
-    <div className="space-y-8">
-      {/* Header */}
-      <div>
-        <div className="flex items-center gap-2 mb-4">
-          <Button variant="ghost" size="sm" asChild>
-            <Link href="/docs/blocks">
-              <ArrowLeft className="mr-2 h-4 w-4" />
-              Back to Blocks
-            </Link>
+    <div className="p-8 lg:p-12 border rounded-lg bg-gradient-to-br from-slate-50 to-white">
+      <div className="max-w-4xl mx-auto text-center space-y-6">
+        <div className="inline-flex items-center px-4 py-2 bg-blue-100 text-blue-800 rounded-full text-sm font-medium">
+          ✨ Welcome
+        </div>
+        <h1 className="text-3xl lg:text-5xl font-bold text-gray-900">
+          Clean, Simple, Effective
+        </h1>
+        <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+          Beautiful hero sections without the complexity. Perfect for content-focused websites that prioritize readability and user experience.
+        </p>
+        <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <Button size="lg" className="bg-blue-600 hover:bg-blue-700">
+            Get Started
+          </Button>
+          <Button size="lg" variant="outline">
+            Learn More
           </Button>
         </div>
-        <div className="flex items-center gap-4 mb-4">
-          <div className="flex items-center justify-center w-12 h-12 rounded-lg bg-primary/10">
-            <Sparkles className="h-6 w-6 text-primary" />
+      </div>
+    </div>
+  )
+}
+
+function SimpleHeroSplit() {
+  return (
+    <div className="p-6 lg:p-8 border rounded-lg bg-background">
+      <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+        <div className="space-y-6">
+          <div className="inline-flex items-center px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm">
+            🚀 Innovation
           </div>
-          <div>
-            <h1 className="text-4xl font-bold tracking-tight">Simple Hero Block</h1>
-            <div className="flex items-center gap-2 mt-2">
-              <Badge>Hero</Badge>
-              <Badge variant="outline">v0.1.0</Badge>
-              <Badge variant="secondary">New</Badge>
+          <h1 className="text-3xl lg:text-4xl font-bold text-gray-900">
+            Powerful Features, Simple Design
+          </h1>
+          <p className="text-lg text-gray-600">
+            Everything you need to build exceptional user experiences. No complexity, just results.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-3">
+            <Button size="lg" className="bg-green-600 hover:bg-green-700">
+              Explore Features
+            </Button>
+            <Button size="lg" variant="ghost">
+              View Demo
+            </Button>
+          </div>
+        </div>
+        <div className="relative">
+          <div className="aspect-[4/3] bg-gradient-to-br from-green-400 via-blue-500 to-purple-600 rounded-lg shadow-2xl">
+            <div className="absolute inset-4 bg-white/10 rounded border border-white/20 backdrop-blur-sm flex items-center justify-center">
+              <div className="text-white text-center">
+                <div className="text-4xl mb-2">📊</div>
+                <div className="text-sm font-medium">Feature Preview</div>
+              </div>
             </div>
           </div>
         </div>
-        <p className="text-xl text-muted-foreground">
-          Clean and minimalist hero section with flexible layouts, perfect for landing pages, portfolios, and content-focused websites. Emphasizes simplicity and readability.
-        </p>
+      </div>
+    </div>
+  )
+}
+
+function SimpleHeroLeft() {
+  return (
+    <div className="p-8 lg:p-12 border rounded-lg bg-background">
+      <div className="max-w-6xl space-y-8">
+        <div className="inline-flex items-center px-4 py-2 bg-purple-100 text-purple-800 rounded-full text-sm font-medium">
+          🎯 Focus
+        </div>
+        <div className="max-w-4xl space-y-6">
+          <h1 className="text-3xl lg:text-5xl font-bold text-gray-900">
+            Start Your Journey Today
+          </h1>
+          <p className="text-xl text-gray-600 max-w-2xl">
+            Left-aligned layout perfect for landing pages and content-heavy applications. Emphasizes the call-to-action.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4">
+            <Button size="lg" className="bg-purple-600 hover:bg-purple-700">
+              Begin Now
+            </Button>
+            <Button size="lg" variant="outline">
+              Read Documentation
+            </Button>
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+export default function SimpleHeroPage() {
+  return (
+    <div className="space-y-8">
+      {/* Navigation */}
+      <div className="flex items-center gap-2">
+        <Button variant="ghost" size="sm" asChild>
+          <Link href="/docs/blocks">
+            <ArrowLeft className="mr-2 h-4 w-4" />
+            Back to Blocks
+          </Link>
+        </Button>
       </div>
 
-      {/* Installation */}
-      <Card>
-        <CardHeader>
-          <CardTitle>Installation</CardTitle>
-          <CardDescription>
-            Add the Simple Hero block to your PayloadCMS project using the PayloadKit CLI.
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <div className="space-y-4">
-            <div>
-              <h4 className="font-semibold mb-2">Install via CLI</h4>
-              <div className="relative">
-                <pre className="bg-muted p-4 rounded-lg text-sm overflow-x-auto">
-                  <code>payloadkit add simple-hero</code>
-                </pre>
-                <CopyButton text="payloadkit add simple-hero" />
-              </div>
-            </div>
-            <div>
-              <h4 className="font-semibold mb-2">Add to your PayloadCMS config</h4>
-              <pre className="bg-muted p-4 rounded-lg text-sm overflow-x-auto">
-                <code>{`import { SimpleHero } from './blocks/simple-hero'
+      {/* Page Description */}
+      <PageDescription
+        title="Simple Hero Block"
+        description="Clean and minimalist hero section with flexible layouts, perfect for landing pages, portfolios, and content-focused websites. Emphasizes simplicity and readability."
+        category="blocks"
+        version="0.1.0"
+        payloadVersion="3.0+"
+        difficulty="beginner"
+        estimatedTime="6 minutes"
+        lastUpdated="January 2025"
+      />
+
+      {/* Component Preview */}
+      <ComponentPreview
+        name="Simple Hero Block Preview"
+        description="Interactive demonstration of clean, minimalist hero layouts focused on content and readability."
+        variants={[
+          {
+            name: "Centered",
+            description: "Classic centered layout perfect for landing pages and announcements.",
+            component: <SimpleHeroCentered />
+          },
+          {
+            name: "Split Layout",
+            description: "Content and image side-by-side for feature showcasing and product demos.",
+            component: <SimpleHeroSplit />
+          },
+          {
+            name: "Left-Aligned",
+            description: "Left-aligned content for blog headers and content-heavy applications.",
+            component: <SimpleHeroLeft />
+          }
+        ]}
+        code={{
+          component: `// React Component Usage
+import { SimpleHeroComponent } from './blocks/simple-hero'
+
+// Centered Layout
+<SimpleHeroComponent
+  eyebrow="Welcome"
+  title="Clean, Simple, Effective"
+  subtitle="Beautiful hero sections without the complexity"
+  description="Perfect for content-focused websites that prioritize readability."
+  layout="centered"
+  contentWidth="medium"
+  titleSize="lg"
+  background={{
+    type: 'gradient',
+    gradientFrom: '#f8fafc',
+    gradientTo: '#e2e8f0',
+    gradientDirection: 'to-br'
+  }}
+  callToActions={[
+    {
+      label: 'Get Started',
+      url: '/start',
+      appearance: 'primary',
+      size: 'default'
+    },
+    {
+      label: 'Learn More',
+      url: '/about',
+      appearance: 'outline',
+      size: 'default'
+    }
+  ]}
+/>
+
+// Split Layout with Image
+<SimpleHeroComponent
+  title="Powerful Features"
+  subtitle="Everything you need to succeed"
+  layout="split"
+  image="/hero-image.jpg"
+  imagePosition="right"
+  contentWidth="full"
+  callToActions={[
+    { label: 'Explore Features', url: '/features', appearance: 'primary' },
+    { label: 'View Demo', url: '/demo', appearance: 'ghost' }
+  ]}
+/>
+
+// Left-Aligned Layout
+<SimpleHeroComponent
+  eyebrow="Focus"
+  title="Start Your Journey Today"
+  description="Left-aligned layout perfect for content-heavy applications."
+  layout="left"
+  contentWidth="wide"
+  titleSize="xl"
+  callToActions={[
+    { label: 'Begin Now', url: '/signup', appearance: 'primary' }
+  ]}
+/>`,
+          config: `// PayloadCMS Block Configuration
+import type { Block } from 'payload'
+
+export const SimpleHero: Block = {
+  slug: 'simple-hero',
+  labels: {
+    singular: 'Simple Hero Block',
+    plural: 'Simple Hero Blocks'
+  },
+  fields: [
+    {
+      name: 'eyebrow',
+      type: 'text',
+      label: 'Eyebrow Text',
+      admin: {
+        description: 'Small text above the main title'
+      }
+    },
+    {
+      name: 'title',
+      type: 'text',
+      label: 'Title',
+      required: true
+    },
+    {
+      name: 'subtitle',
+      type: 'text',
+      label: 'Subtitle'
+    },
+    {
+      name: 'description',
+      type: 'textarea',
+      label: 'Description'
+    },
+    {
+      name: 'layout',
+      type: 'select',
+      label: 'Layout',
+      defaultValue: 'centered',
+      options: [
+        { label: 'Centered', value: 'centered' },
+        { label: 'Left-aligned', value: 'left' },
+        { label: 'Right-aligned', value: 'right' },
+        { label: 'Split with Image', value: 'split' }
+      ]
+    },
+    {
+      name: 'contentWidth',
+      type: 'select',
+      label: 'Content Width',
+      defaultValue: 'medium',
+      options: [
+        { label: 'Narrow', value: 'narrow' },
+        { label: 'Medium', value: 'medium' },
+        { label: 'Wide', value: 'wide' },
+        { label: 'Full', value: 'full' }
+      ]
+    },
+    {
+      name: 'titleSize',
+      type: 'select',
+      label: 'Title Size',
+      defaultValue: 'lg',
+      options: [
+        { label: 'Small', value: 'sm' },
+        { label: 'Medium', value: 'md' },
+        { label: 'Large', value: 'lg' },
+        { label: 'Extra Large', value: 'xl' }
+      ]
+    },
+    {
+      name: 'image',
+      type: 'upload',
+      relationTo: 'media',
+      label: 'Hero Image',
+      admin: {
+        condition: (_, siblingData) => siblingData.layout === 'split'
+      }
+    }
+  ]
+}`,
+          usage: `// Frontend Implementation
+import { RenderBlocks } from '@/components/RenderBlocks'
+
+export default function LandingPage({ data }) {
+  return (
+    <main>
+      <RenderBlocks blocks={data.layout} />
+    </main>
+  )
+}
+
+// Block Rendering
+import { SimpleHeroComponent } from './simple-hero/Component'
+
+const blockComponents = {
+  'simple-hero': SimpleHeroComponent
+}
+
+export function RenderBlocks({ blocks }) {
+  return blocks?.map((block, index) => {
+    const BlockComponent = blockComponents[block.blockType]
+    if (!BlockComponent) return null
+
+    return <BlockComponent key={index} {...block} />
+  })
+}`
+        }}
+      />
+
+      {/* Installation Tutorial */}
+      <TutorialSteps
+        title="Installation & Setup"
+        steps={[
+          {
+            title: 'Install the Block',
+            keyword: 'Install',
+            description: 'Add Simple Hero Block to your project via PayloadKit CLI.',
+            content: (
+              <Snippet command="payloadkit add simple-hero" title="Install via PayloadKit CLI">
+                This will copy the Simple Hero Block files with minimal dependencies for optimal performance.
+              </Snippet>
+            )
+          },
+          {
+            title: 'Add to PayloadCMS Config',
+            keyword: 'Configure',
+            description: 'Import and configure the block in your PayloadCMS setup.',
+            content: (
+              <CodeBlock
+                code={`import { SimpleHero } from '@/blocks/simple-hero'
 
 export default buildConfig({
-  // ... other config
   collections: [
     {
       slug: 'pages',
@@ -129,276 +355,240 @@ export default buildConfig({
         {
           name: 'layout',
           type: 'blocks',
-          blocks: [SimpleHero], // Add here
-        },
-      ],
-    },
-  ],
-})`}</code>
-              </pre>
-            </div>
-          </div>
-        </CardContent>
-      </Card>
-
-      {/* Features */}
-      <Card>
-        <CardHeader>
-          <CardTitle>Features</CardTitle>
-          <CardDescription>
-            Everything included with the Simple Hero Block component.
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <div className="grid gap-2">
-            {features.map((feature, index) => (
-              <div key={index} className="flex items-start gap-3">
-                <Check className="h-5 w-5 text-green-600 mt-0.5 flex-shrink-0" />
-                <span className="text-sm">{feature}</span>
-              </div>
-            ))}
-          </div>
-        </CardContent>
-      </Card>
-
-      {/* Usage Example */}
-      <div className="space-y-4">
-        <h2 className="text-2xl font-semibold">Usage</h2>
-        <div className="space-y-4">
-          <CodeTabs
-            title="PayloadCMS Configuration"
-            code={`// payload.config.ts
-import { SimpleHero } from './blocks/simple-hero'
-
-export default buildConfig({
-  // ... other config
-  blocks: [
-    SimpleHero,
-    // ... other blocks
-  ],
+          blocks: [
+            SimpleHero,
+            // ... other blocks
+          ]
+        }
+      ]
+    }
+  ]
 })`}
-            language="tsx"
-          />
-        </div>
+                language="typescript"
+                title="payload.config.ts"
+              />
+            )
+          },
+          {
+            title: 'Render in Frontend',
+            keyword: 'Implement',
+            description: 'Use the component in your React application.',
+            content: (
+              <CodeBlock
+                code={`import { SimpleHeroComponent } from '@/blocks/simple-hero/Component'
 
-        <div className="space-y-4">
-          <CodeTabs
-            title="Frontend Component"
-            code={codeExample}
-            language="tsx"
-          />
-        </div>
-      </div>
-
-      {/* Props */}
-      <div className="space-y-4">
-        <h2 className="text-2xl font-semibold">Props</h2>
-        <div className="overflow-x-auto">
-          <table className="w-full border-collapse border border-border">
-            <thead>
-              <tr className="border-b border-border bg-muted/50">
-                <th className="border border-border px-4 py-2 text-left">Prop</th>
-                <th className="border border-border px-4 py-2 text-left">Type</th>
-                <th className="border border-border px-4 py-2 text-left">Default</th>
-                <th className="border border-border px-4 py-2 text-left">Description</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td className="border border-border px-4 py-2 font-mono text-sm">layout</td>
-                <td className="border border-border px-4 py-2 text-sm">'centered' | 'left' | 'right' | 'split'</td>
-                <td className="border border-border px-4 py-2 text-sm">'centered'</td>
-                <td className="border border-border px-4 py-2 text-sm">Layout style</td>
-              </tr>
-              <tr>
-                <td className="border border-border px-4 py-2 font-mono text-sm">contentWidth</td>
-                <td className="border border-border px-4 py-2 text-sm">'narrow' | 'medium' | 'wide' | 'full'</td>
-                <td className="border border-border px-4 py-2 text-sm">'medium'</td>
-                <td className="border border-border px-4 py-2 text-sm">Content container width</td>
-              </tr>
-              <tr>
-                <td className="border border-border px-4 py-2 font-mono text-sm">titleSize</td>
-                <td className="border border-border px-4 py-2 text-sm">'sm' | 'md' | 'lg' | 'xl'</td>
-                <td className="border border-border px-4 py-2 text-sm">'lg'</td>
-                <td className="border border-border px-4 py-2 text-sm">Title font size</td>
-              </tr>
-              <tr>
-                <td className="border border-border px-4 py-2 font-mono text-sm">textColor</td>
-                <td className="border border-border px-4 py-2 text-sm">'dark' | 'light' | 'primary'</td>
-                <td className="border border-border px-4 py-2 text-sm">'dark'</td>
-                <td className="border border-border px-4 py-2 text-sm">Text color theme</td>
-              </tr>
-              <tr>
-                <td className="border border-border px-4 py-2 font-mono text-sm">image</td>
-                <td className="border border-border px-4 py-2 text-sm">string | {`{ url: string }`}</td>
-                <td className="border border-border px-4 py-2 text-sm">-</td>
-                <td className="border border-border px-4 py-2 text-sm">Hero image for split layout</td>
-              </tr>
-              <tr>
-                <td className="border border-border px-4 py-2 font-mono text-sm">imagePosition</td>
-                <td className="border border-border px-4 py-2 text-sm">'right' | 'left'</td>
-                <td className="border border-border px-4 py-2 text-sm">'right'</td>
-                <td className="border border-border px-4 py-2 text-sm">Image position in split layout</td>
-              </tr>
-              <tr>
-                <td className="border border-border px-4 py-2 font-mono text-sm">callToActions</td>
-                <td className="border border-border px-4 py-2 text-sm">CallToAction[]</td>
-                <td className="border border-border px-4 py-2 text-sm">[]</td>
-                <td className="border border-border px-4 py-2 text-sm">Action buttons (max 2)</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-
-      {/* Layout Examples */}
-      <div className="space-y-4">
-        <h2 className="text-2xl font-semibold">Layout Examples</h2>
-
-        <div className="space-y-4">
-          <CodeTabs
-            title="Centered Layout"
-            code={`<SimpleHeroComponent
+// Centered hero for landing pages
+<SimpleHeroComponent
+  eyebrow="Welcome"
   title="Welcome to Our Platform"
+  subtitle="Simple, powerful, effective"
+  description="Everything you need to succeed in one place."
   layout="centered"
   contentWidth="medium"
-  textAlignment="center"
-/>`}
-            language="tsx"
-          />
-        </div>
+  titleSize="lg"
+  callToActions={[
+    {
+      label: 'Get Started',
+      url: '/signup',
+      appearance: 'primary',
+      size: 'default'
+    },
+    {
+      label: 'Learn More',
+      url: '/about',
+      appearance: 'outline',
+      size: 'default'
+    }
+  ]}
+/>
 
-        <div className="space-y-4">
-          <CodeTabs
-            title="Split Layout with Image"
-            code={`<SimpleHeroComponent
+// Split layout with image
+<SimpleHeroComponent
   title="Powerful Features"
-  subtitle="Everything you need to succeed"
+  subtitle="Built for modern teams"
   layout="split"
-  image="/hero-image.jpg"
+  image="/features-preview.jpg"
   imagePosition="right"
+  contentWidth="full"
 />`}
-            language="tsx"
-          />
-        </div>
-
-        <div className="space-y-4">
-          <CodeTabs
-            title="Left-Aligned Layout"
-            code={`<SimpleHeroComponent
-  title="Start Your Journey"
-  layout="left"
-  contentWidth="wide"
-  titleSize="xl"
-/>`}
-            language="tsx"
-          />
-        </div>
-      </div>
-
-      {/* Content Width Guide */}
-      <div className="space-y-4">
-        <h2 className="text-2xl font-semibold">Content Width Guide</h2>
-        <div className="grid gap-4">
-          <div className="space-y-2">
-            <h3 className="text-lg font-medium">Narrow (max-w-2xl)</h3>
-            <p className="text-sm text-muted-foreground">Best for short, focused messages and call-to-action focused content.</p>
-          </div>
-          <div className="space-y-2">
-            <h3 className="text-lg font-medium">Medium (max-w-4xl)</h3>
-            <p className="text-sm text-muted-foreground">Ideal for most use cases, provides good readability across devices.</p>
-          </div>
-          <div className="space-y-2">
-            <h3 className="text-lg font-medium">Wide (max-w-6xl)</h3>
-            <p className="text-sm text-muted-foreground">Great for content-rich heroes with longer descriptions.</p>
-          </div>
-          <div className="space-y-2">
-            <h3 className="text-lg font-medium">Full (max-w-none)</h3>
-            <p className="text-sm text-muted-foreground">Uses full container width, perfect for split layouts.</p>
-          </div>
-        </div>
-      </div>
-
-      {/* Button Configuration */}
-      <div className="space-y-4">
-        <h2 className="text-2xl font-semibold">Button Configuration</h2>
-        <div className="space-y-4">
-          <h3 className="text-lg font-medium">Button Appearances</h3>
-          <div className="grid gap-4">
-            <div className="space-y-2">
-              <h4 className="font-medium">Primary</h4>
-              <p className="text-sm text-muted-foreground">Solid background with primary color</p>
-              <div className="relative">
-                <pre className="bg-muted p-4 rounded-md overflow-x-auto text-sm">
-                  <code>{`appearance: 'primary'`}</code>
-                </pre>
-                <CopyButton text={`appearance: 'primary'`} />
+                language="tsx"
+                title="Page Component"
+              />
+            )
+          },
+          {
+            title: 'Customize Design & Content',
+            keyword: 'Customize',
+            description: 'Adapt the hero to your brand and content needs.',
+            content: (
+              <div className="space-y-3">
+                <p className="text-sm text-muted-foreground">Customization options:</p>
+                <ul className="text-sm space-y-1 list-disc list-inside text-muted-foreground">
+                  <li>4 layout options: centered, left, right, split</li>
+                  <li>4 content widths: narrow, medium, wide, full</li>
+                  <li>4 title sizes: sm, md, lg, xl</li>
+                  <li>Background support: color, gradient, image, none</li>
+                  <li>Text color themes: dark, light, primary</li>
+                  <li>Up to 2 call-to-action buttons</li>
+                </ul>
               </div>
-            </div>
-            <div className="space-y-2">
-              <h4 className="font-medium">Secondary</h4>
-              <p className="text-sm text-muted-foreground">Solid background with secondary color</p>
-              <div className="relative">
-                <pre className="bg-muted p-4 rounded-md overflow-x-auto text-sm">
-                  <code>{`appearance: 'secondary'`}</code>
-                </pre>
-                <CopyButton text={`appearance: 'secondary'`} />
-              </div>
-            </div>
-            <div className="space-y-2">
-              <h4 className="font-medium">Outline</h4>
-              <p className="text-sm text-muted-foreground">Transparent background with border</p>
-              <div className="relative">
-                <pre className="bg-muted p-4 rounded-md overflow-x-auto text-sm">
-                  <code>{`appearance: 'outline'`}</code>
-                </pre>
-                <CopyButton text={`appearance: 'outline'`} />
-              </div>
-            </div>
-          </div>
-        </div>
+            ),
+            optional: true
+          }
+        ]}
+        allowSkip
+      />
 
-        <div className="space-y-4">
-          <h3 className="text-lg font-medium">Button Sizes</h3>
-          <div className="grid gap-4">
-            <div className="space-y-2">
-              <h4 className="font-medium">Small (sm)</h4>
-              <p className="text-sm text-muted-foreground">Compact size for secondary actions</p>
-            </div>
-            <div className="space-y-2">
-              <h4 className="font-medium">Default</h4>
-              <p className="text-sm text-muted-foreground">Standard button size for most use cases</p>
-            </div>
-            <div className="space-y-2">
-              <h4 className="font-medium">Large (lg)</h4>
-              <p className="text-sm text-muted-foreground">Prominent size for primary actions</p>
-            </div>
-          </div>
-        </div>
-      </div>
+      {/* API Reference */}
+      <ApiReference
+        title="API Reference"
+        description="Complete props reference for the Simple Hero Block component."
+        props={[
+          {
+            name: 'eyebrow',
+            type: 'string',
+            description: 'Small text displayed above the main title',
+            required: false,
+            example: 'eyebrow="Welcome"'
+          },
+          {
+            name: 'title',
+            type: 'string',
+            description: 'Main hero title (required)',
+            required: true,
+            example: 'title="Welcome to Our Platform"'
+          },
+          {
+            name: 'subtitle',
+            type: 'string',
+            description: 'Optional subtitle text',
+            required: false,
+            example: 'subtitle="Simple, powerful, effective"'
+          },
+          {
+            name: 'description',
+            type: 'string',
+            description: 'Detailed description text',
+            required: false,
+            example: 'description="Everything you need to succeed"'
+          },
+          {
+            name: 'layout',
+            type: '"centered" | "left" | "right" | "split"',
+            description: 'Content layout style',
+            required: false,
+            defaultValue: '"centered"',
+            example: 'layout="centered"'
+          },
+          {
+            name: 'contentWidth',
+            type: '"narrow" | "medium" | "wide" | "full"',
+            description: 'Maximum width of content container',
+            required: false,
+            defaultValue: '"medium"',
+            example: 'contentWidth="medium"'
+          },
+          {
+            name: 'titleSize',
+            type: '"sm" | "md" | "lg" | "xl"',
+            description: 'Title font size variant',
+            required: false,
+            defaultValue: '"lg"',
+            example: 'titleSize="lg"'
+          },
+          {
+            name: 'textColor',
+            type: '"dark" | "light" | "primary"',
+            description: 'Text color theme',
+            required: false,
+            defaultValue: '"dark"',
+            example: 'textColor="dark"'
+          },
+          {
+            name: 'image',
+            type: 'string | Media',
+            description: 'Hero image for split layout',
+            required: false,
+            example: 'image="/hero-image.jpg"'
+          },
+          {
+            name: 'imagePosition',
+            type: '"left" | "right"',
+            description: 'Image position in split layout',
+            required: false,
+            defaultValue: '"right"',
+            example: 'imagePosition="right"'
+          },
+          {
+            name: 'callToActions',
+            type: 'CallToAction[]',
+            description: 'Array of action buttons (max 2)',
+            required: false,
+            example: 'callToActions={[{ label: "Get Started", url: "/start" }]}'
+          },
+          {
+            name: 'background',
+            type: 'BackgroundConfig',
+            description: 'Background configuration object',
+            required: false,
+            example: 'background={{ type: "gradient", gradientFrom: "#f8fafc" }}'
+          }
+        ]}
+      />
 
-      {/* Design Philosophy */}
+      {/* Type Definitions */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold">Design Philosophy</h2>
-        <div className="space-y-3">
-          <div className="p-4 border border-green-200 bg-green-50 rounded-md dark:border-green-800 dark:bg-green-900/20">
-            <h3 className="font-medium text-green-800 dark:text-green-200 mb-2">Content-First Approach</h3>
-            <p className="text-sm text-green-700 dark:text-green-300">
-              Simple Hero prioritizes readability and content hierarchy over visual effects. Perfect for content-focused websites, portfolios, and professional presentations where the message is more important than fancy animations.
-            </p>
-          </div>
+        <div className="text-lg font-semibold">Type Definitions</div>
+        <CodeBlock
+          title="SimpleHeroProps Interface"
+          code={`interface SimpleHeroProps {
+  eyebrow?: string
+  title: string
+  subtitle?: string
+  description?: string
+  layout?: 'centered' | 'left' | 'right' | 'split'
+  contentWidth?: 'narrow' | 'medium' | 'wide' | 'full'
+  titleSize?: 'sm' | 'md' | 'lg' | 'xl'
+  textColor?: 'dark' | 'light' | 'primary'
+  image?: string | Media
+  imagePosition?: 'left' | 'right'
+  callToActions?: CallToAction[]
+  background?: BackgroundConfig
+}
 
-          <div className="p-4 border border-blue-200 bg-blue-50 rounded-md dark:border-blue-800 dark:bg-blue-900/20">
-            <h3 className="font-medium text-blue-800 dark:text-blue-200 mb-2">Performance Benefits</h3>
-            <ul className="space-y-1 text-sm text-blue-700 dark:text-blue-300">
-              <li>• Lightweight with minimal dependencies</li>
-              <li>• Fast loading times with no heavy assets</li>
-              <li>• Excellent for SEO and accessibility</li>
-              <li>• Mobile-first responsive design</li>
-            </ul>
-          </div>
-        </div>
+interface CallToAction {
+  label: string
+  url: string
+  appearance?: 'primary' | 'secondary' | 'outline'
+  size?: 'sm' | 'default' | 'lg'
+  newTab?: boolean
+}
+
+interface BackgroundConfig {
+  type: 'color' | 'gradient' | 'image' | 'none'
+  color?: string
+  gradientFrom?: string
+  gradientTo?: string
+  gradientDirection?: string
+  image?: string | Media
+}
+
+interface Media {
+  url: string
+  alt?: string
+  width?: number
+  height?: number
+}`}
+          language="typescript"
+        />
       </div>
+
+      {/* Tags and Dependencies */}
+      <PageTags
+        category="blocks"
+        dependencies={['blocks-shared', 'lucide-react', 'next']}
+        tags={['hero', 'simple', 'minimal', 'landing', 'content-first', 'clean', 'performance']}
+      />
     </div>
   )
 }
