@@ -1,6 +1,6 @@
 {
   "name": "create-payloadkit",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "Create PayloadCMS projects with PayloadKit",
   "type": "module",
   "bin": {
@@ -8,7 +8,8 @@
   },
   "files": [
     "dist",
-    "bin"
+    "bin",
+    "templates"
   ],
   "scripts": {
     "build": "tsup",
