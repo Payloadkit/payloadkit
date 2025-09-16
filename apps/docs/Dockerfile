@@ -1,26 +1,40 @@
-# Build stage
-FROM oven/bun:1 AS builder
-
+# PayloadKit Docs Dockerfile - Static build for Dokploy
+FROM oven/bun:1-alpine AS base
 WORKDIR /app
 
-# Copy all project files (since we're in a monorepo)
+# Install system dependencies
+RUN apk update && apk upgrade && apk add --no-cache libc6-compat
+
+# Stage: Dependencies installation
+FROM base AS deps
+COPY package.json bun.lockb* ./
+RUN bun install --frozen-lockfile
+
+# Stage: Build docs
+FROM base AS builder
+COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
-# Install dependencies from root
-RUN bun install
+# Build environment variables
+ENV NODE_ENV=production
+ENV NEXT_TELEMETRY_DISABLED=1
 
 # Build docs
 WORKDIR /app/apps/docs
 RUN bun run build
 
-# Production stage
-FROM nginx:alpine
+# Stage: Static file server
+FROM oven/bun:1-alpine AS runner
+WORKDIR /app
 
-# Copy built files
-COPY --from=builder /app/apps/docs/out /usr/share/nginx/html
+# Install serve globally for static file serving
+RUN bun add -g serve
 
-# Copy nginx config
-COPY --from=builder /app/apps/docs/nginx.conf /etc/nginx/conf.d/default.conf
+# Copy built static files
+COPY --from=builder /app/apps/docs/out ./public
 
-EXPOSE 80
-CMD ["nginx", "-g", "daemon off;"]
+# Expose port for Dokploy
+EXPOSE 3000
+
+# Serve static files (Traefik will handle reverse proxy)
+CMD ["serve", "-s", "public", "-l", "3000"]
