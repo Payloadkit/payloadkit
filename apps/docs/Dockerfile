@@ -19,9 +19,8 @@ COPY . .
 ENV NODE_ENV=production
 ENV NEXT_TELEMETRY_DISABLED=1
 
-# Build docs
-WORKDIR /app/apps/docs
-RUN bun run build
+# Build from root (where node_modules is)
+RUN bun run --filter=docs build
 
 # Stage: Static file server
 FROM oven/bun:1-alpine AS runner
