@@ -3,15 +3,10 @@ FROM oven/bun:1 AS builder
 
 WORKDIR /app
 
-# Copy root package files
-COPY ../../package.json ../../bun.lockb ./
-COPY ../../packages ./packages
+# Copy all project files (since we're in a monorepo)
+COPY . .
 
-# Copy docs
-COPY package.json ./apps/docs/
-COPY . ./apps/docs/
-
-# Install dependencies
+# Install dependencies from root
 RUN bun install
 
 # Build docs
@@ -25,7 +20,7 @@ FROM nginx:alpine
 COPY --from=builder /app/apps/docs/out /usr/share/nginx/html
 
 # Copy nginx config
-COPY nginx.conf /etc/nginx/conf.d/default.conf
+COPY --from=builder /app/apps/docs/nginx.conf /etc/nginx/conf.d/default.conf
 
 EXPOSE 80
 CMD ["nginx", "-g", "daemon off;"]
