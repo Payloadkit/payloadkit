@@ -151,7 +151,7 @@ export default function ExamplesPage() {
               We're working on more examples and templates. Check back soon or contribute your own!
             </p>
             <Button variant="outline" asChild>
-              <Link href="https://github.com/j-corral/payloadkit" target="_blank">
+              <Link href="https://github.com/payloadkit/payloadkit" target="_blank">
                 Contribute on GitHub <ArrowRight className="ml-2 h-4 w-4" />
               </Link>
             </Button>

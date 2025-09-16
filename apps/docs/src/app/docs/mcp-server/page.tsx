@@ -32,7 +32,7 @@ export default function MCPServerPage() {
       <PageDescription
         title="MCP Server"
         description="Model Context Protocol server for PayloadKit - enables AI assistants to work with PayloadCMS components and registry"
-        badge="AI Integration"
+        tags={["AI Integration", "MCP", "Claude"]}
       />
 
       {/* Introduction */}

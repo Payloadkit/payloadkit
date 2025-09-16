@@ -8,8 +8,8 @@ export const PAYLOADKIT_NAME = 'PayloadKit'
 
 // Registry URLs
 export const REGISTRY_URL = 'https://registry.payloadkit.dev'
-export const GITHUB_URL = 'https://github.com/j-corral/payloadkit'
-export const DOCS_URL = 'https://payloadkit.dev'
+export const GITHUB_URL = 'https://github.com/payloadkit/payloadkit'
+export const DOCS_URL = 'https://payloadkit.conabea.com'
 
 // Supported file extensions
 export const SUPPORTED_EXTENSIONS = ['.ts', '.tsx', '.js', '.jsx']

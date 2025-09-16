@@ -59,7 +59,7 @@ export function Header() {
               <span className="sr-only">Toggle theme</span>
             </Button>
             <Button variant="ghost" size="icon" className="h-8 w-8" asChild>
-              <Link href="https://github.com/j-corral/payloadkit" target="_blank">
+              <Link href="https://github.com/payloadkit/payloadkit" target="_blank">
                 <Github className="h-4 w-4" />
                 <span className="sr-only">GitHub</span>
               </Link>

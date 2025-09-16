@@ -5,7 +5,7 @@
   "description": "PayloadKit - Open source framework for PayloadCMS",
   "repository": {
     "type": "git",
-    "url": "https://github.com/j-corral/payloadkit.git"
+    "url": "https://github.com/payloadkit/payloadkit.git"
   },
   "workspaces": [
     "packages/*",

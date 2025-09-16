@@ -230,8 +230,8 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 🔗 Links
 
-- [Documentation](https://payloadkit.dev)
-- [GitHub](https://github.com/j-corral/payloadkit)
+- [Documentation](https://payloadkit.conabea.com)
+- [GitHub](https://github.com/payloadkit/payloadkit)
 - [PayloadCMS](https://payloadcms.com)
 
 ---
