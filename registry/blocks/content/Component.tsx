@@ -1,4 +1,5 @@
 import React from 'react'
+import DOMPurify from 'dompurify'
 import type { RichTextContent } from '../blocks-shared'
 
 interface Column {
@@ -34,7 +35,8 @@ export const ContentBlock: React.FC<ContentBlockProps> = ({
   const renderRichText = (richText: RichTextContent) => {
     // This is a simplified version - in practice you'd use the actual Lexical renderer
     if (typeof richText === 'string') {
-      return <div dangerouslySetInnerHTML={{ __html: richText }} />
+      const sanitizedHtml = DOMPurify.sanitize(richText)
+      return <div dangerouslySetInnerHTML={{ __html: sanitizedHtml }} />
     }
     return <div>{JSON.stringify(richText)}</div>
   }

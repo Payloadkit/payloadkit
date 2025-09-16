@@ -2,6 +2,7 @@
 // DO NOT MODIFY - Will be overwritten on updates
 
 import React from 'react'
+import DOMPurify from 'dompurify'
 import { cn } from '@/lib/utils'
 
 interface RichTextProps {
@@ -16,7 +17,8 @@ export default function RichText({ data, className, enableGutter = true }: RichT
   // Simple implementation - in a real app you'd use Lexical renderer
   const renderContent = () => {
     if (typeof data === 'string') {
-      return <div dangerouslySetInnerHTML={{ __html: data }} />
+      const sanitizedHtml = DOMPurify.sanitize(data)
+      return <div dangerouslySetInnerHTML={{ __html: sanitizedHtml }} />
     }
     
     // Basic JSON content rendering

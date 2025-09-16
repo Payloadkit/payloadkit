@@ -110,7 +110,7 @@ npx payloadkit add db-config  # Smart configuration`}
                 <CodeBlock
                   code={`# Minimal configuration
 echo "DATABASE_URI=postgresql://localhost:5432/my_project" > .env
-echo "PAYLOAD_SECRET=my-local-secret" >> .env
+echo "PAYLOAD_SECRET=your-secret-key-here" >> .env
 
 # Launch
 bun dev`}

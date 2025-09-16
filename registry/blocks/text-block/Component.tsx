@@ -1,4 +1,5 @@
 import React from 'react'
+import DOMPurify from 'dompurify'
 import type { RichTextContent } from '../blocks-shared'
 
 interface TextBlockProps {
@@ -34,7 +35,8 @@ export const TextBlock: React.FC<TextBlockProps> = ({
   // Simple function to render rich text
   const renderRichText = (richText: RichTextContent) => {
     if (typeof richText === 'string') {
-      return <div dangerouslySetInnerHTML={{ __html: richText }} />
+      const sanitizedHtml = DOMPurify.sanitize(richText)
+      return <div dangerouslySetInnerHTML={{ __html: sanitizedHtml }} />
     }
     return <div>{JSON.stringify(richText)}</div>
   }

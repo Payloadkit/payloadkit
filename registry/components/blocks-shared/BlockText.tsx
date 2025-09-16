@@ -1,4 +1,5 @@
 import React from 'react'
+import DOMPurify from 'dompurify'
 import { cn } from '../../utils/cn'
 import type { RichTextContent, LexicalNode } from './types'
 
@@ -103,7 +104,7 @@ export const BlockText: React.FC<BlockTextProps> = ({
       style={style}
     >
       {prose ? (
-        <div dangerouslySetInnerHTML={{ __html: content }} />
+        <div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(content) }} />
       ) : (
         content
       )}
