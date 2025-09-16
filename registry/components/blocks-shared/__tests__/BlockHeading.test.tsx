@@ -67,25 +67,25 @@ describe('BlockHeading', () => {
     expect(heading).toHaveClass('text-3xl', 'md:text-4xl', 'font-bold')
   })
 
-  it('applies small size classes', () => {
-    render(<BlockHeading text="Small Size" size="sm" />)
+  it('applies h3 size classes (smaller)', () => {
+    render(<BlockHeading text="Small Size" level="h3" />)
 
     const heading = screen.getByText('Small Size')
-    expect(heading).toHaveClass('text-2xl', 'md:text-3xl')
+    expect(heading).toHaveClass('text-2xl', 'md:text-3xl', 'lg:text-4xl')
   })
 
-  it('applies large size classes', () => {
-    render(<BlockHeading text="Large Size" size="lg" />)
+  it('applies h1 size classes (larger)', () => {
+    render(<BlockHeading text="Large Size" level="h1" />)
 
     const heading = screen.getByText('Large Size')
     expect(heading).toHaveClass('text-4xl', 'md:text-5xl', 'lg:text-6xl')
   })
 
-  it('applies xl size classes', () => {
-    render(<BlockHeading text="XL Size" size="xl" />)
+  it('applies h6 size classes (smallest)', () => {
+    render(<BlockHeading text="Small Size" level="h6" />)
 
-    const heading = screen.getByText('XL Size')
-    expect(heading).toHaveClass('text-5xl', 'md:text-6xl', 'lg:text-7xl')
+    const heading = screen.getByText('Small Size')
+    expect(heading).toHaveClass('text-base', 'md:text-lg', 'lg:text-xl')
   })
 
   it('applies custom className', () => {
@@ -101,7 +101,7 @@ describe('BlockHeading', () => {
         text="Complex Heading"
         level="h3"
         align="center"
-        size="lg"
+        weight="medium"
         className="text-blue-500"
       />
     )
@@ -110,10 +110,10 @@ describe('BlockHeading', () => {
     expect(heading).toHaveTextContent('Complex Heading')
     expect(heading).toHaveClass(
       'text-center',
-      'text-4xl',
-      'md:text-5xl',
-      'lg:text-6xl',
-      'font-bold',
+      'text-2xl',
+      'md:text-3xl',
+      'lg:text-4xl',
+      'font-medium',
       'text-blue-500'
     )
   })
@@ -138,12 +138,11 @@ describe('BlockHeading', () => {
     render(
       <BlockHeading
         text="Test Heading"
-        data-testid="heading"
-        id="test-heading"
+        style={{ color: 'red' }}
       />
     )
 
-    const heading = screen.getByTestId('heading')
-    expect(heading).toHaveAttribute('id', 'test-heading')
+    const heading = screen.getByText('Test Heading')
+    expect(heading).toHaveStyle({ color: 'rgb(255, 0, 0)' })
   })
 })

@@ -22,67 +22,67 @@ describe('BlockSection', () => {
     )
 
     const section = container.firstChild
-    expect(section).toHaveClass('py-16') // default spacing
+    expect(section).toHaveClass('pt-16', 'pb-16', 'px-6') // default: lg, lg, md
   })
 
   it('applies small spacing correctly', () => {
     const { container } = render(
-      <BlockSection paddingY="sm">
+      <BlockSection paddingTop="sm" paddingBottom="sm">
         <div>Content</div>
       </BlockSection>
     )
 
     const section = container.firstChild
-    expect(section).toHaveClass('py-8')
+    expect(section).toHaveClass('pt-8', 'pb-8')
   })
 
   it('applies medium spacing correctly', () => {
     const { container } = render(
-      <BlockSection paddingY="md">
+      <BlockSection paddingTop="md" paddingBottom="md">
         <div>Content</div>
       </BlockSection>
     )
 
     const section = container.firstChild
-    expect(section).toHaveClass('py-16')
+    expect(section).toHaveClass('pt-12', 'pb-12')
   })
 
   it('applies large spacing correctly', () => {
     const { container } = render(
-      <BlockSection paddingY="lg">
+      <BlockSection paddingTop="lg" paddingBottom="lg">
         <div>Content</div>
       </BlockSection>
     )
 
     const section = container.firstChild
-    expect(section).toHaveClass('py-24')
+    expect(section).toHaveClass('pt-16', 'pb-16')
   })
 
   it('applies xl spacing correctly', () => {
     const { container } = render(
-      <BlockSection paddingY="xl">
+      <BlockSection paddingTop="xl" paddingBottom="xl">
         <div>Content</div>
       </BlockSection>
     )
 
     const section = container.firstChild
-    expect(section).toHaveClass('py-32')
+    expect(section).toHaveClass('pt-20', 'pb-20')
   })
 
   it('applies no spacing when specified', () => {
     const { container } = render(
-      <BlockSection paddingY="none">
+      <BlockSection paddingTop="none" paddingBottom="none" paddingX="none">
         <div>Content</div>
       </BlockSection>
     )
 
     const section = container.firstChild
-    expect(section).not.toHaveClass('py-8', 'py-16', 'py-24', 'py-32')
+    expect(section).not.toHaveClass('pt-8', 'pt-16', 'pt-20', 'pb-8', 'pb-16', 'pb-20', 'px-4', 'px-6', 'px-8')
   })
 
   it('applies different top and bottom spacing', () => {
     const { container } = render(
-      <BlockSection paddingTop="lg" paddingBottom="sm">
+      <BlockSection paddingTop="2xl" paddingBottom="sm">
         <div>Content</div>
       </BlockSection>
     )
@@ -99,7 +99,8 @@ describe('BlockSection', () => {
     )
 
     const section = container.firstChild
-    expect(section).toHaveClass('h-auto')
+    // height="auto" maps to empty string, so no specific class is added
+    expect(section).not.toHaveClass('min-h-screen')
   })
 
   it('applies screen height correctly', () => {
@@ -115,24 +116,26 @@ describe('BlockSection', () => {
 
   it('applies full width correctly', () => {
     const { container } = render(
-      <BlockSection width="full">
+      <BlockSection>
         <div>Content</div>
       </BlockSection>
     )
 
     const section = container.firstChild
-    expect(section).toHaveClass('w-full')
+    expect(section).toHaveClass('w-full') // always present
   })
 
-  it('applies container width correctly', () => {
+  it('applies container size correctly', () => {
     const { container } = render(
-      <BlockSection width="container">
+      <BlockSection containerSize="2xl">
         <div>Content</div>
       </BlockSection>
     )
 
     const section = container.firstChild
-    expect(section).toHaveClass('max-w-7xl', 'mx-auto', 'px-4')
+    // Container size affects the inner div, not the section
+    const innerDiv = section?.firstChild
+    expect(innerDiv).toHaveClass('max-w-screen-2xl')
   })
 
   it('applies custom className', () => {
@@ -153,17 +156,17 @@ describe('BlockSection', () => {
       </BlockSection>
     )
 
-    const section = container.firstChild
-    expect(section).toHaveAttribute('data-testid', 'section')
+    const section = screen.getByTestId('section')
     expect(section).toHaveAttribute('id', 'test-id')
   })
 
   it('combines multiple spacing and sizing options', () => {
     const { container } = render(
       <BlockSection
-        paddingY="lg"
+        paddingTop="2xl"
+        paddingBottom="xl"
         height="screen"
-        width="container"
+        containerSize="lg"
         className="bg-gray-100"
       >
         <div>Content</div>
@@ -172,12 +175,14 @@ describe('BlockSection', () => {
 
     const section = container.firstChild
     expect(section).toHaveClass(
-      'py-24',      // paddingY lg
+      'pt-24',        // paddingTop 2xl
+      'pb-20',        // paddingBottom xl
       'min-h-screen', // height screen
-      'max-w-7xl',    // width container
-      'mx-auto',      // width container
-      'px-4',         // width container
       'bg-gray-100'   // custom class
     )
+
+    // Check inner container
+    const innerDiv = section?.firstChild
+    expect(innerDiv).toHaveClass('max-w-screen-lg')
   })
 })

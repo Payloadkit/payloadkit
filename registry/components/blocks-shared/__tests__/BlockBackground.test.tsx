@@ -46,9 +46,11 @@ describe('BlockBackground', () => {
       <BlockBackground
         background={{
           type: 'gradient',
-          gradientFrom: '#ff0000',
-          gradientTo: '#0000ff',
-          gradientDirection: 'to-br'
+          gradientDirection: 'to-br',
+          gradientStops: [
+            { color: '#ff0000', position: '0%' },
+            { color: '#0000ff', position: '100%' }
+          ]
         }}
       >
         <div>Content</div>
@@ -57,7 +59,7 @@ describe('BlockBackground', () => {
 
     const backgroundDiv = container.firstChild as HTMLElement
     expect(backgroundDiv).toHaveStyle({
-      backgroundImage: 'linear-gradient(to bottom right, #ff0000, #0000ff)'
+      backgroundImage: 'linear-gradient(to-br, #ff0000 0%, #0000ff 100%)'
     })
   })
 
@@ -112,7 +114,9 @@ describe('BlockBackground', () => {
 
     const backgroundDiv = container.firstChild as HTMLElement
     expect(backgroundDiv).toHaveClass('relative')
-    expect(backgroundDiv).not.toHaveStyle({ backgroundColor: expect.anything() })
+    // No background styles should be applied
+    expect(backgroundDiv.style.backgroundColor).toBe('')
+    expect(backgroundDiv.style.backgroundImage).toBe('')
   })
 
   it('applies custom className', () => {

@@ -12,6 +12,7 @@ export interface BlockSectionProps {
   height?: SectionHeight
   containerSize?: 'sm' | 'md' | 'lg' | 'xl' | '2xl' | 'full'
   className?: string
+  [key: string]: any // Allow additional props to be passed through
 }
 
 const spacingMap: Record<SpacingSize, string> = {
@@ -77,6 +78,7 @@ export const BlockSection: React.FC<BlockSectionProps> = ({
   height = 'auto',
   containerSize = 'xl',
   className,
+  ...props
 }) => {
   return (
     <section
@@ -88,6 +90,7 @@ export const BlockSection: React.FC<BlockSectionProps> = ({
         paddingXMap[paddingX],
         className
       )}
+      {...props}
     >
       <div className={cn('mx-auto', containerSizeMap[containerSize])}>
         {children}

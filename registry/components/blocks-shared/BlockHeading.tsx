@@ -6,7 +6,7 @@ export type TextAlign = 'left' | 'center' | 'right'
 export type TextWeight = 'light' | 'normal' | 'medium' | 'semibold' | 'bold' | 'extrabold'
 
 export interface BlockHeadingProps {
-  text: string
+  text: string | undefined
   level?: HeadingLevel
   align?: TextAlign
   weight?: TextWeight
