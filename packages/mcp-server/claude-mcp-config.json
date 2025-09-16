@@ -1,0 +1,17 @@
+{
+  "mcpServers": {
+    "payloadkit": {
+      "command": "node",
+      "args": [
+        "/Users/jonathan/WORKSPACE/WEB/payloadkit/packages/mcp-server/dist/server.js",
+        "--registry-path",
+        "/Users/jonathan/WORKSPACE/WEB/payloadkit/registry",
+        "--project-path",
+        "."
+      ],
+      "env": {
+        "PAYLOADKIT_MCP_DEBUG": "false"
+      }
+    }
+  }
+}

@@ -25,6 +25,11 @@ const sidebarNavItems = [
         title: "CLI Usage",
         href: "/docs/cli",
       },
+      {
+        title: "MCP Server",
+        href: "/docs/mcp-server",
+        badge: "AI"
+      },
     ],
   },
   {

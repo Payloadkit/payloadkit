@@ -21,7 +21,7 @@
     },
     "apps/docs": {
       "name": "docs",
-      "version": "0.0.1",
+      "version": "0.0.2",
       "dependencies": {
         "@payloadkit/core": "workspace:*",
         "@radix-ui/react-accordion": "^1.2.12",
@@ -66,7 +66,7 @@
     },
     "packages/core": {
       "name": "@payloadkit/core",
-      "version": "0.0.1",
+      "version": "0.2.0",
       "devDependencies": {
         "tsup": "^8.5.0",
         "typescript": "^5.9.2",
@@ -77,7 +77,7 @@
     },
     "packages/create-payloadkit": {
       "name": "create-payloadkit",
-      "version": "0.0.1",
+      "version": "0.2.0",
       "bin": {
         "create-payloadkit": "./bin/index.js",
       },
@@ -96,9 +96,26 @@
         "typescript": "^5.6.2",
       },
     },
+    "packages/mcp-server": {
+      "name": "@payloadkit/mcp-server",
+      "version": "0.1.0",
+      "bin": {
+        "payloadkit-mcp": "dist/server.js",
+      },
+      "dependencies": {
+        "@modelcontextprotocol/sdk": "^1.18.0",
+        "@payloadkit/core": "workspace:*",
+        "zod": "^3.23.8",
+      },
+      "devDependencies": {
+        "@types/node": "^22.0.0",
+        "tsup": "^8.0.0",
+        "typescript": "^5.6.0",
+      },
+    },
     "packages/payloadkit": {
       "name": "payloadkit",
-      "version": "0.0.1",
+      "version": "0.2.0",
       "bin": {
         "payloadkit": "./bin/index.js",
       },
@@ -474,6 +491,8 @@
     "@payloadcms/translations": ["@payloadcms/translations@3.55.1", "", { "dependencies": { "date-fns": "4.1.0" } }, "sha512-iYb0qrx2FNgy3oApsyLJQYzSxip29wPWE+SnN6sW/rllKU8SwFuwOCp/xu994rS3jcBpYQ0Y0EAJ4BqdvJ0dnA=="],
 
     "@payloadkit/core": ["@payloadkit/core@workspace:packages/core"],
+
+    "@payloadkit/mcp-server": ["@payloadkit/mcp-server@workspace:packages/mcp-server"],
 
     "@pkgjs/parseargs": ["@pkgjs/parseargs@0.11.0", "", {}, "sha512-+1VkjdD0QBLPodGrJUeqarH8VAIvQODIbwh9XpP5Syisf7YoQgsJKPNFoqqLQlu+VQ/tVSshMR6loPMn8U+dPg=="],
 
