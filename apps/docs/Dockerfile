@@ -18,9 +18,10 @@ COPY . .
 # Build environment variables
 ENV NODE_ENV=production
 ENV NEXT_TELEMETRY_DISABLED=1
+ENV PATH="/app/node_modules/.bin:$PATH"
 
-# Build from root (where node_modules is)
-RUN bun run --filter=docs build
+# Build docs using explicit path to next
+RUN cd apps/docs && ../node_modules/.bin/next build
 
 # Stage: Static file server
 FROM oven/bun:1-alpine AS runner
