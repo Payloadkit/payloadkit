@@ -1,6 +1,6 @@
 {
   "name": "payloadkit",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "CLI for PayloadKit - Build websites faster with PayloadCMS",
   "bin": {
     "payloadkit": "./bin/index.js"
@@ -23,7 +23,7 @@
     "test": "vitest run"
   },
   "dependencies": {
-    "@payloadkit/core": "^0.3.0",
+    "@payloadkit/core": "^0.3.1",
     "chalk": "^5.6.2",
     "commander": "^14.0.1",
     "execa": "^9.6.0",
