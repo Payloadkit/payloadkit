@@ -356,6 +356,8 @@ registry/[type]/[component-name]/
 # Better Auth UI
 In order to implement a proper better auth page please use Better Auth UI : https://better-auth-ui.com/llms.txt
 
+# Git Commit
+Never co-author claude on git commit
 
 # important-instruction-reminders
 Do what has been asked; nothing more, nothing less.
