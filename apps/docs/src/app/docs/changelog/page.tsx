@@ -30,7 +30,7 @@ export default function ChangelogPage() {
         title="Changelog"
         description="Complete version history and release notes for PayloadKit. Track new features, improvements, and bug fixes across all releases."
         category="guides"
-        version="0.2.0"
+        version="0.3.0"
         difficulty="beginner"
         estimatedTime="5 minutes"
         lastUpdated="January 2025"
@@ -44,6 +44,81 @@ export default function ChangelogPage() {
           Format based on <Link href="https://keepachangelog.com" className="text-primary hover:underline">Keep a Changelog</Link>.
         </AlertDescription>
       </Alert>
+
+      {/* Version 0.3.0 */}
+      <section className="space-y-6">
+        <div className="flex items-center gap-3">
+          <Calendar className="h-6 w-6 text-purple-600" />
+          <h2 className="text-3xl font-bold">0.3.0</h2>
+          <Badge variant="outline" className="bg-purple-50 text-purple-700 border-purple-200">
+            January 17, 2025
+          </Badge>
+          <Badge className="bg-purple-600 text-white">Latest</Badge>
+        </div>
+
+        <div className="grid gap-6 lg:grid-cols-2">
+          {/* New Features */}
+          <div className="rounded-lg border p-6">
+            <div className="flex items-center gap-3 mb-4">
+              <div className="flex items-center justify-center w-8 h-8 rounded-lg bg-green-100">
+                <Plus className="h-4 w-4 text-green-600" />
+              </div>
+              <h3 className="text-xl font-semibold">Added</h3>
+            </div>
+            <ul className="space-y-3 text-sm text-muted-foreground">
+              <li className="flex items-start gap-2">
+                <span className="w-1.5 h-1.5 rounded-full bg-green-500 mt-2 flex-shrink-0"></span>
+                <span><strong>Database-Only Docker Mode:</strong> New recommended development workflow with PostgreSQL 17 in Docker and app running locally for faster rebuilds</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="w-1.5 h-1.5 rounded-full bg-green-500 mt-2 flex-shrink-0"></span>
+                <span><strong>PostgreSQL 17 Support:</strong> Upgraded from PostgreSQL 16 to 17 for improved performance and enhanced JSON operations</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="w-1.5 h-1.5 rounded-full bg-green-500 mt-2 flex-shrink-0"></span>
+                <span><strong>New Docker Scripts:</strong> Added <code>docker:db-only</code>, <code>docker:db-only:detached</code>, <code>docker:db-only:pgadmin</code>, <code>docker:db-only:stop</code></span>
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="w-1.5 h-1.5 rounded-full bg-green-500 mt-2 flex-shrink-0"></span>
+                <span><strong>Registry Component:</strong> New <code>docker-compose-db-only</code> configuration for database-only development</span>
+              </li>
+            </ul>
+          </div>
+
+          {/* Improvements */}
+          <div className="rounded-lg border p-6">
+            <div className="flex items-center gap-3 mb-4">
+              <div className="flex items-center justify-center w-8 h-8 rounded-lg bg-blue-100">
+                <Wrench className="h-4 w-4 text-blue-600" />
+              </div>
+              <h3 className="text-xl font-semibold">Improved</h3>
+            </div>
+            <ul className="space-y-3 text-sm text-muted-foreground">
+              <li className="flex items-start gap-2">
+                <span className="w-1.5 h-1.5 rounded-full bg-blue-500 mt-2 flex-shrink-0"></span>
+                <span><strong>Documentation:</strong> Enhanced installation and Docker guides with comprehensive database deployment options comparison</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="w-1.5 h-1.5 rounded-full bg-blue-500 mt-2 flex-shrink-0"></span>
+                <span><strong>Developer Experience:</strong> Database-only mode provides faster hot reload, better debugging, and minimal resource usage</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="w-1.5 h-1.5 rounded-full bg-blue-500 mt-2 flex-shrink-0"></span>
+                <span><strong>Templates:</strong> All Docker configurations updated to use PostgreSQL 17 with optimized development workflows</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <Alert>
+          <Package className="h-4 w-4" />
+          <AlertDescription>
+            <strong>Recommended Workflow:</strong> Use <code>bun run docker:db-only</code> for development. PostgreSQL 17 runs in Docker while your app runs locally with hot reload, TypeScript support, and faster builds.
+          </AlertDescription>
+        </Alert>
+      </section>
+
+      <Separator />
 
       {/* Version 0.2.1 */}
       <section className="space-y-6">

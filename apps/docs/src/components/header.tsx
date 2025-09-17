@@ -4,6 +4,7 @@ import Link from "next/link"
 import { useTheme } from "next-themes"
 import { Moon, Sun, Github } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { Badge } from "@/components/ui/badge"
 import { Search } from "@/components/search"
 
 export function Header() {
@@ -20,6 +21,9 @@ export function Header() {
             <span className="hidden font-bold sm:inline-block">
               PayloadKit
             </span>
+            <Badge variant="secondary" className="ml-2 text-xs">
+              v0.3.0
+            </Badge>
           </Link>
           <nav className="flex items-center gap-6 text-sm">
             <Link
