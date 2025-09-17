@@ -270,7 +270,8 @@ var Registry = class {
         blocks: {},
         collections: {},
         globals: {},
-        components: {}
+        components: {},
+        plugins: {}
       };
       this.cache = emptyRegistry;
       Logger.stopSpinner(true, "Empty registry loaded");
@@ -309,6 +310,20 @@ var Registry = class {
     return Object.values(registry.components);
   }
   /**
+   * Get a specific plugin
+   */
+  static async getPlugin(name) {
+    const registry = await this.getRegistry();
+    return registry.plugins[name] || null;
+  }
+  /**
+   * List all available plugins
+   */
+  static async listPlugins() {
+    const registry = await this.getRegistry();
+    return Object.values(registry.plugins);
+  }
+  /**
    * Search blocks by category or name
    */
   static async searchBlocks(query) {
@@ -331,6 +346,13 @@ var Registry = class {
   static getComponentSourcePath(componentName) {
     const registryPath = this.getLocalRegistryPath();
     return import_path2.default.join(registryPath, "components", componentName);
+  }
+  /**
+   * Get the source path for a plugin
+   */
+  static getPluginSourcePath(pluginName) {
+    const registryPath = this.getLocalRegistryPath();
+    return import_path2.default.join(registryPath, "plugins", pluginName);
   }
   /**
    * Check if a block exists in the local registry
@@ -414,6 +436,10 @@ var Project = class {
         path: "src/globals",
         alias: "@/globals"
       },
+      plugins: {
+        path: "src/plugins",
+        alias: "@/plugins"
+      },
       registryUrl: "https://registry.payloadkit.dev"
     };
     await FileOperations.writeJson(configPath, config);
@@ -438,7 +464,8 @@ var Project = class {
       blocks: "src/blocks",
       components: "src/components",
       collections: "src/collections",
-      globals: "src/globals"
+      globals: "src/globals",
+      plugins: "src/plugins"
     };
     return import_path3.default.join(cwd, defaults[componentType]);
   }
@@ -469,17 +496,20 @@ var addCommand = new import_commander.Command().name("add").description("Add a c
     }
     const block = await Registry.getBlock(componentName);
     const component = await Registry.getComponent(componentName);
-    if (!block && !component) {
+    const plugin = await Registry.getPlugin(componentName);
+    if (!block && !component && !plugin) {
       Logger.error(`Component "${componentName}" not found`);
       Logger.info("Available components:");
       const blocks = await Registry.listBlocks();
       const components = await Registry.listComponents();
+      const plugins = await Registry.listPlugins();
       blocks.forEach((b) => Logger.info(`  ${b.name} (block)`));
       components.forEach((c) => Logger.info(`  ${c.name} (component)`));
+      plugins.forEach((p) => Logger.info(`  ${p.name} (plugin)`));
       process.exit(1);
     }
-    const targetComponent = block || component;
-    const componentType = block ? "blocks" : "components";
+    const targetComponent = block || component || plugin;
+    const componentType = block ? "blocks" : component ? "components" : "plugins";
     const exists = await Project.componentExists(componentName, componentType);
     if (exists && !options.force) {
       const response = await (0, import_prompts.default)({
@@ -497,9 +527,19 @@ var addCommand = new import_commander.Command().name("add").description("Add a c
     const componentPath = import_path4.default.join(installPath, componentName);
     Logger.startSpinner(`Installing ${componentName}...`);
     try {
-      const componentExists = await Registry.blockExists(componentName);
+      let sourcePath = "";
+      let componentExists = false;
+      if (componentType === "blocks") {
+        componentExists = await Registry.blockExists(componentName);
+        sourcePath = Registry.getBlockSourcePath(componentName);
+      } else if (componentType === "components") {
+        sourcePath = Registry.getComponentSourcePath(componentName);
+        componentExists = await FileOperations.exists(sourcePath);
+      } else if (componentType === "plugins") {
+        sourcePath = Registry.getPluginSourcePath(componentName);
+        componentExists = await FileOperations.exists(sourcePath);
+      }
       if (componentExists) {
-        const sourcePath = Registry.getBlockSourcePath(componentName);
         const files = await FileOperations.findFiles("**/*", sourcePath);
         Logger.updateSpinner(`Copying ${files.length} files...`);
         for (const file of files) {
@@ -507,6 +547,25 @@ var addCommand = new import_commander.Command().name("add").description("Add a c
           const destFile = import_path4.default.join(componentPath, file);
           if (file === "payloadkit.json") continue;
           await FileOperations.copyFile(srcFile, destFile, options.force);
+        }
+        if (componentType === "plugins" && plugin) {
+          Logger.updateSpinner("Plugin copied successfully");
+          Logger.info(`Plugin ${componentName} installed successfully!`);
+          Logger.info("Next steps:");
+          Logger.info("1. Install required dependencies:");
+          if (plugin.dependencies && plugin.dependencies.length > 0) {
+            Logger.code(`bun add ${plugin.dependencies.join(" ")}`);
+          }
+          if (plugin.devDependencies && plugin.devDependencies.length > 0) {
+            Logger.code(`bun add -D ${plugin.devDependencies.join(" ")}`);
+          }
+          Logger.info("2. Add the plugin to your payload.config.ts:");
+          Logger.code(`import { ${componentName}Plugin } from './src/plugins/${componentName}'`);
+          Logger.code(`plugins: [${componentName}Plugin({ /* config */ })]`);
+          if (plugin.features && plugin.features.length > 0) {
+            Logger.info("3. Features included:");
+            plugin.features.forEach((feature) => Logger.info(`   - ${feature}`));
+          }
         }
         if (targetComponent) {
           await FileOperations.writeJson(

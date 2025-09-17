@@ -2,7 +2,7 @@ import fetch from 'node-fetch'
 import path from 'path'
 import { fileURLToPath } from 'url'
 import { REGISTRY_URL } from '@payloadkit/core'
-import type { PayloadKitRegistry, PayloadKitBlock, PayloadKitComponent } from '@payloadkit/core'
+import type { PayloadKitRegistry, PayloadKitBlock, PayloadKitComponent, PayloadKitPlugin } from '@payloadkit/core'
 import { Logger } from './logger'
 import { FileOperations } from './file-operations'
 
@@ -55,7 +55,8 @@ export class Registry {
         blocks: {},
         collections: {},
         globals: {},
-        components: {}
+        components: {},
+        plugins: {}
       }
 
       this.cache = emptyRegistry
@@ -101,6 +102,22 @@ export class Registry {
   }
 
   /**
+   * Get a specific plugin
+   */
+  static async getPlugin(name: string): Promise<PayloadKitPlugin | null> {
+    const registry = await this.getRegistry()
+    return registry.plugins[name] || null
+  }
+
+  /**
+   * List all available plugins
+   */
+  static async listPlugins(): Promise<PayloadKitPlugin[]> {
+    const registry = await this.getRegistry()
+    return Object.values(registry.plugins)
+  }
+
+  /**
    * Search blocks by category or name
    */
   static async searchBlocks(query: string): Promise<PayloadKitBlock[]> {
@@ -129,6 +146,14 @@ export class Registry {
   static getComponentSourcePath(componentName: string): string {
     const registryPath = this.getLocalRegistryPath()
     return path.join(registryPath, 'components', componentName)
+  }
+
+  /**
+   * Get the source path for a plugin
+   */
+  static getPluginSourcePath(pluginName: string): string {
+    const registryPath = this.getLocalRegistryPath()
+    return path.join(registryPath, 'plugins', pluginName)
   }
 
   /**

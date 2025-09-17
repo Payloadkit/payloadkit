@@ -86,6 +86,10 @@ export class Project {
         path: 'src/globals',
         alias: '@/globals'
       },
+      plugins: {
+        path: 'src/plugins',
+        alias: '@/plugins'
+      },
       registryUrl: 'https://registry.payloadkit.dev'
     }
 
@@ -104,9 +108,9 @@ export class Project {
   /**
    * Resolve component path
    */
-  static async resolveComponentPath(componentType: 'blocks' | 'components' | 'collections' | 'globals', cwd = process.cwd()): Promise<string> {
+  static async resolveComponentPath(componentType: 'blocks' | 'components' | 'collections' | 'globals' | 'plugins', cwd = process.cwd()): Promise<string> {
     const config = await this.getPayloadKitConfig(cwd)
-    
+
     if (config && config[componentType]?.path) {
       return path.join(cwd, config[componentType].path)
     }
@@ -116,7 +120,8 @@ export class Project {
       blocks: 'src/blocks',
       components: 'src/components',
       collections: 'src/collections',
-      globals: 'src/globals'
+      globals: 'src/globals',
+      plugins: 'src/plugins'
     }
 
     return path.join(cwd, defaults[componentType])
@@ -126,8 +131,8 @@ export class Project {
    * Check if component already exists
    */
   static async componentExists(
-    name: string, 
-    type: 'blocks' | 'components' | 'collections' | 'globals',
+    name: string,
+    type: 'blocks' | 'components' | 'collections' | 'globals' | 'plugins',
     cwd = process.cwd()
   ): Promise<boolean> {
     const componentPath = await this.resolveComponentPath(type, cwd)

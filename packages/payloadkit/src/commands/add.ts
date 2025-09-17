@@ -34,22 +34,25 @@ export const addCommand = new Command()
       // Try to find the component in different types
       const block = await Registry.getBlock(componentName)
       const component = await Registry.getComponent(componentName)
+      const plugin = await Registry.getPlugin(componentName)
 
-      if (!block && !component) {
+      if (!block && !component && !plugin) {
         Logger.error(`Component "${componentName}" not found`)
         Logger.info('Available components:')
-        
+
         const blocks = await Registry.listBlocks()
         const components = await Registry.listComponents()
-        
+        const plugins = await Registry.listPlugins()
+
         blocks.forEach(b => Logger.info(`  ${b.name} (block)`))
         components.forEach(c => Logger.info(`  ${c.name} (component)`))
-        
+        plugins.forEach(p => Logger.info(`  ${p.name} (plugin)`))
+
         process.exit(1)
       }
 
-      const targetComponent = block || component
-      const componentType = block ? 'blocks' : 'components'
+      const targetComponent = block || component || plugin
+      const componentType = block ? 'blocks' : component ? 'components' : 'plugins'
 
       // Check if component already exists
       const exists = await Project.componentExists(componentName, componentType)
@@ -79,24 +82,59 @@ export const addCommand = new Command()
 
       try {
         // Check if the component exists in local registry
-        const componentExists = await Registry.blockExists(componentName)
-        
+        let sourcePath: string = ''
+        let componentExists = false
+
+        if (componentType === 'blocks') {
+          componentExists = await Registry.blockExists(componentName)
+          sourcePath = Registry.getBlockSourcePath(componentName)
+        } else if (componentType === 'components') {
+          sourcePath = Registry.getComponentSourcePath(componentName)
+          componentExists = await FileOperations.exists(sourcePath)
+        } else if (componentType === 'plugins') {
+          sourcePath = Registry.getPluginSourcePath(componentName)
+          componentExists = await FileOperations.exists(sourcePath)
+        }
+
         if (componentExists) {
           // Copy real component files from registry
-          const sourcePath = Registry.getBlockSourcePath(componentName)
-          
+
           // Copy all files from the component directory
           const files = await FileOperations.findFiles('**/*', sourcePath)
           Logger.updateSpinner(`Copying ${files.length} files...`)
-          
+
           for (const file of files) {
             const srcFile = path.join(sourcePath, file)
             const destFile = path.join(componentPath, file)
-            
+
             // Skip the payloadkit.json metadata file
             if (file === 'payloadkit.json') continue
-            
+
             await FileOperations.copyFile(srcFile, destFile, options.force)
+          }
+
+          // Special handling for plugins
+          if (componentType === 'plugins' && plugin) {
+            Logger.updateSpinner('Plugin copied successfully')
+
+            // Show plugin-specific instructions
+            Logger.info(`Plugin ${componentName} installed successfully!`)
+            Logger.info('Next steps:')
+            Logger.info('1. Install required dependencies:')
+            if ((plugin as any).dependencies && (plugin as any).dependencies.length > 0) {
+              Logger.code(`bun add ${(plugin as any).dependencies.join(' ')}`)
+            }
+            if ((plugin as any).devDependencies && (plugin as any).devDependencies.length > 0) {
+              Logger.code(`bun add -D ${(plugin as any).devDependencies.join(' ')}`)
+            }
+            Logger.info('2. Add the plugin to your payload.config.ts:')
+            Logger.code(`import { ${componentName}Plugin } from './src/plugins/${componentName}'`)
+            Logger.code(`plugins: [${componentName}Plugin({ /* config */ })]`)
+
+            if ((plugin as any).features && (plugin as any).features.length > 0) {
+              Logger.info('3. Features included:')
+              ;(plugin as any).features.forEach((feature: string) => Logger.info(`   - ${feature}`))
+            }
           }
 
           // Create installation metadata

@@ -63,6 +63,7 @@ export interface PayloadKitRegistry {
   collections: Record<string, PayloadKitCollection>
   globals: Record<string, PayloadKitGlobal>
   components: Record<string, PayloadKitComponent>
+  plugins: Record<string, PayloadKitPlugin>
 }
 
 export interface PayloadKitComponent {
@@ -112,7 +113,31 @@ export interface AddComponentOptions {
 // Plugin Types
 export interface PayloadKitPlugin {
   name: string
-  version: string
-  description: string
-  config: any
+  description?: string
+  category?: PluginCategory
+  tags?: string[]
+  version?: string
+  files: string[]
+  dependencies?: string[]
+  devDependencies?: string[]
+  peerDependencies?: string[]
+  registryDependencies?: string[]
+  features?: string[]
+  configuration?: {
+    required?: boolean
+    minimal?: boolean
+    [key: string]: any
+  }
 }
+
+export type PluginCategory =
+  | 'authentication'
+  | 'database'
+  | 'email'
+  | 'storage'
+  | 'analytics'
+  | 'seo'
+  | 'payments'
+  | 'cms'
+  | 'utilities'
+  | 'other'
