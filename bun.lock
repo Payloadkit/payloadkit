@@ -70,18 +70,18 @@
     },
     "packages/core": {
       "name": "@payloadkit/core",
-      "version": "0.2.0",
+      "version": "0.3.0",
       "devDependencies": {
         "tsup": "^8.5.0",
         "typescript": "^5.9.2",
       },
       "peerDependencies": {
-        "payload": "^3.55.0",
+        "payload": "^3.56.0",
       },
     },
     "packages/create-payloadkit": {
       "name": "create-payloadkit",
-      "version": "0.2.0",
+      "version": "0.3.0",
       "bin": {
         "create-payloadkit": "./bin/index.js",
       },
@@ -119,7 +119,7 @@
     },
     "packages/payloadkit": {
       "name": "payloadkit",
-      "version": "0.2.0",
+      "version": "0.3.0",
       "bin": {
         "payloadkit": "./bin/index.js",
       },

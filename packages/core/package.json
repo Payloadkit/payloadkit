@@ -29,7 +29,7 @@
     "typecheck": "tsc --noEmit"
   },
   "peerDependencies": {
-    "payload": "^3.55.0"
+    "payload": "^3.56.0"
   },
   "devDependencies": {
     "tsup": "^8.5.0",
