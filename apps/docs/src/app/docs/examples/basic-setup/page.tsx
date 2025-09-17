@@ -88,7 +88,7 @@ export default function BasicSetupPage() {
             content: (
               <div className="space-y-4">
                 <Snippet
-                  command="npx create-payloadkit@latest my-basic-site"
+                  command="bunx create-payloadkit@latest my-basic-site"
                   title="Create New Project"
                 />
                 <Alert>
@@ -133,14 +133,14 @@ export default function BasicSetupPage() {
                 <div>
                   <h4 className="font-medium mb-2">1. Add a Hero Block</h4>
                   <Snippet
-                    command="npx payloadkit add hero-block"
+                    command="bunx payloadkit@latest add hero-block"
                     title="Add Hero Block"
                   />
                 </div>
                 <div>
                   <h4 className="font-medium mb-2">2. Add a Call-to-Action</h4>
                   <Snippet
-                    command="npx payloadkit add call-to-action"
+                    command="bunx payloadkit@latest add call-to-action"
                     title="Add Call-to-Action"
                   />
                 </div>

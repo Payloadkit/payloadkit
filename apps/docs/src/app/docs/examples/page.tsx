@@ -111,7 +111,7 @@ export default function ExamplesPage() {
               <div>
                 <h3 className="text-lg font-medium mb-4">Create a new project</h3>
                 <Snippet
-                  command="npx create-payloadkit@latest my-app"
+                  command="bunx create-payloadkit@latest my-app"
                   title="Create PayloadKit Project"
                 />
               </div>
@@ -196,7 +196,7 @@ export default function ExamplesPage() {
                 </ul>
               </div>
               <Snippet
-                command="npx create-payloadkit my-app --template blank"
+                command="bunx create-payloadkit my-app --template blank"
                 title="Create Blank Template"
               />
             </div>

@@ -222,7 +222,7 @@ export default function ComponentsPage() {
                       {component.status}
                     </Badge>
                     <div className="text-sm text-muted-foreground">
-                      <code>npx payloadkit add {component.slug}</code>
+                      <code>bunx payloadkit@latest add {component.slug}</code>
                     </div>
                   </div>
                   
@@ -254,7 +254,7 @@ export default function ComponentsPage() {
           
           <div className="rounded-lg border bg-muted/50 p-6">
             <pre className="bg-background p-3 rounded border">
-              <code>npx payloadkit add [component-name]</code>
+              <code>bunx payloadkit@latest add [component-name]</code>
             </pre>
           </div>
           

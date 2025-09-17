@@ -92,8 +92,8 @@ export default function ConfigurationPage() {
             description: 'Add the modular configuration to your project',
             content: (
               <div className="space-y-4">
-                <Snippet command="npx payloadkit add db-config" title="Add Database Config" />
-                <Snippet command="npx payloadkit add collections-config" title="Add Collections Config" />
+                <Snippet command="bunx payloadkit@latest add db-config" title="Add Database Config" />
+                <Snippet command="bunx payloadkit@latest add collections-config" title="Add Collections Config" />
                 <Alert>
                   <AlertDescription>
                     This will create the modular configuration structure in <code>src/config/</code>

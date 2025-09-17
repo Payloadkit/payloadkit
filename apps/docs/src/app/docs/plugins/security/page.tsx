@@ -43,7 +43,7 @@ export default function SecurityPluginsPage() {
           <div className="rounded-lg border p-6">
             <h3 className="text-xl font-semibold mb-4">Installation</h3>
             <div className="bg-muted rounded p-4 text-sm mb-4">
-              <code>npx payloadkit add plugin/better-auth-security</code>
+              <code>bunx payloadkit@latest add plugin/better-auth-security</code>
             </div>
             
             <h3 className="text-xl font-semibold mb-4">Basic Configuration</h3>
@@ -172,7 +172,7 @@ betterAuthSecurityPlugin({
           <div className="rounded-lg border p-6">
             <h3 className="text-xl font-semibold mb-4">Installation</h3>
             <div className="bg-muted rounded p-4 text-sm mb-4">
-              <code>npx payloadkit add plugin/audit-logging</code>
+              <code>bunx payloadkit@latest add plugin/audit-logging</code>
             </div>
             
             <h3 className="text-xl font-semibold mb-4">Basic Configuration</h3>
@@ -266,7 +266,7 @@ export default buildConfig({
           <div className="rounded-lg border p-6">
             <h3 className="text-xl font-semibold mb-4">Installation</h3>
             <div className="bg-muted rounded p-4 text-sm mb-4">
-              <code>npx payloadkit add plugin/rate-limiting</code>
+              <code>bunx payloadkit@latest add plugin/rate-limiting</code>
             </div>
             
             <h3 className="text-xl font-semibold mb-4">Basic Configuration</h3>

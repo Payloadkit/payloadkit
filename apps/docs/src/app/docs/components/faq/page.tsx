@@ -31,7 +31,7 @@ export default function FaqComponentPage() {
               </Button>
             </div>
             <pre className="bg-background p-3 rounded border">
-              <code>npx payloadkit add faq</code>
+              <code>bunx payloadkit@latest add faq</code>
             </pre>
           </div>
         </section>

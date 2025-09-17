@@ -8,6 +8,7 @@ import { PageDescription } from '@/components/page-description'
 import { Snippet, MultiSnippet } from '@/components/snippet'
 import { TutorialSteps } from '@/components/tutorial-steps'
 import { CodeBlock } from '@/components/code-tabs'
+import { Alert, AlertDescription } from '@/components/ui/alert'
 
 export const metadata: Metadata = {
   title: 'Installation - PayloadKit',
@@ -21,7 +22,7 @@ const quickStartSteps = [
     content: (
       <div className="space-y-4">
         <Snippet
-          command="npx create-payloadkit@latest my-payloadcms-app"
+          command="bunx create-payloadkit@latest my-payloadcms-app"
           title="Create PayloadKit Project"
         >
           This command creates a new PayloadCMS project with PayloadKit pre-configured.
@@ -65,12 +66,17 @@ const quickStartSteps = [
     content: (
       <div className="space-y-4">
         <CodeBlock
-          code={`# Database Configuration
-DATABASE_URI="postgresql://username:password@localhost:5432/payloadkit"
+          code={`# Database Configuration (Docker default)
+DATABASE_URI="postgresql://payloadkit:payloadkit@localhost:5432/payloadkit_dev"
 
 # PayloadCMS Configuration
 PAYLOAD_SECRET="your-32-character-secret-key"
 NEXT_PUBLIC_SERVER_URL="http://localhost:3000"
+
+# Docker PostgreSQL settings (auto-configured)
+POSTGRES_USER=payloadkit
+POSTGRES_PASSWORD=payloadkit
+POSTGRES_DB=payloadkit_dev
 
 # Optional: Custom configurations
 NEXT_PUBLIC_IS_LIVE="false"`}
@@ -79,7 +85,59 @@ NEXT_PUBLIC_IS_LIVE="false"`}
         />
 
         <div className="text-sm text-muted-foreground">
-          <p><strong>Note:</strong> Make sure to replace the database credentials with your actual PostgreSQL setup.</p>
+          <p><strong>Note:</strong> These are the default Docker settings. For custom PostgreSQL setup, update the DATABASE_URI accordingly.</p>
+        </div>
+      </div>
+    )
+  },
+  {
+    title: 'Database Setup',
+    description: 'Set up PostgreSQL database using Docker (recommended) or your own setup.',
+    content: (
+      <div className="space-y-4">
+        <Alert>
+          <AlertDescription>
+            <strong>Docker Method (Recommended):</strong> PayloadKit includes a pre-configured Docker Compose setup for instant database access.
+          </AlertDescription>
+        </Alert>
+
+        <Snippet
+          command="cp .env.example .env"
+          title="1. Copy Environment File"
+        >
+          Copy the example environment file and configure your database settings.
+        </Snippet>
+
+        <CodeBlock
+          code={`# Update your .env file with Docker database settings:
+DATABASE_URI=postgresql://payloadkit:payloadkit@localhost:5432/payloadkit_dev
+
+# Generate a secure secret:
+PAYLOAD_SECRET=your-32-character-secret-key
+
+# Docker PostgreSQL settings (already configured):
+POSTGRES_USER=payloadkit
+POSTGRES_PASSWORD=payloadkit
+POSTGRES_DB=payloadkit_dev`}
+          language="bash"
+          title="2. Configure .env for Docker"
+        />
+
+        <Snippet
+          command="bun run docker:dev"
+          title="3. Start PostgreSQL with Docker"
+        >
+          This starts PostgreSQL 16 in a Docker container with the configured credentials.
+        </Snippet>
+
+        <div className="text-sm text-muted-foreground space-y-2">
+          <p><strong>Docker Commands:</strong></p>
+          <ul className="list-disc list-inside space-y-1">
+            <li><code>bun run docker:dev</code> - Start PostgreSQL only</li>
+            <li><code>bun run docker:dev:full</code> - Start full stack (PostgreSQL + pgAdmin + MailHog)</li>
+            <li><code>bun run docker:stop</code> - Stop all services</li>
+            <li><code>bun run docker:reset</code> - Reset database (clean start)</li>
+          </ul>
         </div>
       </div>
     )
@@ -114,7 +172,7 @@ const existingProjectSteps = [
     description: 'Add PayloadKit to your existing PayloadCMS project.',
     content: (
       <Snippet
-        command="npx payloadkit@latest init"
+        command="bunx payloadkit@latest@latest init"
         title="Initialize in Existing Project"
       >
         This command will set up PayloadKit configuration in your existing project.
@@ -276,7 +334,7 @@ export default function InstallationPage() {
 
           <div className="space-y-3">
             <h3 className="font-semibold">pnpm</h3>
-            <Snippet command="pnpx create-payloadkit@latest my-app" />
+            <Snippet command="pbunx create-payloadkit@latest my-app" />
             <p className="text-sm text-muted-foreground">
               Efficient package management with workspace support.
             </p>
@@ -284,7 +342,7 @@ export default function InstallationPage() {
 
           <div className="space-y-3">
             <h3 className="font-semibold">npm</h3>
-            <Snippet command="npx create-payloadkit@latest my-app" />
+            <Snippet command="bunx create-payloadkit@latest my-app" />
             <p className="text-sm text-muted-foreground">
               Standard Node.js package manager.
             </p>

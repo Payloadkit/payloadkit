@@ -50,7 +50,7 @@ export default function CLIPage() {
             </p>
 
             <Snippet
-              command="npx create-payloadkit@latest [project-name] [options]"
+              command="bunx create-payloadkit@latest [project-name] [options]"
               title="Create Project Command"
             />
 
@@ -70,10 +70,10 @@ export default function CLIPage() {
               <h4 className="font-medium">Examples:</h4>
               <CodeBlock
                 code={`# Create with default settings
-npx create-payloadkit@latest my-app
+bunx create-payloadkit@latest my-app
 
 # Create with custom options
-npx create-payloadkit@latest my-blog --template blog --package-manager npm`}
+bunx create-payloadkit@latest my-blog --template blog --package-manager npm`}
                 language="bash"
                 title="Usage Examples"
               />
@@ -88,7 +88,7 @@ npx create-payloadkit@latest my-blog --template blog --package-manager npm`}
             </p>
 
             <Snippet
-              command="npx payloadkit init"
+              command="bunx payloadkit@latest init"
               title="Initialize PayloadKit"
             />
 
@@ -107,7 +107,7 @@ npx create-payloadkit@latest my-blog --template blog --package-manager npm`}
             </p>
 
             <Snippet
-              command="npx payloadkit list"
+              command="bunx payloadkit@latest list"
               title="List Components"
             />
 
@@ -126,7 +126,7 @@ npx create-payloadkit@latest my-blog --template blog --package-manager npm`}
             </p>
 
             <Snippet
-              command="npx payloadkit add <component-name> [options]"
+              command="bunx payloadkit@latest add <component-name> [options]"
               title="Add Component Command"
             />
 
@@ -144,13 +144,13 @@ npx create-payloadkit@latest my-blog --template blog --package-manager npm`}
               <h4 className="font-medium">Examples:</h4>
               <CodeBlock
                 code={`# Add a call-to-action block
-npx payloadkit add call-to-action
+bunx payloadkit@latest add call-to-action
 
 # Add with force overwrite
-npx payloadkit add hero-block --force
+bunx payloadkit@latest add hero-block --force
 
 # Add to custom path
-npx payloadkit add call-to-action --path ./src/custom-blocks`}
+bunx payloadkit@latest add call-to-action --path ./src/custom-blocks`}
                 language="bash"
                 title="Add Component Examples"
               />
@@ -213,7 +213,7 @@ npx payloadkit add call-to-action --path ./src/custom-blocks`}
               <h3 className="font-medium text-lg">Browse Components</h3>
             </div>
             <p className="text-muted-foreground ml-11">
-              Use <code className="bg-muted px-2 py-1 rounded text-xs">npx payloadkit list</code> to see available components
+              Use <code className="bg-muted px-2 py-1 rounded text-xs">bunx payloadkit@latest list</code> to see available components
             </p>
           </div>
 
@@ -225,7 +225,7 @@ npx payloadkit add call-to-action --path ./src/custom-blocks`}
               <h3 className="font-medium text-lg">Add Component</h3>
             </div>
             <p className="text-muted-foreground ml-11">
-              Use <code className="bg-muted px-2 py-1 rounded text-xs">npx payloadkit add [component-name]</code> to copy it to your project
+              Use <code className="bg-muted px-2 py-1 rounded text-xs">bunx payloadkit@latest add [component-name]</code> to copy it to your project
             </p>
           </div>
 

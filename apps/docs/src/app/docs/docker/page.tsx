@@ -82,21 +82,21 @@ export default function DockerPage() {
             <h3 className="font-semibold mb-3">1. Standard Launch</h3>
             <p className="text-sm text-muted-foreground mb-4">Basic environment (app + PostgreSQL)</p>
             <div className="space-y-2">
-              <Snippet command="npm run docker:dev" title="Start Development" />
-              <Snippet command="npm run docker:dev:detached" title="Background Mode" />
+              <Snippet command="bun run docker:dev" title="Start Development" />
+              <Snippet command="bun run docker:dev:detached" title="Background Mode" />
             </div>
           </div>
 
           <div className="rounded-lg border p-6">
             <h3 className="font-semibold mb-3">2. Full Environment</h3>
             <p className="text-sm text-muted-foreground mb-4">With Redis, MailHog, and pgAdmin</p>
-            <Snippet command="npm run docker:dev:full" title="Full Stack" />
+            <Snippet command="bun run docker:dev:full" title="Full Stack" />
           </div>
 
           <div className="rounded-lg border p-6">
             <h3 className="font-semibold mb-3">3. First Build</h3>
             <p className="text-sm text-muted-foreground mb-4">Build and launch together</p>
-            <Snippet command="npm run docker:dev:build" title="Build + Start" />
+            <Snippet command="bun run docker:dev:build" title="Build + Start" />
           </div>
         </div>
       </section>
@@ -188,11 +188,11 @@ PAYLOAD_SECRET=your-secret-key`}
               <div className="space-y-4">
                 <div>
                   <h4 className="font-medium mb-2">Standard Development</h4>
-                  <Snippet command="npm run docker:dev" title="Start Development Environment" />
+                  <Snippet command="bun run docker:dev" title="Start Development Environment" />
                 </div>
                 <div>
                   <h4 className="font-medium mb-2">Full Stack with All Services</h4>
-                  <Snippet command="npm run docker:dev:full" title="Start Full Environment" />
+                  <Snippet command="bun run docker:dev:full" title="Start Full Environment" />
                 </div>
                 <Alert>
                   <AlertDescription>
@@ -210,7 +210,7 @@ PAYLOAD_SECRET=your-secret-key`}
               <div className="space-y-4">
                 <div>
                   <h4 className="font-medium mb-2">Direct Database Access</h4>
-                  <Snippet command="npm run docker:db" title="Connect to Database" />
+                  <Snippet command="bun run docker:db" title="Connect to Database" />
                 </div>
                 <div>
                   <h4 className="font-medium mb-2">pgAdmin Web Interface</h4>
@@ -263,19 +263,19 @@ SMTP_PASS=`}
             <h3 className="text-lg font-semibold">Development</h3>
             <div className="space-y-3">
               <div>
-                <code className="text-sm bg-muted px-2 py-1 rounded">npm run docker:dev</code>
+                <code className="text-sm bg-muted px-2 py-1 rounded">bun run docker:dev</code>
                 <p className="text-sm text-muted-foreground mt-1">Standard launch</p>
               </div>
               <div>
-                <code className="text-sm bg-muted px-2 py-1 rounded">npm run docker:dev:build</code>
+                <code className="text-sm bg-muted px-2 py-1 rounded">bun run docker:dev:build</code>
                 <p className="text-sm text-muted-foreground mt-1">Build + launch</p>
               </div>
               <div>
-                <code className="text-sm bg-muted px-2 py-1 rounded">npm run docker:dev:detached</code>
+                <code className="text-sm bg-muted px-2 py-1 rounded">bun run docker:dev:detached</code>
                 <p className="text-sm text-muted-foreground mt-1">Background launch</p>
               </div>
               <div>
-                <code className="text-sm bg-muted px-2 py-1 rounded">npm run docker:dev:full</code>
+                <code className="text-sm bg-muted px-2 py-1 rounded">bun run docker:dev:full</code>
                 <p className="text-sm text-muted-foreground mt-1">Full environment</p>
               </div>
             </div>
@@ -285,19 +285,19 @@ SMTP_PASS=`}
             <h3 className="text-lg font-semibold">Management</h3>
             <div className="space-y-3">
               <div>
-                <code className="text-sm bg-muted px-2 py-1 rounded">npm run docker:stop</code>
+                <code className="text-sm bg-muted px-2 py-1 rounded">bun run docker:stop</code>
                 <p className="text-sm text-muted-foreground mt-1">Stop all services</p>
               </div>
               <div>
-                <code className="text-sm bg-muted px-2 py-1 rounded">npm run docker:reset</code>
+                <code className="text-sm bg-muted px-2 py-1 rounded">bun run docker:reset</code>
                 <p className="text-sm text-muted-foreground mt-1">Complete reset (removes volumes)</p>
               </div>
               <div>
-                <code className="text-sm bg-muted px-2 py-1 rounded">npm run docker:logs</code>
+                <code className="text-sm bg-muted px-2 py-1 rounded">bun run docker:logs</code>
                 <p className="text-sm text-muted-foreground mt-1">View app logs</p>
               </div>
               <div>
-                <code className="text-sm bg-muted px-2 py-1 rounded">npm run docker:db</code>
+                <code className="text-sm bg-muted px-2 py-1 rounded">bun run docker:db</code>
                 <p className="text-sm text-muted-foreground mt-1">Direct PostgreSQL connection</p>
               </div>
             </div>
@@ -381,7 +381,7 @@ ports:
             <h4 className="font-semibold mb-2">Corrupted volumes</h4>
             <p className="text-sm text-muted-foreground mb-2">Complete reset of Docker environment:</p>
             <div className="space-y-2">
-              <Snippet command="npm run docker:reset" title="Quick Reset" />
+              <Snippet command="bun run docker:reset" title="Quick Reset" />
               <CodeBlock
                 code={`# Manual reset
 docker-compose down -v

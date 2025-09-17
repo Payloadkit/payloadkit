@@ -31,7 +31,7 @@ export default function BannerComponentPage() {
               </Button>
             </div>
             <pre className="bg-background p-3 rounded border">
-              <code>npx payloadkit add banner</code>
+              <code>bunx payloadkit@latest add banner</code>
             </pre>
           </div>
         </section>

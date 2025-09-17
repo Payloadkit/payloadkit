@@ -445,7 +445,7 @@ import { AuthView } from '@payloadkit/registry/components/auth/AuthView'
               <div>
                 <h3 className="font-semibold mb-2">1. Create PayloadKit project</h3>
                 <code className="bg-background px-3 py-2 rounded text-sm">
-                  npx create-payloadkit my-app --template blank
+                  bunx create-payloadkit my-app --template blank
                 </code>
               </div>
               <div>

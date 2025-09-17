@@ -81,7 +81,7 @@ export default function SecurityPage() {
             </div>
           </div>
           <Snippet
-            command="npx create-payloadkit my-app --template blank"
+            command="bunx create-payloadkit my-app --template blank"
             title="Enterprise security enabled by default!"
           />
         </div>
@@ -196,7 +196,7 @@ ENABLE_WEBAUTHN=true`}
               <div>
                 <h3 className="font-semibold mb-2">1. Create your secure PayloadCMS app</h3>
                 <Snippet
-                  command="npx create-payloadkit my-app --template blank"
+                  command="bunx create-payloadkit my-app --template blank"
                   title="Create Project"
                 />
               </div>

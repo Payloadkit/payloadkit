@@ -31,7 +31,7 @@ export default function FeatureComponentPage() {
               </Button>
             </div>
             <pre className="bg-background p-3 rounded border">
-              <code>npx payloadkit add feature</code>
+              <code>bunx payloadkit@latest add feature</code>
             </pre>
           </div>
         </section>

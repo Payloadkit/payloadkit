@@ -127,7 +127,7 @@ export default function BlogTemplatePage() {
         </p>
 
         <Snippet
-          command="npx create-payloadkit@latest my-blog --template blog"
+          command="bunx create-payloadkit@latest my-blog --template blog"
           title="Create Blog Project"
         />
 
@@ -151,7 +151,7 @@ export default function BlogTemplatePage() {
           <div>
             <h3 className="text-lg font-semibold mb-3">1. Create a basic project</h3>
             <Snippet
-              command="npx create-payloadkit@latest my-blog"
+              command="bunx create-payloadkit@latest my-blog"
               title="Create Basic Project"
             />
           </div>
@@ -160,11 +160,11 @@ export default function BlogTemplatePage() {
             <h3 className="text-lg font-semibold mb-3">2. Add blog components</h3>
             <div className="space-y-3">
               <Snippet
-                command="npx payloadkit add hero-block"
+                command="bunx payloadkit@latest add hero-block"
                 title="Add Hero Block"
               />
               <Snippet
-                command="npx payloadkit add call-to-action"
+                command="bunx payloadkit@latest add call-to-action"
                 title="Add Call-to-Action"
               />
             </div>

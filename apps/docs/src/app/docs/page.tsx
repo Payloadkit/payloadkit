@@ -83,14 +83,14 @@ export default function DocsHomePage() {
             <div>
               <h3 className="text-lg font-medium mb-2">1. Create a new project</h3>
               <pre className="bg-background p-3 rounded border">
-                <code>npx create-payloadkit@latest my-app</code>
+                <code>bunx create-payloadkit@latest my-app</code>
               </pre>
             </div>
             
             <div>
               <h3 className="text-lg font-medium mb-2">2. Add components</h3>
               <pre className="bg-background p-3 rounded border">
-                <code>npx payloadkit add call-to-action</code>
+                <code>bunx payloadkit@latest add call-to-action</code>
               </pre>
             </div>
             

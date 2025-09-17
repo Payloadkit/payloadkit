@@ -38,6 +38,43 @@ export default function GettingStartedPage() {
         lastUpdated="January 2025"
       />
 
+      {/* Prerequisites */}
+      <TutorialSteps
+        title="Prerequisites"
+        steps={[
+          {
+            title: 'Install Bun',
+            keyword: 'Required',
+            description: 'PayloadKit uses bun as the recommended package manager for better performance',
+            content: (
+              <div className="space-y-4">
+                <Alert>
+                  <AlertDescription>
+                    <strong>Bun</strong> is a fast JavaScript runtime and package manager that significantly improves install and build times
+                  </AlertDescription>
+                </Alert>
+                <Snippet command="curl -fsSL https://bun.sh/install | bash" title="Install Bun (macOS/Linux)" />
+                <CodeBlock
+                  code={`# Windows (PowerShell)
+irm bun.sh/install.ps1 | iex
+
+# Alternative: Visit https://bun.sh/docs/installation`}
+                  language="bash"
+                  title="Windows Installation"
+                />
+                <CodeBlock
+                  code={`# Verify installation
+bun --version`}
+                  language="bash"
+                  title="Verify Installation"
+                />
+              </div>
+            )
+          }
+        ]}
+        allowSkip={false}
+      />
+
       {/* Quick Installation Steps */}
       <TutorialSteps
         title="Quick Installation"
@@ -53,18 +90,33 @@ export default function GettingStartedPage() {
                     <strong>Best choice</strong> for new projects or learning PayloadKit
                   </AlertDescription>
                 </Alert>
-                <Snippet command="npx create-payloadkit@latest my-project" title="Create Project" />
+                <Snippet command="bunx create-payloadkit@latest my-project" title="Create Project" />
                 <CodeBlock
                   code={`cd my-project
 
-# Standard local development
-bun dev
+# 1. Setup environment variables
+cp .env.example .env
 
-# OR Docker development (complete environment)
-npm run docker:dev`}
+# 2. Generate a secure secret key (copy output to .env)
+openssl rand -hex 32
+
+# 3. Start PostgreSQL database with Docker
+bun run docker:dev
+
+# 4. Start development server (in a new terminal)
+bun dev`}
                   language="bash"
-                  title="Start Development"
+                  title="Complete Setup"
                 />
+
+                <div className="text-sm text-muted-foreground space-y-2">
+                  <p><strong>Important:</strong> The .env file is pre-configured for Docker with these defaults:</p>
+                  <ul className="list-disc list-inside space-y-1">
+                    <li>Database: <code>postgresql://payloadkit:payloadkit@localhost:5432/payloadkit_dev</code></li>
+                    <li>Docker handles PostgreSQL automatically</li>
+                    <li>Just replace <code>PAYLOAD_SECRET</code> with your generated key</li>
+                  </ul>
+                </div>
               </div>
             )
           },
@@ -79,11 +131,11 @@ npm run docker:dev`}
                     Perfect for existing PayloadCMS projects wanting to use PayloadKit components
                   </AlertDescription>
                 </Alert>
-                <Snippet command="npx payloadkit init" title="Initialize PayloadKit" />
+                <Snippet command="bunx payloadkit@latest init" title="Initialize PayloadKit" />
                 <CodeBlock
                   code={`# Add components
-npx payloadkit add hero-block call-to-action
-npx payloadkit add db-config  # Smart configuration`}
+bunx payloadkit@latest add hero-block call-to-action
+bunx payloadkit@latest add db-config  # Smart configuration`}
                   language="bash"
                   title="Add Components"
                 />
@@ -129,7 +181,7 @@ bun dev`}
                 <p className="text-sm text-muted-foreground">
                   <strong>When to use:</strong> First project, email testing, full-stack development
                 </p>
-                <Snippet command="npm run docker:dev" title="Start Docker Environment" />
+                <Snippet command="bun run docker:dev" title="Start Docker Environment" />
                 <div className="text-sm text-muted-foreground">
                   <p className="font-medium mb-2">Included services:</p>
                   <ul className="space-y-1 ml-4">
@@ -150,7 +202,7 @@ bun dev`}
                 <p className="text-sm text-muted-foreground">
                   <strong>When to use:</strong> Advanced development, email testing, database management
                 </p>
-                <Snippet command="npm run docker:dev:full" title="Start Full Stack" />
+                <Snippet command="bun run docker:dev:full" title="Start Full Stack" />
                 <div className="text-sm text-muted-foreground">
                   <p className="font-medium mb-2">Additional services:</p>
                   <ul className="space-y-1 ml-4">
@@ -213,20 +265,20 @@ DATABASE_URI=postgresql://prod:pass@private:5432/prod`}
         <div className="grid md:grid-cols-3 gap-6">
           <div className="space-y-4">
             <h3 className="text-lg font-medium">Essential Components</h3>
-            <Snippet command="npx payloadkit add Users Media Pages" title="Core Collections" />
-            <Snippet command="npx payloadkit add RichText CMSLink" title="React Components" />
+            <Snippet command="bunx payloadkit@latest add Users Media Pages" title="Core Collections" />
+            <Snippet command="bunx payloadkit@latest add RichText CMSLink" title="React Components" />
           </div>
 
           <div className="space-y-4">
             <h3 className="text-lg font-medium">Content Blocks</h3>
-            <Snippet command="npx payloadkit add hero-block call-to-action" title="Landing Page" />
-            <Snippet command="npx payloadkit add faq content feature" title="Content Blocks" />
+            <Snippet command="bunx payloadkit@latest add hero-block call-to-action" title="Landing Page" />
+            <Snippet command="bunx payloadkit@latest add faq content feature" title="Content Blocks" />
           </div>
 
           <div className="space-y-4">
             <h3 className="text-lg font-medium">Advanced Setup</h3>
-            <Snippet command="npx payloadkit add db-config" title="Smart Database" />
-            <Snippet command="npx payloadkit add email-config" title="Email Configuration" />
+            <Snippet command="bunx payloadkit@latest add db-config" title="Smart Database" />
+            <Snippet command="bunx payloadkit@latest add email-config" title="Email Configuration" />
           </div>
         </div>
       </section>
@@ -247,9 +299,9 @@ DATABASE_URI=postgresql://prod:pass@private:5432/prod`}
             <h3 className="text-lg font-semibold">🚀 First PayloadCMS Project</h3>
             <p className="text-sm text-muted-foreground">Complete setup in 3 minutes</p>
             <CodeBlock
-              code={`npx create-payloadkit@latest my-first-project
+              code={`bunx create-payloadkit@latest my-first-project
 cd my-first-project
-npm run docker:dev
+bun run docker:dev
 
 # Open http://localhost:3000/admin
 # Create your first admin user`}
@@ -262,10 +314,10 @@ npm run docker:dev
             <p className="text-sm text-muted-foreground">Add PayloadKit to existing PayloadCMS</p>
             <CodeBlock
               code={`# In your existing project
-npx payloadkit init
+bunx payloadkit@latest init
 
 # Migrate to modular config
-npx payloadkit add db-config collections-config`}
+bunx payloadkit@latest add db-config collections-config`}
               language="bash"
             />
           </div>
@@ -274,13 +326,13 @@ npx payloadkit add db-config collections-config`}
             <h3 className="text-lg font-semibold">🏢 Business/Marketing Site</h3>
             <p className="text-sm text-muted-foreground">Template with marketing components</p>
             <CodeBlock
-              code={`npx create-payloadkit@latest my-business
+              code={`bunx create-payloadkit@latest my-business
 cd my-business
 
 # Add marketing blocks
-npx payloadkit add hero-block feature faq call-to-action
+bunx payloadkit@latest add hero-block feature faq call-to-action
 
-npm run docker:dev`}
+bun run docker:dev`}
               language="bash"
             />
           </div>
@@ -293,7 +345,7 @@ npm run docker:dev`}
 cd your-project
 
 # Identical setup for everyone
-npm run docker:dev
+bun run docker:dev
 
 # Same database + services
 # No "works on my machine"`}
