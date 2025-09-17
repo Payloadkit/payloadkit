@@ -4,7 +4,7 @@
 services:
   # PostgreSQL database service
   postgres:
-    image: postgres:16-alpine
+    image: postgres:17-alpine
     container_name: payloadkit-postgres
     restart: unless-stopped
     ports:

@@ -186,7 +186,7 @@ bun dev`}
                   <p className="font-medium mb-2">Included services:</p>
                   <ul className="space-y-1 ml-4">
                     <li>• PayloadKit app with hot-reload</li>
-                    <li>• PostgreSQL 16 with extensions</li>
+                    <li>• PostgreSQL 17 with extensions</li>
                     <li>• Web interface at <code className="text-xs bg-muted px-1 rounded">http://localhost:3000</code></li>
                   </ul>
                 </div>

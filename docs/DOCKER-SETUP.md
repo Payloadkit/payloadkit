@@ -7,7 +7,7 @@ PayloadKit now offers a **complete Docker development environment** with Postgre
 ## ✨ Features
 
 - **🐋 Multi-stage Dockerfile**: Optimized Dev, Build, and Production stages
-- **📦 PostgreSQL 16**: Database with extensions and health checks
+- **📦 PostgreSQL 17**: Database with extensions and health checks
 - **⚡ Hot-reload**: Development with automatic reload
 - **🔧 Optional Services**: Redis, MailHog, pgAdmin
 - **🚀 Production Ready**: Compatible with Dokploy/VPS
@@ -49,14 +49,14 @@ project/
 
 ## 🔧 Available Services
 
-| Service | Port | Description | Profile |
-|---------|------|-------------|---------|
-| **app** | 3000 | PayloadKit + Next.js | Always |
-| **postgres** | 5432 | PostgreSQL 16 + extensions | Always |
-| **redis** | 6379 | Cache and sessions | `full` |
-| **mailhog** | 8025 | Test email interface | `full` |
-| **mailhog-smtp** | 1025 | Test SMTP server | `full` |
-| **pgadmin** | 5050 | PostgreSQL administration | `full` |
+| Service | Port | Description                | Profile |
+|---------|------|----------------------------|---------|
+| **app** | 3000 | PayloadKit + Next.js       | Always |
+| **postgres** | 5432 | PostgreSQL 17 + extensions | Always |
+| **redis** | 6379 | Cache and sessions         | `full` |
+| **mailhog** | 8025 | Test email interface       | `full` |
+| **mailhog-smtp** | 1025 | Test SMTP server           | `full` |
+| **pgadmin** | 5050 | PostgreSQL administration  | `full` |
 
 ## 📋 Available NPM Scripts
 

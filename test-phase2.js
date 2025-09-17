@@ -169,7 +169,7 @@ function testPhase2() {
   console.log('\n✨ Achievements unlocked:')
   console.log('   🐳 Multi-stage Dockerfile with bun optimization')
   console.log('   🐋 Complete docker-compose dev environment')
-  console.log('   📦 PostgreSQL 16 with health checks')
+  console.log('   📦 PostgreSQL 17 with health checks')
   console.log('   ⚡ Hot-reload development setup')
   console.log('   🔧 Optional services: Redis, MailHog, pgAdmin')
   console.log('   📝 Optimized .dockerignore')

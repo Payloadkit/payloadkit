@@ -52,7 +52,7 @@ export default function DockerPage() {
           <div className="flex items-start gap-3 p-4 rounded-lg border">
             <Database className="h-5 w-5 text-green-600 mt-0.5" />
             <div>
-              <strong>PostgreSQL 16</strong>
+              <strong>PostgreSQL 17</strong>
               <p className="text-sm text-muted-foreground">Database with extensions and health checks</p>
             </div>
           </div>
@@ -128,7 +128,7 @@ export default function DockerPage() {
                 <div className="grid grid-cols-4 gap-4">
                   <code className="text-xs bg-muted px-2 py-1 rounded font-semibold">postgres</code>
                   <div>5432</div>
-                  <div>PostgreSQL 16 + extensions</div>
+                  <div>PostgreSQL 17 + extensions</div>
                   <div className="text-green-600">Always</div>
                 </div>
                 <div className="grid grid-cols-4 gap-4">

@@ -17,7 +17,7 @@
   },
   "services": {
     "postgres": {
-      "description": "PostgreSQL 16 database with Alpine Linux",
+      "description": "PostgreSQL 17 database with Alpine Linux",
       "port": 5432,
       "healthcheck": true,
       "volumes": ["postgres_data"]
@@ -73,7 +73,7 @@
     "db_shell": "docker-compose exec postgres psql -U payloadkit -d payloadkit_dev"
   },
   "features": [
-    "PostgreSQL 16 with Alpine Linux",
+    "PostgreSQL 17 with Alpine Linux",
     "Hot-reload development environment",
     "Database initialization scripts",
     "Health checks for all services",

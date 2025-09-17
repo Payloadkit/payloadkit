@@ -127,7 +127,7 @@ POSTGRES_DB=payloadkit_dev`}
           command="bun run docker:dev"
           title="3. Start PostgreSQL with Docker"
         >
-          This starts PostgreSQL 16 in a Docker container with the configured credentials.
+          This starts PostgreSQL 17 in a Docker container with the configured credentials.
         </Snippet>
 
         <div className="text-sm text-muted-foreground space-y-2">

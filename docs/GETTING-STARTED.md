@@ -53,7 +53,7 @@ npm run docker:dev
 
 # Included services:
 # - PayloadKit app (hot-reload)
-# - PostgreSQL 16 with extensions
+# - PostgreSQL 17 with extensions
 # - Web interface at: http://localhost:3000
 ```
 

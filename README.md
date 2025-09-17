@@ -100,7 +100,7 @@ bun run docker:reset
 ```
 
 ### What's included:
-- **PostgreSQL 16** - Pre-configured with your .env settings
+- **PostgreSQL 17** - Pre-configured with your .env settings
 - **pgAdmin** (full mode) - Database management UI at http://localhost:5050
 - **MailHog** (full mode) - Email testing at http://localhost:8025
 - **Redis** (full mode) - Caching and sessions
