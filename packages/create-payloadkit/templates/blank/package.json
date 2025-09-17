@@ -18,7 +18,11 @@
     "docker:stop": "docker-compose down",
     "docker:reset": "docker-compose down -v && docker-compose up --build",
     "docker:logs": "docker-compose logs -f app",
-    "docker:db": "docker-compose exec postgres psql -U payloadkit -d payloadkit_dev"
+    "docker:db": "docker-compose exec postgres psql -U payloadkit -d payloadkit_dev",
+    "docker:db-only": "docker-compose -f docker-compose.db-only.yml up",
+    "docker:db-only:detached": "docker-compose -f docker-compose.db-only.yml up -d",
+    "docker:db-only:stop": "docker-compose -f docker-compose.db-only.yml down",
+    "docker:db-only:pgadmin": "docker-compose -f docker-compose.db-only.yml --profile pgadmin up"
   },
   "dependencies": {
     "payload": "^3.55.1",

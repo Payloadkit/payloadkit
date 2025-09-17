@@ -1,0 +1,17 @@
+{
+  "name": "docker-compose-db-only",
+  "type": "docker",
+  "description": "Database-only Docker Compose configuration with PostgreSQL 17",
+  "version": "0.1.0",
+  "files": [
+    "docker-compose.yml"
+  ],
+  "dependencies": [],
+  "devDependencies": [],
+  "registryDependencies": [],
+  "category": "development",
+  "subcategory": "docker",
+  "tags": ["docker", "postgresql", "database", "development"],
+  "docs": "Database-only Docker setup for local development. Run your app with `bun dev` while using containerized PostgreSQL.",
+  "license": "MIT"
+}

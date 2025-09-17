@@ -408,6 +408,20 @@
       "optionalDependencies": [],
       "registryDependencies": ["dockerfile-dev"]
     },
+    "docker-compose-db-only": {
+      "name": "docker-compose-db-only",
+      "description": "Database-only Docker Compose configuration with PostgreSQL 17",
+      "category": "development",
+      "tags": ["docker-compose", "postgresql", "database", "development"],
+      "version": "0.1.0",
+      "files": [
+        "docker-compose.yml",
+        "payloadkit.json"
+      ],
+      "dependencies": [],
+      "optionalDependencies": [],
+      "registryDependencies": []
+    },
     "dockerignore": {
       "name": "dockerignore",
       "description": "Optimized .dockerignore for PayloadCMS + Next.js projects",

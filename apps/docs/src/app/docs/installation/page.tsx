@@ -31,7 +31,7 @@ const quickStartSteps = [
         <div className="text-sm text-muted-foreground space-y-2">
           <p><strong>What this includes:</strong></p>
           <ul className="list-disc list-inside space-y-1">
-            <li>PayloadCMS 3.0+ with PostgreSQL</li>
+            <li>PayloadCMS 3.0+ with PostgreSQL 17</li>
             <li>Next.js 15 with App Router</li>
             <li>shadcn/ui components pre-configured</li>
             <li>TypeScript and Tailwind CSS</li>
@@ -123,18 +123,33 @@ POSTGRES_DB=payloadkit_dev`}
           title="2. Configure .env for Docker"
         />
 
-        <Snippet
-          command="bun run docker:dev"
+        <MultiSnippet
           title="3. Start PostgreSQL with Docker"
-        >
-          This starts PostgreSQL 17 in a Docker container with the configured credentials.
-        </Snippet>
+          commands={[
+            {
+              command: 'bun run docker:db-only',
+              description: 'Database only - Run your app locally (Recommended)'
+            },
+            {
+              command: 'bun run docker:dev',
+              description: 'Full stack - All services in Docker'
+            }
+          ]}
+        />
 
         <div className="text-sm text-muted-foreground space-y-2">
-          <p><strong>Docker Commands:</strong></p>
+          <p><strong>Database-Only Mode (Recommended):</strong></p>
           <ul className="list-disc list-inside space-y-1">
-            <li><code>bun run docker:dev</code> - Start PostgreSQL only</li>
-            <li><code>bun run docker:dev:full</code> - Start full stack (PostgreSQL + pgAdmin + MailHog)</li>
+            <li><code>bun run docker:db-only</code> - Start PostgreSQL 17 only</li>
+            <li><code>bun run docker:db-only:detached</code> - Start database in background</li>
+            <li><code>bun run docker:db-only:pgadmin</code> - Include pgAdmin for database management</li>
+            <li><code>bun run docker:db-only:stop</code> - Stop database services</li>
+          </ul>
+
+          <p className="mt-3"><strong>Full Docker Mode:</strong></p>
+          <ul className="list-disc list-inside space-y-1">
+            <li><code>bun run docker:dev</code> - Start all services (app + database)</li>
+            <li><code>bun run docker:dev:full</code> - Include Redis, pgAdmin, and MailHog</li>
             <li><code>bun run docker:stop</code> - Stop all services</li>
             <li><code>bun run docker:reset</code> - Reset database (clean start)</li>
           </ul>
@@ -310,6 +325,56 @@ export default function InstallationPage() {
           steps={existingProjectSteps}
           allowSkip
         />
+      </div>
+
+      {/* Database Deployment Options */}
+      <div className="space-y-6">
+        <div>
+          <h2 className="text-2xl font-semibold tracking-tight border-b pb-2 mb-4">
+            🐘 Database Deployment Options
+          </h2>
+          <p className="text-muted-foreground">
+            PayloadKit provides flexible PostgreSQL deployment options. Choose what works best for your workflow:
+          </p>
+        </div>
+
+        <div className="grid gap-6 md:grid-cols-2">
+          <div className="space-y-3 p-4 rounded-lg border">
+            <div className="flex items-center space-x-2">
+              <div className="w-3 h-3 bg-green-500 rounded-full"></div>
+              <h3 className="font-semibold">Database-Only Docker (Recommended)</h3>
+            </div>
+            <Snippet command="bun run docker:db-only" />
+            <p className="text-sm text-muted-foreground">
+              <strong>Best for development:</strong> PostgreSQL 17 in Docker, app runs locally with hot reload. Fast, flexible, and resource-efficient.
+            </p>
+            <div className="text-xs text-muted-foreground space-y-1">
+              <p><strong>Pros:</strong> Fast rebuilds, local debugging, minimal resources</p>
+              <p><strong>Cons:</strong> Requires local Node.js setup</p>
+            </div>
+          </div>
+
+          <div className="space-y-3 p-4 rounded-lg border">
+            <div className="flex items-center space-x-2">
+              <div className="w-3 h-3 bg-blue-500 rounded-full"></div>
+              <h3 className="font-semibold">Full Docker Stack</h3>
+            </div>
+            <Snippet command="bun run docker:dev" />
+            <p className="text-sm text-muted-foreground">
+              <strong>For production-like setup:</strong> Everything in Docker containers. Perfect for team consistency and production testing.
+            </p>
+            <div className="text-xs text-muted-foreground space-y-1">
+              <p><strong>Pros:</strong> Production parity, team consistency</p>
+              <p><strong>Cons:</strong> Slower rebuilds, more resources</p>
+            </div>
+          </div>
+        </div>
+
+        <Alert>
+          <AlertDescription>
+            <strong>PostgreSQL 17:</strong> PayloadKit uses the latest PostgreSQL 17 for improved performance, enhanced JSON operations, and better query optimization.
+          </AlertDescription>
+        </Alert>
       </div>
 
       {/* Package Manager Options */}

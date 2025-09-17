@@ -77,9 +77,21 @@ export default function DockerPage() {
       <section className="space-y-4">
         <h2 className="text-2xl font-semibold">Quick Start</h2>
 
-        <div className="grid gap-6 lg:grid-cols-3">
+        <div className="grid gap-6 lg:grid-cols-4">
+          <div className="rounded-lg border p-6 bg-green-50 dark:bg-green-950/20">
+            <div className="flex items-center space-x-2 mb-3">
+              <div className="w-3 h-3 bg-green-500 rounded-full"></div>
+              <h3 className="font-semibold">1. Database Only (Recommended)</h3>
+            </div>
+            <p className="text-sm text-muted-foreground mb-4">PostgreSQL 17 only, app runs locally</p>
+            <div className="space-y-2">
+              <Snippet command="bun run docker:db-only" title="Start Database" />
+              <Snippet command="bun run docker:db-only:detached" title="Background Mode" />
+            </div>
+          </div>
+
           <div className="rounded-lg border p-6">
-            <h3 className="font-semibold mb-3">1. Standard Launch</h3>
+            <h3 className="font-semibold mb-3">2. Standard Launch</h3>
             <p className="text-sm text-muted-foreground mb-4">Basic environment (app + PostgreSQL)</p>
             <div className="space-y-2">
               <Snippet command="bun run docker:dev" title="Start Development" />
@@ -88,17 +100,23 @@ export default function DockerPage() {
           </div>
 
           <div className="rounded-lg border p-6">
-            <h3 className="font-semibold mb-3">2. Full Environment</h3>
+            <h3 className="font-semibold mb-3">3. Full Environment</h3>
             <p className="text-sm text-muted-foreground mb-4">With Redis, MailHog, and pgAdmin</p>
             <Snippet command="bun run docker:dev:full" title="Full Stack" />
           </div>
 
           <div className="rounded-lg border p-6">
-            <h3 className="font-semibold mb-3">3. First Build</h3>
+            <h3 className="font-semibold mb-3">4. First Build</h3>
             <p className="text-sm text-muted-foreground mb-4">Build and launch together</p>
             <Snippet command="bun run docker:dev:build" title="Build + Start" />
           </div>
         </div>
+
+        <Alert>
+          <AlertDescription>
+            <strong>Recommended:</strong> Use database-only mode for faster development. PostgreSQL runs in Docker while your app runs locally with hot reload, TypeScript support, and faster builds.
+          </AlertDescription>
+        </Alert>
       </section>
 
       {/* Available Services */}
@@ -258,9 +276,31 @@ SMTP_PASS=`}
       <section className="space-y-4">
         <h2 className="text-2xl font-semibold">Available NPM Scripts</h2>
 
-        <div className="grid gap-6 md:grid-cols-2">
+        <div className="grid gap-6 md:grid-cols-3">
           <div className="space-y-4">
-            <h3 className="text-lg font-semibold">Development</h3>
+            <h3 className="text-lg font-semibold">Database Only (Recommended)</h3>
+            <div className="space-y-3">
+              <div>
+                <code className="text-sm bg-muted px-2 py-1 rounded">bun run docker:db-only</code>
+                <p className="text-sm text-muted-foreground mt-1">PostgreSQL 17 only</p>
+              </div>
+              <div>
+                <code className="text-sm bg-muted px-2 py-1 rounded">bun run docker:db-only:detached</code>
+                <p className="text-sm text-muted-foreground mt-1">Database in background</p>
+              </div>
+              <div>
+                <code className="text-sm bg-muted px-2 py-1 rounded">bun run docker:db-only:pgadmin</code>
+                <p className="text-sm text-muted-foreground mt-1">Database + pgAdmin</p>
+              </div>
+              <div>
+                <code className="text-sm bg-muted px-2 py-1 rounded">bun run docker:db-only:stop</code>
+                <p className="text-sm text-muted-foreground mt-1">Stop database services</p>
+              </div>
+            </div>
+          </div>
+
+          <div className="space-y-4">
+            <h3 className="text-lg font-semibold">Full Docker</h3>
             <div className="space-y-3">
               <div>
                 <code className="text-sm bg-muted px-2 py-1 rounded">bun run docker:dev</code>
