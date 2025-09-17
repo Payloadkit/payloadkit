@@ -18,39 +18,103 @@ PayloadKit is an open source framework that provides a collection of reusable co
 
 ## 🚀 Quick Start
 
+### Prerequisites
+
+```bash
+# Install bun (recommended package manager)
+curl -fsSL https://bun.sh/install | bash
+# or visit https://bun.sh/docs/installation for other methods
+```
+
 ### Create a new project
 
 ```bash
 # Create with default (blank) template
-npx create-payloadkit@latest my-app
+bunx create-payloadkit@latest my-app
 
 # Create with specific template
-npx create-payloadkit@latest my-blog --template blog
+bunx create-payloadkit@latest my-blog --template blog
 
 # With custom options
-npx create-payloadkit@latest my-business \
+bunx create-payloadkit@latest my-business \
   --template business \
   --package-manager bun \
   --no-git
+```
 
+### Setup and Development
+
+```bash
 cd my-app
 
-# Development with bun
+# 1. Copy environment file
+cp .env.example .env
+
+# 2. Generate a secure secret key
+openssl rand -hex 32
+# Copy the output and replace PAYLOAD_SECRET in .env
+
+# 3. Start PostgreSQL database with Docker
+bun run docker:dev
+
+# 4. Run development server
 bun dev
 
-# Or with Docker (complete environment)
-npm run docker:dev
+# 5. Open admin panel
+# http://localhost:3000/admin
 ```
 
 ### Add to existing project
 
 ```bash
 # Initialize PayloadKit in your existing PayloadCMS project
-npx payloadkit init
+bunx payloadkit@latest init
 
 # Add components
-npx payloadkit add call-to-action
-npx payloadkit add hero-block
+bunx payloadkit@latest add call-to-action
+bunx payloadkit@latest add hero-block
+```
+
+## 🐳 Docker Development
+
+PayloadKit comes with a complete Docker Compose setup for instant development:
+
+```bash
+# In your project directory
+cd my-app
+
+# Start PostgreSQL database only
+bun run docker:dev
+
+# Or start full stack (PostgreSQL + Redis + MailHog + pgAdmin)
+bun run docker:dev:full
+
+# View running containers
+docker-compose ps
+
+# Stop all services
+bun run docker:stop
+
+# Reset database (clean start)
+bun run docker:reset
+```
+
+### What's included:
+- **PostgreSQL 16** - Pre-configured with your .env settings
+- **pgAdmin** (full mode) - Database management UI at http://localhost:5050
+- **MailHog** (full mode) - Email testing at http://localhost:8025
+- **Redis** (full mode) - Caching and sessions
+
+### Useful Docker commands:
+```bash
+# View database logs
+bun run docker:logs
+
+# Connect to database CLI
+bun run docker:db
+
+# View all services status
+docker-compose ps
 ```
 
 ## 📚 Documentation
@@ -114,34 +178,34 @@ Visit our [documentation site](https://payloadkit.dev) for:
 ### create-payloadkit (Project Creation)
 ```bash
 # Create new project with blank template
-npx create-payloadkit@latest my-app
+bunx create-payloadkit@latest my-app
 
 # Create with specific template
-npx create-payloadkit@latest my-blog --template blog
+bunx create-payloadkit@latest my-blog --template blog
 
 # Create with custom package manager
-npx create-payloadkit@latest my-app --package-manager bun
+bunx create-payloadkit@latest my-app --package-manager bun
 
 # Skip installation and git initialization
-npx create-payloadkit@latest my-app --no-install --no-git
+bunx create-payloadkit@latest my-app --no-install --no-git
 ```
 
 ### payloadkit (Component Management)
 ```bash
 # Initialize in existing PayloadCMS project
-npx payloadkit init
+bunx payloadkit@latest init
 
 # List available registry components
-npx payloadkit list
+bunx payloadkit@latest list
 
 # Add specific components
-npx payloadkit add hero-block call-to-action
-npx payloadkit add Users Media
-npx payloadkit add RichText CMSLink
+bunx payloadkit@latest add hero-block call-to-action
+bunx payloadkit@latest add Users Media
+bunx payloadkit@latest add RichText CMSLink
 
 # Add configuration modules (New!)
-npx payloadkit add db-config
-npx payloadkit add docker dockerfile-dev docker-compose-dev
+bunx payloadkit@latest add db-config
+bunx payloadkit@latest add docker dockerfile-dev docker-compose-dev
 ```
 
 ## 🏗️ Development
@@ -162,8 +226,8 @@ bun run dev:docs
 bun run dev
 
 # Docker development (New!)
-npm run docker:dev          # Basic environment
-npm run docker:dev:full     # Full stack with Redis, MailHog, pgAdmin
+bun run docker:dev          # Basic environment (PostgreSQL)
+bun run docker:dev:full     # Full stack with Redis, MailHog, pgAdmin
 ```
 
 ## 📁 Project Structure
