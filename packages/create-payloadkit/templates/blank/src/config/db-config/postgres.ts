@@ -37,7 +37,7 @@ export const postgresDbConfig = postgresAdapter({
   migrationDir: './migrations',
   idType: 'uuid',
   blocksAsJSON: true,
-  push: false,
+et du  push: true,
   pool: {
     connectionString: getDatabaseConnectionString(),
   },

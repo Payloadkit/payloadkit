@@ -440,6 +440,43 @@
       "registryDependencies": []
     }
   },
+  "plugins": {
+    "better-auth": {
+      "name": "better-auth",
+      "description": "Better Auth integration plugin for PayloadCMS with TOTP/2FA support, OAuth providers, and session management",
+      "category": "authentication",
+      "tags": ["auth", "authentication", "better-auth", "totp", "2fa", "oauth", "session", "payloadcms"],
+      "version": "0.1.0",
+      "files": [
+        "index.ts",
+        "plugin.ts",
+        "adapter.ts",
+        "auth.ts",
+        "types/index.ts",
+        "collections/index.ts",
+        "collections/auth-sessions.ts",
+        "collections/auth-accounts.ts",
+        "collections/auth-verifications.ts",
+        "utils/index.ts",
+        "utils/totp.ts",
+        "payloadkit.json"
+      ],
+      "dependencies": ["better-auth", "@better-auth/adapter-payload", "qrcode"],
+      "devDependencies": ["@types/qrcode"],
+      "peerDependencies": ["payload", "react"],
+      "registryDependencies": [],
+      "features": [
+        "OAuth providers (Google, GitHub, Discord)",
+        "Email/Password authentication",
+        "TOTP/2FA with QR code generation",
+        "Session management",
+        "Password reset and email verification",
+        "PayloadCMS collections integration",
+        "Admin panel integration",
+        "Standalone usage support"
+      ]
+    }
+  },
   "components": {
     "RichText": {
       "name": "RichText",

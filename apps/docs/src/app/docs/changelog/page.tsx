@@ -45,21 +45,73 @@ export default function ChangelogPage() {
         </AlertDescription>
       </Alert>
 
-      {/* Unreleased Version */}
+      {/* Version 0.2.1 */}
       <section className="space-y-6">
         <div className="flex items-center gap-3">
-          <GitBranch className="h-6 w-6 text-orange-600" />
-          <h2 className="text-3xl font-bold">Unreleased</h2>
-          <Badge variant="outline" className="bg-orange-50 text-orange-700 border-orange-200">
-            In Development
+          <Calendar className="h-6 w-6 text-green-600" />
+          <h2 className="text-3xl font-bold">0.2.1</h2>
+          <Badge variant="outline" className="bg-green-50 text-green-700 border-green-200">
+            January 17, 2025
           </Badge>
         </div>
 
-        <div className="rounded-lg border p-6 bg-muted/20">
-          <p className="text-muted-foreground text-center italic">
-            No unreleased changes yet. Check back soon for upcoming features!
-          </p>
+        <div className="grid gap-6 lg:grid-cols-2">
+          {/* Bug Fixes */}
+          <div className="rounded-lg border p-6">
+            <div className="flex items-center gap-3 mb-4">
+              <div className="flex items-center justify-center w-8 h-8 rounded-lg bg-red-100">
+                <Bug className="h-4 w-4 text-red-600" />
+              </div>
+              <h3 className="text-xl font-semibold">Fixed</h3>
+            </div>
+            <ul className="space-y-3 text-sm text-muted-foreground">
+              <li className="flex items-start gap-2">
+                <span className="w-1.5 h-1.5 rounded-full bg-red-500 mt-2 flex-shrink-0"></span>
+                <span><strong>Critical:</strong> Removed incompatible Better Auth plugin causing PayloadCMS version conflicts (3.28.1 vs 3.55.1)</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="w-1.5 h-1.5 rounded-full bg-red-500 mt-2 flex-shrink-0"></span>
+                <span><strong>Database:</strong> Fixed PostgreSQL configuration preventing automatic table creation (push: false → push: true)</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="w-1.5 h-1.5 rounded-full bg-red-500 mt-2 flex-shrink-0"></span>
+                <span>Added missing Sharp package for image processing in template dependencies</span>
+              </li>
+            </ul>
+          </div>
+
+          {/* Improvements */}
+          <div className="rounded-lg border p-6">
+            <div className="flex items-center gap-3 mb-4">
+              <div className="flex items-center justify-center w-8 h-8 rounded-lg bg-blue-100">
+                <Wrench className="h-4 w-4 text-blue-600" />
+              </div>
+              <h3 className="text-xl font-semibold">Improved</h3>
+            </div>
+            <ul className="space-y-3 text-sm text-muted-foreground">
+              <li className="flex items-start gap-2">
+                <span className="w-1.5 h-1.5 rounded-full bg-blue-500 mt-2 flex-shrink-0"></span>
+                <span>PayloadCMS database initialization now works automatically on first run</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="w-1.5 h-1.5 rounded-full bg-blue-500 mt-2 flex-shrink-0"></span>
+                <span>Docker development environment stability significantly improved</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="w-1.5 h-1.5 rounded-full bg-blue-500 mt-2 flex-shrink-0"></span>
+                <span>Cleaner template with fewer dependency conflicts</span>
+              </li>
+            </ul>
+          </div>
         </div>
+
+        <Alert>
+          <Bug className="h-4 w-4" />
+          <AlertDescription>
+            <strong>Breaking Change Notice:</strong> If you created a project before this version and experience database issues,
+            please update your <code>src/config/db-config/postgres.ts</code> file to set <code>push: true</code> and remove any Better Auth dependencies.
+          </AlertDescription>
+        </Alert>
       </section>
 
       <Separator />

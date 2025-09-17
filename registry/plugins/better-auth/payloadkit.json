@@ -1,0 +1,56 @@
+{
+  "name": "better-auth",
+  "type": "plugin",
+  "description": "Better Auth integration plugin for PayloadCMS with TOTP/2FA support",
+  "version": "0.1.0",
+  "author": "PayloadKit",
+  "license": "MIT",
+  "keywords": ["auth", "authentication", "better-auth", "totp", "2fa", "payloadcms"],
+  "dependencies": {
+    "better-auth": "^1.3.4",
+    "@better-auth/adapter-payload": "^1.3.4",
+    "qrcode": "^1.5.3"
+  },
+  "devDependencies": {
+    "@types/qrcode": "^1.5.5"
+  },
+  "peerDependencies": {
+    "payload": "^3.55.1",
+    "react": "^18.0.0"
+  },
+  "files": [
+    "index.ts",
+    "plugin.ts",
+    "adapter.ts",
+    "collections/",
+    "hooks/",
+    "types/",
+    "utils/"
+  ],
+  "exports": {
+    ".": "./index.ts",
+    "./plugin": "./plugin.ts",
+    "./adapter": "./adapter.ts",
+    "./types": "./types/index.ts",
+    "./utils": "./utils/index.ts"
+  },
+  "configuration": {
+    "required": false,
+    "minimal": true,
+    "totp": {
+      "enabled": true,
+      "default": true
+    }
+  },
+  "features": [
+    "OAuth providers (Google, GitHub, Discord)",
+    "Email/Password authentication",
+    "TOTP/2FA with QR code generation",
+    "Session management",
+    "Password reset",
+    "Email verification",
+    "PayloadCMS collections integration",
+    "Admin panel integration",
+    "Standalone usage support"
+  ]
+}
