@@ -485,6 +485,35 @@
       "dependencies": ["react", "tailwindcss"],
       "peerDependencies": [],
       "registryDependencies": []
+    },
+    "AuthProvider": {
+      "name": "AuthProvider",
+      "description": "Better Auth UI Provider component for Next.js applications with PayloadCMS integration",
+      "category": "authentication",
+      "tags": ["auth", "provider", "better-auth", "ui", "session"],
+      "version": "0.1.0",
+      "files": [
+        "Component.tsx",
+        "auth-client.ts",
+        "index.ts"
+      ],
+      "dependencies": ["@daveyplate/better-auth-ui", "better-auth", "next", "react"],
+      "peerDependencies": [],
+      "registryDependencies": []
+    },
+    "AuthView": {
+      "name": "AuthView",
+      "description": "Pre-built authentication pages using Better Auth UI with PayloadKit branding",
+      "category": "authentication",
+      "tags": ["auth", "ui", "pages", "better-auth", "forms", "signin", "signup"],
+      "version": "0.1.0",
+      "files": [
+        "Component.tsx",
+        "index.ts"
+      ],
+      "dependencies": ["@daveyplate/better-auth-ui", "better-auth", "react", "clsx", "tailwind-merge"],
+      "peerDependencies": [],
+      "registryDependencies": []
     }
   }
 }
