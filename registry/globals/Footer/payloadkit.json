@@ -1,7 +1,7 @@
 {
-  "name": "Theme",
+  "name": "Footer",
   "type": "global",
-  "description": "Basic theme global for color scheme, colors and typography",
+  "description": "Basic footer global with copyright, social links and footer navigation",
   "version": "0.1.0",
   "author": "PayloadKit",
   "files": [
@@ -10,5 +10,5 @@
   ],
   "dependencies": [],
   "registryDependencies": [],
-  "tags": ["global", "theme", "colors", "typography"]
+  "tags": ["global", "footer", "navigation", "social"]
 }

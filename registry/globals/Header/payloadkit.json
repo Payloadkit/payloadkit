@@ -1,7 +1,7 @@
 {
-  "name": "Theme",
+  "name": "Header",
   "type": "global",
-  "description": "Basic theme global for color scheme, colors and typography",
+  "description": "Basic header global with navigation items",
   "version": "0.1.0",
   "author": "PayloadKit",
   "files": [
@@ -10,5 +10,5 @@
   ],
   "dependencies": [],
   "registryDependencies": [],
-  "tags": ["global", "theme", "colors", "typography"]
+  "tags": ["global", "header", "navigation"]
 }

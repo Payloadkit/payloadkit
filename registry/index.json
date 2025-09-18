@@ -273,26 +273,47 @@
     }
   },
   "globals": {
-    "theme": {
-      "name": "theme",
-      "description": "Complete theme system for PayloadCMS with shadcn/ui integration, color presets, and live preview",
-      "category": "ui",
-      "tags": ["theme", "colors", "design-system", "shadcn", "ui", "css-variables"],
+    "Header": {
+      "name": "Header",
+      "description": "Basic header global with navigation items",
+      "category": "navigation",
+      "tags": ["global", "header", "navigation"],
       "version": "0.1.0",
       "files": [
         "config.ts",
-        "defaultPresets.ts",
-        "initializeTheme.ts",
-        "components/ThemeProvider.tsx",
-        "components/PresetManager.tsx",
-        "components/ThemePreview.tsx",
-        "utilities/themeUtils.ts",
-        "index.ts",
-        "payloadkit.json"
+        "index.ts"
       ],
-      "dependencies": ["react"],
-      "peerDependencies": ["payload", "@payloadcms/ui"],
-      "registryDependencies": ["color-picker"]
+      "dependencies": [],
+      "peerDependencies": ["payload"],
+      "registryDependencies": []
+    },
+    "Footer": {
+      "name": "Footer",
+      "description": "Basic footer global with copyright, social links and footer navigation",
+      "category": "navigation",
+      "tags": ["global", "footer", "navigation", "social"],
+      "version": "0.1.0",
+      "files": [
+        "config.ts",
+        "index.ts"
+      ],
+      "dependencies": [],
+      "peerDependencies": ["payload"],
+      "registryDependencies": []
+    },
+    "Theme": {
+      "name": "Theme",
+      "description": "Basic theme global for color scheme, colors and typography",
+      "category": "ui",
+      "tags": ["global", "theme", "colors", "typography"],
+      "version": "0.1.0",
+      "files": [
+        "config.ts",
+        "index.ts"
+      ],
+      "dependencies": [],
+      "peerDependencies": ["payload"],
+      "registryDependencies": []
     }
   },
   "config": {
