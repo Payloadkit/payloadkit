@@ -1,14 +1,14 @@
 {
   "name": "blank",
-  "version": "0.1.0",
+  "version": "0.3.2",
   "description": "PayloadKit blank template - secure-by-default foundation with enterprise-grade authentication and security",
   "extends": null,
-  "payloadkitVersion": "0.1.0",
+  "payloadkitVersion": "0.3.2",
   "payloadVersion": "^3.0.0",
   "nextVersion": "^15.0.0",
   "collections": [
     "Users",
-    "Media", 
+    "Media",
     "Pages"
   ],
   "globals": [],
@@ -91,7 +91,7 @@
   },
   "requiredEnvVars": [
     "PAYLOAD_SECRET",
-    "DATABASE_URI", 
+    "DATABASE_URI",
     "BETTER_AUTH_URL"
   ],
   "recommendedEnvVars": [
@@ -109,6 +109,8 @@
     "externalIntegration": ["Sentry", "NewRelic", "Custom webhooks"]
   },
   "addedFiles": [
+    "public/robots.txt",
+    "public/sitemap.xml",
     "src/payload.config.ts",
     "src/collections/Users/",
     "src/collections/Media/",
@@ -129,13 +131,23 @@
     "src/app/",
     "src/lib/utils.ts",
     "middleware.ts",
+    ".editorconfig",
+    ".npmrc",
+    ".prettierignore",
+    ".prettierrc.json",
     "components.json",
-    "tailwind.config.js",
+    "tailwind.config.mjs",
+    "redirect.js",
     "next.config.js",
+    "next-sitemap.config.js",
     "tsconfig.json",
+    "nixpacks.toml",
     ".env.example",
     "SECURITY.md",
     "README.md",
-    ".gitignore"
+    ".gitignore",
+    "playwright.config.ts",
+    "vitest.config.mts",
+    "vitest.setup.ts"
   ]
 }

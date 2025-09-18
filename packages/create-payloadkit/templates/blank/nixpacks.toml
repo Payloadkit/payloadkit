@@ -1,0 +1,20 @@
+[phases.setup]
+nixPkgs = ["bun", "nodejs"]
+
+[phases.install]
+cmds = [
+    "bun install --frozen-lockfile"
+]
+
+[phases.build]
+cmds = [
+    "bun run generate:types",
+    "bun run generate:importmap", 
+    "bun run build"
+]
+
+[start]
+cmd = "bun run start"
+
+[variables]
+NODE_ENV = "production"
