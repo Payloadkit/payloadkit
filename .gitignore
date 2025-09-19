@@ -10,6 +10,9 @@ build/
 .nuxt/
 .output/
 
+# Generated CLI binaries
+packages/*/bin/
+
 # Environment files
 .env
 .env.local
