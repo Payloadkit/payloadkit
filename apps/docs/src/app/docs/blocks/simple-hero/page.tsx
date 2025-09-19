@@ -156,7 +156,7 @@ export default function SimpleHeroPage() {
         ]}
         code={{
           component: `// React Component Usage
-import { SimpleHeroComponent } from './blocks/simple-hero'
+import { SimpleHeroComponent } from '@/blocks/simple-hero'
 
 // Centered Layout
 <SimpleHeroComponent
@@ -296,7 +296,7 @@ export const SimpleHero: Block = {
     }
   ]
 }`,
-          usage: `// Frontend Implementation
+          usage: `// app/page.tsx - Frontend Implementation
 import { RenderBlocks } from '@/components/RenderBlocks'
 
 export default function LandingPage({ data }) {
@@ -307,8 +307,8 @@ export default function LandingPage({ data }) {
   )
 }
 
-// Block Rendering
-import { SimpleHeroComponent } from './simple-hero/Component'
+// components/RenderBlocks.tsx - Block Rendering
+import { SimpleHeroComponent } from '@/blocks/simple-hero'
 
 const blockComponents = {
   'simple-hero': SimpleHeroComponent
@@ -334,7 +334,7 @@ export function RenderBlocks({ blocks }) {
             keyword: 'Install',
             description: 'Add Simple Hero Block to your project via PayloadKit CLI.',
             content: (
-              <Snippet command="bunx payloadkit add simple-hero" title="Install via PayloadKit CLI">
+              <Snippet command="bunx payloadkit@latest add simple-hero" title="Install via PayloadKit CLI">
                 This will copy the Simple Hero Block files with minimal dependencies for optimal performance.
               </Snippet>
             )
@@ -345,7 +345,8 @@ export function RenderBlocks({ blocks }) {
             description: 'Import and configure the block in your PayloadCMS setup.',
             content: (
               <CodeBlock
-                code={`import { SimpleHero } from '@/blocks/simple-hero'
+                code={`// payload.config.ts
+import { SimpleHero } from '@/blocks/simple-hero'
 
 export default buildConfig({
   collections: [
@@ -375,7 +376,8 @@ export default buildConfig({
             description: 'Use the component in your React application.',
             content: (
               <CodeBlock
-                code={`import { SimpleHeroComponent } from '@/blocks/simple-hero/Component'
+                code={`// pages/HomePage.tsx
+import { SimpleHeroComponent } from '@/blocks/simple-hero'
 
 // Centered hero for landing pages
 <SimpleHeroComponent

@@ -93,58 +93,45 @@ function ProtectedRouteDemo() {
 const componentCode = `// AuthProvider.tsx - Global authentication context
 'use client'
 
-import { AuthProvider as BetterAuthProvider } from '@daveyplate/better-auth-ui'
+import React from 'react'
+import { AuthUIProvider } from '@daveyplate/better-auth-ui'
 import { authClient } from './auth-client'
+import { useRouter } from 'next/navigation'
+import Link from 'next/link'
 
 interface AuthProviderProps {
   children: React.ReactNode
 }
 
 export function AuthProvider({ children }: AuthProviderProps) {
+  const router = useRouter()
+
   return (
-    <BetterAuthProvider
-      client={authClient}
-      // Configuration options
-      options={{
-        autoRedirect: true,
-        redirectTo: '/dashboard',
-        loginRedirectTo: '/auth/sign-in',
-        // Enable loading states
-        suspense: true,
-      }}
+    <AuthUIProvider
+      authClient={authClient}
+      navigate={router.push}
+      replace={router.replace}
+      onSessionChange={() => router.refresh()}
+      Link={Link}
     >
       {children}
-    </BetterAuthProvider>
+    </AuthUIProvider>
   )
-}
-
-// Export authentication hooks for convenience
-export { useAuth, useSession } from '@daveyplate/better-auth-ui'`
+}`
 
 const configCode = `// auth-client.ts - Better Auth client configuration
 import { betterAuthClient } from 'better-auth/client'
 
 export const authClient = betterAuthClient({
-  // Base URL for authentication endpoints
   baseURL: process.env.NEXT_PUBLIC_BETTER_AUTH_URL || 'http://localhost:3000',
-
-  // Client-side plugins (must match server configuration)
   plugins: [
-    // Add client plugins here
-    // Example: twoFactorClient(), oauthClient(), etc.
+    // Client-side plugins will be added here
+    // These should match the server-side configuration
   ],
-
-  // Additional configuration
-  session: {
-    cookieName: 'better-auth.session',
-    maxAge: 60 * 60 * 24 * 7, // 7 days
-  },
-})
-
-export default authClient`
+})`
 
 const usageCode = `// app/layout.tsx - Root layout integration
-import { AuthProvider } from '@/components/auth/AuthProvider'
+import { AuthProvider } from '@/components/AuthProvider'
 
 export default function RootLayout({
   children,
@@ -153,7 +140,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body>
         <AuthProvider>
           {children}
         </AuthProvider>
@@ -162,13 +149,13 @@ export default function RootLayout({
   )
 }
 
-// components/UserProfile.tsx - Using authentication
-import { useAuth } from '@/components/auth/AuthProvider'
+// components/UserProfile.tsx - Using authentication with Better Auth UI hooks
+import { useAuthUI } from '@daveyplate/better-auth-ui'
 
 export function UserProfile() {
-  const { user, isLoading, signOut } = useAuth()
+  const { user, loading } = useAuthUI()
 
-  if (isLoading) {
+  if (loading) {
     return <div className="animate-pulse">Loading...</div>
   }
 
@@ -180,12 +167,6 @@ export function UserProfile() {
     <div className="space-y-4">
       <h2>Welcome, {user.name}!</h2>
       <p className="text-muted-foreground">Email: {user.email}</p>
-      <button
-        onClick={signOut}
-        className="px-4 py-2 bg-destructive text-destructive-foreground rounded-md"
-      >
-        Sign Out
-      </button>
     </div>
   )
 }`
@@ -197,7 +178,7 @@ export default function AuthProviderPage() {
       keyword: 'Install',
       description: 'Add the authentication provider to your project',
       content: (
-        <Snippet command="bunx payloadkit add auth-provider">
+        <Snippet command="bunx payloadkit@latest add AuthProvider">
           Install AuthProvider component with Better Auth UI integration. This includes the provider and authentication client configuration.
         </Snippet>
       )
@@ -215,6 +196,7 @@ NEXT_PUBLIC_BETTER_AUTH_URL=http://localhost:3000
 BETTER_AUTH_SECRET=your-secret-key
 DATABASE_URL=your-database-url`}
           language="bash"
+          title=".env.local"
         />
       )
     },
@@ -224,7 +206,8 @@ DATABASE_URL=your-database-url`}
       description: 'Add AuthProvider to your root layout',
       content: (
         <CodeBlock
-          code={`import { AuthProvider } from '@/components/auth/AuthProvider'
+          code={`// app/layout.tsx
+import { AuthProvider } from '@/components/AuthProvider'
 
 export default function RootLayout({ children }) {
   return (
@@ -247,12 +230,13 @@ export default function RootLayout({ children }) {
       description: 'Start using authentication in your components',
       content: (
         <CodeBlock
-          code={`import { useAuth } from '@/components/auth/AuthProvider'
+          code={`// components/MyComponent.tsx
+import { useAuthUI } from '@daveyplate/better-auth-ui'
 
 function MyComponent() {
-  const { user, isLoading } = useAuth()
+  const { user, loading } = useAuthUI()
 
-  if (isLoading) return <div>Loading...</div>
+  if (loading) return <div>Loading...</div>
 
   return user ? (
     <div>Welcome {user.name}!</div>
@@ -295,7 +279,7 @@ function MyComponent() {
       description: 'Current authenticated user object, null if not signed in'
     },
     {
-      name: 'isLoading',
+      name: 'loading',
       type: 'boolean',
       description: 'Boolean indicating if authentication state is being determined'
     },
@@ -305,14 +289,9 @@ function MyComponent() {
       description: 'Current user session with tokens and metadata'
     },
     {
-      name: 'signOut',
-      type: '() => Promise<void>',
-      description: 'Function to sign out the current user'
-    },
-    {
-      name: 'refresh',
-      type: '() => Promise<void>',
-      description: 'Function to refresh the current session'
+      name: 'authClient',
+      type: 'BetterAuthClient',
+      description: 'Better Auth client instance for manual operations'
     }
   ]
 
@@ -386,8 +365,8 @@ function MyComponent() {
 
       {/* Hook API */}
       <ApiReference
-        title="useAuth Hook"
-        description="Authentication hook provided by AuthProvider for accessing user state"
+        title="useAuthUI Hook"
+        description="Authentication hook from Better Auth UI for accessing user state"
         props={hookProps}
       />
 

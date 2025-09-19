@@ -212,7 +212,7 @@ export default function HeaderGlobalPage() {
       keyword: 'Install',
       description: 'Add the header global to your PayloadCMS project',
       content: (
-        <Snippet command="bunx payloadkit add Header">
+        <Snippet command="bunx payloadkit@latest add Header">
           Install the header global using the PayloadKit CLI. This adds all necessary files and dependencies.
         </Snippet>
       )

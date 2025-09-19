@@ -256,7 +256,7 @@ export default function TextBlockPage() {
       keyword: 'Install',
       description: 'Add the text block to your PayloadCMS project',
       content: (
-        <Snippet command="bunx payloadkit add text-block">
+        <Snippet command="bunx payloadkit@latest add text-block">
           Install TextBlock component with rich text editing and formatting capabilities.
         </Snippet>
       )
@@ -268,7 +268,7 @@ export default function TextBlockPage() {
       content: (
         <CodeBlock
           code={`// Install the RichText component dependency
-bunx payloadkit add rich-text
+bunx payloadkit@latest add RichText
 
 // Or create manually at components/RichText.tsx
 import { JSXConverters } from '@payloadcms/richtext-lexical/client'

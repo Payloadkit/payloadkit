@@ -234,14 +234,14 @@ const existingProjectSteps = [
     content: (
       <div className="space-y-4">
         <Snippet
-          command="bunx payloadkit add Hero"
+          command="bunx payloadkit@latest add hero-block"
           title="Add a Component"
         >
-          This copies the Hero block into your project with all dependencies and proper folder structure.
+          This copies the hero-block into your project with all dependencies and proper folder structure.
         </Snippet>
 
         <CodeBlock
-          code={`import { Hero } from './blocks/Hero'
+          code={`import { HeroBlock } from './blocks/hero-block'
 
 export default buildConfig({
   collections: [
@@ -251,7 +251,7 @@ export default buildConfig({
         {
           name: 'layout',
           type: 'blocks',
-          blocks: [Hero], // Add your component here
+          blocks: [HeroBlock], // Add your component here
         },
       ],
     },
@@ -280,7 +280,7 @@ export default function InstallationPage() {
               <h3 className="font-semibold text-gray-900">Create New Project</h3>
             </div>
             <p className="text-sm text-gray-600 mb-3">Start fresh with a complete PayloadCMS project using our templates.</p>
-            <div className="bg-gray-50 p-2 rounded text-xs font-mono">bunx create-payloadkit@latest my-app</div>
+            <Snippet command="bunx create-payloadkit@latest my-app" />
             <p className="text-xs text-gray-500 mt-2">Best for: New projects, prototypes, quick starts</p>
           </div>
 
@@ -290,7 +290,7 @@ export default function InstallationPage() {
               <h3 className="font-semibold text-gray-900">Add to Existing Project</h3>
             </div>
             <p className="text-sm text-gray-600 mb-3">Install individual components, blocks, or globals into your existing PayloadCMS project.</p>
-            <div className="bg-gray-50 p-2 rounded text-xs font-mono">bunx payloadkit add Hero</div>
+            <Snippet command="bunx payloadkit@latest add hero-block" />
             <p className="text-xs text-gray-500 mt-2">Best for: Existing projects, specific components, gradual adoption</p>
           </div>
         </div>

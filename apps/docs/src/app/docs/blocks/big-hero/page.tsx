@@ -147,7 +147,7 @@ export default function BigHeroPage() {
         ]}
         code={{
           component: `// React Component Usage
-import { BigHeroComponent } from './blocks/big-hero'
+import { BigHeroComponent } from '@/blocks/big-hero'
 
 // Default Configuration
 <BigHeroComponent
@@ -279,7 +279,7 @@ export const BigHero: Block = {
     }
   ]
 }`,
-          usage: `// Frontend Page Implementation
+          usage: `// app/page.tsx - Frontend Page Implementation
 import { RenderBlocks } from '@/components/RenderBlocks'
 
 export default function LandingPage({ data }) {
@@ -290,8 +290,8 @@ export default function LandingPage({ data }) {
   )
 }
 
-// Block Rendering
-import { BigHeroComponent } from './big-hero/Component'
+// components/RenderBlocks.tsx - Block Rendering
+import { BigHeroComponent } from '@/blocks/big-hero'
 
 const blockComponents = {
   'big-hero': BigHeroComponent
@@ -317,7 +317,7 @@ export function RenderBlocks({ blocks }) {
             keyword: 'Install',
             description: 'Add Big Hero Block to your project via PayloadKit CLI.',
             content: (
-              <Snippet command="bunx payloadkit add big-hero" title="Install via PayloadKit CLI">
+              <Snippet command="bunx payloadkit@latest add big-hero" title="Install via PayloadKit CLI">
                 This will copy the Big Hero Block files and install required dependencies including video handling utilities.
               </Snippet>
             )
@@ -328,7 +328,8 @@ export function RenderBlocks({ blocks }) {
             description: 'Import and configure the block in your PayloadCMS setup.',
             content: (
               <CodeBlock
-                code={`import { BigHero } from '@/blocks/big-hero'
+                code={`// payload.config.ts
+import { BigHero } from '@/blocks/big-hero'
 
 export default buildConfig({
   collections: [
@@ -358,7 +359,8 @@ export default buildConfig({
             description: 'Use the component in your React application.',
             content: (
               <CodeBlock
-                code={`import { BigHeroComponent } from '@/blocks/big-hero/Component'
+                code={`// pages/LandingPage.tsx
+import { BigHeroComponent } from '@/blocks/big-hero'
 
 // Full-screen hero with video background
 <BigHeroComponent

@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { ArrowRight, Palette, Settings, Menu, FileText, Database } from 'lucide-react'
+import { CodeBlock } from '@/components/code-tabs'
 
 export const metadata: Metadata = {
   title: 'Globals',
@@ -166,7 +167,7 @@ export default function GlobalsPage() {
             <div>
               <h4 className="font-semibold mb-2">1. Install a global</h4>
               <code className="text-sm bg-muted px-2 py-1 rounded">
-                bunx payloadkit add Theme
+                bunx payloadkit@latest add Theme
               </code>
             </div>
             <div>
@@ -178,15 +179,16 @@ export default function GlobalsPage() {
           </div>
           <div className="bg-muted p-4 rounded-lg">
             <h4 className="font-semibold mb-2">Example Configuration</h4>
-            <pre className="text-sm overflow-x-auto">
-{`import { buildConfig } from 'payload'
+            <CodeBlock
+              code={`import { buildConfig } from 'payload'
 import { Theme } from './globals/theme'
 
 export default buildConfig({
   globals: [Theme],
   // ... other config
 })`}
-            </pre>
+              language="typescript"
+            />
           </div>
         </CardContent>
       </Card>

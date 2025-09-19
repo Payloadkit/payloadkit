@@ -659,7 +659,7 @@ const exampleFeatures = {
             description: 'Add the Feature Block to your PayloadKit project using the CLI.',
             content: (
               <Snippet
-                command="bunx payloadkit add feature-block"
+                command="bunx payloadkit@latest add feature-block"
                 title="Install via PayloadKit CLI"
               >
                 This will copy the Feature Block files into your project and update your registry.
@@ -672,7 +672,7 @@ const exampleFeatures = {
             description: 'Import and configure the block in your PayloadCMS configuration.',
             content: (
               <CodeBlock
-                code={`import { FeatureBlock } from './blocks/feature-block'
+                code={`import { FeatureBlock } from '@/blocks/feature-block'
 
 export default buildConfig({
   collections: [

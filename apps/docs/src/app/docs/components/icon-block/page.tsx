@@ -317,7 +317,7 @@ export default function IconBlockPage() {
       keyword: 'Install',
       description: 'Add the icon block to your PayloadCMS project',
       content: (
-        <Snippet command="bunx payloadkit add icon-block">
+        <Snippet command="bunx payloadkit@latest add icon-block">
           Install IconBlock component with 12+ built-in Lucide icons and customization options.
         </Snippet>
       )

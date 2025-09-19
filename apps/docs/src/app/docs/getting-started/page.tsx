@@ -272,7 +272,7 @@ DATABASE_URI=postgresql://prod:pass@private:5432/prod`}
           <div className="space-y-4">
             <h3 className="text-lg font-medium">Content Blocks</h3>
             <Snippet command="bunx payloadkit@latest add hero-block call-to-action" title="Landing Page" />
-            <Snippet command="bunx payloadkit@latest add faq content feature" title="Content Blocks" />
+            <Snippet command="bunx payloadkit@latest add faq-block content feature-block" title="Content Blocks" />
           </div>
 
           <div className="space-y-4">
@@ -330,7 +330,7 @@ bunx payloadkit@latest add db-config collections-config`}
 cd my-business
 
 # Add marketing blocks
-bunx payloadkit@latest add hero-block feature faq call-to-action
+bunx payloadkit@latest add hero-block feature-block faq-block call-to-action
 
 bun run docker:dev`}
               language="bash"

@@ -339,7 +339,7 @@ const exampleCta = {
             description: 'Add the CTA block to your PayloadKit project using the CLI.',
             content: (
               <Snippet
-                command="bunx payloadkit add call-to-action"
+                command="bunx payloadkit@latest add call-to-action"
                 title="Install via PayloadKit CLI"
               >
                 This will copy the Call to Action block files into your project and update your registry.

@@ -172,7 +172,7 @@ const existingProjectSteps = [
     description: 'Add PayloadKit to your existing PayloadCMS project.',
     content: (
       <Snippet
-        command="bunx payloadkit@latest@latest init"
+        command="bunx payloadkit@latest init"
         title="Initialize in Existing Project"
       >
         This command will set up PayloadKit configuration in your existing project.
@@ -219,7 +219,7 @@ const existingProjectSteps = [
     content: (
       <div className="space-y-4">
         <Snippet
-          command="bunx payloadkit add simple-hero"
+          command="bunx payloadkit@latest add simple-hero"
           title="Add a Component"
         >
           This will copy the simple-hero block into your project with all dependencies.

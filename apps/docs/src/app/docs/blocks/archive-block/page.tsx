@@ -160,7 +160,7 @@ export default function ArchiveBlockPage() {
         ]}
         code={{
           component: `// React Component Usage
-import { ArchiveBlockComponent } from './blocks/archive-block'
+import { ArchiveBlockComponent } from '@/blocks/archive-block'
 
 // Grid Layout Example
 <ArchiveBlockComponent
@@ -260,7 +260,7 @@ export default function Page({ data }) {
 }
 
 // Block Rendering Component
-import { ArchiveBlockComponent } from './archive-block/Component'
+import { ArchiveBlockComponent } from '@/blocks/archive-block'
 
 const blockComponents = {
   'archive-block': ArchiveBlockComponent
@@ -286,7 +286,7 @@ export function RenderBlocks({ blocks }) {
             keyword: 'Install',
             description: 'Add Archive Block to your project via PayloadKit CLI.',
             content: (
-              <Snippet command="bunx payloadkit add archive-block" title="Install via PayloadKit CLI">
+              <Snippet command="bunx payloadkit@latest add archive-block" title="Install via PayloadKit CLI">
                 This will copy the Archive Block files to your project and update your dependencies.
               </Snippet>
             )
@@ -327,7 +327,7 @@ export default buildConfig({
             description: 'Use the component in your React application.',
             content: (
               <CodeBlock
-                code={`import { ArchiveBlockComponent } from '@/blocks/archive-block/Component'
+                code={`import { ArchiveBlockComponent } from '@/blocks/archive-block'
 
 // In your page or component
 <ArchiveBlockComponent

@@ -1,6 +1,7 @@
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Copy } from 'lucide-react'
+import { Snippet } from '@/components/snippet'
 
 export default function BannerComponentPage() {
   return (
@@ -30,9 +31,7 @@ export default function BannerComponentPage() {
                 Copy
               </Button>
             </div>
-            <pre className="bg-background p-3 rounded border">
-              <code>bunx payloadkit@latest add banner</code>
-            </pre>
+            <Snippet command="bunx payloadkit@latest add banner-block" />
           </div>
         </section>
 
@@ -131,7 +130,7 @@ export default function BannerComponentPage() {
               <div className="rounded-lg border bg-muted/50 p-6">
                 <pre className="bg-background p-3 rounded border text-sm">
 {`// src/collections/Pages/index.ts
-import { BannerBlock } from '@/blocks/banner'
+import { BannerBlock } from '@/blocks/banner-block'
 
 export const Pages: CollectionConfig = {
   slug: 'pages',
@@ -155,10 +154,10 @@ export const Pages: CollectionConfig = {
               <div className="rounded-lg border bg-muted/50 p-6">
                 <pre className="bg-background p-3 rounded border text-sm">
 {`// src/blocks/RenderBlocks.tsx
-import { BannerBlock } from './banner/Component'
+import { BannerBlock } from './banner-block/Component'
 
 const blockComponents = {
-  banner: BannerBlock,
+  'banner-block': BannerBlock,
   // ... other blocks
 }
 

@@ -233,7 +233,7 @@ export default function ThemeGlobalPage() {
       keyword: 'Install',
       description: 'Add the theme global to your PayloadCMS project',
       content: (
-        <Snippet command="bunx payloadkit add Theme">
+        <Snippet command="bunx payloadkit@latest add Theme">
           Install the theme global using the PayloadKit CLI. This adds all necessary files and dependencies.
         </Snippet>
       )

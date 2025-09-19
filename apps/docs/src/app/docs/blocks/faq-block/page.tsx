@@ -171,7 +171,7 @@ const installationSteps = [
     description: 'Add the FAQ block to your PayloadKit project using the CLI.',
     content: (
       <Snippet
-        command="bunx payloadkit add faq-block"
+        command="bunx payloadkit@latest add faq-block"
         title="Install via PayloadKit CLI"
       >
         This will copy the FAQ block files into your project and update your registry.
@@ -184,7 +184,7 @@ const installationSteps = [
     description: 'Import and configure the block in your PayloadCMS configuration.',
     content: (
       <CodeBlock
-        code={`import { FaqBlock } from './blocks/faq-block'
+        code={`import { FaqBlock } from '@/blocks/faq-block'
 
 export default buildConfig({
   collections: [

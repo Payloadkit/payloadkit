@@ -1,6 +1,7 @@
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Copy } from 'lucide-react'
+import { Snippet } from '@/components/snippet'
 
 export default function FeatureComponentPage() {
   return (
@@ -30,9 +31,7 @@ export default function FeatureComponentPage() {
                 Copy
               </Button>
             </div>
-            <pre className="bg-background p-3 rounded border">
-              <code>bunx payloadkit@latest add feature</code>
-            </pre>
+            <Snippet command="bunx payloadkit@latest add feature-block" />
           </div>
         </section>
 
@@ -209,7 +208,7 @@ export default function FeatureComponentPage() {
               <div className="rounded-lg border bg-muted/50 p-6">
                 <pre className="bg-background p-3 rounded border text-sm">
 {`// src/collections/Pages/index.ts
-import { FeatureBlock } from '@/blocks/feature'
+import { FeatureBlock } from '@/blocks/feature-block'
 
 export const Pages: CollectionConfig = {
   slug: 'pages',
@@ -233,10 +232,10 @@ export const Pages: CollectionConfig = {
               <div className="rounded-lg border bg-muted/50 p-6">
                 <pre className="bg-background p-3 rounded border text-sm">
 {`// src/blocks/RenderBlocks.tsx
-import { FeatureBlock } from './feature/Component'
+import { FeatureBlock } from './feature-block/Component'
 
 const blockComponents = {
-  feature: FeatureBlock,
+  'feature-block': FeatureBlock,
   // ... other blocks
 }`}
                 </pre>

@@ -343,7 +343,7 @@ export default function FooterGlobalPage() {
       keyword: 'Install',
       description: 'Add the footer global to your PayloadCMS project',
       content: (
-        <Snippet command="bunx payloadkit add Footer">
+        <Snippet command="bunx payloadkit@latest add Footer">
           Install the footer global using the PayloadKit CLI. This adds all necessary files and dependencies.
         </Snippet>
       )

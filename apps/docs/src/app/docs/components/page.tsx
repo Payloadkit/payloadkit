@@ -2,6 +2,7 @@ import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { ArrowRight } from 'lucide-react'
 import Link from 'next/link'
+import { Snippet } from '@/components/snippet'
 
 const components = [
   // Advanced Blocks (New from jenny-english.com)
@@ -253,9 +254,7 @@ export default function ComponentsPage() {
           </p>
           
           <div className="rounded-lg border bg-muted/50 p-6">
-            <pre className="bg-background p-3 rounded border">
-              <code>bunx payloadkit@latest add [component-name]</code>
-            </pre>
+            <Snippet command="bunx payloadkit@latest add [component-name]" />
           </div>
           
           <p className="text-sm text-muted-foreground">

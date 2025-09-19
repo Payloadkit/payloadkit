@@ -191,7 +191,7 @@ export default function OutlineBlockPage() {
         ]}
         code={{
           component: `// React Component Usage
-import { OutlineBlockComponent } from './blocks/outline-block'
+import { OutlineBlockComponent } from '@/blocks/outline-block'
 
 // Auto-Detection Mode
 <OutlineBlockComponent
@@ -328,7 +328,7 @@ export default function DocumentationPage({ data }) {
 }
 
 // Block Rendering
-import { OutlineBlockComponent } from './outline-block/Component'
+import { OutlineBlockComponent } from '@/blocks/outline-block'
 
 const blockComponents = {
   'outline-block': OutlineBlockComponent
@@ -354,7 +354,7 @@ export function RenderBlocks({ blocks }) {
             keyword: 'Install',
             description: 'Add Outline Block to your project via PayloadKit CLI.',
             content: (
-              <Snippet command="bunx payloadkit add outline-block" title="Install via PayloadKit CLI">
+              <Snippet command="bunx payloadkit@latest add outline-block" title="Install via PayloadKit CLI">
                 This will copy the Outline Block files and install dependencies for scroll detection and DOM manipulation.
               </Snippet>
             )
@@ -422,7 +422,7 @@ export default buildConfig({
             description: 'Use the component in your React application.',
             content: (
               <CodeBlock
-                code={`import { OutlineBlockComponent } from '@/blocks/outline-block/Component'
+                code={`import { OutlineBlockComponent } from '@/blocks/outline-block'
 
 // Auto-detection for documentation
 <OutlineBlockComponent

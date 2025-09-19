@@ -64,7 +64,7 @@ export default function BlocksSharedPage() {
             <div>
               <h4 className="font-semibold mb-2">Install with PayloadKit CLI</h4>
               <Snippet
-                command="bunx payloadkit add blocks-shared"
+                command="bunx payloadkit@latest add blocks-shared"
                 title="Install Blocks Shared"
               />
             </div>
@@ -734,14 +734,14 @@ const CustomBlock: React.FC<CustomBlockProps> = ({
                   <h4 className="font-semibold mb-2">Renamed Blocks</h4>
                   <CodeBlock
                     code={`// OLD (v1.x)
-bunx payloadkit add faq           // Remove
-bunx payloadkit add feature       // Remove
-bunx payloadkit add banner        // Remove
+bunx payloadkit@latest add faq           // Remove
+bunx payloadkit@latest add feature       // Remove
+bunx payloadkit@latest add banner        // Remove
 
 // NEW (v2.x)
-bunx payloadkit add faq-block     // Use instead
-bunx payloadkit add feature-block // Use instead
-bunx payloadkit add banner-block  // Use instead`}
+bunx payloadkit@latest add faq-block     // Use instead
+bunx payloadkit@latest add feature-block // Use instead
+bunx payloadkit@latest add banner-block  // Use instead`}
                     language="bash"
                     title="Block Name Changes"
                   />

@@ -470,7 +470,7 @@ const exampleContent = {
             description: 'Add the Content Block to your PayloadKit project using the CLI.',
             content: (
               <Snippet
-                command="bunx payloadkit add content"
+                command="bunx payloadkit@latest add content"
                 title="Install via PayloadKit CLI"
               >
                 This will copy the Content Block files into your project and update your registry.

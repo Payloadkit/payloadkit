@@ -655,7 +655,7 @@ const exampleBanner = {
             description: 'Add the Banner Block to your PayloadKit project using the CLI.',
             content: (
               <Snippet
-                command="bunx payloadkit add banner-block"
+                command="bunx payloadkit@latest add banner-block"
                 title="Install via PayloadKit CLI"
               >
                 This will copy the Banner Block files into your project and update your registry.
@@ -668,7 +668,7 @@ const exampleBanner = {
             description: 'Import and configure the block in your PayloadCMS configuration.',
             content: (
               <CodeBlock
-                code={`import { BannerBlock } from './blocks/banner-block'
+                code={`import { BannerBlock } from '@/blocks/banner-block'
 
 export default buildConfig({
   collections: [

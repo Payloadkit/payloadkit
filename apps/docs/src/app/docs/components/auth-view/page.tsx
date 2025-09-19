@@ -269,7 +269,7 @@ export default function AuthViewPage() {
       keyword: 'Install',
       description: 'Add the pre-built authentication pages to your project',
       content: (
-        <Snippet command="bunx payloadkit add auth-view">
+        <Snippet command="bunx payloadkit@latest add AuthView">
           Install AuthView component with Better Auth UI integration. Includes all authentication pages and styling.
         </Snippet>
       )

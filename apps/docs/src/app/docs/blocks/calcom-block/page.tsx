@@ -178,7 +178,7 @@ export default function CalComBlockPage() {
         ]}
         code={{
           component: `// React Component Usage
-import { CalComBlockComponent } from './blocks/calcom-block'
+import { CalComBlockComponent } from '@/blocks/calcom-block'
 
 // Full Width Layout
 <CalComBlockComponent
@@ -292,7 +292,7 @@ export default function BookingPage({ data }) {
 }
 
 // Block Rendering
-import { CalComBlockComponent } from './calcom-block/Component'
+import { CalComBlockComponent } from '@/blocks/calcom-block'
 
 const blockComponents = {
   'calcom-block': CalComBlockComponent
@@ -318,7 +318,7 @@ export function RenderBlocks({ blocks }) {
             keyword: 'Install',
             description: 'Add Cal.com Block to your project via PayloadKit CLI.',
             content: (
-              <Snippet command="bunx payloadkit add calcom-block" title="Install via PayloadKit CLI">
+              <Snippet command="bunx payloadkit@latest add calcom-block" title="Install via PayloadKit CLI">
                 This will copy the Cal.com Block files and install the Cal.com embed script dependency.
               </Snippet>
             )
@@ -378,7 +378,7 @@ export default buildConfig({
             description: 'Use the component in your React application.',
             content: (
               <CodeBlock
-                code={`import { CalComBlockComponent } from '@/blocks/calcom-block/Component'
+                code={`import { CalComBlockComponent } from '@/blocks/calcom-block'
 
 // Basic usage
 <CalComBlockComponent

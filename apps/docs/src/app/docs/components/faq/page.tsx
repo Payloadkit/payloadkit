@@ -1,6 +1,7 @@
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Copy } from 'lucide-react'
+import { Snippet } from '@/components/snippet'
 
 export default function FaqComponentPage() {
   return (
@@ -30,9 +31,7 @@ export default function FaqComponentPage() {
                 Copy
               </Button>
             </div>
-            <pre className="bg-background p-3 rounded border">
-              <code>bunx payloadkit@latest add faq</code>
-            </pre>
+            <Snippet command="bunx payloadkit@latest add faq-block" />
           </div>
         </section>
 
@@ -81,7 +80,7 @@ export default function FaqComponentPage() {
           <div className="rounded-lg border bg-muted/50 p-6">
             <pre className="bg-background p-3 rounded border text-sm">
 {`// src/collections/Pages/index.ts
-import { FaqBlock } from '@/blocks/faq'
+import { FaqBlock } from '@/blocks/faq-block'
 
 export const Pages: CollectionConfig = {
   slug: 'pages',

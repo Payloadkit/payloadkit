@@ -332,7 +332,7 @@ const exampleHero = {
             description: 'Add the Hero Block to your PayloadKit project using the CLI.',
             content: (
               <Snippet
-                command="bunx payloadkit add hero-block"
+                command="bunx payloadkit@latest add hero-block"
                 title="Install via PayloadKit CLI"
               >
                 This will copy the Hero Block files into your project and update your registry.

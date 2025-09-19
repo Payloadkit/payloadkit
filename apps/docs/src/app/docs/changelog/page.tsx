@@ -121,7 +121,7 @@ export default function ChangelogPage() {
         <Alert>
           <Package className="h-4 w-4" />
           <AlertDescription>
-            <strong>Critical Fixes:</strong> Version 0.4.3 resolves major installation issues when using <code>bunx payloadkit add</code> with npm-installed packages. All installation commands now work reliably.
+            <strong>Critical Fixes:</strong> Version 0.4.3 resolves major installation issues when using <code>bunx payloadkit@latest add</code> with npm-installed packages. All installation commands now work reliably.
           </AlertDescription>
         </Alert>
       </section>
@@ -182,7 +182,7 @@ export default function ChangelogPage() {
               </li>
               <li className="flex items-start gap-2">
                 <span className="w-1.5 h-1.5 rounded-full bg-blue-500 mt-2 flex-shrink-0"></span>
-                <span><strong>CLI Commands:</strong> Standardized CLI command examples throughout documentation to use <code>bunx payloadkit add</code></span>
+                <span><strong>CLI Commands:</strong> Standardized CLI command examples throughout documentation to use <code>bunx payloadkit@latest add</code></span>
               </li>
             </ul>
           </div>

@@ -168,7 +168,7 @@ export default function FeatureStepsBlockPage() {
         ]}
         code={{
           component: `// React Component Usage
-import { FeatureStepsBlockComponent } from './blocks/feature-steps-block'
+import { FeatureStepsBlockComponent } from '@/blocks/feature-steps-block'
 
 // Grid Layout Example
 <FeatureStepsBlockComponent
@@ -326,7 +326,7 @@ export default function ProcessPage({ data }) {
 }
 
 // Block Rendering
-import { FeatureStepsBlockComponent } from './feature-steps-block/Component'
+import { FeatureStepsBlockComponent } from '@/blocks/feature-steps-block'
 
 const blockComponents = {
   'feature-steps-block': FeatureStepsBlockComponent
@@ -352,7 +352,7 @@ export function RenderBlocks({ blocks }) {
             keyword: 'Install',
             description: 'Add Feature Steps Block to your project via PayloadKit CLI.',
             content: (
-              <Snippet command="bunx payloadkit add feature-steps-block" title="Install via PayloadKit CLI">
+              <Snippet command="bunx payloadkit@latest add feature-steps-block" title="Install via PayloadKit CLI">
                 This will copy the Feature Steps Block files and install required icon dependencies.
               </Snippet>
             )
@@ -393,7 +393,7 @@ export default buildConfig({
             description: 'Use the component in your React application.',
             content: (
               <CodeBlock
-                code={`import { FeatureStepsBlockComponent } from '@/blocks/feature-steps-block/Component'
+                code={`import { FeatureStepsBlockComponent } from '@/blocks/feature-steps-block'
 
 // Process workflow example
 <FeatureStepsBlockComponent

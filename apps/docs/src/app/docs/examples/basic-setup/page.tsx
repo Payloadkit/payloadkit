@@ -156,7 +156,7 @@ export default function BasicSetupPage() {
                 <div>
                   <h4 className="font-medium mb-2">1. Update your Pages collection</h4>
                   <CodeBlock
-                    code="// src/collections/Pages/index.ts\nimport { HeroBlock } from '@/blocks/hero-block'\nimport { CallToAction } from '@/blocks/call-to-action'\n\nexport const Pages: CollectionConfig = {\n  slug: 'pages',\n  admin: {\n    useAsTitle: 'title',\n  },\n  fields: [\n    {\n      name: 'title',\n      type: 'text',\n      required: true,\n    },\n    {\n      name: 'layout',\n      type: 'blocks',\n      blocks: [\n        HeroBlock,\n        CallToAction,\n      ],\n    },\n  ],\n}"
+                    code="// src/collections/Pages/index.ts\nimport { HeroBlockConfig } from '@/blocks/hero-block'\nimport { CallToActionConfig } from '@/blocks/call-to-action'\n\nexport const Pages: CollectionConfig = {\n  slug: 'pages',\n  admin: {\n    useAsTitle: 'title',\n  },\n  fields: [\n    {\n      name: 'title',\n      type: 'text',\n      required: true,\n    },\n    {\n      name: 'layout',\n      type: 'blocks',\n      blocks: [\n        HeroBlockConfig,\n        CallToActionConfig,\n      ],\n    },\n  ],\n}"
                     language="typescript"
                     title="Pages Collection"
                   />
@@ -179,7 +179,7 @@ export default function BasicSetupPage() {
             content: (
               <div className="space-y-4">
                 <CodeBlock
-                  code="// src/app/(frontend)/[...slug]/page.tsx\nimport { RenderBlocks } from '@/blocks/RenderBlocks'\n\nexport default async function Page({ params }) {\n  const page = await fetchPage(params.slug)\n  \n  return (\n    <main>\n      <RenderBlocks blocks={page.layout} />\n    </main>\n  )\n}"
+                  code="// src/app/(frontend)/[...slug]/page.tsx\nimport { RenderBlocks } from '@/components/RenderBlocks'\n\nexport default async function Page({ params }) {\n  const page = await fetchPage(params.slug)\n  \n  return (\n    <main>\n      <RenderBlocks blocks={page.layout} />\n    </main>\n  )\n}"
                   language="typescript"
                   title="Page Template"
                 />
