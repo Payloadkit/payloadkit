@@ -7,7 +7,51 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## [0.2.0] - 2025-01-15
+## [0.4.3] - 2025-09-19
+
+### Fixed
+- **CLI Registry Issues**: Fixed registry component installation when PayloadKit is installed via npm
+- **Case-Sensitivity**: Added case-insensitive component search while maintaining exact match priority
+- **Folder Naming**: Fixed component installation to preserve proper case from registry (Theme vs theme)
+- **Registry Bundling**: Registry is now properly bundled with npm package for global installations
+- **AuthProvider Import**: Fixed template import path for AuthProvider component
+- **Documentation Commands**: Corrected all install commands to use proper component names with correct case
+
+### Changed
+- **CLI Path Resolution**: Enhanced CLI detection with multiple fallback strategies for npm installations
+- **Component Search**: Improved search algorithm to be more user-friendly while maintaining technical accuracy
+- **Registry Loading**: Added registry bundling to npm package for better reliability
+
+## [0.4.2] - 2025-09-19
+
+### Fixed
+- **Registry Installation**: Initial fix for CLI path resolution issues during component installation
+- **Case-Sensitivity**: Partial fix for case-sensitive component search issues
+
+## [0.4.1] - 2025-09-19
+
+### Fixed
+- **CLI Detection**: Fixed PayloadKit CLI detection for npm-installed packages
+- **Registry Loading**: Improved registry loading for different installation methods
+
+## [0.4.0] - 2025-09-19
+
+### Added
+- **Explicit Permissions Support**: Enhanced validation script with explicit permissions configuration
+- **CLI Binary Distribution**: Generated CLI binary for npm distribution with proper packaging
+- **Template Documentation**: Complete documentation for Header, Footer, and Theme globals
+- **Usage Mode Clarification**: Clear documentation distinguishing between template creation and component addition modes
+
+### Changed
+- **Installation Documentation**: Updated installation guide to clearly explain two usage modes of PayloadKit
+- **Global Documentation**: Added comprehensive documentation for Header, Footer, and Theme globals with examples
+- **CLI Commands**: Standardized CLI command examples throughout documentation
+
+### Fixed
+- **Documentation Examples**: Fixed install command examples to use proper component names
+- **Global Imports**: Corrected import paths and component references in template files
+
+## [0.2.0] - 2025-09-15
 
 ### Added
 - **Interactive Documentation System**: Complete overhaul of documentation with syntax highlighting and clipboard functionality
