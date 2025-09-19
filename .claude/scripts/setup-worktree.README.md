@@ -16,7 +16,7 @@ Creates an isolated Git worktree for a GitHub issue with intelligent branch nami
 
 **Example:**
 ```bash
-./setup-worktree.sh https://github.com/Melvynx/nowts/issues/42
+./setup-worktree.sh https://github.com/Payloadkit/payloadkit/issues/42
 ```
 
 This creates a new worktree at `~/Developer/worktrees/<project>-worktrees/issue-XX-descriptive-name/` ready for development.

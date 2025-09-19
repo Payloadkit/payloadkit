@@ -198,7 +198,7 @@ const SAFE_COMMANDS = [
 
 class CommandValidator {
   constructor() {
-    this.logFile = "/Users/melvynx/.claude/security.log";
+    this.logFile = "../security.log";
   }
 
   /**

@@ -25,7 +25,7 @@
 #   ./setup-worktree.sh <github-issue-url>
 #
 # EXAMPLES:
-#   ./setup-worktree.sh https://github.com/Melvynx/saveit.now/issues/18
+#   ./setup-worktree.sh https://github.com/Payloadkit/payloadkit/issues/18
 #   ./setup-worktree.sh https://github.com/owner/repo/issues/123
 #
 # DIRECTORY STRUCTURE:
