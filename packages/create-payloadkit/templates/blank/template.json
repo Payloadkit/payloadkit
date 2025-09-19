@@ -20,6 +20,7 @@
   "components": [
     "RichText",
     "CMSLink",
+    "AuthProvider",
     "TwoFactorSetup",
     "SecurityDashboard"
   ],
@@ -31,7 +32,8 @@
     "globals/Footer": "0.0.1",
     "globals/Theme": "0.0.1",
     "components/RichText": "0.0.1",
-    "components/CMSLink": "0.0.1"
+    "components/CMSLink": "0.0.1",
+    "components/AuthProvider": "0.1.0"
   },
   "features": [
     "PostgreSQL database adapter",

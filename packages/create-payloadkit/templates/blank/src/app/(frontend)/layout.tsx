@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import React from 'react'
 import { draftMode } from 'next/headers'
-import { AuthProvider } from '@payloadkit/registry/components/auth/AuthProvider'
+import { AuthProvider } from '@/components/AuthProvider'
 
 export default async function FrontendLayout({
   children

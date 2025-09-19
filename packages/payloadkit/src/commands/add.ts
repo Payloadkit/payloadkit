@@ -64,14 +64,17 @@ export const addCommand = new Command()
                            global ? 'globals' :
                            collection ? 'collections' : 'plugins'
 
+      // Use the original component name from registry (preserves case)
+      const actualComponentName = targetComponent?.name || componentName
+
       // Check if component already exists
-      const exists = await Project.componentExists(componentName, componentType)
+      const exists = await Project.componentExists(actualComponentName, componentType)
 
       if (exists && !options.force && !options.yes) {
         const response = await prompts({
           type: 'confirm',
           name: 'overwrite',
-          message: `${componentName} already exists. Overwrite?`,
+          message: `${actualComponentName} already exists. Overwrite?`,
           initial: false
         })
 
@@ -86,9 +89,10 @@ export const addCommand = new Command()
         ? path.resolve(options.path)
         : await Project.resolveComponentPath(componentType)
 
-      const componentPath = path.join(installPath, componentName)
+      const componentPath = path.join(installPath, actualComponentName)
 
-      Logger.startSpinner(`Installing ${componentName}...`)
+      const componentTypeLabel = componentType.slice(0, -1) // Remove 's' from plural
+      Logger.startSpinner(`Installing ${actualComponentName} (${componentTypeLabel})...`)
 
       try {
         // Check if the component exists in local registry
@@ -96,19 +100,19 @@ export const addCommand = new Command()
         let componentExists = false
 
         if (componentType === 'blocks') {
-          componentExists = await Registry.blockExists(componentName)
-          sourcePath = Registry.getBlockSourcePath(componentName)
+          componentExists = await Registry.blockExists(actualComponentName)
+          sourcePath = Registry.getBlockSourcePath(actualComponentName)
         } else if (componentType === 'components') {
-          sourcePath = Registry.getComponentSourcePath(componentName)
+          sourcePath = Registry.getComponentSourcePath(actualComponentName)
           componentExists = await FileOperations.exists(sourcePath)
         } else if (componentType === 'globals') {
-          sourcePath = Registry.getGlobalSourcePath(componentName)
+          sourcePath = Registry.getGlobalSourcePath(actualComponentName)
           componentExists = await FileOperations.exists(sourcePath)
         } else if (componentType === 'collections') {
-          sourcePath = Registry.getCollectionSourcePath(componentName)
+          sourcePath = Registry.getCollectionSourcePath(actualComponentName)
           componentExists = await FileOperations.exists(sourcePath)
         } else if (componentType === 'plugins') {
-          sourcePath = Registry.getPluginSourcePath(componentName)
+          sourcePath = Registry.getPluginSourcePath(actualComponentName)
           componentExists = await FileOperations.exists(sourcePath)
         }
 
@@ -134,7 +138,7 @@ export const addCommand = new Command()
             Logger.updateSpinner('Plugin copied successfully')
 
             // Show plugin-specific instructions
-            Logger.info(`Plugin ${componentName} installed successfully!`)
+            Logger.info(`Plugin ${actualComponentName} installed successfully!`)
             Logger.info('Next steps:')
             Logger.info('1. Install required dependencies:')
             if ((plugin as any).dependencies && (plugin as any).dependencies.length > 0) {
@@ -170,7 +174,7 @@ export const addCommand = new Command()
           // Fallback: create placeholder
           await FileOperations.writeFile(
             path.join(componentPath, 'index.ts'), 
-            `// ${componentName} component\n// This component is not yet available in the registry\n\nexport default function ${componentName}() {\n  return null\n}\n`
+            `// ${actualComponentName} component\n// This component is not yet available in the registry\n\nexport default function ${actualComponentName}() {\n  return null\n}\n`
           )
           
           Logger.warn(`Component files not found in registry, created placeholder`)
@@ -180,11 +184,11 @@ export const addCommand = new Command()
         // Create fallback placeholder
         await FileOperations.writeFile(
           path.join(componentPath, 'index.ts'), 
-          `// ${componentName} component\n// Error copying files: ${copyError}\n\nexport default function ${componentName}() {\n  return null\n}\n`
+          `// ${actualComponentName} component\n// Error copying files: ${copyError}\n\nexport default function ${actualComponentName}() {\n  return null\n}\n`
         )
       }
 
-      Logger.stopSpinner(true, `${componentName} installed successfully!`)
+      Logger.stopSpinner(true, `${actualComponentName} (${componentTypeLabel}) installed successfully!`)
 
       // Show next steps
       Logger.divider()

@@ -619,12 +619,13 @@ var addCommand = new import_commander.Command().name("add").description("Add a c
     }
     const targetComponent = block || component || global || collection || plugin;
     const componentType = block ? "blocks" : component ? "components" : global ? "globals" : collection ? "collections" : "plugins";
-    const exists = await Project.componentExists(componentName, componentType);
+    const actualComponentName = targetComponent?.name || componentName;
+    const exists = await Project.componentExists(actualComponentName, componentType);
     if (exists && !options.force && !options.yes) {
       const response = await (0, import_prompts.default)({
         type: "confirm",
         name: "overwrite",
-        message: `${componentName} already exists. Overwrite?`,
+        message: `${actualComponentName} already exists. Overwrite?`,
         initial: false
       });
       if (!response.overwrite) {
@@ -633,25 +634,26 @@ var addCommand = new import_commander.Command().name("add").description("Add a c
       }
     }
     const installPath = options.path ? import_path4.default.resolve(options.path) : await Project.resolveComponentPath(componentType);
-    const componentPath = import_path4.default.join(installPath, componentName);
-    Logger.startSpinner(`Installing ${componentName}...`);
+    const componentPath = import_path4.default.join(installPath, actualComponentName);
+    const componentTypeLabel = componentType.slice(0, -1);
+    Logger.startSpinner(`Installing ${actualComponentName} (${componentTypeLabel})...`);
     try {
       let sourcePath = "";
       let componentExists = false;
       if (componentType === "blocks") {
-        componentExists = await Registry.blockExists(componentName);
-        sourcePath = Registry.getBlockSourcePath(componentName);
+        componentExists = await Registry.blockExists(actualComponentName);
+        sourcePath = Registry.getBlockSourcePath(actualComponentName);
       } else if (componentType === "components") {
-        sourcePath = Registry.getComponentSourcePath(componentName);
+        sourcePath = Registry.getComponentSourcePath(actualComponentName);
         componentExists = await FileOperations.exists(sourcePath);
       } else if (componentType === "globals") {
-        sourcePath = Registry.getGlobalSourcePath(componentName);
+        sourcePath = Registry.getGlobalSourcePath(actualComponentName);
         componentExists = await FileOperations.exists(sourcePath);
       } else if (componentType === "collections") {
-        sourcePath = Registry.getCollectionSourcePath(componentName);
+        sourcePath = Registry.getCollectionSourcePath(actualComponentName);
         componentExists = await FileOperations.exists(sourcePath);
       } else if (componentType === "plugins") {
-        sourcePath = Registry.getPluginSourcePath(componentName);
+        sourcePath = Registry.getPluginSourcePath(actualComponentName);
         componentExists = await FileOperations.exists(sourcePath);
       }
       if (componentExists) {
@@ -665,7 +667,7 @@ var addCommand = new import_commander.Command().name("add").description("Add a c
         }
         if (componentType === "plugins" && plugin) {
           Logger.updateSpinner("Plugin copied successfully");
-          Logger.info(`Plugin ${componentName} installed successfully!`);
+          Logger.info(`Plugin ${actualComponentName} installed successfully!`);
           Logger.info("Next steps:");
           Logger.info("1. Install required dependencies:");
           if (plugin.dependencies && plugin.dependencies.length > 0) {
@@ -697,10 +699,10 @@ var addCommand = new import_commander.Command().name("add").description("Add a c
       } else {
         await FileOperations.writeFile(
           import_path4.default.join(componentPath, "index.ts"),
-          `// ${componentName} component
+          `// ${actualComponentName} component
 // This component is not yet available in the registry
 
-export default function ${componentName}() {
+export default function ${actualComponentName}() {
   return null
 }
 `
@@ -711,16 +713,16 @@ export default function ${componentName}() {
       Logger.warn(`Failed to copy component files: ${copyError}`);
       await FileOperations.writeFile(
         import_path4.default.join(componentPath, "index.ts"),
-        `// ${componentName} component
+        `// ${actualComponentName} component
 // Error copying files: ${copyError}
 
-export default function ${componentName}() {
+export default function ${actualComponentName}() {
   return null
 }
 `
       );
     }
-    Logger.stopSpinner(true, `${componentName} installed successfully!`);
+    Logger.stopSpinner(true, `${actualComponentName} (${componentTypeLabel}) installed successfully!`);
     Logger.divider();
     Logger.success("Component added to your project");
     Logger.info("Location:");

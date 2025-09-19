@@ -1,6 +1,6 @@
 {
   "name": "create-payloadkit",
-  "version": "0.4.1",
+  "version": "0.4.3",
   "description": "Create PayloadCMS projects with PayloadKit",
   "type": "module",
   "bin": {
