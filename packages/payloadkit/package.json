@@ -42,7 +42,8 @@
   },
   "files": [
     "dist",
-    "bin"
+    "bin",
+    "../../registry"
   ],
   "engines": {
     "node": ">=18.20.2"

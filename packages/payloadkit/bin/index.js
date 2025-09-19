@@ -33,6 +33,7 @@ var import_commander = require("commander");
 var import_prompts = __toESM(require("prompts"));
 
 // src/utils/registry.ts
+var import_fs = __toESM(require("fs"));
 var import_path2 = __toESM(require("path"));
 
 // src/utils/logger.ts
@@ -244,10 +245,25 @@ var Registry = class {
    * Get the local registry path
    */
   static getLocalRegistryPath() {
-    if (typeof __dirname !== "undefined") {
-      return import_path2.default.resolve(__dirname, "../../../registry");
+    const possiblePaths = [
+      // For npm installed package: registry is bundled in package root
+      import_path2.default.resolve(__dirname, "../../../registry"),
+      // For built CLI in monorepo: dist -> payloadkit -> packages -> root -> registry
+      import_path2.default.resolve(__dirname, "../../../registry"),
+      // For npm installed package: try from package root (alternative structure)
+      import_path2.default.resolve(__dirname, "../registry"),
+      // Fallback: try from current working directory
+      import_path2.default.resolve(process.cwd(), "registry"),
+      // Try relative to the payloadkit package directory
+      import_path2.default.resolve(__dirname, "../../registry")
+    ];
+    for (const registryPath of possiblePaths) {
+      const indexPath = import_path2.default.join(registryPath, "index.json");
+      if (import_fs.default.existsSync(indexPath)) {
+        return registryPath;
+      }
     }
-    return import_path2.default.resolve(process.cwd(), "registry");
+    return possiblePaths[0];
   }
   /**
    * Fetch the registry data
@@ -286,14 +302,32 @@ var Registry = class {
    */
   static async getBlock(name) {
     const registry = await this.getRegistry();
-    return registry.blocks[name] || null;
+    if (registry.blocks[name]) {
+      return registry.blocks[name];
+    }
+    const lowerName = name.toLowerCase();
+    for (const [key, value] of Object.entries(registry.blocks)) {
+      if (key.toLowerCase() === lowerName) {
+        return value;
+      }
+    }
+    return null;
   }
   /**
    * Get a specific component
    */
   static async getComponent(name) {
     const registry = await this.getRegistry();
-    return registry.components[name] || null;
+    if (registry.components[name]) {
+      return registry.components[name];
+    }
+    const lowerName = name.toLowerCase();
+    for (const [key, value] of Object.entries(registry.components)) {
+      if (key.toLowerCase() === lowerName) {
+        return value;
+      }
+    }
+    return null;
   }
   /**
    * List all available blocks
@@ -314,21 +348,48 @@ var Registry = class {
    */
   static async getGlobal(name) {
     const registry = await this.getRegistry();
-    return registry.globals[name] || null;
+    if (registry.globals[name]) {
+      return registry.globals[name];
+    }
+    const lowerName = name.toLowerCase();
+    for (const [key, value] of Object.entries(registry.globals)) {
+      if (key.toLowerCase() === lowerName) {
+        return value;
+      }
+    }
+    return null;
   }
   /**
    * Get a specific collection
    */
   static async getCollection(name) {
     const registry = await this.getRegistry();
-    return registry.collections[name] || null;
+    if (registry.collections[name]) {
+      return registry.collections[name];
+    }
+    const lowerName = name.toLowerCase();
+    for (const [key, value] of Object.entries(registry.collections)) {
+      if (key.toLowerCase() === lowerName) {
+        return value;
+      }
+    }
+    return null;
   }
   /**
    * Get a specific plugin
    */
   static async getPlugin(name) {
     const registry = await this.getRegistry();
-    return registry.plugins[name] || null;
+    if (registry.plugins[name]) {
+      return registry.plugins[name];
+    }
+    const lowerName = name.toLowerCase();
+    for (const [key, value] of Object.entries(registry.plugins)) {
+      if (key.toLowerCase() === lowerName) {
+        return value;
+      }
+    }
+    return null;
   }
   /**
    * List all available globals

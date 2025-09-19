@@ -1,4 +1,5 @@
 import fetch from 'node-fetch'
+import fs from 'fs'
 import path from 'path'
 import { fileURLToPath } from 'url'
 import { REGISTRY_URL } from '@payloadkit/core'
@@ -17,15 +18,30 @@ export class Registry {
    * Get the local registry path
    */
   private static getLocalRegistryPath(): string {
-    // Get the path to the registry folder in the PayloadKit monorepo
-    // For built CLI, __dirname points to packages/payloadkit/dist/
-    // So we need to go up 3 levels: dist -> payloadkit -> packages -> root
-    if (typeof __dirname !== 'undefined') {
-      return path.resolve(__dirname, '../../../registry')
+    // Try multiple potential registry locations
+    const possiblePaths = [
+      // For npm installed package: registry is bundled in package root
+      path.resolve(__dirname, '../../../registry'),
+      // For built CLI in monorepo: dist -> payloadkit -> packages -> root -> registry
+      path.resolve(__dirname, '../../../registry'),
+      // For npm installed package: try from package root (alternative structure)
+      path.resolve(__dirname, '../registry'),
+      // Fallback: try from current working directory
+      path.resolve(process.cwd(), 'registry'),
+      // Try relative to the payloadkit package directory
+      path.resolve(__dirname, '../../registry')
+    ]
+
+    // Return the first path that exists
+    for (const registryPath of possiblePaths) {
+      const indexPath = path.join(registryPath, 'index.json')
+      if (fs.existsSync(indexPath)) {
+        return registryPath
+      }
     }
-    
-    // Fallback: try to find from current working directory
-    return path.resolve(process.cwd(), 'registry')
+
+    // If none exist, return the first one as fallback
+    return possiblePaths[0]
   }
 
   /**
@@ -74,7 +90,18 @@ export class Registry {
    */
   static async getBlock(name: string): Promise<PayloadKitBlock | null> {
     const registry = await this.getRegistry()
-    return registry.blocks[name] || null
+    // Try exact match first
+    if (registry.blocks[name]) {
+      return registry.blocks[name]
+    }
+    // Try case-insensitive match
+    const lowerName = name.toLowerCase()
+    for (const [key, value] of Object.entries(registry.blocks)) {
+      if (key.toLowerCase() === lowerName) {
+        return value
+      }
+    }
+    return null
   }
 
   /**
@@ -82,7 +109,18 @@ export class Registry {
    */
   static async getComponent(name: string): Promise<PayloadKitComponent | null> {
     const registry = await this.getRegistry()
-    return registry.components[name] || null
+    // Try exact match first
+    if (registry.components[name]) {
+      return registry.components[name]
+    }
+    // Try case-insensitive match
+    const lowerName = name.toLowerCase()
+    for (const [key, value] of Object.entries(registry.components)) {
+      if (key.toLowerCase() === lowerName) {
+        return value
+      }
+    }
+    return null
   }
 
   /**
@@ -106,7 +144,18 @@ export class Registry {
    */
   static async getGlobal(name: string): Promise<any | null> {
     const registry = await this.getRegistry()
-    return registry.globals[name] || null
+    // Try exact match first
+    if (registry.globals[name]) {
+      return registry.globals[name]
+    }
+    // Try case-insensitive match
+    const lowerName = name.toLowerCase()
+    for (const [key, value] of Object.entries(registry.globals)) {
+      if (key.toLowerCase() === lowerName) {
+        return value
+      }
+    }
+    return null
   }
 
   /**
@@ -114,7 +163,18 @@ export class Registry {
    */
   static async getCollection(name: string): Promise<any | null> {
     const registry = await this.getRegistry()
-    return registry.collections[name] || null
+    // Try exact match first
+    if (registry.collections[name]) {
+      return registry.collections[name]
+    }
+    // Try case-insensitive match
+    const lowerName = name.toLowerCase()
+    for (const [key, value] of Object.entries(registry.collections)) {
+      if (key.toLowerCase() === lowerName) {
+        return value
+      }
+    }
+    return null
   }
 
   /**
@@ -122,7 +182,18 @@ export class Registry {
    */
   static async getPlugin(name: string): Promise<PayloadKitPlugin | null> {
     const registry = await this.getRegistry()
-    return registry.plugins[name] || null
+    // Try exact match first
+    if (registry.plugins[name]) {
+      return registry.plugins[name]
+    }
+    // Try case-insensitive match
+    const lowerName = name.toLowerCase()
+    for (const [key, value] of Object.entries(registry.plugins)) {
+      if (key.toLowerCase() === lowerName) {
+        return value
+      }
+    }
+    return null
   }
 
   /**
