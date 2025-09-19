@@ -151,11 +151,11 @@ export default function ContentComponentPage() {
         title="Content Block"
         description="Flexible content block with multi-column layouts and rich text editor support for versatile content presentation."
         category="blocks"
-        version="0.1.0"
+        version="0.4.3"
         payloadVersion="3.0+"
         difficulty="beginner"
         estimatedTime="10 minutes"
-        lastUpdated="January 2025"
+        lastUpdated="September 2025"
       />
 
       {/* Component Preview with variants */}
@@ -470,7 +470,7 @@ const exampleContent = {
             description: 'Add the Content Block to your PayloadKit project using the CLI.',
             content: (
               <Snippet
-                command="payloadkit add content"
+                command="bunx payloadkit add content"
                 title="Install via PayloadKit CLI"
               >
                 This will copy the Content Block files into your project and update your registry.

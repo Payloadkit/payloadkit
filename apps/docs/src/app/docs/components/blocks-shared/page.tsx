@@ -45,10 +45,10 @@ export default function BlocksSharedPage() {
         title="Blocks Shared"
         description="Shared components and utilities for PayloadCMS blocks including backgrounds, layouts, headings, and theme integration. Required dependency for all advanced blocks."
         category="components"
-        version="0.1.0"
+        version="0.4.3"
         difficulty="intermediate"
         estimatedTime="20 minutes"
-        lastUpdated="January 2025"
+        lastUpdated="September 2025"
       />
 
       {/* Installation */}
@@ -64,7 +64,7 @@ export default function BlocksSharedPage() {
             <div>
               <h4 className="font-semibold mb-2">Install with PayloadKit CLI</h4>
               <Snippet
-                command="payloadkit add blocks-shared"
+                command="bunx payloadkit add blocks-shared"
                 title="Install Blocks Shared"
               />
             </div>
@@ -734,14 +734,14 @@ const CustomBlock: React.FC<CustomBlockProps> = ({
                   <h4 className="font-semibold mb-2">Renamed Blocks</h4>
                   <CodeBlock
                     code={`// OLD (v1.x)
-payloadkit add faq           // Remove
-payloadkit add feature       // Remove
-payloadkit add banner        // Remove
+bunx payloadkit add faq           // Remove
+bunx payloadkit add feature       // Remove
+bunx payloadkit add banner        // Remove
 
 // NEW (v2.x)
-payloadkit add faq-block     // Use instead
-payloadkit add feature-block // Use instead
-payloadkit add banner-block  // Use instead`}
+bunx payloadkit add faq-block     // Use instead
+bunx payloadkit add feature-block // Use instead
+bunx payloadkit add banner-block  // Use instead`}
                     language="bash"
                     title="Block Name Changes"
                   />

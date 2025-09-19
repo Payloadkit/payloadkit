@@ -290,7 +290,7 @@ export default function MediaBlockPage() {
       keyword: 'Install',
       description: 'Add the media block to your PayloadCMS project',
       content: (
-        <Snippet command="payloadkit add media-block">
+        <Snippet command="bunx payloadkit add media-block">
           Install MediaBlock component with support for images, videos, and document files.
         </Snippet>
       )
@@ -443,11 +443,11 @@ function renderBlock(block: any, index: number) {
         title="Media Block"
         description="Simple media display block for images and videos with optional caption and size controls."
         category="components"
-        version="0.1.0"
+        version="0.4.3"
         payloadVersion="3.0+"
         difficulty="beginner"
         estimatedTime="3 minutes"
-        lastUpdated="January 2025"
+        lastUpdated="September 2025"
       />
 
       {/* Component Preview */}

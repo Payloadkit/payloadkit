@@ -31,10 +31,10 @@ export default function StoragePage() {
         title="Cloud Storage Configuration"
         description="Configure external storage providers for your PayloadCMS media uploads using S3-compatible services like AWS S3, MinIO, DigitalOcean Spaces, and Cloudflare R2."
         category="guides"
-        version="0.1.0"
+        version="0.4.3"
         difficulty="intermediate"
         estimatedTime="15 minutes"
-        lastUpdated="January 2025"
+        lastUpdated="September 2025"
       />
 
       {/* Supported Providers */}

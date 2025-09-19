@@ -33,10 +33,10 @@ export default function DeploymentPage() {
         title="Deployment"
         description="PayloadKit simplifies VPS deployment by automatically managing differences between build-time and runtime database connections."
         category="guides"
-        version="0.1.0"
+        version="0.4.3"
         difficulty="advanced"
         estimatedTime="20 minutes"
-        lastUpdated="January 2025"
+        lastUpdated="September 2025"
       />
 
       {/* Problem & Solution Overview */}

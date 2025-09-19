@@ -91,11 +91,11 @@ export default function CallToActionComponentPage() {
         title="Call to Action"
         description="Versatile call-to-action block with rich text content and customizable buttons for driving user engagement."
         category="blocks"
-        version="0.1.0"
+        version="0.4.3"
         payloadVersion="3.0+"
         difficulty="beginner"
         estimatedTime="8 minutes"
-        lastUpdated="January 2025"
+        lastUpdated="September 2025"
       />
 
       {/* Component Preview with variants */}
@@ -339,7 +339,7 @@ const exampleCta = {
             description: 'Add the CTA block to your PayloadKit project using the CLI.',
             content: (
               <Snippet
-                command="payloadkit add call-to-action"
+                command="bunx payloadkit add call-to-action"
                 title="Install via PayloadKit CLI"
               >
                 This will copy the Call to Action block files into your project and update your registry.

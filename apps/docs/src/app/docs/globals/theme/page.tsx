@@ -233,7 +233,7 @@ export default function ThemeGlobalPage() {
       keyword: 'Install',
       description: 'Add the theme global to your PayloadCMS project',
       content: (
-        <Snippet command="payloadkit add theme">
+        <Snippet command="bunx payloadkit add Theme">
           Install the theme global using the PayloadKit CLI. This adds all necessary files and dependencies.
         </Snippet>
       )
@@ -347,11 +347,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         title="Theme Global"
         description="Complete theme system with color presets, shadcn/ui integration, and live preview for PayloadCMS applications."
         category="globals"
-        version="0.1.0"
+        version="0.4.3"
         payloadVersion="3.0+"
         difficulty="beginner"
         estimatedTime="5 minutes"
-        lastUpdated="January 2025"
+        lastUpdated="September 2025"
       />
 
       {/* Component Preview */}

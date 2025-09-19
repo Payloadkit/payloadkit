@@ -138,11 +138,11 @@ export default function FeatureStepsBlockPage() {
         title="Feature Steps Block"
         description="Feature steps block with numbered steps, multiple layouts, and advantages section. Perfect for explaining processes, workflows, and step-by-step guides."
         category="blocks"
-        version="0.1.0"
+        version="0.4.3"
         payloadVersion="3.0+"
         difficulty="beginner"
         estimatedTime="8 minutes"
-        lastUpdated="January 2025"
+        lastUpdated="September 2025"
       />
 
       {/* Component Preview */}
@@ -352,7 +352,7 @@ export function RenderBlocks({ blocks }) {
             keyword: 'Install',
             description: 'Add Feature Steps Block to your project via PayloadKit CLI.',
             content: (
-              <Snippet command="payloadkit add feature-steps-block" title="Install via PayloadKit CLI">
+              <Snippet command="bunx payloadkit add feature-steps-block" title="Install via PayloadKit CLI">
                 This will copy the Feature Steps Block files and install required icon dependencies.
               </Snippet>
             )

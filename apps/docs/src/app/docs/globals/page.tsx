@@ -166,7 +166,7 @@ export default function GlobalsPage() {
             <div>
               <h4 className="font-semibold mb-2">1. Install a global</h4>
               <code className="text-sm bg-muted px-2 py-1 rounded">
-                payloadkit add theme
+                bunx payloadkit add Theme
               </code>
             </div>
             <div>

@@ -146,7 +146,7 @@ export default function BlocksPage() {
             <div>
               <h4 className="font-semibold mb-2">1. Install a block</h4>
               <code className="text-sm bg-muted px-2 py-1 rounded">
-                payloadkit add feature-block
+                bunx payloadkit add feature-block
               </code>
             </div>
             <div>

@@ -32,10 +32,10 @@ export default function BasicSetupPage() {
         title="Basic Setup"
         description="Learn how to set up a basic PayloadCMS project with PayloadKit components and build your first dynamic website."
         category="examples"
-        version="0.1.0"
+        version="0.4.3"
         difficulty="beginner"
         estimatedTime="15 minutes"
-        lastUpdated="January 2025"
+        lastUpdated="September 2025"
       />
 
       {/* What You'll Build */}

@@ -169,11 +169,11 @@ export default function FeatureBlockPage() {
         title="Feature Block"
         description="Advanced feature showcase block with icons, multiple layouts, and theme integration for marketing sections."
         category="blocks"
-        version="0.1.0"
+        version="0.4.3"
         payloadVersion="3.0+"
         difficulty="intermediate"
         estimatedTime="15 minutes"
-        lastUpdated="January 2025"
+        lastUpdated="September 2025"
       />
 
       {/* Component Preview with variants */}
@@ -659,7 +659,7 @@ const exampleFeatures = {
             description: 'Add the Feature Block to your PayloadKit project using the CLI.',
             content: (
               <Snippet
-                command="payloadkit add feature-block"
+                command="bunx payloadkit add feature-block"
                 title="Install via PayloadKit CLI"
               >
                 This will copy the Feature Block files into your project and update your registry.

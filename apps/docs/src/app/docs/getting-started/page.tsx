@@ -32,10 +32,10 @@ export default function GettingStartedPage() {
         title="Getting Started"
         description="Set up your PayloadCMS project with PayloadKit in minutes. Choose between a new project or adding PayloadKit to an existing one."
         category="guides"
-        version="0.1.0"
+        version="0.4.3"
         difficulty="beginner"
         estimatedTime="5 minutes"
-        lastUpdated="January 2025"
+        lastUpdated="September 2025"
       />
 
       {/* Prerequisites */}

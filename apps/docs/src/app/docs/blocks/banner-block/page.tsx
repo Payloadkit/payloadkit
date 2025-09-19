@@ -124,11 +124,11 @@ export default function BannerBlockPage() {
         title="Banner Block"
         description="Versatile hero banner block with customizable backgrounds, text alignment, and call-to-action buttons for maximum impact."
         category="blocks"
-        version="0.1.0"
+        version="0.4.3"
         payloadVersion="3.0+"
         difficulty="beginner"
         estimatedTime="12 minutes"
-        lastUpdated="January 2025"
+        lastUpdated="September 2025"
       />
 
       {/* Component Preview with variants */}
@@ -655,7 +655,7 @@ const exampleBanner = {
             description: 'Add the Banner Block to your PayloadKit project using the CLI.',
             content: (
               <Snippet
-                command="payloadkit add banner-block"
+                command="bunx payloadkit add banner-block"
                 title="Install via PayloadKit CLI"
               >
                 This will copy the Banner Block files into your project and update your registry.

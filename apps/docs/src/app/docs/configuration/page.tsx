@@ -33,10 +33,10 @@ export default function ConfigurationPage() {
         title="Configuration"
         description="PayloadKit uses a modular configuration architecture that divides PayloadCMS configuration into reusable and maintainable modules."
         category="guides"
-        version="0.1.0"
+        version="0.4.3"
         difficulty="intermediate"
         estimatedTime="15 minutes"
-        lastUpdated="January 2025"
+        lastUpdated="September 2025"
       />
 
       {/* Benefits Overview */}

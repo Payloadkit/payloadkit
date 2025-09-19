@@ -161,11 +161,11 @@ export default function OutlineBlockPage() {
         title="Outline Block"
         description="Automatic table of contents generator with multiple positioning options, styles, and interactive features. Perfect for long-form content, documentation, and articles."
         category="blocks"
-        version="0.1.0"
+        version="0.4.3"
         payloadVersion="3.0+"
         difficulty="intermediate"
         estimatedTime="12 minutes"
-        lastUpdated="January 2025"
+        lastUpdated="September 2025"
       />
 
       {/* Component Preview */}
@@ -354,7 +354,7 @@ export function RenderBlocks({ blocks }) {
             keyword: 'Install',
             description: 'Add Outline Block to your project via PayloadKit CLI.',
             content: (
-              <Snippet command="payloadkit add outline-block" title="Install via PayloadKit CLI">
+              <Snippet command="bunx payloadkit add outline-block" title="Install via PayloadKit CLI">
                 This will copy the Outline Block files and install dependencies for scroll detection and DOM manipulation.
               </Snippet>
             )

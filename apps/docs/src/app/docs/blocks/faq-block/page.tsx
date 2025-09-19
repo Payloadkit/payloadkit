@@ -171,7 +171,7 @@ const installationSteps = [
     description: 'Add the FAQ block to your PayloadKit project using the CLI.',
     content: (
       <Snippet
-        command="payloadkit add faq-block"
+        command="bunx payloadkit add faq-block"
         title="Install via PayloadKit CLI"
       >
         This will copy the FAQ block files into your project and update your registry.
@@ -271,11 +271,11 @@ export default function FaqBlockPage() {
         title="FAQ Block"
         description="Interactive FAQ section with collapsible questions and answers. Built with shadcn/ui Accordion for accessibility and smooth animations."
         category="blocks"
-        version="0.1.0"
+        version="0.4.3"
         payloadVersion="3.0+"
         difficulty="beginner"
         estimatedTime="5 minutes"
-        lastUpdated="January 2025"
+        lastUpdated="September 2025"
       />
 
       {/* Component Preview */}

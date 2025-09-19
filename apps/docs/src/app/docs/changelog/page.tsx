@@ -30,10 +30,10 @@ export default function ChangelogPage() {
         title="Changelog"
         description="Complete version history and release notes for PayloadKit. Track new features, improvements, and bug fixes across all releases."
         category="guides"
-        version="0.3.0"
+        version="0.4.3"
         difficulty="beginner"
         estimatedTime="5 minutes"
-        lastUpdated="January 2025"
+        lastUpdated="September 2025"
       />
 
       {/* Current Version Alert */}
@@ -45,15 +45,160 @@ export default function ChangelogPage() {
         </AlertDescription>
       </Alert>
 
+      {/* Version 0.4.3 */}
+      <section className="space-y-6">
+        <div className="flex items-center gap-3">
+          <Calendar className="h-6 w-6 text-green-600" />
+          <h2 className="text-3xl font-bold">0.4.3</h2>
+          <Badge variant="outline" className="bg-green-50 text-green-700 border-green-200">
+            September 19, 2025
+          </Badge>
+          <Badge className="bg-green-600 text-white">Latest</Badge>
+        </div>
+
+        <div className="grid gap-6 lg:grid-cols-2">
+          {/* Bug Fixes */}
+          <div className="rounded-lg border p-6">
+            <div className="flex items-center gap-3 mb-4">
+              <div className="flex items-center justify-center w-8 h-8 rounded-lg bg-red-100">
+                <Bug className="h-4 w-4 text-red-600" />
+              </div>
+              <h3 className="text-xl font-semibold">Fixed</h3>
+            </div>
+            <ul className="space-y-3 text-sm text-muted-foreground">
+              <li className="flex items-start gap-2">
+                <span className="w-1.5 h-1.5 rounded-full bg-red-500 mt-2 flex-shrink-0"></span>
+                <span><strong>CLI Registry Issues:</strong> Fixed registry component installation when PayloadKit is installed via npm</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="w-1.5 h-1.5 rounded-full bg-red-500 mt-2 flex-shrink-0"></span>
+                <span><strong>Case-Sensitivity:</strong> Added case-insensitive component search while maintaining exact match priority</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="w-1.5 h-1.5 rounded-full bg-red-500 mt-2 flex-shrink-0"></span>
+                <span><strong>Folder Naming:</strong> Fixed component installation to preserve proper case from registry (Theme vs theme)</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="w-1.5 h-1.5 rounded-full bg-red-500 mt-2 flex-shrink-0"></span>
+                <span><strong>Registry Bundling:</strong> Registry is now properly bundled with npm package for global installations</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="w-1.5 h-1.5 rounded-full bg-red-500 mt-2 flex-shrink-0"></span>
+                <span><strong>AuthProvider Import:</strong> Fixed template import path for AuthProvider component</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="w-1.5 h-1.5 rounded-full bg-red-500 mt-2 flex-shrink-0"></span>
+                <span><strong>Documentation Commands:</strong> Corrected all install commands to use proper component names with correct case</span>
+              </li>
+            </ul>
+          </div>
+
+          {/* Improvements */}
+          <div className="rounded-lg border p-6">
+            <div className="flex items-center gap-3 mb-4">
+              <div className="flex items-center justify-center w-8 h-8 rounded-lg bg-blue-100">
+                <Wrench className="h-4 w-4 text-blue-600" />
+              </div>
+              <h3 className="text-xl font-semibold">Changed</h3>
+            </div>
+            <ul className="space-y-3 text-sm text-muted-foreground">
+              <li className="flex items-start gap-2">
+                <span className="w-1.5 h-1.5 rounded-full bg-blue-500 mt-2 flex-shrink-0"></span>
+                <span><strong>CLI Path Resolution:</strong> Enhanced CLI detection with multiple fallback strategies for npm installations</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="w-1.5 h-1.5 rounded-full bg-blue-500 mt-2 flex-shrink-0"></span>
+                <span><strong>Component Search:</strong> Improved search algorithm to be more user-friendly while maintaining technical accuracy</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="w-1.5 h-1.5 rounded-full bg-blue-500 mt-2 flex-shrink-0"></span>
+                <span><strong>Registry Loading:</strong> Added registry bundling to npm package for better reliability</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <Alert>
+          <Package className="h-4 w-4" />
+          <AlertDescription>
+            <strong>Critical Fixes:</strong> Version 0.4.3 resolves major installation issues when using <code>bunx payloadkit add</code> with npm-installed packages. All installation commands now work reliably.
+          </AlertDescription>
+        </Alert>
+      </section>
+
+      <Separator />
+
+      {/* Version 0.4.0 */}
+      <section className="space-y-6">
+        <div className="flex items-center gap-3">
+          <Calendar className="h-6 w-6 text-blue-600" />
+          <h2 className="text-3xl font-bold">0.4.0</h2>
+          <Badge variant="outline" className="bg-blue-50 text-blue-700 border-blue-200">
+            September 19, 2025
+          </Badge>
+        </div>
+
+        <div className="grid gap-6 lg:grid-cols-2">
+          {/* New Features */}
+          <div className="rounded-lg border p-6">
+            <div className="flex items-center gap-3 mb-4">
+              <div className="flex items-center justify-center w-8 h-8 rounded-lg bg-green-100">
+                <Plus className="h-4 w-4 text-green-600" />
+              </div>
+              <h3 className="text-xl font-semibold">Added</h3>
+            </div>
+            <ul className="space-y-3 text-sm text-muted-foreground">
+              <li className="flex items-start gap-2">
+                <span className="w-1.5 h-1.5 rounded-full bg-green-500 mt-2 flex-shrink-0"></span>
+                <span><strong>Explicit Permissions Support:</strong> Enhanced validation script with explicit permissions configuration</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="w-1.5 h-1.5 rounded-full bg-green-500 mt-2 flex-shrink-0"></span>
+                <span><strong>CLI Binary Distribution:</strong> Generated CLI binary for npm distribution with proper packaging</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="w-1.5 h-1.5 rounded-full bg-green-500 mt-2 flex-shrink-0"></span>
+                <span><strong>Global Documentation:</strong> Complete documentation for Header, Footer, and Theme globals with examples</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="w-1.5 h-1.5 rounded-full bg-green-500 mt-2 flex-shrink-0"></span>
+                <span><strong>Usage Mode Clarification:</strong> Clear documentation distinguishing between template creation and component addition modes</span>
+              </li>
+            </ul>
+          </div>
+
+          {/* Improvements */}
+          <div className="rounded-lg border p-6">
+            <div className="flex items-center gap-3 mb-4">
+              <div className="flex items-center justify-center w-8 h-8 rounded-lg bg-blue-100">
+                <Wrench className="h-4 w-4 text-blue-600" />
+              </div>
+              <h3 className="text-xl font-semibold">Changed</h3>
+            </div>
+            <ul className="space-y-3 text-sm text-muted-foreground">
+              <li className="flex items-start gap-2">
+                <span className="w-1.5 h-1.5 rounded-full bg-blue-500 mt-2 flex-shrink-0"></span>
+                <span><strong>Installation Documentation:</strong> Updated installation guide to clearly explain two usage modes of PayloadKit</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="w-1.5 h-1.5 rounded-full bg-blue-500 mt-2 flex-shrink-0"></span>
+                <span><strong>CLI Commands:</strong> Standardized CLI command examples throughout documentation to use <code>bunx payloadkit add</code></span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <Separator />
+
       {/* Version 0.3.0 */}
       <section className="space-y-6">
         <div className="flex items-center gap-3">
           <Calendar className="h-6 w-6 text-purple-600" />
           <h2 className="text-3xl font-bold">0.3.0</h2>
           <Badge variant="outline" className="bg-purple-50 text-purple-700 border-purple-200">
-            January 17, 2025
+            September 17, 2025
           </Badge>
-          <Badge className="bg-purple-600 text-white">Latest</Badge>
         </div>
 
         <div className="grid gap-6 lg:grid-cols-2">
@@ -126,7 +271,7 @@ export default function ChangelogPage() {
           <Calendar className="h-6 w-6 text-green-600" />
           <h2 className="text-3xl font-bold">0.2.1</h2>
           <Badge variant="outline" className="bg-green-50 text-green-700 border-green-200">
-            January 17, 2025
+            September 17, 2025
           </Badge>
         </div>
 
@@ -197,7 +342,7 @@ export default function ChangelogPage() {
           <Calendar className="h-6 w-6 text-blue-600" />
           <h2 className="text-3xl font-bold">0.2.0</h2>
           <Badge variant="outline" className="bg-blue-50 text-blue-700 border-blue-200">
-            January 15, 2025
+            September 15, 2025
           </Badge>
         </div>
 

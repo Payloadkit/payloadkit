@@ -47,10 +47,10 @@ export default function ExamplesPage() {
         title="Examples"
         description="Real-world examples and templates to get you started with PayloadKit quickly."
         category="guides"
-        version="0.1.0"
+        version="0.4.3"
         difficulty="beginner"
         estimatedTime="5 minutes"
-        lastUpdated="January 2025"
+        lastUpdated="September 2025"
       />
 
       <div className="space-y-6">

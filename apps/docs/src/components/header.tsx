@@ -22,7 +22,7 @@ export function Header() {
               PayloadKit
             </span>
             <Badge variant="secondary" className="ml-2 text-xs">
-              v0.3.0
+              v0.4.3
             </Badge>
           </Link>
           <nav className="flex items-center gap-6 text-sm">

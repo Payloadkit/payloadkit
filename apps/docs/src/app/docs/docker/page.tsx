@@ -32,10 +32,10 @@ export default function DockerPage() {
         title="Docker Development Setup"
         description="PayloadKit offers a complete Docker development environment with PostgreSQL, Redis, MailHog, and pgAdmin. One command for a full development stack."
         category="guides"
-        version="0.1.0"
+        version="0.4.3"
         difficulty="intermediate"
         estimatedTime="10 minutes"
-        lastUpdated="January 2025"
+        lastUpdated="September 2025"
       />
 
       {/* Features Overview */}

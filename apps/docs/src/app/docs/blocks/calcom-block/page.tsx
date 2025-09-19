@@ -148,11 +148,11 @@ export default function CalComBlockPage() {
         title="Cal.com Block"
         description="Cal.com integration block for seamless appointment scheduling. Features multiple layouts, customizable content, and full Cal.com embed support with themes and event types."
         category="blocks"
-        version="0.1.0"
+        version="0.4.3"
         payloadVersion="3.0+"
         difficulty="intermediate"
         estimatedTime="10 minutes"
-        lastUpdated="January 2025"
+        lastUpdated="September 2025"
       />
 
       {/* Component Preview */}
@@ -318,7 +318,7 @@ export function RenderBlocks({ blocks }) {
             keyword: 'Install',
             description: 'Add Cal.com Block to your project via PayloadKit CLI.',
             content: (
-              <Snippet command="payloadkit add calcom-block" title="Install via PayloadKit CLI">
+              <Snippet command="bunx payloadkit add calcom-block" title="Install via PayloadKit CLI">
                 This will copy the Cal.com Block files and install the Cal.com embed script dependency.
               </Snippet>
             )

@@ -269,7 +269,7 @@ export default function AuthViewPage() {
       keyword: 'Install',
       description: 'Add the pre-built authentication pages to your project',
       content: (
-        <Snippet command="payloadkit add auth-view">
+        <Snippet command="bunx payloadkit add auth-view">
           Install AuthView component with Better Auth UI integration. Includes all authentication pages and styling.
         </Snippet>
       )
@@ -383,11 +383,11 @@ export const { handler } = auth`}
         title="AuthView"
         description="Pre-built authentication pages using Better Auth UI with PayloadKit branding and shadcn/ui styling."
         category="components"
-        version="0.1.0"
+        version="0.4.3"
         payloadVersion="3.0+"
         difficulty="beginner"
         estimatedTime="5 minutes"
-        lastUpdated="January 2025"
+        lastUpdated="September 2025"
       />
 
       {/* Component Preview */}

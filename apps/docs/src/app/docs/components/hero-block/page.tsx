@@ -117,11 +117,11 @@ export default function HeroBlockComponentPage() {
         title="Hero Block"
         description="Flexible hero section with customizable content, backgrounds, and call-to-action buttons for maximum visual impact."
         category="blocks"
-        version="0.1.0"
+        version="0.4.3"
         payloadVersion="3.0+"
         difficulty="beginner"
         estimatedTime="10 minutes"
-        lastUpdated="January 2025"
+        lastUpdated="September 2025"
       />
 
       {/* Component Preview with variants */}
@@ -332,7 +332,7 @@ const exampleHero = {
             description: 'Add the Hero Block to your PayloadKit project using the CLI.',
             content: (
               <Snippet
-                command="payloadkit add hero-block"
+                command="bunx payloadkit add hero-block"
                 title="Install via PayloadKit CLI"
               >
                 This will copy the Hero Block files into your project and update your registry.

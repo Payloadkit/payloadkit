@@ -31,10 +31,10 @@ export default function BlogTemplatePage() {
         title="Blog Template"
         description="Complete blog setup with posts, categories, SEO optimization, and content management. Build a professional blog with PayloadCMS and Next.js."
         category="examples"
-        version="0.1.0"
+        version="0.4.3"
         difficulty="intermediate"
         estimatedTime="30 minutes"
-        lastUpdated="January 2025"
+        lastUpdated="September 2025"
       />
 
       {/* What's Included */}

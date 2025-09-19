@@ -130,11 +130,11 @@ export default function ArchiveBlockPage() {
         title="Archive Block"
         description="Display collections of content with advanced filtering, sorting, and multiple responsive layout options. Perfect for blog archives, portfolio galleries, product catalogs, and content directories."
         category="blocks"
-        version="0.1.0"
+        version="0.4.3"
         payloadVersion="3.0+"
         difficulty="intermediate"
         estimatedTime="10 minutes"
-        lastUpdated="January 2025"
+        lastUpdated="September 2025"
       />
 
       {/* Component Preview */}
@@ -286,7 +286,7 @@ export function RenderBlocks({ blocks }) {
             keyword: 'Install',
             description: 'Add Archive Block to your project via PayloadKit CLI.',
             content: (
-              <Snippet command="payloadkit add archive-block" title="Install via PayloadKit CLI">
+              <Snippet command="bunx payloadkit add archive-block" title="Install via PayloadKit CLI">
                 This will copy the Archive Block files to your project and update your dependencies.
               </Snippet>
             )

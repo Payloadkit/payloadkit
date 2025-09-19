@@ -12,7 +12,7 @@ import { Alert, AlertDescription } from '@/components/ui/alert'
 
 export const metadata: Metadata = {
   title: 'Installation - PayloadKit',
-  description: 'Complete installation guide for PayloadKit. Get started with reusable PayloadCMS components in minutes.',
+  description: 'Complete installation guide for PayloadKit. Choose between creating a new project or adding components to existing PayloadCMS projects.',
 }
 
 const quickStartSteps = [
@@ -184,13 +184,13 @@ POSTGRES_DB=payloadkit_dev`}
 const existingProjectSteps = [
   {
     title: 'Initialize PayloadKit',
-    description: 'Add PayloadKit to your existing PayloadCMS project.',
+    description: 'Set up PayloadKit in your existing PayloadCMS project.',
     content: (
       <Snippet
-        command="bunx payloadkit@latest@latest init"
+        command="bunx payloadkit@latest init"
         title="Initialize in Existing Project"
       >
-        This command will set up PayloadKit configuration in your existing project.
+        This command sets up the component registry configuration and creates the components.json file in your existing PayloadCMS project.
       </Snippet>
     )
   },
@@ -234,14 +234,14 @@ const existingProjectSteps = [
     content: (
       <div className="space-y-4">
         <Snippet
-          command="payloadkit add simple-hero"
+          command="bunx payloadkit add Hero"
           title="Add a Component"
         >
-          This will copy the simple-hero block into your project with all dependencies.
+          This copies the Hero block into your project with all dependencies and proper folder structure.
         </Snippet>
 
         <CodeBlock
-          code={`import { SimpleHero } from './blocks/simple-hero'
+          code={`import { Hero } from './blocks/Hero'
 
 export default buildConfig({
   collections: [
@@ -251,7 +251,7 @@ export default buildConfig({
         {
           name: 'layout',
           type: 'blocks',
-          blocks: [SimpleHero], // Add your component here
+          blocks: [Hero], // Add your component here
         },
       ],
     },
@@ -268,27 +268,56 @@ export default buildConfig({
 export default function InstallationPage() {
   return (
     <div className="space-y-8">
+      {/* Two Usage Modes Overview */}
+      <div className="bg-gradient-to-br from-blue-50 to-indigo-50 border border-blue-200 rounded-lg p-6 space-y-4">
+        <h2 className="text-xl font-semibold text-blue-900">Two Ways to Use PayloadKit</h2>
+        <p className="text-blue-800">PayloadKit works in two different modes depending on your needs:</p>
+
+        <div className="grid gap-4 md:grid-cols-2">
+          <div className="bg-white p-4 rounded-lg border border-blue-200">
+            <div className="flex items-center space-x-2 mb-3">
+              <div className="w-8 h-8 bg-blue-600 text-white rounded-full flex items-center justify-center text-sm font-bold">1</div>
+              <h3 className="font-semibold text-gray-900">Create New Project</h3>
+            </div>
+            <p className="text-sm text-gray-600 mb-3">Start fresh with a complete PayloadCMS project using our templates.</p>
+            <div className="bg-gray-50 p-2 rounded text-xs font-mono">bunx create-payloadkit@latest my-app</div>
+            <p className="text-xs text-gray-500 mt-2">Best for: New projects, prototypes, quick starts</p>
+          </div>
+
+          <div className="bg-white p-4 rounded-lg border border-blue-200">
+            <div className="flex items-center space-x-2 mb-3">
+              <div className="w-8 h-8 bg-indigo-600 text-white rounded-full flex items-center justify-center text-sm font-bold">2</div>
+              <h3 className="font-semibold text-gray-900">Add to Existing Project</h3>
+            </div>
+            <p className="text-sm text-gray-600 mb-3">Install individual components, blocks, or globals into your existing PayloadCMS project.</p>
+            <div className="bg-gray-50 p-2 rounded text-xs font-mono">bunx payloadkit add Hero</div>
+            <p className="text-xs text-gray-500 mt-2">Best for: Existing projects, specific components, gradual adoption</p>
+          </div>
+        </div>
+      </div>
+
       {/* Page Description */}
       <PageDescription
         title="Installation"
-        description="Complete installation guide for PayloadKit. Get started with reusable PayloadCMS components and build your application faster with our pre-built blocks and templates."
+        description="Complete installation guide for PayloadKit. Choose between creating a new project with templates or adding individual components to existing PayloadCMS projects."
         category="guides"
         difficulty="beginner"
         estimatedTime="10-15 minutes"
         features={[
-          'Multiple installation methods',
+          'Two distinct usage modes',
+          'Template-based project creation',
+          'Individual component installation',
           'Step-by-step guided setup',
           'Environment configuration',
-          'Development server setup',
-          'Component registry initialization',
-          'First component installation'
+          'Component registry system'
         ]}
         tags={[
           'Installation',
           'Setup',
           'CLI',
           'PayloadCMS',
-          'Next.js',
+          'Templates',
+          'Components',
           'Getting Started'
         ]}
       />
@@ -297,10 +326,10 @@ export default function InstallationPage() {
       <div className="space-y-6">
         <div>
           <h2 className="text-2xl font-semibold tracking-tight border-b pb-2 mb-4">
-            🚀 Quick Start (New Project)
+            🚀 Method 1: Create New Project
           </h2>
           <p className="text-muted-foreground">
-            The fastest way to get started. Creates a new PayloadCMS project with PayloadKit pre-configured.
+            Create a complete PayloadCMS project from scratch using our pre-built templates. This method gives you a fully functional application with PayloadKit components already integrated.
           </p>
         </div>
 
@@ -314,10 +343,10 @@ export default function InstallationPage() {
       <div className="space-y-6">
         <div>
           <h2 className="text-2xl font-semibold tracking-tight border-b pb-2 mb-4">
-            🔧 Add to Existing Project
+            🔧 Method 2: Add to Existing Project
           </h2>
           <p className="text-muted-foreground">
-            Already have a PayloadCMS project? Add PayloadKit to your existing setup.
+            Install individual PayloadKit components into your existing PayloadCMS project. Perfect for adding specific blocks, collections, or globals without starting from scratch.
           </p>
         </div>
 
@@ -399,7 +428,7 @@ export default function InstallationPage() {
 
           <div className="space-y-3">
             <h3 className="font-semibold">pnpm</h3>
-            <Snippet command="pbunx create-payloadkit@latest my-app" />
+            <Snippet command="pnpx create-payloadkit@latest my-app" />
             <p className="text-sm text-muted-foreground">
               Efficient package management with workspace support.
             </p>
@@ -407,7 +436,7 @@ export default function InstallationPage() {
 
           <div className="space-y-3">
             <h3 className="font-semibold">npm</h3>
-            <Snippet command="bunx create-payloadkit@latest my-app" />
+            <Snippet command="npx create-payloadkit@latest my-app" />
             <p className="text-sm text-muted-foreground">
               Standard Node.js package manager.
             </p>

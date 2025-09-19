@@ -126,11 +126,11 @@ export default function SimpleHeroPage() {
         title="Simple Hero Block"
         description="Clean and minimalist hero section with flexible layouts, perfect for landing pages, portfolios, and content-focused websites. Emphasizes simplicity and readability."
         category="blocks"
-        version="0.1.0"
+        version="0.4.3"
         payloadVersion="3.0+"
         difficulty="beginner"
         estimatedTime="6 minutes"
-        lastUpdated="January 2025"
+        lastUpdated="September 2025"
       />
 
       {/* Component Preview */}
@@ -334,7 +334,7 @@ export function RenderBlocks({ blocks }) {
             keyword: 'Install',
             description: 'Add Simple Hero Block to your project via PayloadKit CLI.',
             content: (
-              <Snippet command="payloadkit add simple-hero" title="Install via PayloadKit CLI">
+              <Snippet command="bunx payloadkit add simple-hero" title="Install via PayloadKit CLI">
                 This will copy the Simple Hero Block files with minimal dependencies for optimal performance.
               </Snippet>
             )

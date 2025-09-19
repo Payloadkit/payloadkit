@@ -197,7 +197,7 @@ export default function AuthProviderPage() {
       keyword: 'Install',
       description: 'Add the authentication provider to your project',
       content: (
-        <Snippet command="payloadkit add auth-provider">
+        <Snippet command="bunx payloadkit add auth-provider">
           Install AuthProvider component with Better Auth UI integration. This includes the provider and authentication client configuration.
         </Snippet>
       )
@@ -333,11 +333,11 @@ function MyComponent() {
         title="AuthProvider"
         description="Global authentication context provider using Better Auth UI for Next.js applications."
         category="components"
-        version="0.1.0"
+        version="0.4.3"
         payloadVersion="3.0+"
         difficulty="beginner"
         estimatedTime="3 minutes"
-        lastUpdated="January 2025"
+        lastUpdated="September 2025"
       />
 
       {/* Component Preview */}

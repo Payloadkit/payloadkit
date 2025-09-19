@@ -219,7 +219,7 @@ const existingProjectSteps = [
     content: (
       <div className="space-y-4">
         <Snippet
-          command="payloadkit add simple-hero"
+          command="bunx payloadkit add simple-hero"
           title="Add a Component"
         >
           This will copy the simple-hero block into your project with all dependencies.

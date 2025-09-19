@@ -32,10 +32,10 @@ export default function SecurityPage() {
         title="Security"
         description="PayloadKit provides enterprise-grade security by default using Better Auth and registry-based components."
         category="guides"
-        version="0.1.0"
+        version="0.4.3"
         difficulty="intermediate"
         estimatedTime="10 minutes"
-        lastUpdated="January 2025"
+        lastUpdated="September 2025"
       />
 
       {/* Quick Overview */}
