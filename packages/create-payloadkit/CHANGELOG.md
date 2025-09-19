@@ -1,5 +1,17 @@
 # create-payloadkit Changelog
 
+## 0.4.0
+
+### Minor Changes
+
+- feat: add Header, Footer, Theme globals to registry and template
+  fix: update blank template with new structure and improved configuration
+
+### Patch Changes
+
+- Updated dependencies
+  - @payloadkit/core@0.4.0
+
 ## 0.1.0
 
 ### Minor Changes

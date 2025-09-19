@@ -1,6 +1,6 @@
 {
   "name": "create-payloadkit",
-  "version": "0.3.1",
+  "version": "0.4.0",
   "description": "Create PayloadCMS projects with PayloadKit",
   "type": "module",
   "bin": {
@@ -17,7 +17,7 @@
     "type-check": "tsc --noEmit"
   },
   "dependencies": {
-    "@payloadkit/core": "^0.3.1",
+    "@payloadkit/core": "^0.4.0",
     "commander": "^12.0.0",
     "prompts": "^2.4.2",
     "node-fetch": "^3.3.2",

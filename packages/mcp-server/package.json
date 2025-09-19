@@ -1,6 +1,6 @@
 {
   "name": "@payloadkit/mcp-server",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Model Context Protocol server for PayloadKit - enables AI assistants to work with PayloadCMS components and registry",
   "type": "module",
   "main": "dist/index.js",
