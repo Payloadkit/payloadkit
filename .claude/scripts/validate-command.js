@@ -330,11 +330,12 @@ class CommandValidator {
   isExplicitlyAllowed(command, allowedPatterns = []) {
     for (const pattern of allowedPatterns) {
       // Convert Claude Code permission pattern to regex
-      // e.g., "Bash(git *)" becomes /^git\s+.*$/
+      // e.g., "Bash(git commit :*)" becomes /^git commit .*$/
       if (pattern.startsWith("Bash(") && pattern.endsWith(")")) {
         const cmdPattern = pattern.slice(5, -1); // Remove "Bash(" and ")"
+        // Handle :* prefix matching and * wildcard
         const regex = new RegExp(
-          "^" + cmdPattern.replace(/\*/g, ".*") + "$",
+          "^" + cmdPattern.replace(/:\*/, ".*").replace(/\*/g, ".*") + "$",
           "i"
         );
         if (regex.test(command)) {
@@ -391,6 +392,22 @@ async function main() {
     if (!command) {
       console.error("No command found in tool input");
       process.exit(1);
+    }
+
+    // Check for explicit permissions in Claude Code settings
+    try {
+      const fs = require('fs');
+      const settingsPath = ".claude/settings.json";
+      const settingsText = fs.readFileSync(settingsPath, 'utf8');
+      const settings = JSON.parse(settingsText);
+      const allowedPatterns = settings.permissions?.allow || [];
+
+      if (validator.isExplicitlyAllowed(command, allowedPatterns)) {
+        console.log("Command explicitly allowed by permissions");
+        process.exit(0); // Allow execution
+      }
+    } catch (error) {
+      // Settings file not found or invalid, continue with validation
     }
 
     // Validate the command

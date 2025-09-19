@@ -35,6 +35,12 @@
       }
     ]
   },
+  "permissions": {
+    "allow": [
+      "Bash(git add packages/payloadkit/bin/index.js)",
+      "Bash(git commit :*)"
+    ]
+  },
   "statusLine": {
     "type": "command",
     "command": "bash .claude/scripts/statusbar.sh",
