@@ -1,0 +1,60 @@
+{
+  "name": "archive-block",
+  "version": "0.1.0",
+  "description": "Display collections of content with filtering, sorting, and multiple layout options",
+  "author": "PayloadKit",
+  "license": "MIT",
+  "type": "block",
+  "category": "content",
+  "tags": ["archive", "collection", "list", "grid", "content", "blog", "posts"],
+  "files": [
+    {
+      "name": "config.ts",
+      "type": "config"
+    },
+    {
+      "name": "Component.tsx",
+      "type": "component"
+    },
+    {
+      "name": "index.ts",
+      "type": "main"
+    }
+  ],
+  "dependencies": [
+    "react",
+    "next",
+    "lucide-react"
+  ],
+  "peerDependencies": [
+    "payload"
+  ],
+  "registryDependencies": [
+    "blocks-shared"
+  ],
+  "features": [
+    "Two population modes: collection query or manual selection",
+    "Support for multiple collections (posts, pages, projects, products)",
+    "Category filtering and sorting options",
+    "5 layout options: 2-col, 3-col, 4-col grid, list, and masonry",
+    "Configurable content display: images, excerpts, dates, authors, categories",
+    "Responsive design with hover effects and smooth transitions",
+    "Background support (color, gradient, image)",
+    "SEO-friendly with proper semantic HTML",
+    "Flexible spacing controls",
+    "Empty state handling with helpful messages"
+  ],
+  "usage": "Perfect for blog archives, portfolio galleries, product listings, or any content collection display.",
+  "examples": [
+    "// In your PayloadCMS config\nimport { ArchiveBlock } from 'registry/blocks/archive-block'\nexport default buildConfig({ collections: [], globals: [], blocks: [ArchiveBlock] })",
+    "// In your frontend\nimport { ArchiveBlockComponent } from 'registry/blocks/archive-block'\n<ArchiveBlockComponent populateBy=\"collection\" relationTo=\"posts\" layout=\"grid-3\" items={posts} />"
+  ],
+  "preview": {
+    "description": "Archive block with configurable content layouts",
+    "image": null
+  },
+  "setup": {
+    "collections": "This block works with any PayloadCMS collection. Ensure your collections have the fields referenced (title, slug, featuredImage, excerpt, categories, etc.)",
+    "relationships": "The block can reference categories collection for filtering. Make sure this collection exists if you plan to use category filtering."
+  }
+}

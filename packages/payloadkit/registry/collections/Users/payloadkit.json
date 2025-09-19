@@ -1,0 +1,14 @@
+{
+  "name": "Users",
+  "description": "User authentication and management collection with role-based access",
+  "category": "auth",
+  "tags": ["users", "authentication", "roles", "auth"],
+  "version": "0.0.1",
+  "files": [
+    "config.ts",
+    "index.ts"
+  ],
+  "dependencies": [],
+  "peerDependencies": ["payload"],
+  "registryDependencies": []
+}

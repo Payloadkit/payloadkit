@@ -246,16 +246,16 @@ var Registry = class {
    */
   static getLocalRegistryPath() {
     const possiblePaths = [
-      // For npm installed package: registry is bundled in package root
-      import_path2.default.resolve(__dirname, "../../../registry"),
+      // For npm installed package: registry is bundled in package root (dist/../registry)
+      import_path2.default.resolve(__dirname, "../registry"),
       // For built CLI in monorepo: dist -> payloadkit -> packages -> root -> registry
       import_path2.default.resolve(__dirname, "../../../registry"),
-      // For npm installed package: try from package root (alternative structure)
-      import_path2.default.resolve(__dirname, "../registry"),
+      // Alternative npm package structure
+      import_path2.default.resolve(__dirname, "../../registry"),
       // Fallback: try from current working directory
       import_path2.default.resolve(process.cwd(), "registry"),
-      // Try relative to the payloadkit package directory
-      import_path2.default.resolve(__dirname, "../../registry")
+      // Try from package root
+      import_path2.default.resolve(__dirname, "../../../registry")
     ];
     for (const registryPath of possiblePaths) {
       const indexPath = import_path2.default.join(registryPath, "index.json");

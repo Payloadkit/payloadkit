@@ -1,0 +1,60 @@
+{
+  "name": "banner-block",
+  "version": "0.1.0",
+  "description": "Hero banner block with customizable backgrounds, text alignment, and call-to-action buttons",
+  "author": "PayloadKit",
+  "license": "MIT",
+  "type": "block",
+  "category": "content",
+  "tags": ["banner", "hero", "cta", "background", "landing"],
+  "files": [
+    {
+      "name": "config.ts",
+      "type": "config"
+    },
+    {
+      "name": "Component.tsx",
+      "type": "component"
+    },
+    {
+      "name": "index.ts",
+      "type": "main"
+    }
+  ],
+  "dependencies": [
+    "react",
+    "next",
+    "tailwindcss"
+  ],
+  "peerDependencies": [
+    "payload"
+  ],
+  "registryDependencies": [
+    "blocks-shared"
+  ],
+  "features": [
+    "Flexible text content: eyebrow, title, subtitle, rich text description",
+    "Two eyebrow styles: simple text or badge style",
+    "Three text alignment options: center, left, right",
+    "Three text color themes: light, dark, primary",
+    "Three background types: solid color, gradient, image with overlay",
+    "Up to 3 call-to-action buttons with multiple styles and sizes",
+    "Five height options: auto, small (50vh), medium (60vh), large (75vh), full screen",
+    "Responsive design with proper spacing controls",
+    "Button styles adapt to banner text color theme for optimal contrast",
+    "Gradient direction control with 8 different options"
+  ],
+  "usage": "Perfect for hero sections, landing page headers, promotional banners, and call-to-action sections.",
+  "examples": [
+    "// In your PayloadCMS config\nimport { BannerBlock } from 'registry/blocks/banner-block'\nexport default buildConfig({ collections: [], globals: [], blocks: [BannerBlock] })",
+    "// In your frontend\nimport { BannerBlockComponent } from 'registry/blocks/banner-block'\n<BannerBlockComponent title=\"Welcome to Our Site\" textAlignment=\"center\" background={{ type: 'gradient', gradientFrom: '#3b82f6', gradientTo: '#1d4ed8' }} callToActions={[{ label: 'Get Started', url: '/signup', style: 'primary', size: 'lg' }]} />"
+  ],
+  "preview": {
+    "description": "Customizable banner block with backgrounds and CTAs",
+    "image": null
+  },
+  "setup": {
+    "dependencies": "Make sure you have Next.js and Tailwind CSS configured in your project for proper styling.",
+    "components": "This block uses the blocks-shared registry components. Make sure to install them first."
+  }
+}

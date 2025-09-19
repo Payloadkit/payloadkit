@@ -1,0 +1,23 @@
+{
+  "name": "icon-block",
+  "description": "Icon-based content block with customizable icon, title and description",
+  "category": "content",
+  "tags": ["icon", "visual", "highlight", "callout"],
+  "version": "0.0.1",
+  "files": [
+    "Component.tsx",
+    "config.ts",
+    "index.ts"
+  ],
+  "dependencies": [
+    "react"
+  ],
+  "peerDependencies": [
+    "payload"
+  ],
+  "registryDependencies": [],
+  "preview": {
+    "image": null,
+    "description": "Eye-catching icon blocks for highlighting key points"
+  }
+}

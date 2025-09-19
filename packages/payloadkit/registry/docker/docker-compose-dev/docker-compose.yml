@@ -1,0 +1,134 @@
+# PayloadKit Development Docker Compose
+# Complete development environment with PostgreSQL database
+
+services:
+  # PostgreSQL database service
+  postgres:
+    image: postgres:17-alpine
+    container_name: payloadkit-postgres
+    restart: unless-stopped
+    ports:
+      - '5432:5432'
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-payloadkit}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-payloadkit}
+      POSTGRES_DB: ${POSTGRES_DB:-payloadkit_dev}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+    networks:
+      - payloadkit_network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-payloadkit}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+  # PayloadKit application service
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: dev
+    container_name: payloadkit-app
+    restart: unless-stopped
+    ports:
+      - '3000:3000'
+    volumes:
+      # Mount source code for hot-reload (exclude node_modules)
+      - .:/app
+      - /app/node_modules
+      - /app/.next
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      - NODE_ENV=development
+      - DATABASE_URI=postgresql://${POSTGRES_USER:-payloadkit}:${POSTGRES_PASSWORD:-payloadkit}@postgres:5432/${POSTGRES_DB:-payloadkit_dev}
+      - NEXT_PUBLIC_SERVER_URL=http://localhost:3000
+      - PAYLOAD_SECRET=${PAYLOAD_SECRET:-your-secret-key}
+      - SMTP_HOST=${SMTP_HOST:-}
+      - SMTP_PORT=${SMTP_PORT:-587}
+      - SMTP_USER=${SMTP_USER:-}
+      - SMTP_PASS=${SMTP_PASS:-}
+    env_file:
+      - .env
+    networks:
+      - payloadkit_network
+    stdin_open: true
+    tty: true
+
+  # Optional: Redis for caching and sessions
+  redis:
+    image: redis:7-alpine
+    container_name: payloadkit-redis
+    restart: unless-stopped
+    ports:
+      - '6379:6379'
+    volumes:
+      - redis_data:/data
+    networks:
+      - payloadkit_network
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+    profiles:
+      - full
+
+  # Optional: Mailhog for email testing in development
+  mailhog:
+    image: mailhog/mailhog:latest
+    container_name: payloadkit-mailhog
+    restart: unless-stopped
+    ports:
+      - '1025:1025' # SMTP server
+      - '8025:8025' # Web UI
+    networks:
+      - payloadkit_network
+    profiles:
+      - full
+
+  # Optional: pgAdmin for database management
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    container_name: payloadkit-pgadmin
+    restart: unless-stopped
+    ports:
+      - '5050:80'
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_EMAIL:-admin@payloadkit.dev}
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_PASSWORD:-admin}
+      PGADMIN_CONFIG_SERVER_MODE: 'False'
+    volumes:
+      - pgadmin_data:/var/lib/pgadmin
+    depends_on:
+      - postgres
+    networks:
+      - payloadkit_network
+    profiles:
+      - full
+
+volumes:
+  postgres_data:
+    driver: local
+  redis_data:
+    driver: local
+  pgadmin_data:
+    driver: local
+
+networks:
+  payloadkit_network:
+    driver: bridge

@@ -1,0 +1,63 @@
+# PayloadKit Database-Only Docker Compose
+# Only PostgreSQL database service for local development
+# Run your app locally with `bun dev` while using containerized database
+
+services:
+  # PostgreSQL database service
+  postgres:
+    image: postgres:17-alpine
+    container_name: payloadkit-postgres
+    restart: unless-stopped
+    ports:
+      - '5432:5432'
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-payloadkit}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-payloadkit}
+      POSTGRES_DB: ${POSTGRES_DB:-payloadkit_dev}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+    networks:
+      - payloadkit_network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-payloadkit}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+  # Optional: pgAdmin for database management
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    container_name: payloadkit-pgadmin
+    restart: unless-stopped
+    ports:
+      - '5050:80'
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_EMAIL:-admin@payloadkit.dev}
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_PASSWORD:-admin}
+      PGADMIN_CONFIG_SERVER_MODE: 'False'
+    volumes:
+      - pgadmin_data:/var/lib/pgadmin
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - payloadkit_network
+    profiles:
+      - pgadmin
+
+volumes:
+  postgres_data:
+    driver: local
+  pgadmin_data:
+    driver: local
+
+networks:
+  payloadkit_network:
+    driver: bridge

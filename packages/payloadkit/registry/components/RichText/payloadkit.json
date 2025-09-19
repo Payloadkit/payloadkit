@@ -1,0 +1,13 @@
+{
+  "name": "RichText",
+  "description": "Component to render PayloadCMS rich text content with Lexical support",
+  "category": "content",
+  "tags": ["richtext", "lexical", "content", "editor"],
+  "version": "0.0.1",
+  "files": [
+    "index.tsx"
+  ],
+  "dependencies": ["react"],
+  "peerDependencies": ["@payloadcms/richtext-lexical"],
+  "registryDependencies": []
+}

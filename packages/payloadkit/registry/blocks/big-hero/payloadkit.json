@@ -1,0 +1,69 @@
+{
+  "name": "big-hero",
+  "version": "0.1.0",
+  "description": "Advanced hero section with full customization options including video backgrounds, animations, and flexible content positioning. Perfect for impactful landing pages and marketing websites.",
+  "author": "PayloadKit",
+  "license": "MIT",
+  "type": "block",
+  "category": "marketing",
+  "tags": ["hero", "landing", "video", "background", "animations", "marketing"],
+  "files": [
+    {
+      "name": "config.ts",
+      "type": "config"
+    },
+    {
+      "name": "Component.tsx",
+      "type": "component"
+    },
+    {
+      "name": "index.ts",
+      "type": "main"
+    }
+  ],
+  "dependencies": [
+    "react",
+    "lucide-react",
+    "tailwindcss"
+  ],
+  "peerDependencies": [
+    "payload"
+  ],
+  "registryDependencies": [
+    "blocks-shared"
+  ],
+  "features": [
+    "5 viewport height options: 100vh, 90vh, 80vh, 70vh, auto",
+    "5 content positioning options: center, top-center, bottom-center, left-center, right-center",
+    "5 background types: color, gradient, image, video, none",
+    "Video background support with poster image fallback",
+    "Background overlay with customizable color and opacity",
+    "3 text color themes: white, dark, primary",
+    "3 text alignment options: left, center, right",
+    "5 title size options: sm, md, lg, xl, hero",
+    "Parallax scrolling effect for background elements",
+    "Smooth scroll indicator with bounce animation",
+    "Rich text support for description content",
+    "Up to 2 customizable call-to-action buttons",
+    "Button styling with 3 appearances and 3 sizes",
+    "Animation system with fade-in-up effects",
+    "Custom CSS injection for advanced styling",
+    "HTML ID and class customization",
+    "Mobile-responsive design with adaptive typography",
+    "Accessibility features with proper semantic structure"
+  ],
+  "usage": "Perfect for impactful landing pages, product launches, marketing campaigns, portfolio showcases, and any situation requiring a bold, visually striking hero section with professional video or image backgrounds.",
+  "examples": [
+    "// In your PayloadCMS config\nimport { BigHero } from 'registry/blocks/big-hero'\nexport default buildConfig({ collections: [], globals: [], blocks: [BigHero] })",
+    "// In your frontend\nimport { BigHeroComponent } from 'registry/blocks/big-hero'\n<BigHeroComponent title=\"Welcome to the Future\" height=\"100vh\" contentPosition=\"center\" background={{ type: 'video', videoUrl: '/hero-video.mp4' }} showScrollIndicator={true} />"
+  ],
+  "preview": {
+    "description": "Advanced hero section with video background and animations",
+    "image": null
+  },
+  "setup": {
+    "dependencies": "Make sure you have Lucide React and Tailwind CSS configured in your project.",
+    "components": "This block uses the blocks-shared registry components. Make sure to install them first: payloadkit add blocks-shared",
+    "video": "For video backgrounds, ensure your video files are optimized for web (MP4 format recommended) and hosted on a reliable CDN for best performance."
+  }
+}

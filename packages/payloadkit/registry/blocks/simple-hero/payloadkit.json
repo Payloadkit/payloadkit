@@ -1,0 +1,66 @@
+{
+  "name": "simple-hero",
+  "version": "0.1.0",
+  "description": "Clean and minimalist hero section with flexible layouts, perfect for landing pages, portfolios, and content-focused websites. Emphasizes simplicity and readability.",
+  "author": "PayloadKit",
+  "license": "MIT",
+  "type": "block",
+  "category": "marketing",
+  "tags": ["hero", "landing", "simple", "clean", "minimal", "content"],
+  "files": [
+    {
+      "name": "config.ts",
+      "type": "config"
+    },
+    {
+      "name": "Component.tsx",
+      "type": "component"
+    },
+    {
+      "name": "index.ts",
+      "type": "main"
+    }
+  ],
+  "dependencies": [
+    "react",
+    "tailwindcss"
+  ],
+  "peerDependencies": [
+    "payload"
+  ],
+  "registryDependencies": [
+    "blocks-shared"
+  ],
+  "features": [
+    "4 layout options: centered, left-aligned, right-aligned, split with image",
+    "4 content width settings: narrow, medium, wide, full",
+    "Rich content support: eyebrow, title, subtitle, description",
+    "Up to 2 call-to-action buttons with 3 styles and 3 sizes",
+    "Image support for split layout with left/right positioning",
+    "4 background types: color, gradient, image, none",
+    "3 text color themes: dark, light, primary",
+    "4 title size options: sm, md, lg, xl",
+    "Flexible spacing controls for top and bottom padding",
+    "Mobile-responsive design with adaptive typography",
+    "Clean and accessible HTML structure",
+    "Custom HTML ID and class support",
+    "Lightweight implementation without dependencies",
+    "Perfect for content-focused designs",
+    "TypeScript interfaces for type safety",
+    "Consistent with shadcn/ui design system"
+  ],
+  "usage": "Ideal for landing pages, portfolio sites, blog headers, product pages, and any situation where you need a clean, professional hero section without overwhelming visual effects.",
+  "examples": [
+    "// In your PayloadCMS config\nimport { SimpleHero } from 'registry/blocks/simple-hero'\nexport default buildConfig({ collections: [], globals: [], blocks: [SimpleHero] })",
+    "// In your frontend\nimport { SimpleHeroComponent } from 'registry/blocks/simple-hero'\n<SimpleHeroComponent title=\"Welcome to Our Platform\" layout=\"centered\" contentWidth=\"medium\" titleSize=\"lg\" background={{ type: 'gradient', gradientFrom: '#f8fafc', gradientTo: '#e2e8f0' }} />"
+  ],
+  "preview": {
+    "description": "Clean and minimal hero section with content focus",
+    "image": null
+  },
+  "setup": {
+    "dependencies": "Make sure you have Tailwind CSS configured in your project.",
+    "components": "This block uses the blocks-shared registry components. Make sure to install them first: payloadkit add blocks-shared",
+    "design": "This block follows minimalist design principles - perfect for content-focused websites and professional presentations."
+  }
+}

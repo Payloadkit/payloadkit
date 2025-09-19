@@ -1,0 +1,14 @@
+{
+  "name": "Footer",
+  "type": "global",
+  "description": "Basic footer global with copyright, social links and footer navigation",
+  "version": "0.1.0",
+  "author": "PayloadKit",
+  "files": [
+    "config.ts",
+    "index.ts"
+  ],
+  "dependencies": [],
+  "registryDependencies": [],
+  "tags": ["global", "footer", "navigation", "social"]
+}

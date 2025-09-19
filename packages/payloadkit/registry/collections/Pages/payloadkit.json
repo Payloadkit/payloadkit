@@ -1,0 +1,14 @@
+{
+  "name": "Pages",
+  "description": "Basic pages collection with SEO fields and publishing workflow",
+  "category": "content",
+  "tags": ["pages", "content", "seo", "cms"],
+  "version": "0.0.1",
+  "files": [
+    "config.ts",
+    "index.ts"
+  ],
+  "dependencies": [],
+  "peerDependencies": ["payload"],
+  "registryDependencies": ["Media"]
+}

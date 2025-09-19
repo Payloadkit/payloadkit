@@ -1,0 +1,67 @@
+{
+  "name": "calcom-block",
+  "version": "0.1.0",
+  "description": "Cal.com integration block for seamless appointment scheduling. Features multiple layouts, customizable content, and full Cal.com embed support with themes and event types.",
+  "author": "PayloadKit",
+  "license": "MIT",
+  "type": "block",
+  "category": "integration",
+  "tags": ["calendar", "booking", "cal.com", "scheduling", "appointments", "meetings"],
+  "files": [
+    {
+      "name": "config.ts",
+      "type": "config"
+    },
+    {
+      "name": "Component.tsx",
+      "type": "component"
+    },
+    {
+      "name": "index.ts",
+      "type": "main"
+    }
+  ],
+  "dependencies": [
+    "react",
+    "lucide-react",
+    "tailwindcss"
+  ],
+  "peerDependencies": [
+    "payload"
+  ],
+  "registryDependencies": [
+    "blocks-shared"
+  ],
+  "features": [
+    "Full Cal.com integration with iframe embedding",
+    "Support for specific event types and general booking pages",
+    "3 calendar themes: auto, light, dark",
+    "3 layout options: full-width, split-content, split-calendar",
+    "4 calendar height options: small, medium, large, auto",
+    "Rich header content: eyebrow, title, subtitle, description",
+    "Feature list with 8 Lucide React icons",
+    "Content positioning for split layouts",
+    "Flexible background options: color, gradient, image, none",
+    "Text color theming: dark, light, primary",
+    "Responsive design with mobile-first approach",
+    "Auto-loading of Cal.com embed script",
+    "Custom CSS injection support",
+    "HTML ID and class customization",
+    "Proper iframe security attributes",
+    "TypeScript interfaces for type safety"
+  ],
+  "usage": "Perfect for service providers, consultants, coaches, agencies, and any business that needs professional appointment scheduling integrated directly into their PayloadCMS website.",
+  "examples": [
+    "// In your PayloadCMS config\nimport { CalComBlock } from 'registry/blocks/calcom-block'\nexport default buildConfig({ collections: [], globals: [], blocks: [CalComBlock] })",
+    "// In your frontend\nimport { CalComBlockComponent } from 'registry/blocks/calcom-block'\n<CalComBlockComponent calcomUsername=\"john-doe\" eventType=\"30-minute-consultation\" layout=\"split-content\" title=\"Book Your Free Consultation\" theme=\"auto\" />"
+  ],
+  "preview": {
+    "description": "Cal.com scheduling block with content and calendar",
+    "image": null
+  },
+  "setup": {
+    "dependencies": "Make sure you have Lucide React and Tailwind CSS configured in your project.",
+    "components": "This block uses the blocks-shared registry components. Make sure to install them first: payloadkit add blocks-shared",
+    "calcom": "You'll need a Cal.com account and username. Set up your event types in your Cal.com dashboard before using this component."
+  }
+}

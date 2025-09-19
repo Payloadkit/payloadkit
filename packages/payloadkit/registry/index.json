@@ -1,0 +1,591 @@
+{
+  "version": "0.3.0",
+  "lastUpdated": "2025-01-12T00:00:00Z",
+  "blocks": {
+    "hero-block": {
+      "name": "hero-block",
+      "description": "Basic hero section with gradient background and CTA buttons - Perfect for simple landing pages",
+      "category": "hero",
+      "tags": ["hero", "banner", "landing", "cta", "basic", "simple"],
+      "version": "0.0.2",
+      "files": [
+        "Component.tsx",
+        "config.ts",
+        "index.ts"
+      ],
+      "dependencies": ["react"],
+      "peerDependencies": ["payload"],
+      "registryDependencies": ["button", "badge"]
+    },
+    "call-to-action": {
+      "name": "call-to-action",
+      "description": "A versatile call-to-action block with rich text content and customizable buttons",
+      "category": "marketing", 
+      "tags": ["cta", "call-to-action", "buttons", "marketing", "conversion"],
+      "version": "0.0.2",
+      "files": [
+        "Component.tsx",
+        "config.ts", 
+        "index.ts"
+      ],
+      "dependencies": ["react"],
+      "peerDependencies": ["payload", "@payloadcms/richtext-lexical"],
+      "registryDependencies": ["RichText", "CMSLink", "card", "button"]
+    },
+    "media-block": {
+      "name": "media-block",
+      "description": "Simple media display block for images and videos with optional caption",
+      "category": "content",
+      "tags": ["media", "image", "video", "gallery", "content"],
+      "version": "0.0.1",
+      "files": [
+        "Component.tsx",
+        "config.ts",
+        "index.ts"
+      ],
+      "dependencies": ["react"],
+      "peerDependencies": ["payload"],
+      "registryDependencies": []
+    },
+    "content": {
+      "name": "content",
+      "description": "Rich content block with flexible column layouts and rich text editor",
+      "category": "content",
+      "tags": ["content", "text", "columns", "rich-text", "layout"],
+      "version": "0.0.1",
+      "files": [
+        "Component.tsx",
+        "config.ts",
+        "index.ts"
+      ],
+      "dependencies": ["react"],
+      "peerDependencies": ["payload", "@payloadcms/richtext-lexical"],
+      "registryDependencies": []
+    },
+    "text-block": {
+      "name": "text-block",
+      "description": "Simple text block with optional title and rich text content",
+      "category": "content",
+      "tags": ["text", "content", "simple", "basic"],
+      "version": "0.0.1",
+      "files": [
+        "Component.tsx",
+        "config.ts",
+        "index.ts"
+      ],
+      "dependencies": ["react"],
+      "peerDependencies": ["payload", "@payloadcms/richtext-lexical"],
+      "registryDependencies": []
+    },
+    "icon-block": {
+      "name": "icon-block",
+      "description": "Icon-based content block with customizable icon, title and description",
+      "category": "content",
+      "tags": ["icon", "visual", "highlight", "callout"],
+      "version": "0.0.1",
+      "files": [
+        "Component.tsx",
+        "config.ts",
+        "index.ts"
+      ],
+      "dependencies": ["react"],
+      "peerDependencies": ["payload"],
+      "registryDependencies": []
+    },
+    "feature-block": {
+      "name": "feature-block",
+      "description": "Advanced feature showcase block with 16 icons, 4 layouts, and responsive grid system",
+      "category": "marketing",
+      "tags": ["features", "grid", "icons", "showcase", "benefits", "layout", "responsive"],
+      "version": "0.1.0",
+      "files": [
+        "Component.tsx",
+        "config.ts",
+        "index.ts"
+      ],
+      "dependencies": ["react", "lucide-react"],
+      "peerDependencies": ["payload"],
+      "registryDependencies": ["blocks-shared"]
+    },
+    "faq-block": {
+      "name": "faq-block",
+      "description": "FAQ block with collapsible accordion, optional icons, and advanced styling options",
+      "category": "content",
+      "tags": ["faq", "accordion", "questions", "answers", "support", "icons"],
+      "version": "0.1.0",
+      "files": [
+        "Component.tsx",
+        "config.ts",
+        "index.ts"
+      ],
+      "dependencies": ["react", "lucide-react"],
+      "peerDependencies": ["payload"],
+      "registryDependencies": ["blocks-shared"]
+    },
+    "archive-block": {
+      "name": "archive-block",
+      "description": "Display collections of content with filtering, sorting, and multiple layout options",
+      "category": "content",
+      "tags": ["archive", "collection", "list", "grid", "content", "blog", "posts"],
+      "version": "0.1.0",
+      "files": [
+        "Component.tsx",
+        "config.ts",
+        "index.ts"
+      ],
+      "dependencies": ["react", "next", "lucide-react"],
+      "peerDependencies": ["payload"],
+      "registryDependencies": ["blocks-shared"]
+    },
+    "banner-block": {
+      "name": "banner-block",
+      "description": "Hero banner block with customizable backgrounds, text alignment, and call-to-action buttons",
+      "category": "content",
+      "tags": ["banner", "hero", "cta", "background", "landing"],
+      "version": "0.1.0",
+      "files": [
+        "Component.tsx",
+        "config.ts",
+        "index.ts"
+      ],
+      "dependencies": ["react", "next", "tailwindcss"],
+      "peerDependencies": ["payload"],
+      "registryDependencies": ["blocks-shared"]
+    },
+    "feature-steps-block": {
+      "name": "feature-steps-block",
+      "description": "Step-by-step process block with 16 icons and 5 layout options including advanced stair layout",
+      "category": "marketing",
+      "tags": ["steps", "process", "features", "icons", "layout", "stair"],
+      "version": "0.1.0",
+      "files": [
+        "Component.tsx",
+        "config.ts",
+        "index.ts"
+      ],
+      "dependencies": ["react", "lucide-react"],
+      "peerDependencies": ["payload"],
+      "registryDependencies": ["blocks-shared"]
+    },
+    "big-hero": {
+      "name": "big-hero",
+      "description": "Advanced hero section with video backgrounds, parallax effects, and animations - Perfect for premium marketing sites",
+      "category": "hero",
+      "tags": ["hero", "advanced", "video", "parallax", "animations", "marketing", "premium"],
+      "version": "0.1.0",
+      "files": [
+        "Component.tsx",
+        "config.ts",
+        "index.ts"
+      ],
+      "dependencies": ["react", "lucide-react"],
+      "peerDependencies": ["payload"],
+      "registryDependencies": ["blocks-shared"]
+    },
+    "calcom-block": {
+      "name": "calcom-block",
+      "description": "Cal.com integration block with iframe embedding, multiple themes, and responsive layouts",
+      "category": "integration",
+      "tags": ["calcom", "calendar", "booking", "scheduling", "iframe", "integration"],
+      "version": "0.1.0",
+      "files": [
+        "Component.tsx",
+        "config.ts",
+        "index.ts"
+      ],
+      "dependencies": ["react", "lucide-react"],
+      "peerDependencies": ["payload"],
+      "registryDependencies": ["blocks-shared"]
+    },
+    "outline-block": {
+      "name": "outline-block",
+      "description": "Automatic table of contents generator with client-side heading detection and scroll tracking",
+      "category": "navigation",
+      "tags": ["outline", "toc", "table-of-contents", "navigation", "headings", "scroll"],
+      "version": "0.1.0",
+      "files": [
+        "Component.tsx",
+        "config.ts",
+        "index.ts"
+      ],
+      "dependencies": ["react", "lucide-react"],
+      "peerDependencies": ["payload"],
+      "registryDependencies": ["blocks-shared"]
+    },
+    "simple-hero": {
+      "name": "simple-hero",
+      "description": "Intermediate hero section with 4 layouts, image support and advanced backgrounds - Perfect for corporate sites",
+      "category": "hero",
+      "tags": ["hero", "intermediate", "layouts", "image", "background", "corporate"],
+      "version": "0.1.0",
+      "files": [
+        "Component.tsx",
+        "config.ts",
+        "index.ts"
+      ],
+      "dependencies": ["react", "lucide-react"],
+      "peerDependencies": ["payload"],
+      "registryDependencies": ["blocks-shared"]
+    }
+  },
+  "collections": {
+    "Users": {
+      "name": "Users",
+      "description": "User authentication and management collection with role-based access",
+      "category": "auth",
+      "tags": ["users", "authentication", "roles", "auth"],
+      "version": "0.0.1",
+      "files": [
+        "config.ts",
+        "index.ts"
+      ],
+      "dependencies": [],
+      "peerDependencies": ["payload"],
+      "registryDependencies": []
+    },
+    "Media": {
+      "name": "Media",
+      "description": "Media upload collection with responsive image sizes and alt text support",
+      "category": "media",
+      "tags": ["media", "upload", "images", "files"],
+      "version": "0.0.1",
+      "files": [
+        "config.ts",
+        "index.ts"
+      ],
+      "dependencies": [],
+      "peerDependencies": ["payload"],
+      "registryDependencies": []
+    },
+    "Pages": {
+      "name": "Pages",
+      "description": "Basic pages collection with SEO fields and publishing workflow",
+      "category": "content",
+      "tags": ["pages", "content", "seo", "cms"],
+      "version": "0.0.1",
+      "files": [
+        "config.ts",
+        "index.ts"
+      ],
+      "dependencies": [],
+      "peerDependencies": ["payload"],
+      "registryDependencies": ["Media"]
+    }
+  },
+  "globals": {
+    "Header": {
+      "name": "Header",
+      "description": "Basic header global with navigation items",
+      "category": "navigation",
+      "tags": ["global", "header", "navigation"],
+      "version": "0.1.0",
+      "files": [
+        "config.ts",
+        "index.ts"
+      ],
+      "dependencies": [],
+      "peerDependencies": ["payload"],
+      "registryDependencies": []
+    },
+    "Footer": {
+      "name": "Footer",
+      "description": "Basic footer global with copyright, social links and footer navigation",
+      "category": "navigation",
+      "tags": ["global", "footer", "navigation", "social"],
+      "version": "0.1.0",
+      "files": [
+        "config.ts",
+        "index.ts"
+      ],
+      "dependencies": [],
+      "peerDependencies": ["payload"],
+      "registryDependencies": []
+    },
+    "Theme": {
+      "name": "Theme",
+      "description": "Basic theme global for color scheme, colors and typography",
+      "category": "ui",
+      "tags": ["global", "theme", "colors", "typography"],
+      "version": "0.1.0",
+      "files": [
+        "config.ts",
+        "index.ts"
+      ],
+      "dependencies": [],
+      "peerDependencies": ["payload"],
+      "registryDependencies": []
+    }
+  },
+  "config": {
+    "db-config": {
+      "name": "db-config",
+      "description": "Smart database configuration with auto-detection for Vercel and VPS deployments",
+      "category": "database",
+      "tags": ["postgres", "mongodb", "vercel", "vps", "dokploy", "database"],
+      "version": "0.1.0",
+      "files": [
+        "index.ts",
+        "postgres.ts",
+        "mongodb.ts",
+        "payloadkit.json"
+      ],
+      "dependencies": ["@payloadcms/db-postgres"],
+      "optionalDependencies": ["@payloadcms/db-mongodb"],
+      "registryDependencies": []
+    },
+    "collections-config": {
+      "name": "collections-config",
+      "description": "Modular collections configuration for PayloadCMS",
+      "category": "configuration",
+      "tags": ["collections", "config", "modular"],
+      "version": "0.1.0",
+      "files": [
+        "index.ts"
+      ],
+      "dependencies": [],
+      "peerDependencies": ["payload"],
+      "registryDependencies": ["Users", "Media", "Pages"]
+    },
+    "plugins-config": {
+      "name": "plugins-config",
+      "description": "Essential plugins configuration for PayloadCMS applications",
+      "category": "configuration",
+      "tags": ["plugins", "seo", "forms", "redirects"],
+      "version": "0.1.0",
+      "files": [
+        "index.ts"
+      ],
+      "dependencies": ["@payloadcms/plugin-seo", "@payloadcms/plugin-form-builder", "@payloadcms/plugin-redirects"],
+      "peerDependencies": ["payload"],
+      "registryDependencies": []
+    },
+    "globals-config": {
+      "name": "globals-config",
+      "description": "Basic globals configuration for site-wide settings",
+      "category": "configuration",
+      "tags": ["globals", "header", "footer", "config"],
+      "version": "0.1.0",
+      "files": [
+        "index.ts"
+      ],
+      "dependencies": [],
+      "peerDependencies": ["payload"],
+      "registryDependencies": ["Header", "Footer"]
+    },
+    "jobs-config": {
+      "name": "jobs-config",
+      "description": "Background jobs configuration with security access control",
+      "category": "configuration",
+      "tags": ["jobs", "cron", "tasks", "background"],
+      "version": "0.1.0",
+      "files": [
+        "index.ts"
+      ],
+      "dependencies": [],
+      "peerDependencies": ["payload"],
+      "registryDependencies": []
+    },
+    "email-config": {
+      "name": "email-config",
+      "description": "Smart email configuration for development and production",
+      "category": "configuration",
+      "tags": ["email", "smtp", "nodemailer", "transport"],
+      "version": "0.1.0",
+      "files": [
+        "index.ts"
+      ],
+      "dependencies": ["@payloadcms/email-nodemailer"],
+      "peerDependencies": ["payload"],
+      "registryDependencies": []
+    }
+  },
+  "docker": {
+    "dockerfile-dev": {
+      "name": "dockerfile-dev",
+      "description": "Multi-stage Dockerfile optimized for PayloadCMS development with bun",
+      "category": "development",
+      "tags": ["docker", "bun", "payloadcms", "nextjs", "development", "production"],
+      "version": "0.1.0",
+      "files": [
+        "Dockerfile",
+        "payloadkit.json"
+      ],
+      "dependencies": [],
+      "optionalDependencies": [],
+      "registryDependencies": []
+    },
+    "docker-compose-dev": {
+      "name": "docker-compose-dev",
+      "description": "Complete development environment with PostgreSQL, Redis, and optional services",
+      "category": "development",
+      "tags": ["docker-compose", "postgresql", "redis", "mailhog", "pgadmin", "development"],
+      "version": "0.1.0",
+      "files": [
+        "docker-compose.yml",
+        "init.sql",
+        "payloadkit.json"
+      ],
+      "dependencies": [],
+      "optionalDependencies": [],
+      "registryDependencies": ["dockerfile-dev"]
+    },
+    "docker-compose-db-only": {
+      "name": "docker-compose-db-only",
+      "description": "Database-only Docker Compose configuration with PostgreSQL 17",
+      "category": "development",
+      "tags": ["docker-compose", "postgresql", "database", "development"],
+      "version": "0.1.0",
+      "files": [
+        "docker-compose.yml",
+        "payloadkit.json"
+      ],
+      "dependencies": [],
+      "optionalDependencies": [],
+      "registryDependencies": []
+    },
+    "dockerignore": {
+      "name": "dockerignore",
+      "description": "Optimized .dockerignore for PayloadCMS + Next.js projects",
+      "category": "configuration",
+      "tags": ["dockerignore", "optimization", "payloadcms", "nextjs", "build"],
+      "version": "0.1.0",
+      "files": [
+        "dockerignore",
+        "payloadkit.json"
+      ],
+      "dependencies": [],
+      "optionalDependencies": [],
+      "registryDependencies": []
+    }
+  },
+  "fields": {
+    "color-picker": {
+      "name": "color-picker",
+      "description": "Color picker field component for PayloadCMS with preset colors and RGB input",
+      "category": "forms",
+      "tags": ["color", "picker", "form", "ui"],
+      "version": "0.1.0",
+      "files": [
+        "index.ts",
+        "ColorPicker.tsx",
+        "payloadkit.json"
+      ],
+      "dependencies": ["react"],
+      "peerDependencies": ["payload", "@payloadcms/ui"],
+      "registryDependencies": []
+    }
+  },
+  "plugins": {
+    "better-auth": {
+      "name": "better-auth",
+      "description": "Better Auth integration plugin for PayloadCMS with TOTP/2FA support, OAuth providers, and session management",
+      "category": "authentication",
+      "tags": ["auth", "authentication", "better-auth", "totp", "2fa", "oauth", "session", "payloadcms"],
+      "version": "0.1.0",
+      "files": [
+        "index.ts",
+        "plugin.ts",
+        "adapter.ts",
+        "auth.ts",
+        "types/index.ts",
+        "collections/index.ts",
+        "collections/auth-sessions.ts",
+        "collections/auth-accounts.ts",
+        "collections/auth-verifications.ts",
+        "utils/index.ts",
+        "utils/totp.ts",
+        "payloadkit.json"
+      ],
+      "dependencies": ["better-auth", "@better-auth/adapter-payload", "qrcode"],
+      "devDependencies": ["@types/qrcode"],
+      "peerDependencies": ["payload", "react"],
+      "registryDependencies": [],
+      "features": [
+        "OAuth providers (Google, GitHub, Discord)",
+        "Email/Password authentication",
+        "TOTP/2FA with QR code generation",
+        "Session management",
+        "Password reset and email verification",
+        "PayloadCMS collections integration",
+        "Admin panel integration",
+        "Standalone usage support"
+      ]
+    }
+  },
+  "components": {
+    "RichText": {
+      "name": "RichText",
+      "description": "Component to render PayloadCMS rich text content with Lexical support",
+      "category": "content",
+      "tags": ["richtext", "lexical", "content", "editor"],
+      "version": "0.0.1",
+      "files": [
+        "index.tsx"
+      ],
+      "dependencies": ["react"],
+      "peerDependencies": ["@payloadcms/richtext-lexical"],
+      "registryDependencies": []
+    },
+    "CMSLink": {
+      "name": "CMSLink",
+      "description": "Smart link component that handles both internal and external links from PayloadCMS",
+      "category": "navigation",
+      "tags": ["link", "navigation", "cms", "reference"],
+      "version": "0.0.1",
+      "files": [
+        "index.tsx"
+      ],
+      "dependencies": ["react", "next"],
+      "peerDependencies": ["payload"],
+      "registryDependencies": ["button"]
+    },
+    "blocks-shared": {
+      "name": "blocks-shared",
+      "description": "Shared components and utilities for PayloadCMS blocks including backgrounds, layouts, headings, and theme integration",
+      "category": "blocks",
+      "tags": ["shared", "utilities", "blocks", "layout", "theme", "background"],
+      "version": "0.1.0",
+      "files": [
+        "index.ts",
+        "BlockBackground.tsx",
+        "BlockSection.tsx",
+        "BlockLayout.tsx",
+        "BlockHeading.tsx",
+        "BlockText.tsx",
+        "useThemeColor.ts"
+      ],
+      "dependencies": ["react", "tailwindcss"],
+      "peerDependencies": [],
+      "registryDependencies": []
+    },
+    "AuthProvider": {
+      "name": "AuthProvider",
+      "description": "Better Auth UI Provider component for Next.js applications with PayloadCMS integration",
+      "category": "authentication",
+      "tags": ["auth", "provider", "better-auth", "ui", "session"],
+      "version": "0.1.0",
+      "files": [
+        "Component.tsx",
+        "auth-client.ts",
+        "index.ts"
+      ],
+      "dependencies": ["@daveyplate/better-auth-ui", "better-auth", "next", "react"],
+      "peerDependencies": [],
+      "registryDependencies": []
+    },
+    "AuthView": {
+      "name": "AuthView",
+      "description": "Pre-built authentication pages using Better Auth UI with PayloadKit branding",
+      "category": "authentication",
+      "tags": ["auth", "ui", "pages", "better-auth", "forms", "signin", "signup"],
+      "version": "0.1.0",
+      "files": [
+        "Component.tsx",
+        "index.ts"
+      ],
+      "dependencies": ["@daveyplate/better-auth-ui", "better-auth", "react", "clsx", "tailwind-merge"],
+      "peerDependencies": [],
+      "registryDependencies": []
+    }
+  }
+}

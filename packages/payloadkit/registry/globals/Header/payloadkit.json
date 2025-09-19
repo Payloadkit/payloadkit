@@ -1,0 +1,14 @@
+{
+  "name": "Header",
+  "type": "global",
+  "description": "Basic header global with navigation items",
+  "version": "0.1.0",
+  "author": "PayloadKit",
+  "files": [
+    "config.ts",
+    "index.ts"
+  ],
+  "dependencies": [],
+  "registryDependencies": [],
+  "tags": ["global", "header", "navigation"]
+}

@@ -1,0 +1,102 @@
+{
+  "name": "better-auth-security",
+  "version": "0.1.0",
+  "description": "Enterprise-grade authentication plugin for PayloadCMS using Better Auth with 2FA, OAuth, Magic Links, and WebAuthn support",
+  "type": "plugin",
+  "dependencies": [
+    "@payload-auth/better-auth-plugin",
+    "better-auth",
+    "payload"
+  ],
+  "peerDependencies": [
+    "@sendgrid/mail",
+    "nodemailer"
+  ],
+  "files": [
+    "index.ts"
+  ],
+  "exports": {
+    "betterAuthSecurityPlugin": "./index.ts"
+  },
+  "requiredEnvVars": [
+    "BETTER_AUTH_URL"
+  ],
+  "optionalEnvVars": [
+    "TWOFA_ISSUER",
+    "TRUSTED_ORIGINS",
+    "SKIP_2FA_ENFORCEMENT",
+    "GOOGLE_CLIENT_ID",
+    "GOOGLE_CLIENT_SECRET",
+    "GITHUB_CLIENT_ID", 
+    "GITHUB_CLIENT_SECRET",
+    "DISCORD_CLIENT_ID",
+    "DISCORD_CLIENT_SECRET",
+    "MICROSOFT_CLIENT_ID",
+    "MICROSOFT_CLIENT_SECRET",
+    "APPLE_CLIENT_ID",
+    "APPLE_CLIENT_SECRET",
+    "TWITTER_CLIENT_ID",
+    "TWITTER_CLIENT_SECRET",
+    "LINKEDIN_CLIENT_ID",
+    "LINKEDIN_CLIENT_SECRET",
+    "ENABLE_MAGIC_LINKS",
+    "ENABLE_WEBAUTHN",
+    "ENABLE_USERNAME_AUTH",
+    "WEBAUTHN_RP_NAME",
+    "WEBAUTHN_RP_ID"
+  ],
+  "features": [
+    "🛡️ Two-Factor Authentication (2FA) - Required by default",
+    "🌐 OAuth/Social Login - Google, GitHub, Discord, Microsoft, Apple, Twitter, LinkedIn",
+    "✨ Magic Links - Passwordless authentication",
+    "🔑 WebAuthn/Passkeys - Biometric authentication",
+    "🔒 Strong Password Requirements - 12+ chars, mixed case, numbers, symbols",
+    "📧 Email Verification - Required by default",
+    "⏰ Session Management - Secure, auto-refreshing sessions",
+    "🏢 Enterprise Ready - GDPR, SOX, HIPAA compliant"
+  ],
+  "security": {
+    "twoFactorAuthentication": {
+      "enabled": true,
+      "required": true,
+      "providers": ["TOTP", "Backup Codes"]
+    },
+    "passwordRequirements": {
+      "minLength": 12,
+      "requireUppercase": true,
+      "requireNumbers": true,
+      "requireSymbols": true
+    },
+    "emailVerification": {
+      "required": true
+    }
+  },
+  "usageExample": {
+    "basic": "betterAuthSecurityPlugin()",
+    "withOptions": "betterAuthSecurityPlugin({ twoFactor: { issuer: 'My App' }, oauth: { google: { clientId: 'xxx', clientSecret: 'xxx' } } })"
+  },
+  "category": "authentication",
+  "tags": ["auth", "security", "2fa", "oauth", "better-auth", "plugin", "enterprise"],
+  "examples": [
+    {
+      "title": "Basic Setup (Secure by Default)",
+      "description": "Minimal configuration with maximum security",
+      "code": "export default buildConfig({ plugins: [betterAuthSecurityPlugin()] })"
+    },
+    {
+      "title": "With OAuth Providers",
+      "description": "Enable social login with environment variables",
+      "code": "// Just set GOOGLE_CLIENT_ID and GOOGLE_CLIENT_SECRET in .env\n// OAuth will be automatically enabled"
+    },
+    {
+      "title": "Custom Configuration", 
+      "description": "Override default security settings",
+      "code": "betterAuthSecurityPlugin({ twoFactor: { issuer: 'My Company' }, basic: { emailAndPassword: { minPasswordLength: 16 } } })"
+    },
+    {
+      "title": "Enable Advanced Features",
+      "description": "Magic Links and WebAuthn support",
+      "code": "betterAuthSecurityPlugin({ advanced: { magicLinks: { enabled: true }, webauthn: { enabled: true } } })"
+    }
+  ]
+}

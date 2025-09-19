@@ -20,16 +20,16 @@ export class Registry {
   private static getLocalRegistryPath(): string {
     // Try multiple potential registry locations
     const possiblePaths = [
-      // For npm installed package: registry is bundled in package root
-      path.resolve(__dirname, '../../../registry'),
+      // For npm installed package: registry is bundled in package root (dist/../registry)
+      path.resolve(__dirname, '../registry'),
       // For built CLI in monorepo: dist -> payloadkit -> packages -> root -> registry
       path.resolve(__dirname, '../../../registry'),
-      // For npm installed package: try from package root (alternative structure)
-      path.resolve(__dirname, '../registry'),
+      // Alternative npm package structure
+      path.resolve(__dirname, '../../registry'),
       // Fallback: try from current working directory
       path.resolve(process.cwd(), 'registry'),
-      // Try relative to the payloadkit package directory
-      path.resolve(__dirname, '../../registry')
+      // Try from package root
+      path.resolve(__dirname, '../../../registry')
     ]
 
     // Return the first path that exists

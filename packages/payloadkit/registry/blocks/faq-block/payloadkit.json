@@ -1,0 +1,55 @@
+{
+  "name": "faq-block",
+  "version": "0.1.0",
+  "description": "Interactive FAQ block with accordion functionality, icons, and flexible layouts",
+  "author": "PayloadKit",
+  "license": "MIT",
+  "type": "block",
+  "category": "content",
+  "tags": ["faq", "accordion", "questions", "answers", "interactive", "help", "support"],
+  "files": [
+    {
+      "name": "config.ts",
+      "type": "config"
+    },
+    {
+      "name": "Component.tsx",
+      "type": "component"
+    },
+    {
+      "name": "index.ts",
+      "type": "main"
+    }
+  ],
+  "dependencies": [
+    "react",
+    "lucide-react"
+  ],
+  "peerDependencies": [
+    "payload"
+  ],
+  "registryDependencies": [
+    "blocks-shared"
+  ],
+  "features": [
+    "Accordion-style FAQ items with smooth animations",
+    "15 optional Lucide React icons for questions",
+    "Two layout options: single column or two-column (title left, FAQ right)",
+    "Customizable borders between FAQ items",
+    "Background support (color, gradient, image)",
+    "Rich text support for answers",
+    "Card background styling options",
+    "Responsive design with mobile-first approach",
+    "Theme integration with shadcn/ui colors",
+    "Smooth expand/collapse transitions"
+  ],
+  "usage": "Perfect for customer support pages, product documentation, or any content requiring organized Q&A format.",
+  "examples": [
+    "// In your PayloadCMS config\nimport { FaqBlock } from 'registry/blocks/faq-block'\nexport default buildConfig({ collections: [], globals: [], blocks: [FaqBlock] })",
+    "// In your frontend\nimport { FaqBlockComponent } from 'registry/blocks/faq-block'\n<FaqBlockComponent faqs={faqData} layout=\"two-column\" showBorder={true} />"
+  ],
+  "preview": {
+    "description": "Interactive FAQ block with expandable accordion items",
+    "image": null
+  }
+}

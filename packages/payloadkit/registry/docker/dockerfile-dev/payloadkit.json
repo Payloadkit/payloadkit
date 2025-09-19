@@ -1,0 +1,61 @@
+{
+  "name": "dockerfile-dev",
+  "version": "0.1.0",
+  "description": "Multi-stage Dockerfile optimized for PayloadCMS development with bun",
+  "type": "docker",
+  "category": "development",
+  "tags": ["docker", "bun", "payloadcms", "nextjs", "development", "production"],
+  "files": [
+    "Dockerfile"
+  ],
+  "dependencies": [],
+  "optionalDependencies": [],
+  "exports": {
+    "main": "./Dockerfile"
+  },
+  "features": [
+    "Multi-stage build optimization",
+    "bun package manager support",
+    "Development hot-reload ready",
+    "Production build optimization",
+    "Health checks included",
+    "PayloadCMS type generation",
+    "Next.js standalone build",
+    "Alpine Linux for small image size",
+    "Non-root user for security"
+  ],
+  "stages": {
+    "dev": "Development server with hot-reload",
+    "builder": "Production build stage",
+    "runner": "Optimized production runtime"
+  },
+  "ports": {
+    "3000": "Next.js application port"
+  },
+  "envVars": {
+    "build": [
+      "PAYLOAD_SECRET",
+      "DATABASE_URI",
+      "DATABASE_BUILD_URI",
+      "SMTP_HOST",
+      "SMTP_PORT",
+      "SMTP_USER",
+      "SMTP_PASS"
+    ],
+    "runtime": [
+      "PAYLOAD_SECRET",
+      "DATABASE_URI",
+      "SMTP_HOST",
+      "SMTP_PORT",
+      "SMTP_USER",
+      "SMTP_PASS",
+      "NEXT_PUBLIC_SERVER_URL"
+    ]
+  },
+  "usage": {
+    "development": "docker build --target dev -t payloadkit-dev .",
+    "production": "docker build --target runner -t payloadkit-prod .",
+    "run_dev": "docker run -p 3000:3000 --env-file .env payloadkit-dev",
+    "run_prod": "docker run -p 3000:3000 --env-file .env payloadkit-prod"
+  }
+}

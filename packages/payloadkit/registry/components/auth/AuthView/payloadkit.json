@@ -1,0 +1,49 @@
+{
+  "name": "AuthView", 
+  "version": "0.1.0",
+  "description": "Pre-built authentication pages using Better Auth UI with PayloadKit branding",
+  "type": "component",
+  "dependencies": [
+    "@daveyplate/better-auth-ui",
+    "better-auth",
+    "react",
+    "clsx",
+    "tailwind-merge"
+  ],
+  "files": [
+    "Component.tsx",
+    "index.ts"
+  ],
+  "exports": {
+    "AuthView": "./Component.tsx"
+  },
+  "features": [
+    "Pre-built authentication pages",
+    "Sign in, Sign up, Reset password, Verify email",
+    "Responsive design with shadcn/ui styling",
+    "PayloadKit branding",
+    "Customizable appearance",
+    "TypeScript support"
+  ],
+  "usageExample": "import { AuthView } from '@/components/auth/AuthView'",
+  "category": "authentication",
+  "tags": ["auth", "ui", "pages", "better-auth", "forms", "signin", "signup"],
+  "examples": [
+    {
+      "title": "Sign In Page",
+      "code": "<AuthView pathname=\"sign-in\" />"
+    },
+    {
+      "title": "Sign Up Page", 
+      "code": "<AuthView pathname=\"sign-up\" />"
+    },
+    {
+      "title": "Reset Password",
+      "code": "<AuthView pathname=\"reset-password\" />"
+    },
+    {
+      "title": "Custom View",
+      "code": "<AuthView view=\"SIGN_IN\" showPoweredBy={false} />"
+    }
+  ]
+}

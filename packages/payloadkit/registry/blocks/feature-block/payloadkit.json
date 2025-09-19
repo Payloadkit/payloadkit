@@ -1,0 +1,55 @@
+{
+  "name": "feature-block",
+  "version": "0.1.0",
+  "description": "Advanced feature showcase block with icons, multiple layouts, and theme integration",
+  "author": "PayloadKit",
+  "license": "MIT",
+  "type": "block",
+  "category": "marketing",
+  "tags": ["features", "showcase", "marketing", "icons", "grid", "landing-page"],
+  "files": [
+    {
+      "name": "config.ts",
+      "type": "config"
+    },
+    {
+      "name": "Component.tsx",
+      "type": "component"
+    },
+    {
+      "name": "index.ts",
+      "type": "main"
+    }
+  ],
+  "dependencies": [
+    "react",
+    "lucide-react"
+  ],
+  "peerDependencies": [
+    "payload"
+  ],
+  "registryDependencies": [
+    "blocks-shared"
+  ],
+  "features": [
+    "16 built-in Lucide React icons (Star, Lightning, Shield, Heart, etc.)",
+    "4 layout options: 2-column, 3-column, 4-column grid, and vertical list",
+    "Customizable icon colors and backgrounds",
+    "Rich text support for descriptions",
+    "Optional links with external/internal support",
+    "Eyebrow text with badge or simple styling",
+    "Background support (color, gradient, image)",
+    "Responsive design with hover effects",
+    "Theme integration with shadcn/ui colors",
+    "Flexible spacing controls"
+  ],
+  "usage": "Perfect for showcasing product features, service benefits, or key selling points with visual icons and organized layouts.",
+  "examples": [
+    "// In your PayloadCMS config\nimport { FeatureBlock } from 'registry/blocks/feature-block'\nexport default buildConfig({ collections: [], globals: [], blocks: [FeatureBlock] })",
+    "// In your frontend\nimport { FeatureBlockComponent } from 'registry/blocks/feature-block'\n<FeatureBlockComponent features={features} layout=\"grid-3\" />"
+  ],
+  "preview": {
+    "description": "Feature block with customizable icon grid layouts",
+    "image": null
+  }
+}

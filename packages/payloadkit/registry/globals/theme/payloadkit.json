@@ -1,0 +1,14 @@
+{
+  "name": "Theme",
+  "type": "global",
+  "description": "Basic theme global for color scheme, colors and typography",
+  "version": "0.1.0",
+  "author": "PayloadKit",
+  "files": [
+    "config.ts",
+    "index.ts"
+  ],
+  "dependencies": [],
+  "registryDependencies": [],
+  "tags": ["global", "theme", "colors", "typography"]
+}

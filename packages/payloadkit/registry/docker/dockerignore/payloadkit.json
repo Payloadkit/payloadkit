@@ -1,0 +1,46 @@
+{
+  "name": "dockerignore",
+  "version": "0.1.0",
+  "description": "Optimized .dockerignore for PayloadCMS + Next.js projects",
+  "type": "docker",
+  "category": "configuration",
+  "tags": ["dockerignore", "optimization", "payloadcms", "nextjs", "build"],
+  "files": [
+    "dockerignore"
+  ],
+  "dependencies": [],
+  "optionalDependencies": [],
+  "exports": {
+    "main": "./dockerignore"
+  },
+  "features": [
+    "PayloadCMS-specific exclusions",
+    "Next.js build optimization",
+    "Node.js best practices",
+    "IDE and OS file exclusions",
+    "Environment and secret protection",
+    "Build artifact exclusions",
+    "Testing and coverage exclusions",
+    "CI/CD file exclusions"
+  ],
+  "excludes": {
+    "dependencies": ["node_modules", "*.lockb", "pnpm-debug.log*"],
+    "build_artifacts": [".next/", "dist", "out/", "build/"],
+    "environment": [".env*", "secrets/"],
+    "development": [".vscode/", ".idea/", "logs", "tmp/"],
+    "payloadcms": ["migrations/", "payload-types.ts"],
+    "testing": ["coverage", "test-results/", "playwright-report/"],
+    "docker": ["Dockerfile*", "docker-compose*.yml"]
+  },
+  "usage": {
+    "install": "Copy to project root as .dockerignore",
+    "customize": "Add project-specific exclusions as needed"
+  },
+  "benefits": [
+    "Reduces Docker build context size",
+    "Faster build times",
+    "Smaller Docker images",
+    "Prevents sensitive data leaks",
+    "Optimized layer caching"
+  ]
+}

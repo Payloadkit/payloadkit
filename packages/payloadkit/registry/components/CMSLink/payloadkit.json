@@ -1,0 +1,13 @@
+{
+  "name": "CMSLink",
+  "description": "Smart link component that handles both internal and external links from PayloadCMS",
+  "category": "navigation",
+  "tags": ["link", "navigation", "cms", "reference"],
+  "version": "0.0.1",
+  "files": [
+    "index.tsx"
+  ],
+  "dependencies": ["react", "next"],
+  "peerDependencies": ["payload"],
+  "registryDependencies": ["button"]
+}
