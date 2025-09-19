@@ -310,11 +310,39 @@ var Registry = class {
     return Object.values(registry.components);
   }
   /**
+   * Get a specific global
+   */
+  static async getGlobal(name) {
+    const registry = await this.getRegistry();
+    return registry.globals[name] || null;
+  }
+  /**
+   * Get a specific collection
+   */
+  static async getCollection(name) {
+    const registry = await this.getRegistry();
+    return registry.collections[name] || null;
+  }
+  /**
    * Get a specific plugin
    */
   static async getPlugin(name) {
     const registry = await this.getRegistry();
     return registry.plugins[name] || null;
+  }
+  /**
+   * List all available globals
+   */
+  static async listGlobals() {
+    const registry = await this.getRegistry();
+    return Object.values(registry.globals);
+  }
+  /**
+   * List all available collections
+   */
+  static async listCollections() {
+    const registry = await this.getRegistry();
+    return Object.values(registry.collections);
   }
   /**
    * List all available plugins
@@ -346,6 +374,20 @@ var Registry = class {
   static getComponentSourcePath(componentName) {
     const registryPath = this.getLocalRegistryPath();
     return import_path2.default.join(registryPath, "components", componentName);
+  }
+  /**
+   * Get the source path for a global
+   */
+  static getGlobalSourcePath(globalName) {
+    const registryPath = this.getLocalRegistryPath();
+    return import_path2.default.join(registryPath, "globals", globalName);
+  }
+  /**
+   * Get the source path for a collection
+   */
+  static getCollectionSourcePath(collectionName) {
+    const registryPath = this.getLocalRegistryPath();
+    return import_path2.default.join(registryPath, "collections", collectionName);
   }
   /**
    * Get the source path for a plugin
@@ -481,7 +523,7 @@ var Project = class {
 
 // src/commands/add.ts
 var import_path4 = __toESM(require("path"));
-var addCommand = new import_commander.Command().name("add").description("Add a component to your project").argument("<name>", "Component name to add").option("-f, --force", "Overwrite existing components").option("-p, --path <path>", "Custom installation path").action(async (componentName, options) => {
+var addCommand = new import_commander.Command().name("add").description("Add a component to your project").argument("<name>", "Component name to add").option("-f, --force", "Overwrite existing components").option("-p, --path <path>", "Custom installation path").option("-y, --yes", "Skip confirmation prompts").action(async (componentName, options) => {
   try {
     Logger.header(`Adding ${componentName}`);
     const projectInfo = await Project.getProjectInfo();
@@ -496,22 +538,28 @@ var addCommand = new import_commander.Command().name("add").description("Add a c
     }
     const block = await Registry.getBlock(componentName);
     const component = await Registry.getComponent(componentName);
+    const global = await Registry.getGlobal(componentName);
+    const collection = await Registry.getCollection(componentName);
     const plugin = await Registry.getPlugin(componentName);
-    if (!block && !component && !plugin) {
+    if (!block && !component && !global && !collection && !plugin) {
       Logger.error(`Component "${componentName}" not found`);
       Logger.info("Available components:");
       const blocks = await Registry.listBlocks();
       const components = await Registry.listComponents();
+      const globals = await Registry.listGlobals();
+      const collections = await Registry.listCollections();
       const plugins = await Registry.listPlugins();
       blocks.forEach((b) => Logger.info(`  ${b.name} (block)`));
       components.forEach((c) => Logger.info(`  ${c.name} (component)`));
+      globals.forEach((g) => Logger.info(`  ${g.name} (global)`));
+      collections.forEach((c) => Logger.info(`  ${c.name} (collection)`));
       plugins.forEach((p) => Logger.info(`  ${p.name} (plugin)`));
       process.exit(1);
     }
-    const targetComponent = block || component || plugin;
-    const componentType = block ? "blocks" : component ? "components" : "plugins";
+    const targetComponent = block || component || global || collection || plugin;
+    const componentType = block ? "blocks" : component ? "components" : global ? "globals" : collection ? "collections" : "plugins";
     const exists = await Project.componentExists(componentName, componentType);
-    if (exists && !options.force) {
+    if (exists && !options.force && !options.yes) {
       const response = await (0, import_prompts.default)({
         type: "confirm",
         name: "overwrite",
@@ -534,6 +582,12 @@ var addCommand = new import_commander.Command().name("add").description("Add a c
         sourcePath = Registry.getBlockSourcePath(componentName);
       } else if (componentType === "components") {
         sourcePath = Registry.getComponentSourcePath(componentName);
+        componentExists = await FileOperations.exists(sourcePath);
+      } else if (componentType === "globals") {
+        sourcePath = Registry.getGlobalSourcePath(componentName);
+        componentExists = await FileOperations.exists(sourcePath);
+      } else if (componentType === "collections") {
+        sourcePath = Registry.getCollectionSourcePath(componentName);
         componentExists = await FileOperations.exists(sourcePath);
       } else if (componentType === "plugins") {
         sourcePath = Registry.getPluginSourcePath(componentName);
