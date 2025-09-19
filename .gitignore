@@ -10,10 +10,6 @@ build/
 .nuxt/
 .output/
 
-# Generated CLI binaries
-packages/*/bin/
-packages/payloadkit/bin/index.js
-
 # Environment files
 .env
 .env.local
