@@ -144,16 +144,48 @@ async function createProject(name: string, options: Partial<ProjectOptions> = {}
     try {
       const registryItems = Object.keys(templateConfig.registryDependencies)
 
+      // Helper function to find PayloadKit CLI
+      const findPayloadkitCLI = async (): Promise<{ command: string; args: string[] }> => {
+        // Try global payloadkit command first
+        try {
+          await new Promise<void>((resolve, reject) => {
+            const testChild = spawn('payloadkit', ['--version'], { stdio: 'pipe' })
+            testChild.on('close', (code) => {
+              if (code === 0) {
+                resolve()
+              } else {
+                reject(new Error('Global payloadkit not found'))
+              }
+            })
+            testChild.on('error', () => reject(new Error('Global payloadkit not found')))
+          })
+          return { command: 'payloadkit', args: [] }
+        } catch {
+          // Fallback to relative path for development
+          let payloadkitPath = path.resolve(__dirname, '../../payloadkit/bin/index.js')
+
+          // If relative path doesn't exist, try different possible paths
+          if (!existsSync(payloadkitPath)) {
+            // Try from node_modules (when installed as dependency)
+            const nodeModulesPath = path.resolve(process.cwd(), 'node_modules/payloadkit/bin/index.js')
+            if (existsSync(nodeModulesPath)) {
+              payloadkitPath = nodeModulesPath
+            } else {
+              throw new Error('PayloadKit CLI not found')
+            }
+          }
+
+          return { command: 'node', args: [payloadkitPath] }
+        }
+      }
+
+      const payloadkitCLI = await findPayloadkitCLI()
+
       for (const item of registryItems) {
         const componentName = item.split('/').pop() // Extract component name from path
         if (componentName) {
           await new Promise<void>((resolve, reject) => {
-            const child = spawn('node', [
-              path.resolve(__dirname, '../../payloadkit/bin/index.js'),
-              'add',
-              componentName,
-              '--yes' // Skip confirmation prompts
-            ], {
+            const child = spawn(payloadkitCLI.command, [...payloadkitCLI.args, 'add', componentName, '--yes'], {
               cwd: projectPath,
               stdio: 'pipe'
             })
