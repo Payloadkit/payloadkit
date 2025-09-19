@@ -137,6 +137,45 @@ async function createProject(name: string, options: Partial<ProjectOptions> = {}
   await writeFile(packageJsonPath, JSON.stringify(packageJson, null, 2))
   spinner.succeed('Project configured')
 
+  // Install registry dependencies
+  if (templateConfig.registryDependencies && Object.keys(templateConfig.registryDependencies).length > 0) {
+    spinner.start('Installing registry components...')
+
+    try {
+      const registryItems = Object.keys(templateConfig.registryDependencies)
+
+      for (const item of registryItems) {
+        const componentName = item.split('/').pop() // Extract component name from path
+        if (componentName) {
+          await new Promise<void>((resolve, reject) => {
+            const child = spawn('node', [
+              path.resolve(__dirname, '../../payloadkit/bin/index.js'),
+              'add',
+              componentName,
+              '--yes' // Skip confirmation prompts
+            ], {
+              cwd: projectPath,
+              stdio: 'pipe'
+            })
+
+            child.on('close', (code) => {
+              if (code === 0) {
+                resolve()
+              } else {
+                reject(new Error(`Failed to install ${componentName}`))
+              }
+            })
+          })
+        }
+      }
+
+      spinner.succeed('Registry components installed')
+    } catch (error) {
+      spinner.warn(`Failed to install some registry components: ${error}`)
+      console.log(chalk.yellow('   You may need to install components manually with: payloadkit add <component-name>'))
+    }
+  }
+
   // Install dependencies
   if (options.install !== false) {
     const packageManager = options.packageManager || 'bun'

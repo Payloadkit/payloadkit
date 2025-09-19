@@ -12,6 +12,7 @@ export const addCommand = new Command()
   .argument('<name>', 'Component name to add')
   .option('-f, --force', 'Overwrite existing components')
   .option('-p, --path <path>', 'Custom installation path')
+  .option('-y, --yes', 'Skip confirmation prompts')
   .action(async (componentName: string, options) => {
     try {
       Logger.header(`Adding ${componentName}`)
@@ -34,30 +35,39 @@ export const addCommand = new Command()
       // Try to find the component in different types
       const block = await Registry.getBlock(componentName)
       const component = await Registry.getComponent(componentName)
+      const global = await Registry.getGlobal(componentName)
+      const collection = await Registry.getCollection(componentName)
       const plugin = await Registry.getPlugin(componentName)
 
-      if (!block && !component && !plugin) {
+      if (!block && !component && !global && !collection && !plugin) {
         Logger.error(`Component "${componentName}" not found`)
         Logger.info('Available components:')
 
         const blocks = await Registry.listBlocks()
         const components = await Registry.listComponents()
+        const globals = await Registry.listGlobals()
+        const collections = await Registry.listCollections()
         const plugins = await Registry.listPlugins()
 
         blocks.forEach(b => Logger.info(`  ${b.name} (block)`))
         components.forEach(c => Logger.info(`  ${c.name} (component)`))
+        globals.forEach(g => Logger.info(`  ${g.name} (global)`))
+        collections.forEach(c => Logger.info(`  ${c.name} (collection)`))
         plugins.forEach(p => Logger.info(`  ${p.name} (plugin)`))
 
         process.exit(1)
       }
 
-      const targetComponent = block || component || plugin
-      const componentType = block ? 'blocks' : component ? 'components' : 'plugins'
+      const targetComponent = block || component || global || collection || plugin
+      const componentType = block ? 'blocks' :
+                           component ? 'components' :
+                           global ? 'globals' :
+                           collection ? 'collections' : 'plugins'
 
       // Check if component already exists
       const exists = await Project.componentExists(componentName, componentType)
-      
-      if (exists && !options.force) {
+
+      if (exists && !options.force && !options.yes) {
         const response = await prompts({
           type: 'confirm',
           name: 'overwrite',
@@ -90,6 +100,12 @@ export const addCommand = new Command()
           sourcePath = Registry.getBlockSourcePath(componentName)
         } else if (componentType === 'components') {
           sourcePath = Registry.getComponentSourcePath(componentName)
+          componentExists = await FileOperations.exists(sourcePath)
+        } else if (componentType === 'globals') {
+          sourcePath = Registry.getGlobalSourcePath(componentName)
+          componentExists = await FileOperations.exists(sourcePath)
+        } else if (componentType === 'collections') {
+          sourcePath = Registry.getCollectionSourcePath(componentName)
           componentExists = await FileOperations.exists(sourcePath)
         } else if (componentType === 'plugins') {
           sourcePath = Registry.getPluginSourcePath(componentName)

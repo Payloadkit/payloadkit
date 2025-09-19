@@ -11,7 +11,11 @@
     "Media",
     "Pages"
   ],
-  "globals": [],
+  "globals": [
+    "Header",
+    "Footer",
+    "Theme"
+  ],
   "blocks": [],
   "components": [
     "RichText",
@@ -23,6 +27,9 @@
     "collections/Users": "0.0.1",
     "collections/Media": "0.0.1",
     "collections/Pages": "0.0.1",
+    "globals/Header": "0.0.1",
+    "globals/Footer": "0.0.1",
+    "globals/Theme": "0.0.1",
     "components/RichText": "0.0.1",
     "components/CMSLink": "0.0.1"
   },

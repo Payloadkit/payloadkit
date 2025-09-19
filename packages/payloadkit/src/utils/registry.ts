@@ -102,11 +102,43 @@ export class Registry {
   }
 
   /**
+   * Get a specific global
+   */
+  static async getGlobal(name: string): Promise<any | null> {
+    const registry = await this.getRegistry()
+    return registry.globals[name] || null
+  }
+
+  /**
+   * Get a specific collection
+   */
+  static async getCollection(name: string): Promise<any | null> {
+    const registry = await this.getRegistry()
+    return registry.collections[name] || null
+  }
+
+  /**
    * Get a specific plugin
    */
   static async getPlugin(name: string): Promise<PayloadKitPlugin | null> {
     const registry = await this.getRegistry()
     return registry.plugins[name] || null
+  }
+
+  /**
+   * List all available globals
+   */
+  static async listGlobals(): Promise<any[]> {
+    const registry = await this.getRegistry()
+    return Object.values(registry.globals)
+  }
+
+  /**
+   * List all available collections
+   */
+  static async listCollections(): Promise<any[]> {
+    const registry = await this.getRegistry()
+    return Object.values(registry.collections)
   }
 
   /**
@@ -146,6 +178,22 @@ export class Registry {
   static getComponentSourcePath(componentName: string): string {
     const registryPath = this.getLocalRegistryPath()
     return path.join(registryPath, 'components', componentName)
+  }
+
+  /**
+   * Get the source path for a global
+   */
+  static getGlobalSourcePath(globalName: string): string {
+    const registryPath = this.getLocalRegistryPath()
+    return path.join(registryPath, 'globals', globalName)
+  }
+
+  /**
+   * Get the source path for a collection
+   */
+  static getCollectionSourcePath(collectionName: string): string {
+    const registryPath = this.getLocalRegistryPath()
+    return path.join(registryPath, 'collections', collectionName)
   }
 
   /**
